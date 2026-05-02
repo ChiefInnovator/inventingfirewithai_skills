@@ -43,7 +43,7 @@ MIT
 Created by **Richard Crane**, Microsoft MVP and founder of **MILL5**.
 
 - **MILL5:** [mill5.com](https://www.mill5.com)
-- **Microsoft MVP profile:** [Richard Crane](https://mvp.microsoft.com/en-US/MVP/profile/10ce0bc0-7536-43f6-b28c-e9601a4a0d0d)
+- **Microsoft MVP:** [Richard Crane](https://mvp.microsoft.com/en-US/MVP/profile/10ce0bc0-7536-43f6-b28c-e9601a4a0d0d)
 - **Podcast:** [Inventing Fire with AI](https://inventingfirewith.ai)
 - **GitHub:** [@ChiefInnovator](https://github.com/ChiefInnovator)
 
