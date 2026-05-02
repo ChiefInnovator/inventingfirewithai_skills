@@ -117,6 +117,45 @@
       color: #fff;
     }
 
+    .brand-strip {
+      background: #fff;
+      border-top: 1px solid rgba(240, 177, 62, .42);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand-strip .wrap {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 34px;
+      align-items: center;
+      padding: 30px 0;
+    }
+
+    .brand-mark {
+      width: min(220px, 100%);
+      height: auto;
+      display: block;
+    }
+
+    .brand-copy {
+      max-width: 720px;
+    }
+
+    .brand-copy strong {
+      display: block;
+      color: var(--ember);
+      font-size: 13px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .brand-copy p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
     section {
       padding: 86px 0;
       border-top: 1px solid var(--line);
@@ -410,8 +449,17 @@
       .grid,
       .split,
       .stat-grid,
-      .skill-grid {
+      .skill-grid,
+      .brand-strip .wrap {
         grid-template-columns: 1fr;
+      }
+
+      .brand-strip .wrap {
+        padding: 24px 0;
+      }
+
+      .brand-mark {
+        width: 180px;
       }
 
       nav {
@@ -455,6 +503,16 @@
       </div>
     </div>
   </header>
+
+  <div class="brand-strip" aria-label="Inventing Fire with AI brand">
+    <div class="wrap">
+      <img class="brand-mark" src="assets/images/inventing-fire-brand.png" alt="Inventing Fire with AI">
+      <div class="brand-copy">
+        <strong>Inventing Fire with AI</strong>
+        <p>A focused skill library for coding agents that favors clarity, verification, restraint, and durable engineering habits.</p>
+      </div>
+    </div>
+  </div>
 
   <section id="why">
     <div class="wrap split">
