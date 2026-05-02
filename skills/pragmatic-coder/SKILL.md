@@ -1,6 +1,6 @@
 ---
 name: pragmatic-coder
-description: Guidelines for simple, safe, verified code changes.
+description: Use for simple, safe, verified implementation, review, and refactor work.
 license: MIT
 ---
 
@@ -8,88 +8,49 @@ license: MIT
 
 ## 1. Think Before Coding
 
-- No guessing: research, state assumptions, choose, proceed
-- Ask only for security, privacy, legal, financial, destructive, contradiction, or missing access
-- Compare correctness, simplicity, reversibility, security, performance, and project fit
-- Push back when a simpler approach exists
-- Name confusion before proceeding
+- No guessing: read code/docs/tests; state assumptions; choose; proceed
+- Ask only for security, privacy, legal, financial, destructive, contradiction, or access blockers
+- Compare correctness, simplicity, reversibility, security, performance, project fit
+- Challenge complexity; name ambiguity
 
 ## 2. Data First
 
-Design data before code.
-
-- Make the common case simple
+- Simplify the common case
 - Fix data shape instead of adding conditionals
-- No hierarchy when data plus functions suffice
+- No hierarchy when data plus functions work
+- Interfaces only for real seams: external dependencies, replaceable providers, public contracts, test doubles
+- New seams/contracts state consumer, implementation, composition root, inputs, outputs, errors, invariants, owner
 - If data flow needs a diagram, simplify first
 
 ## 3. Simplicity and Cost First
 
-Write the simplest correct code.
-
 - Prefer little or no code
-- No unrequested features, abstractions, configurability, or impossible-case handling
-- Use the cheapest model likely to pass verification
-- Lookup/format/mechanical: cheap, low effort
-- Feature/test/refactor: balanced, medium effort
-- Auth/data loss/architecture/hard bug: strongest, high effort
-- Escalate after two failed attempts or unexplained test failures
-- If 50 lines solve it, 200 lines is a confession
-
-If this looks overcomplicated, rewrite it.
+- No unrequested features, abstractions, configuration, impossible-case handlers
+- Use the cheapest model likely to verify: cheap/low for lookup; balanced/medium for coding; strongest/high for auth, data loss, architecture, hard bugs; escalate after two failures/unexplained tests
+- If 50 lines solve it, 200 lines is overengineering
 
 ## 4. Surgical Changes
 
-Touch only required lines.
-
-- No adjacent cleanup, refactors, or formatting churn
+- No adjacent cleanup, refactors, or formatting
 - Match existing style
-- Remove only unused code from your change
+- Remove only unused code you created
 - Mention unrelated problems; don't fix them
-- Parallelize only disjoint files, modules, or read-only research
-
-Every changed line must serve the request. Otherwise it's churn.
+- Parallel work: disjoint files/modules or read-only research; synthesize and validate
+- Every changed line serves the request
+- Preserve behavior; reject interface breaks unless requested with known cost
 
 ## 5. Verify, Don't Assert
 
-Define testable success before finishing.
-
-- Behavior changes: failing test first, happy path plus error/boundary path
-- Preconditions: state, permissions, ownership, input shape, limits, dependencies, failure modes
-- Violation tests: missing, invalid, unauthorized, wrong owner/tenant, boundary, dependency failure
-- Implement only enough code to pass; refactor after green
-- Performance work: define budget, measure baseline, reject regressions
-- "Add validation" → write tests for invalid inputs, then make them pass
-- "Fix the bug" → write a test that reproduces it, then make it pass
-- "Refactor X" → ensure tests pass before and after
-
-For multi-step tasks:
-```
-1. [Step] → verify: [check]
-2. [Step] → verify: [check]
-```
-
-Unverified means guessed.
+- Behavior changes: one public-interface failing test at a time; confirm failure; cover happy/error/boundary paths; implement enough to pass; refactor after green
+- Check/test preconditions: state, permissions, ownership, input shape, limits, dependencies, failure modes; missing, invalid, unauthorized, wrong owner/tenant, boundary, dependency failure
+- APIs are security boundaries; test abuse and data exposure
+- Security work: check secrets, dependencies, injection paths, sensitive-data leaks
+- Performance work: define budget, measure baseline, hot paths, allocation/branch/lock cost, reject regressions, state tradeoffs
+- Validation, bug, refactor work need targeted checks
+- Report assumptions, decisions, risks, verification, escalation reasons; unverified means guessed
+- For multi-step tasks: `1. [Step] → verify: [check]`
+- Mocks stay in tests; implementation uses real dependencies
 
 ## 6. Review Smells
 
-Flag:
-
-| Label | Meaning |
-|---|---|
-| **Empty abstraction** | Indirection with no concrete payoff |
-| **Hostile API** | Interface that makes common usage painful |
-| **Ceremony** | Factories/builders/managers for a trivial task |
-| **Bad data shape** | Conditionals that better data would eliminate |
-| **Layered hack** | New workaround stacked on old workaround |
-| **Unsupported claim** | Unproven claim about speed, safety, or correctness |
-
-Blunt about code, not people.
-
-## 7. Do Not Break Userspace
-
-Existing behavior beats cleanliness. Regressions fail. Reject interface breaks unless explicitly requested with known cost.
-
-## 8. No Mocks in Implementation
-
-Mocks in tests only. Never wire mocks, stubs, or fakes into implementation. Use real dependencies.
+Flag code, not people: empty abstraction, pointless interface, hostile API, process ceremony, data-shape failure, unexplained mechanism, layered workaround, unsupported claim.

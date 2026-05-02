@@ -1,29 +1,28 @@
 # pragmatic-coder
 
-Guidelines for simple, safe, verified code changes.
+Simple, safe, verified code changes.
 
 ## What it does
 
-Research before asking. Avoid guessing. Write little or no code. Make surgical changes. Verify before finishing.
+Research first. No guessing. Little or no code. Surgical changes. Verify before finishing. Flags anti-patterns by name.
 
 ## When to use
 
-Implementation, code review, or refactor tasks.
+Implementation, review, or refactor tasks.
 
 ## Influences
 
-Karpathy-style caution plus Torvalds-style pragmatism around data, simplicity, and regressions. Adds autonomy, TDD, precondition, security, performance, parallel-agent, and cost rules: research before asking, use the cheapest capable model, test behavior and preconditions first, measure before optimizing, parallelize only independent work, and reject regressions.
+Karpathy-style caution plus Torvalds-style pragmatism around data, simplicity, and regressions. Adds autonomy, TDD, preconditions, security, performance, parallel-agent, cost, and contract rules.
 
 ## Rules
 
-1. **Think Before Coding** - research first; no guessing; ask only for blockers.
-2. **Data First** - design data before code.
-3. **Simplicity and Cost First** - write little or no code; use the cheapest model that can confidently finish.
-4. **Surgical Changes** - touch only required lines; avoid overlapping parallel edits.
-5. **Verify, Don't Assert** - prefer failing tests first; test preconditions; measure performance work.
-6. **Review Smells** - flag empty abstractions, hostile APIs, ceremony, bad data shapes, layered hacks, and unsupported claims.
-7. **Do Not Break Userspace** - regressions fail.
-8. **No Mocks in Implementation** - mocks belong in tests only.
+1. **Think Before Coding** — Research first; no guessing; ask only for blockers
+2. **Data First** — Design data before code; use interfaces only for real seams
+3. **Simplicity and Cost First** — Little or no code; cheapest model likely to verify
+4. **Surgical Changes** — Touch required lines; avoid overlapping parallel edits
+5. **Verify, Don't Assert** — One public-interface failing test at a time; test preconditions, security, and performance
+6. **Review Smells** — Flag empty abstractions, pointless interfaces, hostile APIs, ceremony, bad data shapes, unexplained mechanisms, layered workarounds, and unsupported claims
+7. **Constraints** — Don't break existing behavior; mocks in tests only
 
 ## License
 
@@ -33,6 +32,8 @@ MIT
 
 - Andrej Karpathy Skills: https://github.com/forrestchang/andrej-karpathy-skills
 - Linus Torvalds Skills: https://github.com/leopiney/linus-torvalds-skills
+- Referenced Skills Scorecard: `docs/referenced_skills_scorecard.md`
+- Referenced Skills Audit: `docs/referenced_skills_audit.md`
 - TDD Skills References: `docs/tdd_skills_references.md`
 - Matt Pocock TDD Skill: https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/SKILL.md
 - Matt Pocock TDD Tests Guidance: https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/tests.md
@@ -98,3 +99,20 @@ MIT
 - OWASP ASVS: https://owasp.org/www-project-application-security-verification-standard/
 - OWASP REST Security Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html
 - OWASP Input Validation Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html
+- Interface Contract Dependency Inversion Skills Research: `docs/interface_contract_dependency_inversion_skills_research.md`
+- Matt Pocock Interface Design Guidance: https://github.com/mattpocock/skills/blob/main/skills/engineering/improve-codebase-architecture/INTERFACE-DESIGN.md
+- Matt Pocock Improve Codebase Architecture Skill: https://github.com/mattpocock/skills/blob/main/skills/engineering/improve-codebase-architecture/SKILL.md
+- Clean Architecture Dependency Inversion Skill: https://github.com/PanGan21/clean-architecture-claude-skills/blob/master/skills/clean-architecture-dependency-inversion/SKILL.md
+- GitHub Copilot .NET Best Practices Skill: https://github.com/github/awesome-copilot/blob/main/plugins/csharp-dotnet-development/skills/dotnet-best-practices/SKILL.md
+- GitHub Copilot .NET Design Pattern Review Skill: https://github.com/github/awesome-copilot/blob/main/skills/dotnet-design-pattern-review/SKILL.md
+- GitHub Copilot C Sharp Expert Agent: https://github.com/github/awesome-copilot/blob/main/agents/CSharpExpert.agent.md
+- GitHub Copilot OOP Design Pattern Instructions: https://github.com/github/awesome-copilot/blob/main/instructions/oop-design-patterns.instructions.md
+- GitHub Copilot .NET Architecture Instructions: https://github.com/github/awesome-copilot/blob/main/instructions/dotnet-architecture-good-practices.instructions.md
+- SOLID Skills: https://github.com/ramziddin/solid-skills
+- Microsoft .NET Abstractions Guidance: https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/abstractions-abstract-types-and-interfaces
+- Microsoft .NET Dependency Injection Guidelines: https://learn.microsoft.com/en-us/dotnet/core/extensions/dependency-injection/guidelines
+- ASP.NET Core Dependency Injection Guidance: https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection
+- Microsoft .NET Architecture Principles: https://learn.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/architectural-principles
+- TypeScript Interfaces: https://www.typescriptlang.org/docs/handbook/interfaces.html
+- Python Protocols: https://typing.python.org/en/latest/reference/protocols.html
+- PEP 544 Protocols: https://peps.python.org/pep-0544/
