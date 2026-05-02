@@ -36,6 +36,8 @@ This audit checks each referenced skill for ideas worth adding to `skills/pragma
 | Claude Code Cost Optimization | Model tier mapping | Covered | Current model-cost rule is platform-neutral |
 | GitHub Model Recommendation | Match model strength to task risk | Covered | Model-cost rule names simple, coding, and high-risk work |
 | Research Lookup | Use narrow research before answering | Covered | No guessing rule covers it |
+| Research Learn Implement | Unknowns are work; research, learn, implement, verify, remember | Add | Added sources/learning, durable learnings, and invented API smell |
+| Skeptical Coding Verification | Evidence before claims; challenge hidden failure modes | Add | Added hidden-failure and fresh-evidence language |
 | Addy Security and Hardening | Secrets, dependencies, injection, leaks | Covered | Security work rule already captures it |
 | API Security Best Practices | API auth, ownership, input, rate, error checks | Covered | Preconditions and API boundary rules cover it |
 | Senior Security | Threat modeling mindset | Covered | Security and precondition checks cover useful parts |
@@ -57,6 +59,8 @@ This audit checks each referenced skill for ideas worth adding to `skills/pragma
 
 - `No guessing` now explicitly starts from local code, docs, and tests.
 - New seams/contracts now name inputs, outputs, errors, invariants, and owner.
+- Unknowns now include sources, learning, high-confidence reusable learnings, and invented API detection.
+- Claims now require fresh evidence and hidden-failure skepticism before completion.
 
 ## Rejected Categories
 
