@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A compact pragmatic coding-agent skill that reduces skill bloat into one verified engineering standard.">
+  <title>Pragmatic Coder | Inventing Fire with AI</title>
+  <style>
+    :root {
+      --ink: #151515;
+      --muted: #5a5f66;
+      --line: #d9dde3;
+      --paper: #f7f5ef;
+      --panel: #ffffff;
+      --ember: #d94f30;
+      --gold: #f0b13e;
+      --steel: #236477;
+      --green: #1d7a5f;
+      --code: #20252b;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.5;
+    }
+
+    a { color: inherit; }
+
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      align-items: center;
+      background:
+        linear-gradient(90deg, rgba(21, 21, 21, .82), rgba(21, 21, 21, .34)),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 1000'%3E%3Crect width='1600' height='1000' fill='%2320252b'/%3E%3Cg opacity='.72'%3E%3Crect x='130' y='150' width='610' height='510' rx='18' fill='%2317191d' stroke='%23f0b13e' stroke-opacity='.35'/%3E%3Crect x='190' y='220' width='500' height='24' rx='5' fill='%23f7f5ef' fill-opacity='.9'/%3E%3Crect x='190' y='285' width='410' height='18' rx='4' fill='%23d94f30'/%3E%3Crect x='190' y='340' width='455' height='18' rx='4' fill='%231d7a5f'/%3E%3Crect x='190' y='395' width='350' height='18' rx='4' fill='%23236477'/%3E%3Crect x='190' y='450' width='470' height='18' rx='4' fill='%23f0b13e'/%3E%3Crect x='190' y='505' width='290' height='18' rx='4' fill='%23f7f5ef' fill-opacity='.72'/%3E%3C/g%3E%3Cg opacity='.82'%3E%3Cpath d='M890 180h430l120 120v430H890z' fill='%23f7f5ef'/%3E%3Cpath d='M1320 180v120h120' fill='%23d9dde3'/%3E%3Crect x='970' y='300' width='300' height='18' rx='4' fill='%2320252b'/%3E%3Crect x='970' y='355' width='380' height='18' rx='4' fill='%23d94f30'/%3E%3Crect x='970' y='410' width='330' height='18' rx='4' fill='%231d7a5f'/%3E%3Crect x='970' y='465' width='365' height='18' rx='4' fill='%23236477'/%3E%3Crect x='970' y='520' width='250' height='18' rx='4' fill='%23f0b13e'/%3E%3C/g%3E%3Cpath d='M760 760c150-115 325-115 510 0' fill='none' stroke='%23f0b13e' stroke-width='24' stroke-linecap='round' opacity='.8'/%3E%3C/svg%3E");
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    nav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 22px 0;
+    }
+
+    nav .wrap {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .brand {
+      font-weight: 750;
+      letter-spacing: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: rgba(255, 255, 255, .82);
+      font-size: 14px;
+    }
+
+    .nav-links a { text-decoration: none; }
+
+    h1 {
+      max-width: 820px;
+      font-size: clamp(48px, 8vw, 104px);
+      line-height: .94;
+      margin: 96px 0 26px;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 690px;
+      font-size: clamp(18px, 2.5vw, 25px);
+      color: rgba(255, 255, 255, .86);
+      margin: 0 0 34px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border: 1px solid rgba(255, 255, 255, .28);
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 700;
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .button.secondary {
+      background: rgba(255, 255, 255, .08);
+      color: #fff;
+    }
+
+    section {
+      padding: 86px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    h2 {
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.03;
+      margin: 0 0 18px;
+      letter-spacing: 0;
+    }
+
+    .lede {
+      max-width: 780px;
+      font-size: 20px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 38px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 24px;
+      min-height: 190px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 42px;
+      align-items: start;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .stat {
+      background: var(--code);
+      color: #fff;
+      border-radius: 8px;
+      padding: 22px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 34px;
+      line-height: 1;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .rules {
+      display: grid;
+      gap: 12px;
+      margin: 32px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .rules li {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 12px;
+      align-items: start;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .rules span {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--steel);
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .terminal {
+      background: var(--code);
+      color: #f4f4f4;
+      border-radius: 8px;
+      border: 1px solid #303841;
+      overflow: hidden;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, .16);
+    }
+
+    .bar {
+      height: 42px;
+      display: flex;
+      gap: 7px;
+      align-items: center;
+      padding: 0 14px;
+      background: #15191e;
+    }
+
+    .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--ember);
+    }
+
+    .dot:nth-child(2) { background: var(--gold); }
+    .dot:nth-child(3) { background: var(--green); }
+
+    pre {
+      margin: 0;
+      padding: 24px;
+      overflow-x: auto;
+      font: 15px/1.65 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    code .key { color: var(--gold); }
+    code .ok { color: #77d6aa; }
+    code .bad { color: #ff9a80; }
+
+    footer {
+      padding: 44px 0;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+
+    footer .wrap {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 860px) {
+      .grid,
+      .split,
+      .stat-grid {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        position: static;
+        background: var(--code);
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 54px 0 76px;
+      }
+
+      h1 {
+        margin-top: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="wrap">
+      <div class="brand">pragmatic-coder</div>
+      <div class="nav-links">
+        <a href="#why">Why</a>
+        <a href="#standard">Standard</a>
+        <a href="#install">Install</a>
+        <a href="https://github.com/ChiefInnovator/inventingfirewithai_skills">GitHub</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap">
+      <h1>One compact skill for serious coding agents.</h1>
+      <p>Reduce skill bloat into a pragmatic engineering standard: no guessing, little or no code, data-first design, surgical edits, and verified change.</p>
+      <div class="actions">
+        <a class="button" href="https://github.com/ChiefInnovator/inventingfirewithai_skills">View on GitHub</a>
+        <a class="button secondary" href="https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/skills/pragmatic-coder/SKILL.md">Read the skill</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="why">
+    <div class="wrap split">
+      <div>
+        <h2>Built to fight context bloat.</h2>
+        <p class="lede">Agent skill libraries grow fast. Overlapping skills add noise, conflict, and token weight. `pragmatic-coder` distills the durable behaviors into one default operating standard.</p>
+      </div>
+      <div class="stat-grid">
+        <div class="stat"><strong>598</strong>skill tokens</div>
+        <div class="stat"><strong>1</strong>default coding standard</div>
+        <div class="stat"><strong>0</strong>guessing tolerated</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="standard">
+    <div class="wrap">
+      <h2>The behavior you want by default.</h2>
+      <p class="lede">The skill blends Karpathy-style caution with Torvalds-style pragmatism, then adds the discipline modern coding agents need.</p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>No Guessing</h3>
+          <p>Read code, docs, and tests before deciding. State assumptions, choose, proceed, and verify.</p>
+        </div>
+        <div class="card">
+          <h3>Little or No Code</h3>
+          <p>The best developers avoid unnecessary code. The skill rejects unrequested features, ceremony, and speculative abstraction.</p>
+        </div>
+        <div class="card">
+          <h3>Verified Changes</h3>
+          <p>Public-interface tests, preconditions, security checks, performance budgets, and targeted validation replace hand-wavy claims.</p>
+        </div>
+        <div class="card">
+          <h3>Data First</h3>
+          <p>Fix data shape before adding conditionals. Use interfaces only for real seams and contracts.</p>
+        </div>
+        <div class="card">
+          <h3>Surgical Edits</h3>
+          <p>Touch required lines, preserve behavior, avoid adjacent cleanup, and keep parallel work in disjoint areas.</p>
+        </div>
+        <div class="card">
+          <h3>Cost Aware</h3>
+          <p>Use the cheapest model likely to verify the work, then escalate when complexity or failures justify it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap split">
+      <div>
+        <h2>Small enough to load. Strong enough to matter.</h2>
+        <p class="lede">The scorecard compares referenced skills and shows what was kept, rejected, or compressed into the final skill.</p>
+        <ul class="rules">
+          <li><span>1</span><div><strong>Audit the references.</strong><br>Score each skill for durable coding-agent value.</div></li>
+          <li><span>2</span><div><strong>Keep only signal.</strong><br>Drop framework-specific, tool-specific, or process-heavy bloat.</div></li>
+          <li><span>3</span><div><strong>Ship one standard.</strong><br>Use a compact skill that guides implementation, review, and refactor work.</div></li>
+        </ul>
+      </div>
+      <div class="terminal" aria-label="Pragmatic Coder quality gates">
+        <div class="bar"><i class="dot"></i><i class="dot"></i><i class="dot"></i></div>
+        <pre><code><span class="key">pragmatic-coder</span>
+  <span class="ok">✓</span> read code/docs/tests
+  <span class="ok">✓</span> prefer little or no code
+  <span class="ok">✓</span> fix data shape first
+  <span class="ok">✓</span> preserve behavior
+  <span class="ok">✓</span> test public interfaces
+  <span class="ok">✓</span> check preconditions
+  <span class="ok">✓</span> measure performance work
+  <span class="bad">✕</span> tolerate unsupported claims</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section id="install">
+    <div class="wrap">
+      <h2>Use the skill.</h2>
+      <p class="lede">Install or copy `skills/pragmatic-coder/SKILL.md` into your agent skill directory, then use it for implementation, review, and refactor work.</p>
+      <div class="actions" style="margin-top: 28px">
+        <a class="button" href="https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/skills/pragmatic-coder/SKILL.md">Open SKILL.md</a>
+        <a class="button secondary" href="referenced_skills_scorecard.md" style="background: var(--code)">View scorecard</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div>Created by Richard Crane, Microsoft MVP and founder of MILL5.</div>
+      <div><a href="https://inventingfirewith.ai">Inventing Fire with AI</a> · <a href="https://www.mill5.com">MILL5</a></div>
+    </div>
+  </footer>
+</body>
+</html>

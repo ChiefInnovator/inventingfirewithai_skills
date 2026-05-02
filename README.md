@@ -1,10 +1,20 @@
 # pragmatic-coder
 
-Simple, safe, verified code changes.
+Use for simple, safe, verified implementation, review, and refactor work.
+
+Part of **[Inventing Fire with AI](https://inventingfirewith.ai)** by **[Richard Crane](https://mvp.microsoft.com/en-US/MVP/profile/10ce0bc0-7536-43f6-b28c-e9601a4a0d0d)** — Microsoft MVP and founder of **[MILL5](https://www.mill5.com)**.
+
+**Landing page:** [chiefinnovator.github.io/inventingfirewithai_skills](https://chiefinnovator.github.io/inventingfirewithai_skills/)
 
 ## What it does
 
-Research first. No guessing. Little or no code. Surgical changes. Verify before finishing. Flags anti-patterns by name.
+`pragmatic-coder` makes coding agents behave like pragmatic senior engineers by default: no guessing, little or no code, data-first design, surgical edits, verified changes, security and precondition checks, performance discipline, contract restraint, parallel-work boundaries, and cost-aware model use.
+
+## Why this exists
+
+Agent skill libraries grow fast. Too many overlapping skills add context bloat, conflicting advice, and slow decision-making.
+
+`pragmatic-coder` distills the coding behaviors we want most into one compact default skill. It replaces a pile of overlapping coding guidance with a streamlined, high-signal operating standard.
 
 ## When to use
 
@@ -27,6 +37,15 @@ Karpathy-style caution plus Torvalds-style pragmatism around data, simplicity, a
 ## License
 
 MIT
+
+## Credits
+
+Created by **Richard Crane**, Microsoft MVP and founder of **MILL5**.
+
+- **MILL5:** [mill5.com](https://www.mill5.com)
+- **Microsoft MVP profile:** [Richard Crane](https://mvp.microsoft.com/en-US/MVP/profile/10ce0bc0-7536-43f6-b28c-e9601a4a0d0d)
+- **Podcast:** [Inventing Fire with AI](https://inventingfirewith.ai)
+- **GitHub:** [@ChiefInnovator](https://github.com/ChiefInnovator)
 
 ## References
 
