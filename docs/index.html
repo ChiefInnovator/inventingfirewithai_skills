@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A compact pragmatic coding-agent skill that reduces skill bloat into one verified engineering standard.">
-  <title>Pragmatic Coder | Inventing Fire with AI</title>
+  <meta name="description" content="Inventing Fire with AI Skills: a focused skill library for coding agents, starting with Pragmatic Coder.">
+  <title>Inventing Fire with AI Skills | Pragmatic Coder</title>
   <style>
     :root {
       --ink: #151515;
@@ -161,6 +161,66 @@
       color: var(--muted);
     }
 
+    .skill-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 18px;
+      margin-top: 38px;
+    }
+
+    .skill-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 26px;
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .skill-card.featured {
+      border-color: rgba(217, 79, 48, .45);
+      box-shadow: inset 0 0 0 1px rgba(217, 79, 48, .2);
+    }
+
+    .skill-card.empty {
+      background: transparent;
+      border-style: dashed;
+      color: var(--muted);
+    }
+
+    .skill-card h3 {
+      margin: 0 0 10px;
+      font-size: 30px;
+      line-height: 1.05;
+    }
+
+    .skill-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: #eef3f4;
+      color: var(--steel);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
     .split {
       display: grid;
       grid-template-columns: .9fr 1.1fr;
@@ -219,6 +279,81 @@
       font-weight: 800;
     }
 
+    .scorecard-panel {
+      margin-top: 32px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 16px 42px rgba(0, 0, 0, .08);
+    }
+
+    .scorecard-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+      background: #fbfaf7;
+    }
+
+    .scorecard-head strong {
+      display: block;
+      font-size: 18px;
+    }
+
+    .scorecard-head a {
+      color: var(--steel);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 860px;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      padding: 13px 16px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: var(--code);
+      color: #fff;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    td:nth-child(2),
+    td:nth-child(4),
+    td:nth-child(5),
+    td:nth-child(6) {
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    tr:first-child td:first-child {
+      font-weight: 800;
+      color: var(--ember);
+    }
+
+    .loading {
+      padding: 22px;
+      color: var(--muted);
+    }
+
     .terminal {
       background: var(--code);
       color: #f4f4f4;
@@ -274,7 +409,8 @@
     @media (max-width: 860px) {
       .grid,
       .split,
-      .stat-grid {
+      .stat-grid,
+      .skill-grid {
         grid-template-columns: 1fr;
       }
 
@@ -297,10 +433,12 @@
 <body>
   <nav>
     <div class="wrap">
-      <div class="brand">pragmatic-coder</div>
+      <div class="brand">Inventing Fire with AI Skills</div>
       <div class="nav-links">
         <a href="#why">Why</a>
+        <a href="#skills">Skills</a>
         <a href="#standard">Standard</a>
+        <a href="#scorecard">Scorecard</a>
         <a href="#install">Install</a>
         <a href="https://github.com/ChiefInnovator/inventingfirewithai_skills">GitHub</a>
       </div>
@@ -309,8 +447,8 @@
 
   <header class="hero">
     <div class="wrap">
-      <h1>One compact skill for serious coding agents.</h1>
-      <p>Reduce skill bloat into a pragmatic engineering standard: no guessing, little or no code, data-first design, surgical edits, and verified change.</p>
+      <h1>Pragmatic Coder</h1>
+      <p>The first skill in the Inventing Fire with AI skill library: a compact operating standard for serious coding agents.</p>
       <div class="actions">
         <a class="button" href="https://github.com/ChiefInnovator/inventingfirewithai_skills">View on GitHub</a>
         <a class="button secondary" href="https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/skills/pragmatic-coder/SKILL.md">Read the skill</a>
@@ -321,13 +459,51 @@
   <section id="why">
     <div class="wrap split">
       <div>
-        <h2>Built to fight context bloat.</h2>
-        <p class="lede">Agent skill libraries grow fast. Overlapping skills add noise, conflict, and token weight. `pragmatic-coder` distills the durable behaviors into one default operating standard.</p>
+        <h2>A skill library, not a context landfill.</h2>
+        <p class="lede">Think of skills like UI components: each one should have a name, purpose, and clear activation surface. <code>pragmatic-coder</code> is the first component in this library.</p>
       </div>
       <div class="stat-grid">
         <div class="stat"><strong>598</strong>skill tokens</div>
         <div class="stat"><strong>1</strong>default coding standard</div>
         <div class="stat"><strong>0</strong>guessing tolerated</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <h2>Skills in the library.</h2>
+      <p class="lede">One skill today, with room to add more focused skills later without turning the agent context into a pile of overlapping instructions.</p>
+
+      <div class="skill-grid">
+        <article class="skill-card featured">
+          <div>
+            <div class="tag-row">
+              <span class="tag">Available</span>
+              <span class="tag">Coding</span>
+              <span class="tag">598 tokens</span>
+            </div>
+            <h3>Pragmatic Coder</h3>
+            <p>Use for simple, safe, verified implementation, review, and refactor work. It enforces no guessing, little or no code, data-first design, surgical edits, and verification.</p>
+          </div>
+          <a class="button" href="https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/skills/pragmatic-coder/SKILL.md">Open skill</a>
+        </article>
+
+        <article class="skill-card empty">
+          <div>
+            <span class="tag">Future</span>
+            <h3>Next Skill</h3>
+            <p>A focused skill belongs here when it has a distinct purpose and earns its context cost.</p>
+          </div>
+        </article>
+
+        <article class="skill-card empty">
+          <div>
+            <span class="tag">Future</span>
+            <h3>Another Skill</h3>
+            <p>The library can grow, but each addition should reduce work, not add noise.</p>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -366,7 +542,7 @@
     </div>
   </section>
 
-  <section>
+  <section id="scorecard">
     <div class="wrap split">
       <div>
         <h2>Small enough to load. Strong enough to matter.</h2>
@@ -390,12 +566,26 @@
   <span class="bad">✕</span> tolerate unsupported claims</code></pre>
       </div>
     </div>
+    <div class="wrap">
+      <div class="scorecard-panel">
+        <div class="scorecard-head">
+          <div>
+            <strong>Referenced skills scorecard</strong>
+            <span>Rendered from the markdown scorecard in this repo.</span>
+          </div>
+          <a href="referenced_skills_scorecard.md">Open markdown</a>
+        </div>
+        <div class="table-wrap" id="scorecard-table">
+          <div class="loading">Loading scorecard...</div>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section id="install">
     <div class="wrap">
       <h2>Use the skill.</h2>
-      <p class="lede">Install or copy `skills/pragmatic-coder/SKILL.md` into your agent skill directory, then use it for implementation, review, and refactor work.</p>
+      <p class="lede">Install or copy <code>skills/pragmatic-coder/SKILL.md</code> into your agent skill directory, then use it for implementation, review, and refactor work.</p>
       <div class="actions" style="margin-top: 28px">
         <a class="button" href="https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/skills/pragmatic-coder/SKILL.md">Open SKILL.md</a>
         <a class="button secondary" href="referenced_skills_scorecard.md" style="background: var(--code)">View scorecard</a>
@@ -409,5 +599,54 @@
       <div><a href="https://inventingfirewith.ai">Inventing Fire with AI</a> · <a href="https://www.mill5.com">MILL5</a></div>
     </div>
   </footer>
+  <script>
+    const target = document.getElementById("scorecard-table");
+
+    function escapeHtml(value) {
+      return value
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function splitRow(row) {
+      return row
+        .trim()
+        .replace(/^\|/, "")
+        .replace(/\|$/, "")
+        .split("|")
+        .map((cell) => cell.trim());
+    }
+
+    function renderMarkdownTable(markdown) {
+      const rows = markdown
+        .split("\n")
+        .filter((line) => line.startsWith("|") && !line.includes("---"));
+
+      if (rows.length < 2) {
+        throw new Error("No markdown table found");
+      }
+
+      const headers = splitRow(rows[0]);
+      const body = rows.slice(1).map(splitRow);
+      const thead = `<thead><tr>${headers.map((h) => `<th>${escapeHtml(h)}</th>`).join("")}</tr></thead>`;
+      const tbody = `<tbody>${body.map((row) => `<tr>${row.map((cell) => `<td>${escapeHtml(cell)}</td>`).join("")}</tr>`).join("")}</tbody>`;
+      return `<table>${thead}${tbody}</table>`;
+    }
+
+    fetch("referenced_skills_scorecard.md")
+      .then((response) => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.text();
+      })
+      .then((markdown) => {
+        target.innerHTML = renderMarkdownTable(markdown);
+      })
+      .catch(() => {
+        target.innerHTML = '<div class="loading">Scorecard preview could not load. Open the markdown source from the link above.</div>';
+      });
+  </script>
 </body>
 </html>
