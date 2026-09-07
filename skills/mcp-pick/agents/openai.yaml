@@ -1,0 +1,3 @@
+interface:
+  display_name: "MCP Picker"
+  short_description: "Choose MCP servers and apps for each Codex project"
