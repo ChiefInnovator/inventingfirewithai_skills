@@ -200,6 +200,12 @@ class ProjectTests(unittest.TestCase):
 
 
 class DiscoveryTests(unittest.TestCase):
+    def test_older_codex_rejected_before_starting_client(self):
+        with patch.object(picker.subprocess, 'run', return_value=subprocess.CompletedProcess([], 0, 'codex-cli 0.147.0\n')), patch.object(picker.subprocess, 'Popen') as start:
+            with self.assertRaisesRegex(picker.PickerError, '0.153.4'):
+                picker.Codex(Path('/fake/project'))
+            start.assert_not_called()
+
     def test_remote_plugin_uses_canonical_source_id(self):
         calls = []
         class Metadata:

@@ -1,6 +1,6 @@
 # Referenced Skills Audit
 
-This audit checks each referenced skill for ideas worth adding to `skills/pragmatic-coder/SKILL.md`. The goal is to keep the skill compact while preserving capability.
+This audit records the May 2, 2026 reference review for `skills/codex/pragmatic-coder/SKILL.md`. The table describes that version's editorial assessment, not measured agent behavior. In particular, "ask only for blockers" did not establish persistence, and broad checklist coverage did not prove equivalent capability. The September revision below supersedes those wording and coverage claims where they differ.
 
 ## Decisions
 
@@ -55,12 +55,22 @@ This audit checks each referenced skill for ideas worth adding to `skills/pragma
 | OOP Design Pattern Instructions | SOLID/pattern review | Covered | Useful parts covered without SOLID verbosity |
 | GitHub .NET Architecture Instructions | Architecture principles and boundaries | Covered | Reversibility, contracts, and project fit cover useful parts |
 
-## Skill Changes Made
+## May 2 Skill Changes
 
 - `No guessing` now explicitly starts from local code, docs, and tests.
 - New seams/contracts now name inputs, outputs, errors, invariants, and owner.
 - Unknowns now include sources, learning, high-confidence reusable learnings, and invented API detection.
 - Claims now require fresh evidence and hidden-failure skepticism before completion.
+
+## September 5 Revision
+
+- Require completion through relevant checks and final diff review, with precise blockers when work cannot finish.
+- Keep review/diagnosis read-only unless changes are requested; reuse authorization and resolve routine choices independently.
+- Select meaningful verification by risk; retain regression testing without requiring the same sequence for every change.
+- Replace line-count and diagram heuristics with clarity, dependency, maintenance, and compatibility criteria.
+- Limit model routing to supported, authorized choices and persistent learning to the host's memory rules.
+- Distinguish runtime evidence, inspection, assumptions, and untested behavior; require consequences and evidence for review findings.
+- Use [behavioral evaluation scenarios](pragmatic_coder_evaluation.md) to assess outcomes before claiming measured improvement. Comparative agent runs have not yet been performed.
 
 ## Rejected Categories
 

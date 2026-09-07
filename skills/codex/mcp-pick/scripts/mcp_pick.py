@@ -13,6 +13,7 @@ import json
 import os
 from pathlib import Path
 import queue
+import re
 import shutil
 import subprocess
 import sys
@@ -30,6 +31,10 @@ class Codex:
     """Short-lived metadata/config client; never creates a model thread or runs MCP tools."""
 
     def __init__(self, project: Path, profile: str | None = None):
+        version = subprocess.run(["codex", "--version"], capture_output=True, text=True, timeout=10)
+        match = re.fullmatch(r"codex-cli (\d+)\.(\d+)\.(\d+)\s*", version.stdout)
+        if version.returncode or not match or tuple(map(int, match.groups())) < (0, 153, 4):
+            raise PickerError("mcp-pick requires Codex CLI 0.153.4 or newer on PATH; older versions may ignore plugin server controls.")
         self.project = project
         command = ["codex"]
         if profile:

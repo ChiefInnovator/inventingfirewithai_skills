@@ -1,9 +1,9 @@
-# pragmatic-coder Skills Project
+# Inventing Fire with AI Skills Project
 
 ## Rules
 
 - Keep `README.md` short. Do not add a references section; put source links in `references.md`.
-- Keep `skills/pragmatic-coder/SKILL.md` compact; add capability only when it earns its token cost.
+- Keep `skills/codex/pragmatic-coder/SKILL.md` compact; add capability only when it earns its token cost.
 - Do not reference local files outside this repo.
 - No mocks in implementation code. Mocks stay in tests.
 - No redundant docs: one root README, one `references.md`, operational instructions in `AGENTS.md`/`CLAUDE.md`, research under `docs/`.
@@ -13,7 +13,13 @@
 ## Structure
 
 ```text
-skills/pragmatic-coder/SKILL.md
+skills/codex/pragmatic-coder/SKILL.md
+skills/codex/slam/SKILL.md
+skills/codex/mcp-pick/SKILL.md
+skills/claude/mcp-pick/SKILL.md
+skills/claude/slam/SKILL.md
+skills/claude/pragmatic-coder/SKILL.md
+tests/
 AGENTS.md
 CLAUDE.md
 README.md

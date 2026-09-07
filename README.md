@@ -2,9 +2,9 @@
   <img src="assets/branding/primary%20square%20for%20white%20bg.png" alt="Inventing Fire with AI" width="280">
 </p>
 
-# pragmatic-coder
+# Inventing Fire with AI Skills
 
-Use for simple, safe, verified implementation, review, and refactor work.
+Reusable skills for implementing, reviewing, and shipping software.
 
 Part of **[Inventing Fire with AI](https://inventingfirewith.ai)** by **[Richard Crane](https://mvp.microsoft.com/en-US/MVP/profile/10ce0bc0-7536-43f6-b28c-e9601a4a0d0d)** — Microsoft MVP and founder of **[MILL5](https://www.mill5.com)**.
 
@@ -12,7 +12,18 @@ Part of **[Inventing Fire with AI](https://inventingfirewith.ai)** by **[Richard
 
 ## What it does
 
-`pragmatic-coder` makes coding agents behave like pragmatic senior engineers by default: no guessing, research-backed learning, little or no code, data-first design, surgical edits, evidence-backed claims, security and precondition checks, performance discipline, contract restraint, parallel-work boundaries, and cost-aware model use.
+| Skill | Purpose |
+|---|---|
+| [pragmatic-coder (Codex)](skills/codex/pragmatic-coder/SKILL.md) | Implement, debug, review, and refactor with minimal changes and proportionate verification. |
+| [pragmatic-coder (Claude Code)](skills/claude/pragmatic-coder/SKILL.md) | The same coding guidance adapted to Claude Code. |
+| [slam (Codex)](skills/codex/slam/SKILL.md) | Ship scoped GitHub work through commit, PR, AI review, CI, merge, and verified branch cleanup. |
+| [slam (Claude Code)](skills/claude/slam/SKILL.md) | Native Claude shipping workflow with session goal guidance. |
+| [mcp-pick (Codex)](skills/codex/mcp-pick/SKILL.md) | Choose MCP servers and installed app integrations per Codex project. |
+| [mcp-pick (Claude Code)](skills/claude/mcp-pick/SKILL.md) | Choose which MCP servers stay enabled per Claude Code project. |
+
+`pragmatic-coder` guides coding agents to finish authorized work with minimal changes, proportionate verification, clear evidence, and respect for user choices. It favors simple data, maintainable solutions, relevant security checks, and measured performance work.
+
+Install a skill folder from `skills/codex/` or `skills/claude/` into the matching client's skills directory, including its bundled resources. Invoke `$pragmatic-coder` or `$mcp-pick` in Codex; use `/pragmatic-coder` or `/mcp-pick` in Claude Code.
 
 ## Why this exists
 
@@ -22,21 +33,20 @@ Agent skill libraries grow fast. Too many overlapping skills add context bloat, 
 
 ## When to use
 
-Implementation, review, or refactor tasks.
+Use `pragmatic-coder` for implementation, review, and refactoring. Invoke `$slam` when ready to ship the scoped work. Slam requires repository tools and authenticated GitHub access; inspecting or installing it does not run the shipping workflow.
 
 ## Influences
 
 Karpathy-style caution plus Torvalds-style pragmatism around data, simplicity, and regressions. Adds autonomy, TDD, preconditions, security, performance, parallel-agent, cost, contract, research-learning, and skeptical-verification rules.
 
-## Rules
+## Pragmatic Coder Rules
 
-1. **Think Before Coding** — Research and learn first; no guessing; ask only for blockers
-2. **Data First** — Design data before code; use interfaces only for real seams
-3. **Simplicity and Cost First** — Little or no code; cheapest model likely to verify
-4. **Surgical Changes** — Touch required lines; avoid overlapping parallel edits
-5. **Verify, Don't Assert** — One public-interface failing test at a time; test preconditions, security, performance, evidence, and reusable learnings
-6. **Review Smells** — Flag empty abstractions, pointless interfaces, hostile APIs, ceremony, bad data shapes, unexplained mechanisms, layered workarounds, and unsupported claims
-7. **Constraints** — Don't break existing behavior; mocks in tests only
+1. **Think Before Coding** — Inspect evidence, preserve scope, and reuse existing authorization
+2. **Data First** — Simplify data within compatibility constraints; document meaningful boundaries
+3. **Simplicity and Cost First** — Favor maintainability, respect model choices, and reassess failed approaches
+4. **Surgical Changes** — Preserve user edits and existing behavior; keep changes tied to the request
+5. **Verify, Don't Assert** — Use proportionate checks, finish the requested work, and distinguish evidence from assumptions
+6. **Review Smells** — Report concrete consequences and evidence; separate defects from optional improvements
 
 ## License
 

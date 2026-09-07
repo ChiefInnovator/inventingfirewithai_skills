@@ -1,10 +1,13 @@
 # Referenced Skills Scorecard
 
-Scores compare each referenced skill against `pragmatic-coder` for compact, professional coding-agent behavior: simplicity, verification, TDD, security, performance, contracts, cost control, and parallel execution. Counts use `tiktoken` `cl100k_base` for the local skill and directly fetchable GitHub files on May 2, 2026. `N/A` means the reference is repo-only, multi-skill, unavailable, or not a single canonical file.
+These are historical editorial scores from May 2, 2026, based on instruction coverage and compactness, not behavioral benchmarks. They do not establish correctness, completion rates, or superiority over other skills. Historical counts use `tiktoken` `cl100k_base` for directly fetchable files. `N/A` means unavailable or not applicable. The revised local skill has no comparative performance score; its counts below were measured with the same encoding on September 5, 2026.
 
 | Skill | Score | Why | Lines | Characters | Tokens |
 |---|---:|---|---:|---:|---:|
-| pragmatic-coder | 9.2 | Best broad coding standard; compact coverage across simplicity, research-backed learning, skepticism, TDD, security, contracts, performance, cost, and parallel work. | 56 | 2,758 | 600 |
+| mcp-pick (Codex / Claude) | N/A | Project integration selection; no comparative behavioral score assigned. | N/A | N/A | N/A |
+| slam (Claude) | N/A | Original native Claude workflow; no comparative behavioral score assigned. | N/A | N/A | N/A |
+| pragmatic-coder | N/A | Historical September 5 revision before platform-specific invocation guidance; behavioral comparison pending. See evaluation scenarios. | 50 | 3,706 | 705 |
+| slam | N/A | GitHub shipping workflow migrated from the user's Claude skill; entrypoint measured September 5; comparative behavior unscored. | 125 | 15,002 | 3,046 |
 | Karpathy Guidelines | 8.0 | Strong assumptions, simplicity, surgical edits, and verification; narrower. | 67 | 2,506 | 580 |
 | Torvalds Doctrine | 7.6 | Strong data/userspace instincts; tone and size reduce reuse. | 141 | 5,574 | 1,288 |
 | Matt Pocock TDD | 8.9 | Excellent TDD/public-interface discipline; focused scope. | 109 | 4,371 | 968 |
@@ -123,7 +126,7 @@ Scores compare each referenced skill against `pragmatic-coder` for compact, prof
 
 ## Notes
 
-- `pragmatic-coder` scores highest because it merges the strongest behaviors from the references into 600 tokens.
-- The closest high-value references are Matt Pocock TDD, Addy Security and Hardening, Matt Pocock Architecture, and Addy Performance Optimization.
-- Larger skills often score well for depth but lower for activation cost, reuse, and token efficiency.
+- The former 9.2 rating for `pragmatic-coder` was an editorial judgment, not a measured result, and does not apply to the revised skill.
+- The reference ratings reflect the author's assessments of coverage, depth, activation cost, and reuse at that time.
+- Use [behavioral evaluation scenarios](pragmatic_coder_evaluation.md) to compare the baseline and revision under matched conditions before making performance claims.
 - Non-skill standards, docs, people, product, and organization links are cataloged in `references.md` but are not scored here.

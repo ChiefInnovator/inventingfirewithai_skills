@@ -4,7 +4,16 @@ Canonical reference catalog for this repository. README stays short; detailed so
 
 ## Local Documents
 
-- [Pragmatic Coder Skill](skills/pragmatic-coder/SKILL.md)
+- [Pragmatic Coder for Claude Code](skills/claude/pragmatic-coder/SKILL.md)
+- [MCP Picker for Codex](skills/codex/mcp-pick/SKILL.md)
+- [MCP Picker for Claude Code](skills/claude/mcp-pick/SKILL.md)
+- [Slam for Claude Code](skills/claude/slam/SKILL.md)
+
+- [Pragmatic Coder Skill](skills/codex/pragmatic-coder/SKILL.md)
+- [Slam Skill](skills/codex/slam/SKILL.md)
+- [Slam Migration and Verification](docs/slam_migration.md)
+- [Slam GitHub Review Workflow](skills/codex/slam/references/github-review.md)
+- [Pragmatic Coder Behavioral Evaluation](docs/pragmatic_coder_evaluation.md)
 - [Agent Instructions](AGENTS.md)
 - [Claude Instructions](CLAUDE.md)
 - [Autonomous Execution Skills Research and Reference Guide](docs/autonomous_execution_skills_research.md)
@@ -48,14 +57,14 @@ Local references:
 - `README.md`
 - `docs/referenced_skills_scorecard.md`
 - `references.md`
-- `skills/pragmatic-coder/SKILL.md`
+- `skills/codex/pragmatic-coder/SKILL.md`
 
 ### `CLAUDE.md`
 
 Local references:
 - `docs/referenced_skills_scorecard.md`
 - `references.md`
-- `skills/pragmatic-coder/SKILL.md`
+- `skills/codex/pragmatic-coder/SKILL.md`
 
 ### `docs/autonomous_execution_skills_research.md`
 
@@ -213,7 +222,7 @@ External references:
 ### `docs/referenced_skills_audit.md`
 
 Local references:
-- `skills/pragmatic-coder/SKILL.md`
+- `skills/codex/pragmatic-coder/SKILL.md`
 
 ### `docs/referenced_skills_scorecard.md`
 

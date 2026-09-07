@@ -51,6 +51,6 @@ After a successful write, run `list` again with the same project, scope, and pro
 - Do not call `codex mcp remove`, edit global enablement, remove plugins, or edit Claude configuration to accomplish project scoping. Never copy global server definitions or credentials into the project file.
 - Do not disable built-in Codex tools or change trust/approval settings as a substitute for MCP selection.
 
-The helper requires Python 3.11+, uv, and Codex on PATH. Its TOML dependency is pinned in the script. If uv is unavailable but a suitable Python and the declared dependency are already installed, running the helper with that Python is equivalent. Tested against Codex CLI 0.153.4 on macOS; its metadata APIs are experimental, so errors on another version require checking compatibility rather than guessing a configuration format.
+The helper requires Python 3.11+, uv, and Codex CLI 0.153.4 or newer on PATH. Its TOML dependency is pinned in the script. If uv is unavailable but a suitable Python and the declared dependency are already installed, running the helper with that Python is equivalent. Tested against Codex CLI 0.153.4 on macOS; its metadata APIs are experimental, so errors on another version require checking compatibility rather than guessing a configuration format.
 
 Official references: [project configuration and trust](https://learn.chatgpt.com/docs/config-file/config-basic), [MCP and plugin server controls](https://learn.chatgpt.com/docs/extend/mcp?surface=cli), and [app enablement](https://learn.chatgpt.com/docs/config-file/config-reference).
