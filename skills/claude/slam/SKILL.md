@@ -1,6 +1,6 @@
 ---
 name: slam
-description: Ship the current branch end-to-end under a session /goal that keeps the run alive to the merge — preflight checks, commit, push, ensure a PR against the repo's base branch (develop if it exists, else main), request and address GitHub Copilot / AI review comments, merge, then delete the merged branch. Stops on anything ambiguous rather than guessing.
+description: Ship the current branch end-to-end under a session /goal that keeps the run alive to the merge — preflight checks, commit, push, ensure a PR against the repo's base branch (develop if it exists, else main), request and address GitHub Copilot / AI review comments, merge, then delete the merged branch. Resolves in-scope blockers and stops when no authorized path remains.
 user_invocable: true
 arguments: message-or-scope
 ---
@@ -22,7 +22,9 @@ This skill is repo-agnostic. It detects the base branch, the review bot, and the
 - **Never add `Co-Authored-By` or AI-attribution lines** to commits.
 - Merge with a **merge commit** (`gh pr merge --merge`). Not `--rebase`. Use `--squash` only if the user explicitly asks.
 
-Work the phases in order. Report a one-line status per phase as you go. If a **stop condition** fires, halt and tell the user exactly what's blocking and the options — do not improvise past it.
+Work the phases in order. Report a one-line status per phase as you go.
+
+Resolve blockers within the authorized scope: inspect evidence, fix valid in-scope defects or review findings, run the affected checks, and resume the shipping phases. Retry transient failures when evidence supports a retry. After repeated failures, change the approach rather than repeating the same action indefinitely. A failed gate prevents merging; it does not by itself end the run. Stop only when no safe, authorized path forward remains, or an explicit stop rule applies. Report what was tried, the remaining obstacle, and the access, decision, or external change needed to resume. Never broaden scope, bypass a gate, or resolve conflicts/divergence without the required user approval.
 
 ---
 
@@ -34,15 +36,15 @@ Work the phases in order. Report a one-line status per phase as you go. If a **s
 
 Propose it with the `ProposeGoal` tool — the user approves with one keypress. If that tool is unavailable (non-interactive or agent context, plan mode, or model-proposed goals disabled in settings), print the `/goal` line for the user to paste and **carry on either way**. A missing goal is a missing safety net, never a reason not to ship.
 
-**The condition** — name the branch and base, state the evidence, and include the halt state:
+**The condition** — name the branch and base and state the completion evidence:
 
 ```
-/goal the PR for <branch> reports MERGED into <base> with the merge commit SHA reported, and the feature branch is deleted or its retention explained — or /slam halted at a named stop condition with the blocker and the options reported
+/goal the PR for <branch> reports MERGED into <base> with the merge commit SHA reported, and the feature branch is deleted or its retention explained
 ```
 
 Keep it under ~500 characters so the whole thing fits the approval dialog (a typed `/goal` allows 4000).
 
-**That second clause is not decoration.** Every stop condition in this skill — a conflict, red CI, a human requesting changes, a diverged protected branch — is a *correct* ending. Word the goal as "merged" alone and the evaluator reads a legitimate halt as failure and pushes the session to keep grinding, straight into the improvisation the stop conditions exist to prevent. Halting with the blocker reported must satisfy the goal.
+**A halt is not completion.** Resolve fixable blockers and continue. If no authorized path remains, stop shipping actions and report the unfinished goal and what would enable resumption. Follow the host's supported goal lifecycle; never claim a merge occurred merely to satisfy an evaluator. Abandonment requires an explicit user decision, with the decision-maker and reason recorded.
 
 **The goal never outranks a hard rule.** If continuing means a rebase, a force-push, an `--admin` merge, or deleting a protected branch, the rule wins: report and stop. A Stop hook cannot authorize what a hard rule forbids.
 
@@ -461,13 +463,13 @@ gh pr view "$PR" --json mergeable,mergeStateStatus,statusCheckRollup \
   -q '{mergeable, mergeStateStatus, checks: [.statusCheckRollup[]? | {name, conclusion}]}'
 ```
 
-**Stop conditions — do not merge:**
+**Merge gates — resolve or wait before merging:**
 
 | Condition | Action |
 | --- | --- |
-| Any required check failing or still running | Wait for running checks; report failures and stop. Never merge red. |
-| `mergeable: CONFLICTING` | Merge `origin/$BASE` into the branch (**not rebase**), resolve, push, re-check. |
-| A human reviewer requested changes | Stop — an AI pass doesn't clear a human's block. |
+| Any required check failing or still running | Wait for running checks. Inspect failures, fix in-scope causes, verify, push, and recheck the new head. Stop only if no authorized remedy remains. Never merge red. |
+| `mergeable: CONFLICTING` | Report the conflict and obtain user approval before resolving it. Diverged branches also require approval. Never rebase; after authorized resolution, verify, push, and recheck. |
+| A human reviewer requested changes | Address actionable in-scope requests, verify, push, and request re-review. Never dismiss the human's block; if reviewer action is all that remains, report the dependency and wait or stop according to host capabilities. |
 | Unresolved review comments you couldn't triage | Stop and ask. |
 
 A repo with no CI configured returns an empty check list. That is "nothing to wait for", not "checks passed" — report it as such.
@@ -555,6 +557,6 @@ Summarize concretely:
 - Whether the feature branch was deleted (local + remote), or why it was kept
 - **Anything you skipped or that remains open** — state it plainly rather than implying a clean sweep
 
-If you stopped early, say exactly which phase, why, and what the user's options are.
+If you stopped early, report the phase, attempted remedies, remaining obstacle, and what would enable resumption. Distinguish completed, blocked, and explicitly abandoned outcomes; abandonment records who decided and why. A blocked or abandoned run is not shipped.
 
-**Under a Phase G goal the report is also the evidence.** The evaluator judges the condition from the conversation and cannot run `gh` for itself, so put the literal facts in the text — PR number, `state=MERGED`, the merge commit SHA, the deleted branch name, or the named stop condition and its blocker. A report that says "all done" gives the evaluator nothing to confirm and the session keeps grinding. If you halted and the goal is still active, close with the reminder that `/goal clear` releases it.
+**Under a Phase G goal the report is also the evidence.** The evaluator judges the condition from the conversation and cannot run `gh` for itself, so put the literal facts in the text — PR number, `state=MERGED`, the merge commit SHA, and the deleted branch name or verified retention reason. For an unfinished run, report the named stop condition and its blocker separately; they are not completion evidence. A report that says "all done" gives the evaluator nothing to confirm and the session keeps grinding. If you halted and the goal is still active, close with the reminder that `/goal clear` releases it.
