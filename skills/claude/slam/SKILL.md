@@ -520,10 +520,20 @@ read -r state merged_at <<<"$(gh pr view "$PR" --json state,mergedAt -q '"\(.sta
 #    feature branch during this run, a stale origin/$BRANCH points at an older
 #    commit that IS contained in the base — the gate would pass and the delete
 #    would take the newer commits with it.
-git fetch origin --quiet \
+git fetch origin --prune --quiet \
   || { echo "REFUSE: git fetch failed — cannot judge containment on stale refs"; exit 1; }
-git merge-base --is-ancestor "origin/$BRANCH" "origin/$BASE" \
-  || { echo "REFUSE: origin/$BRANCH is NOT contained in origin/$BASE"; exit 1; }
+remote_ref=$(git ls-remote --heads origin "refs/heads/$BRANCH") \
+  || { echo "REFUSE: remote lookup failed"; exit 1; }
+if [ -n "$remote_ref" ]; then
+  remote_head=$(printf '%s' "$remote_ref" | cut -f1)
+  git merge-base --is-ancestor "$remote_head" "origin/$BASE" \
+    || { echo "REFUSE: remote feature is NOT contained in origin/$BASE"; exit 1; }
+fi
+# A missing remote feature is already clean, not a merge failure.
+if git show-ref --verify --quiet "refs/heads/$BRANCH"; then
+  git merge-base --is-ancestor "refs/heads/$BRANCH" "origin/$BASE" \
+    || { echo "REFUSE: local feature is NOT contained in origin/$BASE"; exit 1; }
+fi
 ```
 
 Every check above **exits non-zero on failure** rather than printing a verdict for you to read past. That is deliberate: a gate that only narrates is not a gate. In particular, note that `--is-ancestor ... && echo ok || echo "NOT CONTAINED"` would *swallow* the non-zero exit and let the deletion proceed — never write the containment check that way.
@@ -531,8 +541,12 @@ Every check above **exits non-zero on failure** rather than printing a verdict f
 Only with all four satisfied:
 
 ```bash
-git push origin --delete "$BRANCH"   # remote
-git branch -d "$BRANCH"              # local — -d, never -D
+if [ -n "$remote_ref" ]; then
+  git push origin --delete "$BRANCH" || exit 1
+fi
+if git show-ref --verify --quiet "refs/heads/$BRANCH"; then
+  git branch -d "$BRANCH"           # local — -d, never -D
+fi
 ```
 
 Use `git branch -d`, never `-D`. `-d` refuses to delete a branch whose commits aren't reachable from the current HEAD, which is a free second opinion on check 3. **If `-d` refuses, that is a real signal** — the commits are not in the base. Stop and investigate rather than reaching for `-D`.
