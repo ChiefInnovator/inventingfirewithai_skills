@@ -64,11 +64,14 @@ esac
 BACKUP="$(mktemp "$MCP_CFG.bak.XXXXXX")"
 cp "$MCP_CFG" "$BACKUP"
 python3 -c "
-import json,os,tempfile,stat
+import json,os,tempfile,stat,fcntl
 allsrv=[l.rstrip('\n') for l in open(os.environ['MCP_ALL']) if l.strip()]
 keep={l.rstrip('\n') for l in open(os.environ['MCP_KEEP']) if l.strip()}
 cfg=os.environ['MCP_CFG']
-d=json.load(open(cfg))
+lock=open(cfg+'.mcp-pick.lock','a')
+fcntl.flock(lock.fileno(),fcntl.LOCK_EX)
+original=open(cfg,'rb').read()
+d=json.loads(original)
 e=d.setdefault('projects',{}).setdefault(os.environ['MCP_CWD'],{})
 unseen=set(e.get('disabledMcpServers',[]))-set(allsrv)
 e['disabledMcpServers']=sorted(unseen | (set(allsrv)-keep))
@@ -79,6 +82,8 @@ try:
         json.dump(d,stream,indent=2)
         stream.flush()
         os.fsync(stream.fileno())
+    if open(cfg,'rb').read()!=original:
+        raise SystemExit('Configuration changed during update; refresh the picker and retry.')
     os.replace(temporary,cfg)
 finally:
     if os.path.exists(temporary):

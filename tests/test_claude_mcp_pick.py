@@ -73,6 +73,26 @@ class ClaudePickerTests(unittest.TestCase):
         self.assertEqual(self.config.read_bytes(), before)
         self.assertEqual(list(self.root.glob('.mcp-pick-*')), [])
 
+    def test_concurrent_config_edit_is_preserved(self):
+        wrapper = self.root / 'python3'
+        wrapper.write_text('#!' + sys.executable + '\n'
+                           'import os,sys,json\n'
+                           'real_fsync=os.fsync\n'
+                           'def edit(fd):\n'
+                           '    real_fsync(fd)\n'
+                           '    p=os.environ["MCP_CFG"]\n'
+                           '    d=json.load(open(p)); d["concurrent"]=True\n'
+                           '    with open(p,"w") as f: json.dump(d,f)\n'
+                           'os.fsync=edit\n'
+                           'exec(sys.argv[2])\n')
+        wrapper.chmod(0o700)
+        self.env['PATH'] = str(self.root) + os.pathsep + self.env['PATH']
+        with self.assertRaises(subprocess.CalledProcessError):
+            self.run_picker('none')
+        expected = {**self.original, 'concurrent': True}
+        self.assertEqual(json.loads(self.config.read_text()), expected)
+        self.assertEqual(list(self.root.glob('.mcp-pick-*')), [])
+
     def test_list_is_read_only(self):
         before = self.config.read_bytes()
         self.run_picker('list')
