@@ -3,6 +3,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import sys
 import tempfile
 import unittest
 
@@ -56,6 +57,21 @@ class ClaudePickerTests(unittest.TestCase):
         backups = list(self.root.glob('config.json.bak.*'))
         self.assertEqual(len(backups), 2)
         self.assertTrue(all(json.loads(p.read_text()) for p in backups))
+
+    def test_failed_replace_preserves_live_config(self):
+        before = self.config.read_bytes()
+        wrapper = self.root / 'python3'
+        wrapper.write_text('#!' + sys.executable + '\n'
+                           'import os,sys\n'
+                           'def fail(*args): raise OSError("injected replace failure")\n'
+                           'os.replace=fail\n'
+                           'exec(sys.argv[2])\n')
+        wrapper.chmod(0o700)
+        self.env['PATH'] = str(self.root) + os.pathsep + self.env['PATH']
+        with self.assertRaises(subprocess.CalledProcessError):
+            self.run_picker('none')
+        self.assertEqual(self.config.read_bytes(), before)
+        self.assertEqual(list(self.root.glob('.mcp-pick-*')), [])
 
     def test_list_is_read_only(self):
         before = self.config.read_bytes()

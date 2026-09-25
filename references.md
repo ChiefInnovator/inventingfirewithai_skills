@@ -80,7 +80,7 @@ Local references:
 Local references:
 - `docs/evaluations/referenced_skills_scorecard.md`
 - `references.md`
-- `skills/codex/pragmatic-coder/SKILL.md`
+- `skills/claude/pragmatic-coder/SKILL.md`
 
 ### `docs/research/autonomous_execution_skills_research.md`
 

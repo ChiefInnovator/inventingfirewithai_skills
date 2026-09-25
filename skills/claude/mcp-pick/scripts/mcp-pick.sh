@@ -64,7 +64,7 @@ esac
 BACKUP="$(mktemp "$MCP_CFG.bak.XXXXXX")"
 cp "$MCP_CFG" "$BACKUP"
 python3 -c "
-import json,os
+import json,os,tempfile,stat
 allsrv=[l.rstrip('\n') for l in open(os.environ['MCP_ALL']) if l.strip()]
 keep={l.rstrip('\n') for l in open(os.environ['MCP_KEEP']) if l.strip()}
 cfg=os.environ['MCP_CFG']
@@ -72,7 +72,17 @@ d=json.load(open(cfg))
 e=d.setdefault('projects',{}).setdefault(os.environ['MCP_CWD'],{})
 unseen=set(e.get('disabledMcpServers',[]))-set(allsrv)
 e['disabledMcpServers']=sorted(unseen | (set(allsrv)-keep))
-json.dump(d,open(cfg,'w'),indent=2)
+descriptor,temporary=tempfile.mkstemp(prefix='.mcp-pick-',dir=os.path.dirname(cfg) or '.')
+try:
+    with os.fdopen(descriptor,'w') as stream:
+        os.fchmod(stream.fileno(),stat.S_IMODE(os.stat(cfg).st_mode))
+        json.dump(d,stream,indent=2)
+        stream.flush()
+        os.fsync(stream.fileno())
+    os.replace(temporary,cfg)
+finally:
+    if os.path.exists(temporary):
+        os.unlink(temporary)
 print('enabled : '+(', '.join(sorted(keep)) or '(none)'))
 print('disabled: '+(', '.join(e['disabledMcpServers']) or '(none)'))
 "
