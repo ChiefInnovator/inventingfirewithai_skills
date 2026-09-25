@@ -4,7 +4,7 @@
 set -euo pipefail
 
 export MCP_CWD="$(pwd)"
-export MCP_CFG="$HOME/.claude.json"
+export MCP_CFG="${MCP_CFG:-$HOME/.claude.json}"
 MODE="${1:-ask}"
 [ -f "$MCP_CFG" ] || { echo "no $MCP_CFG" >&2; exit 1; }
 
@@ -14,7 +14,13 @@ export MCP_ALL="$TMP/all" MCP_KEEP="$TMP/keep"
 if [ -n "${MCP_SERVER_LIST:-}" ] && [ -s "${MCP_SERVER_LIST:-}" ]; then
   cp "$MCP_SERVER_LIST" "$MCP_ALL"
 else
-  claude mcp list 2>/dev/null | sed -n 's/^\(.*\): http.*/\1/p' | sed 's/[[:space:]]*$//' > "$MCP_ALL"
+  claude mcp list 2>/dev/null | python3 -c '
+import sys
+for line in sys.stdin:
+    name, separator, details = line.strip().partition(": ")
+    if separator and name and " - " in details:
+        print(name)
+' > "$MCP_ALL"
 fi
 [ -s "$MCP_ALL" ] || { echo "no MCP servers found" >&2; exit 1; }
 
@@ -55,7 +61,8 @@ case "$MODE" in
   *) echo "usage: mcp-pick.sh [ask|all|none|list|keep <name>...]" >&2; exit 2 ;;
 esac
 
-cp "$MCP_CFG" "$MCP_CFG.bak.$(date +%Y-%m-%d_%H%M%S)"
+BACKUP="$(mktemp "$MCP_CFG.bak.XXXXXX")"
+cp "$MCP_CFG" "$BACKUP"
 python3 -c "
 import json,os
 allsrv=[l.rstrip('\n') for l in open(os.environ['MCP_ALL']) if l.strip()]
@@ -63,7 +70,8 @@ keep={l.rstrip('\n') for l in open(os.environ['MCP_KEEP']) if l.strip()}
 cfg=os.environ['MCP_CFG']
 d=json.load(open(cfg))
 e=d.setdefault('projects',{}).setdefault(os.environ['MCP_CWD'],{})
-e['disabledMcpServers']=sorted(s for s in allsrv if s not in keep)
+unseen=set(e.get('disabledMcpServers',[]))-set(allsrv)
+e['disabledMcpServers']=sorted(unseen | (set(allsrv)-keep))
 json.dump(d,open(cfg,'w'),indent=2)
 print('enabled : '+(', '.join(sorted(keep)) or '(none)'))
 print('disabled: '+(', '.join(e['disabledMcpServers']) or '(none)'))

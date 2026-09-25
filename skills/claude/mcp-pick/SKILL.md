@@ -37,7 +37,7 @@ Map their reply back to full server names and run:
 bash <helper> keep "claude.ai HubSpot" "claude.ai Microsoft Learn"
 ```
 
-Every server not named is disabled for this repo. Other modes: `all`, `none`, `list`. Do not run `ask` — it needs a TTY the Bash tool doesn't have, so it would silently keep every current value.
+Every discovered server not named is disabled for this repo. Existing disabled settings for undiscovered servers are preserved. Other modes: `all`, `none`, `list`. Do not run `ask` — it needs a TTY the Bash tool doesn't have, so it would silently keep every current value.
 
 If the user's reply is ambiguous (a name that matches two servers, a number out of range), say which part was unclear and ask only about that. Don't re-print the menu.
 

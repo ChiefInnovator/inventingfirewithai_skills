@@ -15,7 +15,7 @@ This skill is repo-agnostic. It detects the base branch, the review bot, and the
 
 **Hard rules, no exceptions:**
 
-- **NEVER REBASE.** Not `git rebase` in any form, not `git pull --rebase`, not GitHub's "Rebase and merge", not asking a bot to rebase. If the branch is behind, `git merge origin/$BASE` into it.
+- **NEVER REBASE.** Do not run `git rebase`, `git pull` in any form, GitHub's "Rebase and merge", or delegate a rebase to another agent or tool. Git configuration can make a pull rebase implicitly. Fetch explicitly, then use `git merge --ff-only` for synchronization; merge the base into a feature branch only within existing authorization. Stop and ask before handling divergence or resolving conflicts. Never change Git configuration to work around this rule.
 - **Never `--admin`-merge**, never force-push.
 - **Never delete a protected branch** — `$BASE`, `main`, `master`, or `develop` — under any circumstance. Not as cleanup, not to "recreate it clean", not because a command suggested it. Some repos also have server-side rulesets that would reject it, but **never rely on the server to stop you.** Refuse locally first.
 - **Delete the feature branch only after the merge is verified** (Phase 7). Invoking this skill is the approval for that one deletion — the branch this run just merged, once GitHub reports it `MERGED` — and it extends to nothing else.
@@ -300,7 +300,7 @@ EOF
 git push -u origin "$BRANCH"
 ```
 
-If rejected as non-fast-forward, the remote has commits you don't. **`git pull` (merge, never `--rebase`)**, resolve, then push. Never `--force`.
+If rejected as non-fast-forward, fetch `origin` and inspect both histories. If the local feature branch is strictly behind its remote, use `git merge --ff-only "origin/$BRANCH"`, verify, and retry the push. If histories diverge or conflicts require resolution, stop and ask for approval. Never pull, rebase, or force-push.
 
 Confirm it landed:
 
@@ -482,11 +482,11 @@ gh pr merge "$PR" --merge
 
 Do **not** pass `--rebase`. Do **not** pass `--admin` to bypass protections. Do **not** pass `--delete-branch` here either — deletion is Phase 7, gated on verifying the merge actually happened.
 
-**Verify it actually merged**, then sync the local base branch:
+**Verify it actually merged**, then sync the local base branch. If fast-forward synchronization fails, retain the local branch and report the blocker; do not rebase, reset, or force-update it:
 
 ```bash
 gh pr view "$PR" --json state,mergedAt,mergeCommit
-git checkout "$BASE" && git pull origin "$BASE"
+git fetch origin --prune && git checkout "$BASE" && git merge --ff-only "origin/$BASE"
 ```
 
 ---

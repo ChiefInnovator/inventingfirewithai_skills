@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # /// script
 # requires-python = ">=3.11"
-# dependencies = ["tomlkit==0.13.3"]
+# dependencies = ["tomlkit==0.15.1"]
 # ///
 """Select project-local Codex MCP servers and installed app integrations without exposing secrets."""
 from __future__ import annotations
@@ -270,16 +270,17 @@ def apply_selection(client, project, inventory, response, keep):
     target, codex_home = safe_target(project)
     if inventory["project_config_ignored"]:
         raise PickerError("Codex ignores this untrusted project's config. Trust the project in Codex before applying.")
-    if not inventory["entries"]:
+    editable = [entry for entry in inventory["entries"] if not entry["blocked"]]
+    if not editable:
         return {"changed": False, "backup": None, "config_path": str(target)}
     original = target.read_bytes() if target.exists() else None
     # Check syntax before creating backups or requesting any changes.
     existing = tomllib.loads(original.decode()) if original is not None else {}
-    if all(setting(existing, entry["path"]) == (entry["id"] in keep) for entry in inventory["entries"]):
+    if all(setting(existing, entry["path"]) == (entry["id"] in keep) for entry in editable):
         return {"changed": False, "backup": None, "config_path": str(target)}
 
     document = tomlkit.parse(original.decode() if original is not None else "")
-    for entry in inventory["entries"]:
+    for entry in editable:
         table = document
         for part in entry["path"][:-1]:
             if part not in table:
@@ -332,13 +333,13 @@ def apply_selection(client, project, inventory, response, keep):
         atomic_write(target, proposed, mode)
         written = True
         read_back = tomllib.loads(target.read_text())
-        for entry in inventory["entries"]:
+        for entry in editable:
             if setting(read_back, entry["path"]) != (entry["id"] in keep):
                 raise PickerError("A project setting failed read-back verification; inspect the backup and config.")
         refreshed = client.call("config/read", {"cwd": str(project), "includeLayers": True})
         if not local_layer(refreshed, target) or local_layer(refreshed, target).get("disabledReason"):
             raise PickerError("The written project layer is not active in Codex; no effective change is claimed.")
-        for entry in inventory["entries"]:
+        for entry in editable:
             if setting(refreshed["config"], entry["path"]) != (entry["id"] in keep):
                 raise PickerError("A higher-priority configuration overrides the selection; no effective success is claimed.")
         return {"changed": True, "backup": str(backup) if backup else None, "config_path": str(target)}
@@ -394,7 +395,7 @@ def main():
                     print("Project config is ignored by Codex until the project is trusted.")
             return 0
         keep = selected_entries(inventory, args.mode, args.ids)
-        result = {"enabled": sorted(keep), "disabled": sorted(entry["id"] for entry in inventory["entries"] if entry["id"] not in keep),
+        result = {"enabled": sorted(keep), "disabled": sorted(entry["id"] for entry in inventory["entries"] if not entry["blocked"] and entry["id"] not in keep),
                   "dry_run": args.dry_run, "scope": args.scope}
         if not args.dry_run:
             result.update(apply_selection(client, project, inventory, response, keep))

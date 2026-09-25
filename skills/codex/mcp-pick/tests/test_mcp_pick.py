@@ -187,6 +187,25 @@ class ProjectTests(unittest.TestCase):
         self.apply('none')
         self.assertFalse(self.runtime()['fixture_mcp']['enabled'])
 
+    def test_blocked_entries_preserve_inherited_settings(self):
+        inventory, response = self.inventory()
+        for entry in inventory['entries']:
+            if entry['id'] == 'mcp:alpha':
+                entry['blocked'] = 'parent disabled'
+        picker.apply_selection(self.client, self.project, inventory, response, set())
+        local = tomllib.loads(self.target.read_text())
+        self.assertNotIn('alpha', local['mcp_servers'])
+        self.assertTrue(self.runtime()['alpha']['enabled'])
+        self.assertFalse(self.runtime()['name.with.dots']['enabled'])
+
+    def test_all_blocked_inventory_does_not_create_config(self):
+        inventory, response = self.inventory()
+        for entry in inventory['entries']:
+            entry['blocked'] = 'parent disabled'
+        result = picker.apply_selection(self.client, self.project, inventory, response, set())
+        self.assertFalse(result['changed'])
+        self.assertFalse(self.target.exists())
+
     def test_app_preference_preserves_tool_policy(self):
         with self.global_config.open('a') as stream:
             stream.write('\n[apps.fixture]\nenabled=true\n[apps.fixture.tools."item.read"]\nenabled=false\n')

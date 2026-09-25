@@ -13,7 +13,7 @@ An explicit request to run `$slam` authorizes committing and pushing the scoped 
 
 ## Hard rules
 
-- Never rebase, force-push, use `--admin`, bypass branch protections, or add `Co-Authored-By`/AI attribution to commits. Never run bare `git pull`; configuration could select rebase.
+- Never rebase, force-push, use `--admin`, bypass branch protections, or add `Co-Authored-By`/AI attribution to commits. Never run `git pull` in any form; configuration could select rebase. Fetch explicitly and use `git merge --ff-only` for synchronization. Do not delegate rebasing to another agent/tool or change Git configuration to work around this rule.
 - Use a merge commit; use squash only when the user explicitly requests it. If repository policy disallows the requested method, report the conflict.
 - Never delete or rewind the base, remote default, `main`, `master`, `develop`, or any additionally protected branch. Protect empty/invalid branch names too.
 - Preserve unrelated changes and branches. Never use `reset --hard`, `clean`, `branch -D`, or automatic stashing to make the pipeline proceed.
