@@ -538,12 +538,10 @@ fi
 
 Every check above **exits non-zero on failure** rather than printing a verdict for you to read past. That is deliberate: a gate that only narrates is not a gate. In particular, note that `--is-ancestor ... && echo ok || echo "NOT CONTAINED"` would *swallow* the non-zero exit and let the deletion proceed — never write the containment check that way.
 
-Only with all four satisfied:
+Only with all four satisfied, perform local cleanup. Retain the remote feature by default: a live-ref check followed by an ordinary delete is not atomic. Remote deletion requires repository-supported exclusive control preventing updates between the check and deletion. Never infer exclusivity from a quiet branch or use force/force-with-lease to bypass the no-force rule; report retention when exclusive control is unavailable.
 
 ```bash
-if [ -n "$remote_ref" ]; then
-  git push origin --delete "$BRANCH" || exit 1
-fi
+# Retain the remote feature unless exclusive control has been established.
 if git show-ref --verify --quiet "refs/heads/$BRANCH"; then
   git branch -d "$BRANCH"           # local — -d, never -D
 fi
