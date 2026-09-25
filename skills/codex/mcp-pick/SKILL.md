@@ -21,7 +21,15 @@ The helper uses Codex's effective configuration and installed-plugin inventory, 
 
 Read enough project context to justify recommendations: `README.md`, relevant manifests, or the main specification if implementation has not started. Keep helpers the project actually needs, considering the user's workflow as well as its programming language.
 
-Present a compact numbered menu in the returned order, preserving `[x]` and `[ ]`. Include each name, its kind (MCP server, plugin server, or app), a short project-specific reason, and an arrow beside recommended choices. Map menu numbers to the exact returned `id`; never invent IDs from display names. If selection is still missing, ask which entries to keep. If the user already supplied the selection or authorized `recommended`, continue without another confirmation.
+If the user supplied a keep/drop selection or authorized `recommended`, apply it without another confirmation. For incremental changes such as “disable Calendar,” preserve the other reviewed settings. When the user invokes the picker without new changes, show the text chooser with their current settings marked; previous choices remain defaults, not a reason to skip the chooser.
+
+### Text chooser
+
+Present compact numbered lists directly in the response, grouped under bold On and Off labels, with On first. Sort each group alphabetically by the displayed name, case-insensitively; break identical-name ties by exact inventory ID. Number continuously across both groups after sorting, and preserve that displayed number-to-ID mapping for the reviewed selection. Include every discovered entry. Put blocked entries in Off with a short blocker note. Use the group label instead of repeating status on each row; omit table columns, redundant app/server suffixes, and per-entry explanations unless needed to distinguish entries or explain a blocker. Distinguish explicit servers from same-named plugin servers with concise labels. Put any useful recommendation in one short sentence after the list.
+
+Ask the user to reply with the numbers or names to keep, `recommended`, `all`, or `none`. Keep the number-to-exact-ID mapping, project, scope, profile, and `inventory_version` from the reviewed inventory in the conversation. Use those exact IDs and that fingerprint for the guarded apply flow. A request such as “disable Calendar” changes only that setting and preserves the others. Resolve ambiguous duplicate names before writing. A blank response is not `none` or authorization to change settings.
+
+Use text only. Do not generate HTML, visualizations, checkbox widgets, browser pages, or temporary picker files. Read the sanitized inventory directly from the helper output. When reopening, show current preferences again; do not silently reuse a previous selection as authorization for a new change.
 
 ## Apply the selection
 

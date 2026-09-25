@@ -531,7 +531,7 @@
   <section id="skills">
     <div class="wrap">
       <h2>Skills in the library.</h2>
-      <p class="lede">Three focused skills for Codex and Claude Code: Pragmatic Coder, MCP Picker, and Slam.</p>
+      <p class="lede">Four focused skills for Codex and Claude Code: Pragmatic Coder, MCP Picker, Slam, and Travel Like a Local.</p>
 
       <div class="skill-grid">
         <article class="skill-card featured">
@@ -562,6 +562,15 @@
             <h3>MCP Picker</h3>
             <p>Select which MCP integrations stay enabled for each project in Codex or Claude Code.</p>
           </div>
+        </article>
+
+        <article class="skill-card">
+          <div>
+            <span class="tag">Available</span>
+            <h3>Travel Like a Local</h3>
+            <p>Plan neighborhood experiences, relaxing property stays, and practical trip logistics. Available for Codex and Claude Code.</p>
+          </div>
+          <a class="button" href="https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/skills/codex/travel-like-a-local/SKILL.md">Open skill</a>
         </article>
       </div>
     </div>
@@ -632,7 +641,7 @@
             <strong>Referenced skills scorecard</strong>
             <span>Historical editorial ratings; revised skill is unscored.</span>
           </div>
-          <a href="referenced_skills_scorecard.md">Open markdown</a>
+          <a href="evaluations/referenced_skills_scorecard.md">Open markdown</a>
         </div>
         <div class="table-wrap" id="scorecard-table">
           <div class="loading">Loading scorecard...</div>
@@ -647,7 +656,7 @@
       <p class="lede">Copy a complete skill folder from <code>skills/codex/</code> or <code>skills/claude/</code> into the matching client’s skills directory, including bundled scripts and references.</p>
       <div class="actions" style="margin-top: 28px">
         <a class="button" href="https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/skills/codex/pragmatic-coder/SKILL.md">Open SKILL.md</a>
-        <a class="button secondary" href="referenced_skills_scorecard.md" style="background: var(--code)">View scorecard</a>
+        <a class="button secondary" href="evaluations/referenced_skills_scorecard.md" style="background: var(--code)">View scorecard</a>
       </div>
     </div>
   </section>
@@ -695,7 +704,7 @@
       return `<table>${thead}${tbody}</table>`;
     }
 
-    fetch("referenced_skills_scorecard.md")
+    fetch("evaluations/referenced_skills_scorecard.md")
       .then((response) => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         return response.text();

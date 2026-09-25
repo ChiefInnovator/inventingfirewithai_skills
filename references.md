@@ -4,42 +4,58 @@ Canonical reference catalog for this repository. README stays short; detailed so
 
 ## Local Documents
 
+### Skills and operating instructions
+
+- [Travel Like a Local for Codex](skills/codex/travel-like-a-local/SKILL.md)
+- [Travel Like a Local for Claude Code](skills/claude/travel-like-a-local/SKILL.md)
 - [Pragmatic Coder for Claude Code](skills/claude/pragmatic-coder/SKILL.md)
 - [MCP Picker for Codex](skills/codex/mcp-pick/SKILL.md)
 - [MCP Picker for Claude Code](skills/claude/mcp-pick/SKILL.md)
 - [Slam for Claude Code](skills/claude/slam/SKILL.md)
-
 - [Pragmatic Coder Skill](skills/codex/pragmatic-coder/SKILL.md)
 - [Slam Skill](skills/codex/slam/SKILL.md)
-- [Slam Migration and Verification](docs/slam_migration.md)
 - [Slam GitHub Review Workflow](skills/codex/slam/references/github-review.md)
-- [Pragmatic Coder Behavioral Evaluation](docs/pragmatic_coder_evaluation.md)
 - [Agent Instructions](AGENTS.md)
 - [Claude Instructions](CLAUDE.md)
-- [Autonomous Execution Skills Research and Reference Guide](docs/autonomous_execution_skills_research.md)
-- [Interface, Contract, and Dependency Inversion Skills Research](docs/interface_contract_dependency_inversion_skills_research.md)
-- [Microsoft Agent Skills Research for .NET, Azure, Python, React, TypeScript, Microsoft Foundry, and Related Platforms](docs/microsoft_agent_skills_research.md)
-- [Model Selection and Cost Minimization Skills for Claude Code and Codex](docs/model_selection_cost_minimization_skills.md)
-- [Parallel Agent Coding Skills for Claude Code and Codex](docs/parallel_agent_coding_skills_research.md)
-- [Performance Skills References](docs/performance_skills_references.md)
-- [Referenced Skills Audit](docs/referenced_skills_audit.md)
-- [Referenced Skills Scorecard](docs/referenced_skills_scorecard.md)
-- [Research, Learning, and Implementation Skills for AI Agents](docs/research_learn_implement_skills_research.md)
-- [Security, API Security, and Preconditions Skills Research](docs/security_api_preconditions_skills_research.md)
-- [Skeptical Coding Agent Skills Research](docs/skeptical_coding_agent_skills_research.md)
-- [Test Driven Development Skill Research](docs/tdd_skill_research.md)
-- [TDD Skill References](docs/tdd_skills_references.md)
+
+### Designs and pilots
+
+- [AI Scrum Master Service — Research and Design](docs/designs/ai-scrum-master-research-and-design.md)
+
+### Evaluations and audits
+
+- [Pragmatic Coder Behavioral Evaluation](docs/evaluations/pragmatic_coder_evaluation.md)
+- [Referenced Skills Audit](docs/evaluations/referenced_skills_audit.md)
+- [Referenced Skills Scorecard](docs/evaluations/referenced_skills_scorecard.md)
+
+### Migration notes
+
+- [Slam Migration and Verification](docs/migrations/slam_migration.md)
+
+### Research by topic
+
+- [Autonomous Execution Skills Research and Reference Guide](docs/research/autonomous_execution_skills_research.md)
+- [Interface, Contract, and Dependency Inversion Skills Research](docs/research/interface_contract_dependency_inversion_skills_research.md)
+- [Microsoft Agent Skills Research for .NET, Azure, Python, React, TypeScript, Microsoft Foundry, and Related Platforms](docs/research/microsoft_agent_skills_research.md)
+- [Model Selection and Cost Minimization Skills for Claude Code and Codex](docs/research/model_selection_cost_minimization_skills.md)
+- [Parallel Agent Coding Skills for Claude Code and Codex](docs/research/parallel_agent_coding_skills_research.md)
+- [Performance Skills References](docs/research/performance_skills_references.md)
+- [Research, Learning, and Implementation Skills for AI Agents](docs/research/research_learn_implement_skills_research.md)
+- [Security, API Security, and Preconditions Skills Research](docs/research/security_api_preconditions_skills_research.md)
+- [Skeptical Coding Agent Skills Research](docs/research/skeptical_coding_agent_skills_research.md)
+- [Test Driven Development Skill Research](docs/research/tdd_skill_research.md)
+- [TDD Skill References](docs/research/tdd_skills_references.md)
 
 ## Scorecard Coverage
 
-All skill-like references are scored in [`docs/referenced_skills_scorecard.md`](docs/referenced_skills_scorecard.md). Non-skill standards, documentation pages, people, products, and organization links are cataloged here but not scored.
+All skill-like references are scored in [`docs/evaluations/referenced_skills_scorecard.md`](docs/evaluations/referenced_skills_scorecard.md). Non-skill standards, documentation pages, people, products, and organization links are cataloged here but not scored.
 
 ## Source Links By Document
 
 ### `README.md`
 
 Local references:
-- `docs/referenced_skills_scorecard.md`
+- `docs/evaluations/referenced_skills_scorecard.md`
 - `references.md`
 
 External references:
@@ -55,18 +71,18 @@ Local references:
 - `AGENTS.md`
 - `CLAUDE.md`
 - `README.md`
-- `docs/referenced_skills_scorecard.md`
+- `docs/evaluations/referenced_skills_scorecard.md`
 - `references.md`
 - `skills/codex/pragmatic-coder/SKILL.md`
 
 ### `CLAUDE.md`
 
 Local references:
-- `docs/referenced_skills_scorecard.md`
+- `docs/evaluations/referenced_skills_scorecard.md`
 - `references.md`
 - `skills/codex/pragmatic-coder/SKILL.md`
 
-### `docs/autonomous_execution_skills_research.md`
+### `docs/research/autonomous_execution_skills_research.md`
 
 External references:
 - https://github.com/asklokesh/loki-mode/blob/main/SKILL.md
@@ -82,7 +98,7 @@ External references:
 - https://github.com/199-biotechnologies/claude-deep-research-skill/blob/main/AUTONOMY_VERIFICATION.md
 - https://github.com/ericporres/llm-coding-workflow-skill
 
-### `docs/interface_contract_dependency_inversion_skills_research.md`
+### `docs/research/interface_contract_dependency_inversion_skills_research.md`
 
 Local references:
 - `AGENTS.md`
@@ -108,7 +124,7 @@ External references:
 - https://typing.python.org/en/latest/reference/protocols.html
 - https://peps.python.org/pep-0544/
 
-### `docs/microsoft_agent_skills_research.md`
+### `docs/research/microsoft_agent_skills_research.md`
 
 Local references:
 - `SKILL.md`
@@ -165,7 +181,7 @@ External references:
 - https://devblogs.microsoft.com/all-things-azure/azure-skills-plugin-lets-get-started/
 - https://learn.microsoft.com/en-us/agent-framework/workflows/agents-in-workflows
 
-### `docs/model_selection_cost_minimization_skills.md`
+### `docs/research/model_selection_cost_minimization_skills.md`
 
 Local references:
 - `AGENTS.md`
@@ -188,7 +204,7 @@ External references:
 - https://developers.openai.com/codex/concepts/subagents
 - https://developers.openai.com/codex/learn/best-practices
 
-### `docs/parallel_agent_coding_skills_research.md`
+### `docs/research/parallel_agent_coding_skills_research.md`
 
 Local references:
 - `AGENTS.md`
@@ -207,7 +223,7 @@ External references:
 - https://github.com/ZoranSpirkovski/creating-agent-teams
 - https://github.com/shakacode/claude-code-commands-skills-agents/blob/main/commands/file-by-file-review.md
 
-### `docs/performance_skills_references.md`
+### `docs/research/performance_skills_references.md`
 
 External references:
 - https://github.com/addyosmani/agent-skills/blob/main/skills/performance-optimization/SKILL.md
@@ -219,17 +235,17 @@ External references:
 - https://github.com/rtk-ai/rtk/blob/master/.claude/skills/performance/SKILL.md
 - https://github.com/AgenticTesting/OpenRequirementsAI/blob/main/.claude/skills/performanceengineering/SKILL.md
 
-### `docs/referenced_skills_audit.md`
+### `docs/evaluations/referenced_skills_audit.md`
 
 Local references:
 - `skills/codex/pragmatic-coder/SKILL.md`
 
-### `docs/referenced_skills_scorecard.md`
+### `docs/evaluations/referenced_skills_scorecard.md`
 
 Local references:
 - `references.md`
 
-### `docs/research_learn_implement_skills_research.md`
+### `docs/research/research_learn_implement_skills_research.md`
 
 Local references:
 - `AGENTS.md`
@@ -258,7 +274,7 @@ External references:
 - https://github.com/asklokesh/loki-mode/blob/main/SKILL.md
 - https://raw.githubusercontent.com/NeverSight/skills_feed/refs/heads/main/data/skills-md/levnikolaevich/claude-code-skills/ln-001-standards-researcher/SKILL.md
 
-### `docs/security_api_preconditions_skills_research.md`
+### `docs/research/security_api_preconditions_skills_research.md`
 
 Local references:
 - `AGENTS.md`
@@ -285,7 +301,7 @@ External references:
 - https://developers.openai.com/codex/skills
 - https://developers.openai.com/codex/guides/agents-md
 
-### `docs/skeptical_coding_agent_skills_research.md`
+### `docs/research/skeptical_coding_agent_skills_research.md`
 
 Local references:
 - `AGENTS.md`
@@ -313,7 +329,7 @@ External references:
 - https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview
 - https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
 
-### `docs/tdd_skill_research.md`
+### `docs/research/tdd_skill_research.md`
 
 External references:
 - https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/SKILL.md
@@ -323,7 +339,7 @@ External references:
 - https://github.com/mfranzon/tdd
 - https://github.com/morodomi/tdd-skills
 
-### `docs/tdd_skills_references.md`
+### `docs/research/tdd_skills_references.md`
 
 External references:
 - https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/SKILL.md
@@ -342,3 +358,49 @@ External references:
 - https://github.com/alirezarezvani/claude-skills/blob/main/engineering-team/tdd-guide/README.md
 - https://github.com/mfranzon/tdd
 - https://github.com/morodomi/tdd-skills
+
+### `docs/designs/ai-scrum-master-research-and-design.md`
+
+Imported source links are cataloged for provenance, not independently endorsed or revalidated. The final two GitHub documentation links support the repository implementation notes.
+
+External references:
+- https://scrumguides.org/scrum-guide.html
+- https://www.scrum.org/resources/blog/28-characteristics-great-scrum-master
+- https://www.mountaingoatsoftware.com/agile/six-attributes-of-a-great-scrummaster
+- https://dora.dev/capabilities/wip-limits/
+- https://dora.dev/guides/dora-metrics/
+- https://rework.withgoogle.com/intl/en/guides/understand-team-effectiveness
+- https://uplevelteam.com/blog/wip-limits
+- https://github.com/CrashBytes/claude-role-skills/blob/main/skills/scrum-master/SKILL.md
+- https://github.com/ukkit/scrum-skill
+- https://github.blog/changelog/2025-10-14-github-mcp-server-now-supports-github-projects-and-more/
+- https://learn.microsoft.com/graph/api/calltranscript-get?view=graph-rest-1.0
+- https://code.claude.com/docs/en/github-actions
+- https://developers.openai.com/codex/github-action
+- https://www.recall.ai/product/microsoft-teams-transcription-api
+- https://devblogs.microsoft.com/foundry/whats-new-in-microsoft-foundry-june-2026/
+- https://devblogs.microsoft.com/foundry/agent-service-build2026/
+- https://devblogs.microsoft.com/foundry/from-building-agents-to-working-with-them-enterprise-agent-distribution-in-microsoft-foundry/
+- https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/agent-365
+- https://learn.microsoft.com/en-us/microsoft-agent-365/developer/identity
+- https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/publish
+- https://learn.microsoft.com/en-us/azure/communication-services/concepts/call-automation/audio-streaming-concept
+- https://claude.ai/code/artifact/a53a666c-fd51-4825-a536-f80f34cecbc0
+- https://github.com/borghei/Claude-Skills/blob/main/project-management/scrum-master/SKILL.md
+- https://github.com/alirezarezvani/claude-code-skill-factory/tree/dev/generated-skills/scrum-master-agent
+- https://github.com/alirezarezvani/claude-skills
+- https://github.com/aj-geddes/claude-code-bmad-skills
+- https://github.com/github/awesome-copilot/blob/main/plugins/project-planning/README.md
+- https://github.com/github/github-mcp-server/discussions/1742
+- https://www.npmjs.com/package/@modelcontextprotocol/server-github
+- https://agentskill.sh/plugins/crashbytes-personal/scrum-master
+- https://octopus.com/devops/metrics/dora-metrics/
+- https://learn.microsoft.com/en-us/answers/questions/2264627/how-to-get-meeting-transcript-record-content-using
+- https://github.com/recallai/teams-transcript
+- https://devblogs.microsoft.com/foundry/foundry-agent-service-ga/
+- https://learn.microsoft.com/en-us/azure/ai-services/speech-service/voice-live
+- https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/publish-copilot
+- https://techcommunity.microsoft.com/discussions/azure-ai-foundry-discussions/published-agent-from-foundry-doesnt-work-at-all-in-teams-and-m365/4485341
+- https://github.com/PhoenixFinancial/phoenix
+- https://docs.github.com/en/issues/planning-and-tracking-with-projects/automating-your-project/using-the-api-to-manage-projects
+- https://docs.github.com/en/issues/tracking-your-work-with-issues/administering-issues/closing-an-issue

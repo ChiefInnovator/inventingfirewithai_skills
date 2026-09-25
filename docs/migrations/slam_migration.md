@@ -1,6 +1,6 @@
 # Slam Migration to Codex
 
-Adapted on September 5, 2026 from the user's 560-line Claude `slam` skill, source SHA-256 `52832e6d0b627dcac1c2ed9167520ca453c956a37a7c4fdba8823486a5516475`. The Claude original is preserved. The portable skill package is [skills/codex/slam](../skills/codex/slam/SKILL.md), including its review reference, OpenAI UI metadata, and Python cleanup guard.
+Adapted on September 5, 2026 from the user's 560-line Claude `slam` skill, source SHA-256 `52832e6d0b627dcac1c2ed9167520ca453c956a37a7c4fdba8823486a5516475`. The Claude original is preserved. The portable skill package is [skills/codex/slam](../../skills/codex/slam/SKILL.md), including its review reference, OpenAI UI metadata, and Python cleanup guard.
 
 ## Preserved Workflow
 

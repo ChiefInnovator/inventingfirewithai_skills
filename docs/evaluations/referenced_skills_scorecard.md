@@ -4,6 +4,7 @@ These are historical editorial scores from May 2, 2026, based on instruction cov
 
 | Skill | Score | Why | Lines | Characters | Tokens |
 |---|---:|---|---:|---:|---:|
+| travel-like-a-local (Codex / Claude) | N/A | Local travel planning, property relaxation, and booking-state accuracy; imported September 25, 2026; comparative behavior unscored. | N/A | N/A | N/A |
 | mcp-pick (Codex / Claude) | N/A | Project integration selection; no comparative behavioral score assigned. | N/A | N/A | N/A |
 | slam (Claude) | N/A | Original native Claude workflow; no comparative behavioral score assigned. | N/A | N/A | N/A |
 | pragmatic-coder | N/A | Historical September 5 revision before platform-specific invocation guidance; behavioral comparison pending. See evaluation scenarios. | 50 | 3,706 | 705 |
@@ -124,7 +125,19 @@ These are historical editorial scores from May 2, 2026, based on instruction cov
 | React Flow Node TypeScript Skill | 7.6 | Focused React Flow implementation guidance. | N/A | N/A | N/A |
 | Zustand Store TypeScript Skill | 7.6 | Focused Zustand state-management guidance. | N/A | N/A | N/A |
 
+| AI Scrum Master embedded playbook | N/A | Referenced in supplied research; independent evaluation pending. | N/A | N/A | N/A |
+| CrashBytes scrum-master | N/A | Referenced in supplied research; independent evaluation pending. | N/A | N/A | N/A |
+| ukkit scrum-skill | N/A | Referenced in supplied research; independent evaluation pending. | N/A | N/A | N/A |
+| borghei scrum-master | N/A | Referenced in supplied research; independent evaluation pending. | N/A | N/A | N/A |
+| skill-factory scrum-master-agent | N/A | Referenced in supplied research; independent evaluation pending. | N/A | N/A | N/A |
+| alirezarezvani PM pack | N/A | Referenced in supplied research; independent evaluation pending. | N/A | N/A | N/A |
+| BMAD scrum-master | N/A | Referenced in supplied research; independent evaluation pending. | N/A | N/A | N/A |
+| VoltAgent / rohitg00 subagents | N/A | Referenced in supplied research; independent evaluation pending. | N/A | N/A | N/A |
+| GitHub awesome-copilot project-planning | N/A | Referenced in supplied research; independent evaluation pending. | N/A | N/A | N/A |
+
 ## Notes
+
+Cataloged September 25, 2026 from [the supplied design](../designs/ai-scrum-master-research-and-design.md). Scores are unassigned pending direct assessment; the source document's market-scan verdicts are not behavioral evaluations. The source does not identify an exact VoltAgent / rohitg00 artifact.
 
 - The former 9.2 rating for `pragmatic-coder` was an editorial judgment, not a measured result, and does not apply to the revised skill.
 - The reference ratings reflect the author's assessments of coverage, depth, activation cost, and reuse at that time.

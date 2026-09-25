@@ -4,7 +4,7 @@
 
 # Inventing Fire with AI Skills
 
-Reusable skills for implementing, reviewing, and shipping software.
+Reusable skills for software development, shipping, and personalized travel planning.
 
 Part of **[Inventing Fire with AI](https://inventingfirewith.ai)** by **[Richard Crane](https://mvp.microsoft.com/en-US/MVP/profile/10ce0bc0-7536-43f6-b28c-e9601a4a0d0d)** — Microsoft MVP and founder of **[MILL5](https://www.mill5.com)**.
 
@@ -18,12 +18,16 @@ Part of **[Inventing Fire with AI](https://inventingfirewith.ai)** by **[Richard
 | [pragmatic-coder (Claude Code)](skills/claude/pragmatic-coder/SKILL.md) | The same coding guidance adapted to Claude Code. |
 | [slam (Codex)](skills/codex/slam/SKILL.md) | Ship scoped GitHub work through commit, PR, AI review, CI, merge, and verified branch cleanup. |
 | [slam (Claude Code)](skills/claude/slam/SKILL.md) | Native Claude shipping workflow with session goal guidance. |
-| [mcp-pick (Codex)](skills/codex/mcp-pick/SKILL.md) | Choose MCP servers and installed app integrations per Codex project. |
+| [mcp-pick (Codex)](skills/codex/mcp-pick/SKILL.md) | Choose MCP servers and installed app integrations per project, using a numbered text chooser. |
 | [mcp-pick (Claude Code)](skills/claude/mcp-pick/SKILL.md) | Choose which MCP servers stay enabled per Claude Code project. |
+| [travel-like-a-local (Codex)](skills/codex/travel-like-a-local/SKILL.md) | Plan local city experiences, relaxing property stays, and practical trip logistics. |
+| [travel-like-a-local (Claude Code)](skills/claude/travel-like-a-local/SKILL.md) | The same travel guidance adapted to Claude Code. |
 
 `pragmatic-coder` guides coding agents to finish authorized work with minimal changes, proportionate verification, clear evidence, and respect for user choices. It favors simple data, maintainable solutions, relevant security checks, and measured performance work.
 
-Install a skill folder from `skills/codex/` or `skills/claude/` into the matching client's skills directory, including its bundled resources. Invoke `$pragmatic-coder` or `$mcp-pick` in Codex; use `/pragmatic-coder` or `/mcp-pick` in Claude Code.
+Install a skill folder from `skills/codex/` or `skills/claude/` into the matching client's skills directory, including its bundled resources. Invoke `$pragmatic-coder` or `$mcp-pick` in Codex; use `/pragmatic-coder` or `/mcp-pick` in Claude Code. For travel, invoke `$travel-like-a-local` in Codex or `/travel-like-a-local` in Claude Code.
+
+Browse [designs, research, evaluations, and migration notes](references.md#local-documents).
 
 ## Why this exists
 
