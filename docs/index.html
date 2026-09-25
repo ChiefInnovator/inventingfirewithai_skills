@@ -496,10 +496,10 @@
   <header class="hero">
     <div class="wrap">
       <h1>Pragmatic Coder</h1>
-      <p>The first skill in the Inventing Fire with AI skill library: a compact operating standard for serious coding agents.</p>
+      <p>Practical skills for coding, shipping, project integrations, and travel planning.</p>
       <div class="actions">
         <a class="button" href="https://github.com/ChiefInnovator/inventingfirewithai_skills">View on GitHub</a>
-        <a class="button secondary" href="https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/skills/pragmatic-coder/SKILL.md">Read the skill</a>
+        <a class="button secondary" href="https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/skills/codex/pragmatic-coder/SKILL.md">Read the skill</a>
       </div>
     </div>
   </header>
@@ -518,12 +518,12 @@
     <div class="wrap split">
       <div>
         <h2>A skill library, not a context landfill.</h2>
-        <p class="lede">Think of skills like UI components: each one should have a name, purpose, and clear activation surface. <code>pragmatic-coder</code> is the first component in this library.</p>
+        <p class="lede">Think of skills like UI components: each one should have a name, purpose, and clear activation surface. <code>pragmatic-coder</code> provides the coding standard in this library.</p>
       </div>
       <div class="stat-grid">
-        <div class="stat"><strong>600</strong>skill tokens</div>
+        <div class="stat"><strong>2</strong>supported clients</div>
         <div class="stat"><strong>1</strong>default coding standard</div>
-        <div class="stat"><strong>0</strong>guessing tolerated</div>
+        <div class="stat"><strong>6</strong>engineering principles</div>
       </div>
     </div>
   </section>
@@ -531,7 +531,7 @@
   <section id="skills">
     <div class="wrap">
       <h2>Skills in the library.</h2>
-      <p class="lede">One skill today, with room to add more focused skills later without turning the agent context into a pile of overlapping instructions.</p>
+      <p class="lede">Four focused skills for Codex and Claude Code: Pragmatic Coder, MCP Picker, Slam, and Travel Like a Local.</p>
 
       <div class="skill-grid">
         <article class="skill-card featured">
@@ -539,28 +539,39 @@
             <div class="tag-row">
               <span class="tag">Available</span>
               <span class="tag">Coding</span>
-              <span class="tag">600 tokens</span>
+              <span class="tag">Codex + Claude</span>
             </div>
             <h3>Pragmatic Coder</h3>
-            <p>Use for simple, safe, verified implementation, review, and refactor work. It enforces no guessing, little or no code, data-first design, surgical edits, and verification.</p>
+            <p>Complete authorized coding work with minimal changes, proportionate verification, clear evidence, and respect for user choices.</p>
           </div>
-          <a class="button" href="https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/skills/pragmatic-coder/SKILL.md">Open skill</a>
+          <a class="button" href="https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/skills/codex/pragmatic-coder/SKILL.md">Open skill</a>
         </article>
 
-        <article class="skill-card empty">
+        <article class="skill-card">
           <div>
-            <span class="tag">Future</span>
-            <h3>Next Skill</h3>
-            <p>A focused skill belongs here when it has a distinct purpose and earns its context cost.</p>
+            <span class="tag">Available</span>
+            <h3>Slam</h3>
+            <p>Ship scoped work through commit, pull request, AI review, checks, merge, and verified branch cleanup. Invoke <code>$slam</code> when ready to ship.</p>
           </div>
+          <a class="button" href="https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/skills/codex/slam/SKILL.md">Open skill</a>
         </article>
 
-        <article class="skill-card empty">
+        <article class="skill-card">
           <div>
-            <span class="tag">Future</span>
-            <h3>Another Skill</h3>
-            <p>The library can grow, but each addition should reduce work, not add noise.</p>
+            <span class="tag">Available</span>
+            <h3>MCP Picker</h3>
+            <p>Select which MCP integrations stay enabled for each project in Codex or Claude Code.</p>
           </div>
+          <a class="button" href="https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/skills/codex/mcp-pick/SKILL.md">Open skill</a>
+        </article>
+
+        <article class="skill-card">
+          <div>
+            <span class="tag">Available</span>
+            <h3>Travel Like a Local</h3>
+            <p>Plan neighborhood experiences, relaxing property stays, and practical trip logistics. Available for Codex and Claude Code.</p>
+          </div>
+          <a class="button" href="https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/skills/codex/travel-like-a-local/SKILL.md">Open skill</a>
         </article>
       </div>
     </div>
@@ -573,8 +584,8 @@
 
       <div class="grid">
         <div class="card">
-          <h3>No Guessing</h3>
-          <p>Read code, docs, and tests before deciding. State assumptions, choose, proceed, and verify.</p>
+          <h3>Evidence First</h3>
+          <p>Read relevant code, docs, and tests. Distinguish observed results, conclusions from inspection, assumptions, and untested behavior.</p>
         </div>
         <div class="card">
           <h3>Little or No Code</h3>
@@ -582,11 +593,11 @@
         </div>
         <div class="card">
           <h3>Verified Changes</h3>
-          <p>Public-interface tests, preconditions, security checks, performance budgets, and targeted validation replace hand-wavy claims.</p>
+          <p>Choose tests, builds, runtime checks, or visual inspection according to the change and risk. Finish with relevant checks and a final diff review.</p>
         </div>
         <div class="card">
           <h3>Data First</h3>
-          <p>Fix data shape before adding conditionals. Use interfaces only for real seams and contracts.</p>
+          <p>Simplify data within compatibility constraints. Use interfaces for meaningful boundaries and document contracts where they matter.</p>
         </div>
         <div class="card">
           <h3>Surgical Edits</h3>
@@ -594,7 +605,7 @@
         </div>
         <div class="card">
           <h3>Cost Aware</h3>
-          <p>Use the cheapest model likely to verify the work, then escalate when complexity or failures justify it.</p>
+          <p>Respect the user's model choice and optimize total cost to a verified result. Reassess failed approaches before escalating.</p>
         </div>
       </div>
     </div>
@@ -604,7 +615,7 @@
     <div class="wrap split">
       <div>
         <h2>Small enough to load. Strong enough to matter.</h2>
-        <p class="lede">The scorecard compares referenced skills and shows what was kept, rejected, or compressed into the final skill.</p>
+        <p class="lede">The scorecard records editorial assessments of referenced skills. These are not behavioral benchmarks; the revised skill awaits comparative evaluation.</p>
         <ul class="rules">
           <li><span>1</span><div><strong>Audit the references.</strong><br>Score each skill for durable coding-agent value.</div></li>
           <li><span>2</span><div><strong>Keep only signal.</strong><br>Drop framework-specific, tool-specific, or process-heavy bloat.</div></li>
@@ -629,9 +640,9 @@
         <div class="scorecard-head">
           <div>
             <strong>Referenced skills scorecard</strong>
-            <span>Rendered from the markdown scorecard in this repo.</span>
+            <span>Historical editorial ratings; revised skill is unscored.</span>
           </div>
-          <a href="referenced_skills_scorecard.md">Open markdown</a>
+          <a href="evaluations/referenced_skills_scorecard.md">Open markdown</a>
         </div>
         <div class="table-wrap" id="scorecard-table">
           <div class="loading">Loading scorecard...</div>
@@ -643,10 +654,10 @@
   <section id="install">
     <div class="wrap">
       <h2>Use the skill.</h2>
-      <p class="lede">Install or copy <code>skills/pragmatic-coder/SKILL.md</code> into your agent skill directory, then use it for implementation, review, and refactor work.</p>
+      <p class="lede">Copy a complete skill folder from <code>skills/codex/</code> or <code>skills/claude/</code> into the matching client’s skills directory, including bundled scripts and references.</p>
       <div class="actions" style="margin-top: 28px">
-        <a class="button" href="https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/skills/pragmatic-coder/SKILL.md">Open SKILL.md</a>
-        <a class="button secondary" href="referenced_skills_scorecard.md" style="background: var(--code)">View scorecard</a>
+        <a class="button" href="https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/skills/codex/pragmatic-coder/SKILL.md">Open SKILL.md</a>
+        <a class="button secondary" href="evaluations/referenced_skills_scorecard.md" style="background: var(--code)">View scorecard</a>
       </div>
     </div>
   </section>
@@ -694,7 +705,7 @@
       return `<table>${thead}${tbody}</table>`;
     }
 
-    fetch("referenced_skills_scorecard.md")
+    fetch("evaluations/referenced_skills_scorecard.md")
       .then((response) => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         return response.text();

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Slam"
+  short_description: "Ship a branch through review, merge, and cleanup"
+  default_prompt: "Use $slam to ship the current scoped work through review, checks, merge, and verified branch cleanup."

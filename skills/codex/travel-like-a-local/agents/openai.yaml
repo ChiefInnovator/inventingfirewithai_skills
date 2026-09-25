@@ -1,0 +1,4 @@
+interface:
+  display_name: "Travel Like a Local"
+  short_description: "Personal travel planning with local knowledge"
+  default_prompt: "Use $travel-like-a-local to plan my trip using the context I have provided; ask for my destination and dates if missing."
