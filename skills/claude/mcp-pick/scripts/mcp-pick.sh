@@ -61,8 +61,6 @@ case "$MODE" in
   *) echo "usage: mcp-pick.sh [ask|all|none|list|keep <name>...]" >&2; exit 2 ;;
 esac
 
-BACKUP="$(mktemp "$MCP_CFG.bak.XXXXXX")"
-cp "$MCP_CFG" "$BACKUP"
 python3 -c "
 import json,os,tempfile,stat,fcntl
 allsrv=[l.rstrip('\n') for l in open(os.environ['MCP_ALL']) if l.strip()]
@@ -72,6 +70,11 @@ lock=open(cfg+'.mcp-pick.lock','a')
 fcntl.flock(lock.fileno(),fcntl.LOCK_EX)
 original=open(cfg,'rb').read()
 d=json.loads(original)
+backup_fd,backup=tempfile.mkstemp(prefix=os.path.basename(cfg)+'.bak.',dir=os.path.dirname(cfg) or '.')
+with os.fdopen(backup_fd,'wb') as stream:
+    stream.write(original)
+    stream.flush()
+    os.fsync(stream.fileno())
 e=d.setdefault('projects',{}).setdefault(os.environ['MCP_CWD'],{})
 unseen=set(e.get('disabledMcpServers',[]))-set(allsrv)
 e['disabledMcpServers']=sorted(unseen | (set(allsrv)-keep))

@@ -4,7 +4,7 @@
 
 ## Suggested first implementation
 
-Start with a manual, read-only pilot for one team and one GitHub Project. Phoenix is the candidate identified by the source; recheck its current project fields and work before relying on the September 24 observations.
+Start with a manual, read-only pilot for one team and one GitHub Project. the pilot project is the candidate identified by the source; recheck its current project fields and work before relying on the September 24 observations.
 
 1. Extract and adapt Appendix B into Codex and Claude Code skills, with small `SCRUM.md` and `PLAN.md` templates. Keep customer data and transcripts in the customer's approved private workspace, separate from this reusable skill repository.
 2. First acceptance run: use current GitHub work and one supplied meeting transcript to produce the four status answers, source-linked minutes, board discrepancies, and a proposed plan diff. Review the result against the actual work and meeting record.
@@ -19,7 +19,7 @@ Resolve these design details before turning the playbook into an operational ski
 - **History and coverage:** current board state and fixed result limits are insufficient for reliable historical scope-change and throughput reporting. Paginate reads, capture sprint baselines, and disclose unavailable history.
 - **Access:** demonstrate reads of the actual iteration, status, hierarchy, and PR fields using the chosen connection. Treat the onboarding portal, sign-in broker, and permission profiles as designs until implemented and tested.
 
-Sources for these implementation checks are cataloged in [references.md](../../references.md). The supplied research follows.
+Sources for these implementation checks are cataloged in [references.md](../../references.md). Private customer identifiers in the supplied research have been anonymized. The supplied research follows.
 
 ---
 
@@ -180,15 +180,15 @@ The plan is rewritten in place after every meeting, and the logs are append-only
 
 ---
 
-## 6. Real-world test: PhoenixFinancial/phoenix (observed 2026-09-24)
+## 6. Real-world test: example-org/example-project (observed 2026-09-24)
 
-Phoenix served as the **example project**. The skill's fixes are generic and apply to any GitHub Projects repo.
+the pilot project served as the **example project**. The skill's fixes are generic and apply to any GitHub Projects repo.
 
 - **Setup:**
   - Org Project #4 with Iteration, Status (with WIP limits), Estimate, Effort, Priority, and Target date fields.
   - Epics use the Feature type with Task sub-issues and epic.story.task title numbering.
   - There are no milestones.
-- **Scrum Master epic:** Epic 0 (#1291) holds today's human Scrum Master scope at 8 hours/week. Its stories are:
+- **Scrum Master epic:** Epic 0 (#100) holds today's human Scrum Master scope at 8 hours/week. Its stories are:
   - Backlog setup
   - Daily scrum and status reporting
   - Backlog enrichment
@@ -268,7 +268,7 @@ Cron times are in UTC, and scheduled workflows run only from the default branch.
 
 ### 7.6 Tenancy, identity, and sign-in
 
-The service is **independent of MILL5** and is multi-tenant. A tenant is one customer organization (MILL5, Phoenix Financial, any other company). A tenant can hold several teams or projects, and a partner such as MILL5 can manage workspaces for its own clients.
+The service is **independent of MILL5** and is multi-tenant. A tenant is one customer organization (MILL5, Example Customer, any other company). A tenant can hold several teams or projects, and a partner such as MILL5 can manage workspaces for its own clients.
 
 **Design principle: avoid sign-in prompts wherever possible. Access is set up as Connections (§7.9), so the agent needs no MFA for GitHub, Microsoft 365, or Azure. When the agent must sign in and is challenged for MFA, it signs in through a Sign-in Broker (§7.8) using an MFA method the system owner has explicitly approved.** The model itself never sees passwords, codes, or tokens.
 
@@ -397,7 +397,7 @@ The agent will meet MFA challenges in customer tenants, GitHub, and other SaaS t
 
 #### How a connection is created
 
-1. **Ask.** An admin clicks **Connect** in the admin portal, or tells the agent in Teams or chat: *"Connect GitHub org PhoenixFinancial."*
+1. **Ask.** An admin clicks **Connect** in the admin portal, or tells the agent in Teams or chat: *"Connect GitHub org example-org."*
 2. **Consent.** The service returns a consent link, sent only to people with the tenant-admin role. The provider's own screen shows exactly what's being granted.
 3. **Scope.** The admin picks the resources: specific repos, mailboxes, or subscriptions/resource groups.
 4. **Verify.** The service tests the connection (gets a token, checks each permission) and shows **Connected ✓** with the scopes it actually received.
@@ -434,30 +434,30 @@ Before building, verify the exact permission names for issue types and dependenc
 Consent must happen in the provider's UI. Everything after that lives in a per-tenant file the admin can edit, e.g. `connections.yaml`:
 
 ```yaml
-tenant: phoenix-financial
+tenant: example-customer
 connections:
-  github-phoenix:
+  github-example-project:
     provider: github
-    org: PhoenixFinancial
+    org: example-org
     installation_id: <set by consent callback>
     profile: issue-manager
-    repos: [phoenix]
-  m365-phoenix:
+    repos: [example-project]
+  m365-example-project:
     provider: m365
     tenant_id: <set by consent callback>
     profile: observer
-    mailboxes: [scrum-master@phoenix.example]
-    transcript_organizers: [scrum-master@phoenix.example]
-  azure-phoenix:
+    mailboxes: [scrum-master@example-project.example]
+    transcript_organizers: [scrum-master@example-project.example]
+  azure-example-project:
     provider: azure
     method: lighthouse
-    scopes: [/subscriptions/<id>/resourceGroups/rg-phoenix-dev]
+    scopes: [/subscriptions/<id>/resourceGroups/rg-example-project-dev]
     role: Reader
 workspaces:
-  phoenix-core:
-    github: { connection: github-phoenix, project: "PhoenixFinancial/4", repo: phoenix }
-    meetings: { connection: m365-phoenix, series: [standup, planning, review, retro] }
-    plan_repo: phoenix
+  example-core:
+    github: { connection: github-example-project, project: "example-org/4", repo: example-project }
+    meetings: { connection: m365-example-project, series: [standup, planning, review, retro] }
+    plan_repo: example-project
 ```
 
 #### Operations
@@ -518,7 +518,7 @@ workspaces:
 | Risk / item | Label | Mitigation |
 |---|---|---|
 | Recording consent: Massachusetts requires all-party consent | Legal (not legal advice) | Disclose up front; tell customers; confirm client contracts with counsel |
-| Board hygiene: the agent is only as good as the Status updates | Observed on Phoenix | Hygiene check plus inference from PR/commit activity; team norm to update the board |
+| Board hygiene: the agent is only as good as the Status updates | Observed on the pilot project | Hygiene check plus inference from PR/commit activity; team norm to update the board |
 | No estimates means forecasts are low-confidence | Observed | Count-based throughput until 3 sprints of estimates exist |
 | Autopilot and hosted agents are in preview | Verified (Microsoft docs) | Phases 1–3 run on GA pieces |
 | Licensing: Agent 365 needs a qualifying license (e.g. M365 Copilot); works best with E5 | Verified | Price it before phase 4 |
@@ -856,7 +856,7 @@ For each meeting record:
    - **Customer feedback** — see §6
    - **Open questions** — who must answer
 3. **Link** each item to existing issues by number or close title match. Mark unmatched items "new".
-4. **Reconcile** with GitHub. If the meeting says something GitHub doesn't show (e.g. "#1231 is done" but it's still open), list it under **Board updates needed**.
+4. **Reconcile** with GitHub. If the meeting says something GitHub doesn't show (e.g. "#123 is done" but it's still open), list it under **Board updates needed**.
 5. **Output minutes** (about one screen): the Four Answers, then Decisions, Actions, Feedback, Risks, Open questions, and Board updates needed.
 6. **Update the plan** (§5), and propose issue changes (§7).
 
@@ -986,4 +986,4 @@ Default to read-only. Before any write — issues, labels, fields, iterations, c
 - Voice Live overview — https://learn.microsoft.com/en-us/azure/ai-services/speech-service/voice-live
 - Publish Foundry agents to Microsoft 365 Copilot and Teams — https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/publish-copilot
 - Report of Foundry agents in Teams being limited to prompt-only (Jan 2026) — https://techcommunity.microsoft.com/discussions/azure-ai-foundry-discussions/published-agent-from-foundry-doesnt-work-at-all-in-teams-and-m365/4485341
-- PhoenixFinancial/phoenix, Project #4, Epic 0 #1291 (private; viewed 2026-09-24) — https://github.com/PhoenixFinancial/phoenix
+- Private pilot project observations supplied by the author (2026-09-24); identifying repository link omitted.

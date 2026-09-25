@@ -401,6 +401,5 @@ External references:
 - https://learn.microsoft.com/en-us/azure/ai-services/speech-service/voice-live
 - https://learn.microsoft.com/en-us/azure/foundry/agents/how-to/publish-copilot
 - https://techcommunity.microsoft.com/discussions/azure-ai-foundry-discussions/published-agent-from-foundry-doesnt-work-at-all-in-teams-and-m365/4485341
-- https://github.com/PhoenixFinancial/phoenix
 - https://docs.github.com/en/issues/planning-and-tracking-with-projects/automating-your-project/using-the-api-to-manage-projects
 - https://docs.github.com/en/issues/tracking-your-work-with-issues/administering-issues/closing-an-issue
