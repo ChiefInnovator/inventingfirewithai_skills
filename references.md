@@ -6,6 +6,12 @@ Canonical reference catalog for this repository. README stays short; detailed so
 
 ### Skills and operating instructions
 
+- [Figma to Flutter for GitHub Copilot](.github/skills/figma-to-flutter/SKILL.md)
+- [Pragmatic Coder for GitHub Copilot](.github/skills/pragmatic-coder/SKILL.md)
+- [Slam for GitHub Copilot](.github/skills/slam/SKILL.md)
+- [MCP Picker for GitHub Copilot](.github/skills/mcp-pick/SKILL.md)
+- [Travel Like a Local for GitHub Copilot](.github/skills/travel-like-a-local/SKILL.md)
+
 - [Figma to Flutter for Codex](skills/codex/figma-to-flutter/SKILL.md)
 - [Figma to Flutter for Claude Code](skills/claude/figma-to-flutter/SKILL.md)
 - [Travel Like a Local for Codex](skills/codex/travel-like-a-local/SKILL.md)
@@ -37,6 +43,8 @@ Canonical reference catalog for this repository. README stays short; detailed so
 - [Slam Migration and Verification](docs/migrations/slam_migration.md)
 
 ### Research by topic
+
+- [Ponytail review and proposed Pragmatic Coder improvements](docs/research/ponytail_pragmatic_coder_review.md)
 
 - [Figma to Flutter: improvements and community plugin comparison](docs/research/figma_to_flutter_comparison.md)
 - [Autonomous Execution Skills Research and Reference Guide](docs/research/autonomous_execution_skills_research.md)
@@ -434,3 +442,19 @@ External references:
 - https://learn.chatgpt.com/docs/enterprise/skills
 - https://learn.chatgpt.com/docs/plugins
 - https://developers.openai.com/plugins/build/plugins
+
+### GitHub Copilot skills
+
+- [Official skill format, discovery, installation, and invocation](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-skills)
+- [VS Code agent skills](https://code.visualstudio.com/docs/agent-customization/agent-skills)
+- [VS Code MCP server management and enablement scope](https://code.visualstudio.com/docs/agent-customization/mcp-servers)
+
+The five standalone Copilot packages live in `.github/skills/`. Instructions use Copilot invocation and host capabilities; bundled Figma conversion and Slam cleanup helpers retain their existing behavior. MCP Picker uses supported host controls rather than another client's private configuration. CLI syntax was checked against installed Copilot 1.0.95 help on October 10, 2026; check the installed version before use.
+
+### Ponytail
+
+- [Ponytail repository](https://github.com/DietrichGebert/ponytail)
+- [Implementation skill](https://github.com/DietrichGebert/ponytail/blob/main/skills/ponytail/SKILL.md)
+- [Review skill](https://github.com/DietrichGebert/ponytail/blob/main/skills/ponytail-review/SKILL.md)
+- [Published agentic benchmark and methodology](https://github.com/DietrichGebert/ponytail/blob/main/benchmarks/results/2026-10-07-agentic.md)
+- [Local assessment and unapplied proposals](docs/research/ponytail_pragmatic_coder_review.md)

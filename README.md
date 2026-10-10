@@ -12,22 +12,17 @@ Part of **[Inventing Fire with AI](https://inventingfirewith.ai)** by **[Richard
 
 ## What it does
 
-| Skill | Purpose |
-|---|---|
-| [figma-to-flutter (Codex)](skills/codex/figma-to-flutter/SKILL.md) | Convert Figma frames into Flutter with source provenance, focused updates, and visual checks. |
-| [figma-to-flutter (Claude Code)](skills/claude/figma-to-flutter/SKILL.md) | The same portable conversion and verification workflow for Claude Code. |
-| [pragmatic-coder (Codex)](skills/codex/pragmatic-coder/SKILL.md) | Implement, debug, review, and refactor with minimal changes and proportionate verification. |
-| [pragmatic-coder (Claude Code)](skills/claude/pragmatic-coder/SKILL.md) | The same coding guidance adapted to Claude Code. |
-| [slam (Codex)](skills/codex/slam/SKILL.md) | Ship scoped GitHub work through commit, PR, AI review, CI, merge, and verified branch cleanup. |
-| [slam (Claude Code)](skills/claude/slam/SKILL.md) | Native Claude shipping workflow with session goal guidance. |
-| [mcp-pick (Codex)](skills/codex/mcp-pick/SKILL.md) | Choose MCP servers and installed app integrations per project, using a numbered text chooser. |
-| [mcp-pick (Claude Code)](skills/claude/mcp-pick/SKILL.md) | Choose which MCP servers stay enabled per Claude Code project. |
-| [travel-like-a-local (Codex)](skills/codex/travel-like-a-local/SKILL.md) | Plan local city experiences, relaxing property stays, and practical trip logistics. |
-| [travel-like-a-local (Claude Code)](skills/claude/travel-like-a-local/SKILL.md) | The same travel guidance adapted to Claude Code. |
+| Skill | Codex | Claude Code | GitHub Copilot | Purpose |
+|---|---|---|---|---|
+| figma-to-flutter | [Skill](skills/codex/figma-to-flutter/SKILL.md) | [Skill](skills/claude/figma-to-flutter/SKILL.md) | [Skill](.github/skills/figma-to-flutter/SKILL.md) | Capture, convert, and check Flutter against Figma. |
+| pragmatic-coder | [Skill](skills/codex/pragmatic-coder/SKILL.md) | [Skill](skills/claude/pragmatic-coder/SKILL.md) | [Skill](.github/skills/pragmatic-coder/SKILL.md) | Make focused changes with proportionate verification. |
+| slam | [Skill](skills/codex/slam/SKILL.md) | [Skill](skills/claude/slam/SKILL.md) | [Skill](.github/skills/slam/SKILL.md) | Ship through review, CI, merge, and verified cleanup. |
+| mcp-pick | [Skill](skills/codex/mcp-pick/SKILL.md) | [Skill](skills/claude/mcp-pick/SKILL.md) | [Skill](.github/skills/mcp-pick/SKILL.md) | Select project-relevant MCP servers. |
+| travel-like-a-local | [Skill](skills/codex/travel-like-a-local/SKILL.md) | [Skill](skills/claude/travel-like-a-local/SKILL.md) | [Skill](.github/skills/travel-like-a-local/SKILL.md) | Plan local experiences, property stays, and trip logistics. |
 
 `pragmatic-coder` guides coding agents to finish authorized work with minimal changes, proportionate verification, clear evidence, and respect for user choices. It favors simple data, maintainable solutions, relevant security checks, and measured performance work.
 
-Install a skill folder from `skills/codex/` or `skills/claude/` into the matching client's skills directory, including its bundled resources. Invoke `$pragmatic-coder` or `$mcp-pick` in Codex; use `/pragmatic-coder` or `/mcp-pick` in Claude Code. For travel, invoke `$travel-like-a-local` in Codex or `/travel-like-a-local` in Claude Code.
+Install an entire skill folder, including its resources: use `skills/codex/` or `skills/claude/` for those clients. Copy a Copilot folder from `.github/skills/` into the target repository's `.github/skills/`; these packages are already discoverable here. Invoke `$<skill-name>` in Codex or `/<skill-name>` in Claude Code and GitHub Copilot. In Copilot CLI, reload with `/skills reload` and check `/skills info <skill-name>`. MCP Picker's supported scope depends on the Copilot host; it reports prepared commands separately from applied settings.
 
 For ChatGPT on the web, see the [travel skill export and setup status](docs/migrations/travel_chatgpt_web.md).
 

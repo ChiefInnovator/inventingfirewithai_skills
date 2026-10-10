@@ -23,6 +23,11 @@ skills/codex/travel-like-a-local/SKILL.md
 skills/claude/travel-like-a-local/SKILL.md
 skills/claude/slam/SKILL.md
 skills/claude/pragmatic-coder/SKILL.md
+.github/skills/figma-to-flutter/SKILL.md
+.github/skills/pragmatic-coder/SKILL.md
+.github/skills/slam/SKILL.md
+.github/skills/mcp-pick/SKILL.md
+.github/skills/travel-like-a-local/SKILL.md
 tests/
 AGENTS.md
 CLAUDE.md
