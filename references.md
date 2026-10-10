@@ -30,6 +30,8 @@ Canonical reference catalog for this repository. README stays short; detailed so
 
 ### Migration notes
 
+- [Travel Like a Local: ChatGPT Web Migration](docs/migrations/travel_chatgpt_web.md)
+
 - [Slam Migration and Verification](docs/migrations/slam_migration.md)
 
 ### Research by topic
@@ -403,3 +405,14 @@ External references:
 - https://techcommunity.microsoft.com/discussions/azure-ai-foundry-discussions/published-agent-from-foundry-doesnt-work-at-all-in-teams-and-m365/4485341
 - https://docs.github.com/en/issues/planning-and-tracking-with-projects/automating-your-project/using-the-api-to-manage-projects
 - https://docs.github.com/en/issues/tracking-your-work-with-issues/administering-issues/closing-an-issue
+
+### `docs/migrations/travel_chatgpt_web.md`
+
+Official documentation reviewed September 25, 2026; web account installation remains unverified.
+
+External references:
+- https://learn.chatgpt.com/docs/skills-and-plugins
+- https://learn.chatgpt.com/docs/build-skills
+- https://learn.chatgpt.com/docs/enterprise/skills
+- https://learn.chatgpt.com/docs/plugins
+- https://developers.openai.com/plugins/build/plugins

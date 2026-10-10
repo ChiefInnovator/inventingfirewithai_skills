@@ -27,6 +27,8 @@ Part of **[Inventing Fire with AI](https://inventingfirewith.ai)** by **[Richard
 
 Install a skill folder from `skills/codex/` or `skills/claude/` into the matching client's skills directory, including its bundled resources. Invoke `$pragmatic-coder` or `$mcp-pick` in Codex; use `/pragmatic-coder` or `/mcp-pick` in Claude Code. For travel, invoke `$travel-like-a-local` in Codex or `/travel-like-a-local` in Claude Code.
 
+For ChatGPT on the web, see the [travel skill export and setup status](docs/migrations/travel_chatgpt_web.md).
+
 Browse [designs, research, evaluations, and migration notes](references.md#local-documents).
 
 ## Why this exists

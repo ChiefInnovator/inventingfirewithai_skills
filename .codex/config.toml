@@ -1,0 +1,62 @@
+[apps.asdk_app_697acb8e53d88191bf7a79e62012ae14]
+enabled = false
+
+[apps.asdk_app_69949aa62bf48191be5e57a01202beca]
+enabled = false
+
+[apps.asdk_app_69b31dc2110c8191b8b47dc98fe5a052]
+enabled = false
+
+[apps.connector_1e4f6a44acf14e3ca1d96672f8c945bc]
+enabled = false
+
+[apps.connector_246af0940da3457da0e751171dc1ce60]
+enabled = false
+
+[apps.connector_4aaab2856305417b993eca9a216aaf6e]
+enabled = false
+
+[apps.connector_68d579f7b0948191a7da3124a3b560f7]
+enabled = false
+
+[apps.connector_68de829bf7648191acd70a907364c67c]
+enabled = false
+
+[apps.connector_68df038e0ba48191908c8434991bbac2]
+enabled = false
+
+[apps.connector_68e004f14af881919eb50893d3d9f523]
+enabled = false
+
+[apps.connector_69050bf6de9c8191b3968f2cc08d33d6]
+enabled = false
+
+[apps.connector_693864f100e4819093e6ed9b651239f1]
+enabled = false
+
+[apps.connector_76869538009648d5b282a4bb21c3d157]
+enabled = true
+
+[apps.connector_e6a7394682e24467ac68c60696f275a4]
+enabled = false
+
+[apps.connector_openai_codex_document_control]
+enabled = false
+
+[apps.connector_openai_default_templates]
+enabled = false
+
+[apps.connector_openai_plugin_management]
+enabled = true
+
+[mcp_servers.computer-use]
+enabled = false
+
+[mcp_servers.node_repl]
+enabled = true
+
+[plugins."codex-app-tools@openai-bundled".mcp_servers.codex_app]
+enabled = true
+
+[plugins."unified-computer-use@openai-bundled".mcp_servers.cua_repl]
+enabled = true
