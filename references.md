@@ -44,7 +44,7 @@ Canonical reference catalog for this repository. README stays short; detailed so
 
 ### Research by topic
 
-- [Ponytail review and proposed Pragmatic Coder improvements](docs/research/ponytail_pragmatic_coder_review.md)
+- [Ponytail review and applied Pragmatic Coder improvements](docs/research/ponytail_pragmatic_coder_review.md)
 
 - [Figma to Flutter: improvements and community plugin comparison](docs/research/figma_to_flutter_comparison.md)
 - [Autonomous Execution Skills Research and Reference Guide](docs/research/autonomous_execution_skills_research.md)
@@ -457,4 +457,4 @@ The five standalone Copilot packages live in `.github/skills/`. Instructions use
 - [Implementation skill](https://github.com/DietrichGebert/ponytail/blob/main/skills/ponytail/SKILL.md)
 - [Review skill](https://github.com/DietrichGebert/ponytail/blob/main/skills/ponytail-review/SKILL.md)
 - [Published agentic benchmark and methodology](https://github.com/DietrichGebert/ponytail/blob/main/benchmarks/results/2026-10-07-agentic.md)
-- [Local assessment and unapplied proposals](docs/research/ponytail_pragmatic_coder_review.md)
+- [Local assessment and applied recommendations](docs/research/ponytail_pragmatic_coder_review.md)

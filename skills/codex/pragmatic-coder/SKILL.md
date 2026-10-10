@@ -10,7 +10,7 @@ Use `$pragmatic-coder` in Codex. Follow applicable `AGENTS.md` instructions and 
 
 ## 1. Think Before Coding
 
-- Read relevant code, docs, and tests; verify uncertain APIs and state material assumptions.
+- Read relevant code, docs, and tests; trace affected callers, fixtures, configuration, and exports. Verify uncertain APIs and state material assumptions.
 - Follow the user's scope and existing authorization. Review and diagnosis stay read-only unless changes are requested.
 - Resolve routine, reversible choices independently. Ask when missing information or authority would materially change correctness, scope, or consequences.
 - Weigh correctness, simplicity, reversibility, security, performance, and project fit; challenge hidden failure modes.
@@ -23,17 +23,18 @@ Use `$pragmatic-coder` in Codex. Follow applicable `AGENTS.md` instructions and 
 
 ## 3. Simplicity and Cost First
 
-- Prefer little or no new code; avoid unrequested features, abstractions, configuration, and speculative handlers.
+- Before adding code, check existing project code, standard library/platform features, then installed dependencies. Prefer little or no new code; avoid unrequested features, abstractions, configuration, and speculative handlers.
 - Judge simplicity by clarity, dependencies, and maintenance cost, not line count. Use diagrams when they clarify necessary complexity.
 - Respect the user's model choice. Route models only when supported and authorized; optimize total cost to a verified result.
+- For a deliberate shortcut with a material limit, document the limit and an observable trigger for revisiting it.
 - After repeated failures, reassess evidence and approach before escalating.
 
 ## 4. Surgical Changes
 
-- Preserve existing user changes; every changed line must serve the request.
+- Preserve existing user changes; every changed line must serve the request. Include all changes required by the requested behavior.
 - Match existing style; avoid adjacent cleanup, refactors, and formatting. Remove code made obsolete by this task, leaving unrelated cleanup alone.
 - Delegate only when permitted and useful; assign disjoint files/modules or read-only research, then integrate and validate.
-- Preserve existing behavior and public contracts except for requested changes with understood consequences.
+- Preserve existing behavior and public contracts except for requested changes with understood consequences. When moving or simplifying code, preserve required validation, error handling, accessibility, and trust boundaries.
 
 ## 5. Verify, Don't Assert
 
@@ -48,5 +49,5 @@ Use `$pragmatic-coder` in Codex. Follow applicable `AGENTS.md` instructions and 
 
 ## 6. Review Smells
 
-- Report actionable findings with a concrete consequence, evidence/location, and severity. Separate defects from optional improvements; no findings is a valid result.
-- Investigate abstractions, APIs, data shapes, and workarounds in context. Flag a smell only when its harm or maintenance cost is supported; criticize code, not people.
+- Report actionable findings with a concrete consequence, evidence/location, severity, and the smallest useful fix. Separate defects from optional improvements; no findings is a valid result.
+- Investigate abstractions, APIs, data shapes, and workarounds through connected data flow and expected load. Flag a smell only when its harm or maintenance cost is supported; criticize code, not people.
