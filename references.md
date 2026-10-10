@@ -6,11 +6,11 @@ Canonical reference catalog for this repository. README stays short; detailed so
 
 ### Skills and operating instructions
 
-- [Figma to Flutter for GitHub Copilot](.github/skills/figma-to-flutter/SKILL.md)
-- [Pragmatic Coder for GitHub Copilot](.github/skills/pragmatic-coder/SKILL.md)
-- [Slam for GitHub Copilot](.github/skills/slam/SKILL.md)
-- [MCP Picker for GitHub Copilot](.github/skills/mcp-pick/SKILL.md)
-- [Travel Like a Local for GitHub Copilot](.github/skills/travel-like-a-local/SKILL.md)
+- [Figma to Flutter for GitHub Copilot](skills/copilot/figma-to-flutter/SKILL.md)
+- [Pragmatic Coder for GitHub Copilot](skills/copilot/pragmatic-coder/SKILL.md)
+- [Slam for GitHub Copilot](skills/copilot/slam/SKILL.md)
+- [MCP Picker for GitHub Copilot](skills/copilot/mcp-pick/SKILL.md)
+- [Travel Like a Local for GitHub Copilot](skills/copilot/travel-like-a-local/SKILL.md)
 
 - [Figma to Flutter for Codex](skills/codex/figma-to-flutter/SKILL.md)
 - [Figma to Flutter for Claude Code](skills/claude/figma-to-flutter/SKILL.md)
@@ -437,7 +437,7 @@ External references:
 - [VS Code agent skills](https://code.visualstudio.com/docs/agent-customization/agent-skills)
 - [VS Code MCP server management and enablement scope](https://code.visualstudio.com/docs/agent-customization/mcp-servers)
 
-The five standalone Copilot packages live in `.github/skills/`. Instructions use Copilot invocation and host capabilities; bundled Figma conversion and Slam cleanup helpers retain their existing behavior. MCP Picker uses supported host controls rather than another client's private configuration. CLI syntax was checked against installed Copilot 1.0.95 help on October 10, 2026; check the installed version before use.
+The five downloadable Copilot packages live in `skills/copilot/`; users install them into `.github/skills/` in their own repositories. Instructions use Copilot invocation and host capabilities; bundled Figma conversion and Slam cleanup helpers retain their existing behavior. MCP Picker uses supported host controls rather than another client's private configuration. CLI syntax was checked against installed Copilot 1.0.95 help on October 10, 2026; check the installed version before use.
 
 ### Ponytail
 
