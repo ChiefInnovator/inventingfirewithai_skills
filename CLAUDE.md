@@ -15,6 +15,8 @@ Reusable coding, shipping, and travel planning skills. Pragmatic Coder combines 
 ## Structure
 
 ```
+skills/codex/figma-to-flutter/SKILL.md
+skills/claude/figma-to-flutter/SKILL.md
 skills/claude/pragmatic-coder/SKILL.md   — the skill
 skills/codex/slam/SKILL.md              — portable shipping workflow
 skills/codex/mcp-pick/SKILL.md

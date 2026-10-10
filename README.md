@@ -14,6 +14,8 @@ Part of **[Inventing Fire with AI](https://inventingfirewith.ai)** by **[Richard
 
 | Skill | Purpose |
 |---|---|
+| [figma-to-flutter (Codex)](skills/codex/figma-to-flutter/SKILL.md) | Convert Figma frames into Flutter with source provenance, focused updates, and visual checks. |
+| [figma-to-flutter (Claude Code)](skills/claude/figma-to-flutter/SKILL.md) | The same portable conversion and verification workflow for Claude Code. |
 | [pragmatic-coder (Codex)](skills/codex/pragmatic-coder/SKILL.md) | Implement, debug, review, and refactor with minimal changes and proportionate verification. |
 | [pragmatic-coder (Claude Code)](skills/claude/pragmatic-coder/SKILL.md) | The same coding guidance adapted to Claude Code. |
 | [slam (Codex)](skills/codex/slam/SKILL.md) | Ship scoped GitHub work through commit, PR, AI review, CI, merge, and verified branch cleanup. |
@@ -28,6 +30,8 @@ Part of **[Inventing Fire with AI](https://inventingfirewith.ai)** by **[Richard
 Install a skill folder from `skills/codex/` or `skills/claude/` into the matching client's skills directory, including its bundled resources. Invoke `$pragmatic-coder` or `$mcp-pick` in Codex; use `/pragmatic-coder` or `/mcp-pick` in Claude Code. For travel, invoke `$travel-like-a-local` in Codex or `/travel-like-a-local` in Claude Code.
 
 For ChatGPT on the web, see the [travel skill export and setup status](docs/migrations/travel_chatgpt_web.md).
+
+Use `$figma-to-flutter` in Codex or `/figma-to-flutter` in Claude Code. See [what it adds to community code generation](docs/research/figma_to_flutter_comparison.md).
 
 Browse [designs, research, evaluations, and migration notes](references.md#local-documents).
 

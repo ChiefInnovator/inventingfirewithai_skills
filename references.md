@@ -6,6 +6,8 @@ Canonical reference catalog for this repository. README stays short; detailed so
 
 ### Skills and operating instructions
 
+- [Figma to Flutter for Codex](skills/codex/figma-to-flutter/SKILL.md)
+- [Figma to Flutter for Claude Code](skills/claude/figma-to-flutter/SKILL.md)
 - [Travel Like a Local for Codex](skills/codex/travel-like-a-local/SKILL.md)
 - [Travel Like a Local for Claude Code](skills/claude/travel-like-a-local/SKILL.md)
 - [Pragmatic Coder for Claude Code](skills/claude/pragmatic-coder/SKILL.md)
@@ -36,6 +38,7 @@ Canonical reference catalog for this repository. README stays short; detailed so
 
 ### Research by topic
 
+- [Figma to Flutter: improvements and community plugin comparison](docs/research/figma_to_flutter_comparison.md)
 - [Autonomous Execution Skills Research and Reference Guide](docs/research/autonomous_execution_skills_research.md)
 - [Interface, Contract, and Dependency Inversion Skills Research](docs/research/interface_contract_dependency_inversion_skills_research.md)
 - [Microsoft Agent Skills Research for .NET, Azure, Python, React, TypeScript, Microsoft Foundry, and Related Platforms](docs/research/microsoft_agent_skills_research.md)
@@ -53,6 +56,21 @@ Canonical reference catalog for this repository. README stays short; detailed so
 All skill-like references are scored in [`docs/evaluations/referenced_skills_scorecard.md`](docs/evaluations/referenced_skills_scorecard.md). Non-skill standards, documentation pages, people, products, and organization links are cataloged here but not scored.
 
 ## Source Links By Document
+
+### Figma to Flutter
+
+Local packages and comparison:
+- [Codex skill](skills/codex/figma-to-flutter/SKILL.md)
+- [Claude Code skill](skills/claude/figma-to-flutter/SKILL.md)
+- [Why this skill exists and its specific improvements](docs/research/figma_to_flutter_comparison.md)
+
+Community references, reviewed October 10, 2026:
+- [Figma to Code community plugin](https://www.figma.com/community/plugin/842128343887142055)
+- [Official repository and documented limitations](https://github.com/bernaferrari/FigmaToCode#deliberate-limitations)
+- [Official privacy model](https://github.com/bernaferrari/FigmaToCode#privacy-model)
+- [Upstream license](https://github.com/bernaferrari/FigmaToCode/blob/main/LICENSE)
+
+The local packages adapt an existing conversion workflow into customer-neutral instructions and independently implemented helpers. They do not bundle private captures, decision history, or upstream plugin implementation files. The comparison describes scope and verification additions, not measured superiority. The community plugin is a tool reference, not an agent skill.
 
 ### `README.md`
 

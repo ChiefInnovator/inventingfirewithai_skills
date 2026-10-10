@@ -4,6 +4,7 @@ These are historical editorial scores from May 2, 2026, based on instruction cov
 
 | Skill | Score | Why | Lines | Characters | Tokens |
 |---|---:|---|---:|---:|---:|
+| figma-to-flutter (Codex / Claude) | N/A | Portable conversion, identity, and pixel-check helpers plus capture, repair, and platform-review guidance; added October 10, 2026. Regression validation is not a comparative fidelity benchmark. | N/A | N/A | N/A |
 | travel-like-a-local (Codex / Claude) | N/A | Local travel planning, property relaxation, and booking-state accuracy; imported September 25, 2026; comparative behavior unscored. | N/A | N/A | N/A |
 | mcp-pick (Codex / Claude) | N/A | Project integration selection; no comparative behavioral score assigned. | N/A | N/A | N/A |
 | slam (Claude) | N/A | Original native Claude workflow; no comparative behavioral score assigned. | N/A | N/A | N/A |

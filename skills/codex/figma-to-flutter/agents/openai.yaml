@@ -1,0 +1,4 @@
+interface:
+  display_name: "Figma to Flutter"
+  short_description: "Convert and verify Figma designs in Flutter"
+  default_prompt: "Use $figma-to-flutter to convert this Figma frame into Flutter and verify it against the source."

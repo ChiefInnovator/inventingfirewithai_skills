@@ -13,6 +13,8 @@
 ## Structure
 
 ```text
+skills/codex/figma-to-flutter/SKILL.md
+skills/claude/figma-to-flutter/SKILL.md
 skills/codex/pragmatic-coder/SKILL.md
 skills/codex/slam/SKILL.md
 skills/codex/mcp-pick/SKILL.md
