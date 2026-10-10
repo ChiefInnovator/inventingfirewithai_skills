@@ -1,0 +1,9 @@
+## R — Resolve repository and base
+
+Before changing the tree, verify Git and authenticated GitHub access. Inspect the working tree, current branch, all `origin` fetch/push URLs, and worktrees. Stop on detached HEAD. Resolve the GitHub host and owner/repository from `origin`, explicitly using that repository for all GitHub calls; don't rely on a CLI default that could point to a fork or another repository. Require every push destination to match the intended repository; stop on a mismatched or ambiguous push URL before publishing or deleting a ref.
+
+If `origin` is missing, inspect the work and proposed outgoing history for secrets first, reporting paths and types without exposing credential values. Ask for any missing owner/name and authority before creating a private repository; public visibility requires an explicit request. Do not create or push a repository merely to complete migration/inspection of this skill. After authorized creation, restart repository resolution. Never interpret a failed fetch or denied API request as an empty repository or absent policy.
+
+Fetch `origin` successfully with pruning. Resolve the base from explicit user/project instructions; otherwise use remote `develop` if present, then `main`, then the actual remote default. This is a selection policy, not proof of the repository's branching model. Confirm the selected remote ref exists.
+
+Capture values in task state: `SLAM_ROOT`, `SLAM_REPO` (host/owner/repo), `SLAM_ORIGIN`, `SLAM_BASE`, `SLAM_DEFAULT`, and protected branch names/rules. Inspect applicable GitHub protection/rulesets, including their target conditions. Recheck protections before merge and cleanup. Use `SLAM_BRANCH` only after Phase 0; never replace it with the current branch during cleanup. Shell variables do not persist between independent tool calls: restore captured values explicitly and verify repository identity before mutations.

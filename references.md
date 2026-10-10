@@ -23,14 +23,15 @@ Canonical reference catalog for this repository. README stays short; detailed so
 - [Pragmatic Coder Skill](skills/codex/pragmatic-coder/SKILL.md)
 - [Slam Skill](skills/codex/slam/SKILL.md)
 - [Slam GitHub Review Workflow](skills/codex/slam/references/github-review.md)
-- [Agent Instructions](AGENTS.md)
-- [Claude Instructions](CLAUDE.md)
+- [Shared Agent Instructions (Codex, Claude Code, and Copilot)](AGENTS.md)
 
 ### Designs and pilots
 
 - [AI Scrum Master Service — Research and Design](docs/designs/ai-scrum-master-research-and-design.md)
 
 ### Evaluations and audits
+
+- [Skill instruction token audit](docs/evaluations/skill_token_budget.md)
 
 - [Pragmatic Coder Behavioral Evaluation](docs/evaluations/pragmatic_coder_evaluation.md)
 - [Referenced Skills Audit](docs/evaluations/referenced_skills_audit.md)
@@ -97,18 +98,10 @@ External references:
 
 Local references:
 - `AGENTS.md`
-- `CLAUDE.md`
 - `README.md`
 - `docs/evaluations/referenced_skills_scorecard.md`
 - `references.md`
 - `skills/codex/pragmatic-coder/SKILL.md`
-
-### `CLAUDE.md`
-
-Local references:
-- `docs/evaluations/referenced_skills_scorecard.md`
-- `references.md`
-- `skills/claude/pragmatic-coder/SKILL.md`
 
 ### `docs/research/autonomous_execution_skills_research.md`
 
@@ -130,7 +123,6 @@ External references:
 
 Local references:
 - `AGENTS.md`
-- `CLAUDE.md`
 
 External references:
 - https://github.com/mattpocock/skills/blob/main/skills/engineering/improve-codebase-architecture/INTERFACE-DESIGN.md
@@ -213,7 +205,6 @@ External references:
 
 Local references:
 - `AGENTS.md`
-- `CLAUDE.md`
 - `SKILL.md`
 
 External references:
@@ -236,7 +227,6 @@ External references:
 
 Local references:
 - `AGENTS.md`
-- `CLAUDE.md`
 - `SKILL.md`
 
 External references:
@@ -277,7 +267,6 @@ Local references:
 
 Local references:
 - `AGENTS.md`
-- `CLAUDE.md`
 - `ERRORS.md`
 - `FEATURE_REQUESTS.md`
 - `LEARNINGS.md`
@@ -306,7 +295,6 @@ External references:
 
 Local references:
 - `AGENTS.md`
-- `CLAUDE.md`
 
 External references:
 - https://github.com/addyosmani/agent-skills/blob/main/skills/security-and-hardening/SKILL.md
@@ -458,3 +446,9 @@ The five standalone Copilot packages live in `.github/skills/`. Instructions use
 - [Review skill](https://github.com/DietrichGebert/ponytail/blob/main/skills/ponytail-review/SKILL.md)
 - [Published agentic benchmark and methodology](https://github.com/DietrichGebert/ponytail/blob/main/benchmarks/results/2026-10-07-agentic.md)
 - [Local assessment and applied recommendations](docs/research/ponytail_pragmatic_coder_review.md)
+
+### Shared repository instructions
+
+- [Claude Code's direct AGENTS.md support](https://code.claude.com/docs/en/memory#agentsmd)
+
+Verified October 10, 2026: Claude Code 2.1.277+ supports direct `AGENTS.md` loading. Under its default mode, project/ancestor `CLAUDE.md` or `CLAUDE.local.md` files take precedence. Use `/memory` to verify actual loading; this repository now maintains only `AGENTS.md`.

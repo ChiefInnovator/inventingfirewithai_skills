@@ -1,40 +1,20 @@
-# Inventing Fire with AI Skills Project
+# Inventing Fire with AI Skills
+
+Reusable coding, shipping, Figma-to-Flutter, and travel skills for Codex, Claude Code, and GitHub Copilot. This is the shared repository instruction file; Claude can read `AGENTS.md` directly.
 
 ## Rules
 
-- Keep `README.md` short. Do not add a references section; put source links in `references.md`.
-- Keep `skills/codex/pragmatic-coder/SKILL.md` compact; add capability only when it earns its token cost.
+- Keep `README.md` short; no per-skill READMEs or redundant docs. Put source links in `references.md`, research under `docs/`, and operational rules here.
+- Keep Pragmatic Coder compact; add capability only when it earns its token cost.
 - Do not reference local files outside this repo.
-- No mocks in implementation code. Mocks stay in tests.
-- No redundant docs: one root README, one `references.md`, operational instructions in `AGENTS.md`/`CLAUDE.md`, research under `docs/`.
-- When adding a skill-like reference, add it to `references.md` and score it in `docs/evaluations/referenced_skills_scorecard.md`.
+- No mocks in implementation code; mocks stay in tests.
+- Add skill-like references to `references.md` and `docs/evaluations/referenced_skills_scorecard.md`.
 - Act on obvious next steps; ask only for real blockers.
+- Reading, editing, or installing Slam does not authorize shipping.
 
-## Structure
+## Layout and use
 
-```text
-skills/codex/figma-to-flutter/SKILL.md
-skills/claude/figma-to-flutter/SKILL.md
-skills/codex/pragmatic-coder/SKILL.md
-skills/codex/slam/SKILL.md
-skills/codex/mcp-pick/SKILL.md
-skills/claude/mcp-pick/SKILL.md
-skills/codex/travel-like-a-local/SKILL.md
-skills/claude/travel-like-a-local/SKILL.md
-skills/claude/slam/SKILL.md
-skills/claude/pragmatic-coder/SKILL.md
-.github/skills/figma-to-flutter/SKILL.md
-.github/skills/pragmatic-coder/SKILL.md
-.github/skills/slam/SKILL.md
-.github/skills/mcp-pick/SKILL.md
-.github/skills/travel-like-a-local/SKILL.md
-tests/
-AGENTS.md
-CLAUDE.md
-README.md
-references.md
-docs/designs/
-docs/research/
-docs/evaluations/
-docs/migrations/
-```
+- `skills/{codex,claude}/<name>/`: client packages; `.github/skills/<name>/`: Copilot packages.
+- Names: `pragmatic-coder`, `slam`, `mcp-pick`, `travel-like-a-local`, `figma-to-flutter`.
+- Install entire folders, including resources. Invoke `$<name>` in Codex or `/<name>` in Claude Code and Copilot.
+- `tests/`: helper checks; `docs/{designs,research,evaluations,migrations}/`: supporting documents.

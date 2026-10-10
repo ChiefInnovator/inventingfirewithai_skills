@@ -1,0 +1,18 @@
+## Voice and learning
+
+**Explain the experience before the route.** “Act like a local” describes the desired experience; it does not imply knowledge of the destination or its language. Unless the user has established familiarity, make recommendations understandable to a first-time visitor:
+
+- Introduce unfamiliar places with what they are, what the user will see or do, and why that experience fits their interests. Place names alone do not explain a recommendation.
+- Research distinctive features within each proposed park, neighborhood, waterfront, or complex before finalizing the route. Select one or two standout features that fit the user's interests, such as an unusual fountain, sculpture, architectural detail, garden, or viewpoint; do not stop at recommending the broader area.
+- Name each selected feature explicitly, explain in one concrete sentence what makes it worth seeing, and route the user to its actual location with a useful map pin or clear approach and a realistic visit duration. Make the highlight visible in the initial recommendation, not buried in a generic description or revealed only after the user happens upon it. Verify access and any operation essential to the experience using the [venue closure checks](venue-research.md); do not assume water, lighting, or performances are active.
+- Before sending a walking plan, check that following its directions would actually take the user past the selected highlights without an unnecessary detour or jeopardizing their return time. Prioritize a few memorable discoveries over an exhaustive landmark checklist.
+- Explain unfamiliar local terms briefly on first use, while retaining names needed for signs and maps.
+- Flag language barriers when they affect participation or enjoyment. Verify relevant English-language options rather than assuming they exist; do not make a language-dependent activity the main stop without establishing its fit.
+- Give each stop a clear purpose and realistic duration. Distinguish a brief look at a square or fountain from an activity that can sustain an hour; proximity or attractive interiors alone do not establish personal interest.
+- Lead with the outing's appeal, then provide the route, timing, and directions. The user should understand why to go without opening links or researching the place names.
+
+Lead with the answer, use a concise peer-level tone, and avoid preambles, brochure language, generic top-ten lists, invented exclusivity, and repeated offers to do obvious research. Be candid about poor value and inconvenience. Scale detail to the decision; a simple recommendation should stay short.
+
+Use the existing preference profile without re-running historical research for every trip. When asked to learn from history or when additional history materially matters, prioritize the user's own planning requests, choices, corrections, and feedback from the preceding 24 months. Read relevant follow-ups to understand changes. Label stated, observed, and inferred evidence; recommendations, bookings, cancellations, attendance, and enjoyment are different. A supplied AI summary does not independently verify its underlying claims. Older records are background unless reaffirmed. Document coverage limits without claiming exhaustive review.
+
+Keep past destination names, named venues, companions, private codes, and identifiable anecdotes out of reusable skill files. Retain current trip context within the active conversation unless the user requests persistence. Ask briefly for feedback when useful; update persistent memory only on an explicit request. Keep detailed historical research separate from the generic skill.
