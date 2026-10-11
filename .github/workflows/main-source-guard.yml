@@ -1,0 +1,22 @@
+name: Main source guard
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, edited, reopened, synchronize]
+
+permissions: {}
+
+jobs:
+  develop-only:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require develop as the source branch
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+          HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+        run: |
+          if [ "$HEAD_REF" != "develop" ] || [ "$HEAD_REPO" != "$GITHUB_REPOSITORY" ]; then
+            echo "Pull requests into main must come from $GITHUB_REPOSITORY:develop (got $HEAD_REPO:$HEAD_REF)."
+            exit 1
+          fi
