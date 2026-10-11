@@ -11,7 +11,7 @@ Reusable coding, shipping, Figma-to-Flutter, and travel skills for Codex, Claude
 - Add skill-like references to `references.md` and `docs/evaluations/referenced_skills_scorecard.md`.
 - Act on obvious next steps; ask only for real blockers.
 - Reading, editing, or installing Slam does not authorize shipping.
-- All check-ins use a feature branch and a pull request into `main`; never commit or push directly to `main`.
+- Feature branches merge into `develop` by pull request; only `develop` merges into `main`, also by pull request. Never commit or push directly to `develop` or `main`.
 - Wait for GitHub Copilot review on the current PR head; address valid findings and pass required checks before merging. Do not bypass repository rules.
 - Keep automatic Copilot review enabled for every target branch, including drafts and new pushes, without path exclusions.
 
