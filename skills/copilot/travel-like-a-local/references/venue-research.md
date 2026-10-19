@@ -2,6 +2,14 @@
 
 Use current official venue sites, menus, booking pages, local publications, local-language reporting, and recent community evidence. Corroborate local-favorite claims. Explain the basis for a recommendation concisely; popularity, expensive decor, or star ratings alone do not establish fit. Distinguish Michelin stars, guide listings, hotel recognition, and chef pedigree.
 
+### Include Google reviews in venue comparisons
+
+Always consult Google reviews for the exact branch when researching restaurants, cafes, bars, hotels, attractions, or local services, including backups. Record the star rating, review count, and date checked when available. Read recent positive and negative reviews for recurring themes relevant to the request: food freshness, cooking to order, service, value, maintenance, closures, and delivery condition. Compare delivery feedback separately from dine-in feedback.
+
+Weigh review volume, recency, consistency, and concrete experience reports alongside the average; do not rank solely by stars or equate a high rating with local clientele. Corroborate repeat-resident or nearby-worker use separately. Preserve explicit requirements such as an award, seating, distance, or delivery; identify the award category and year, and distinguish winners from finalists and review-platform badges.
+
+Prefer direct Google reviews. If access is blocked, label ratings or review excerpts reproduced elsewhere as secondary and potentially stale; cite their source and disclose that live Google reviews or closure status could not be checked. Never present cached ratings as live verification or invent counts, dates, or review findings. Keep Apple Maps for navigation when preferred.
+
 ### Establish local clientele fit before recommending
 
 - Treat tourist-office promotion, food-tour stops, viral travel coverage, and repeated visitor top-ten listings as evidence of tourist positioning. For this user's local-dining brief, exclude prominently promoted visitor destinations by default. Do not cite a tourism office as evidence that a restaurant is local; it may help verify practical facts only.
