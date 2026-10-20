@@ -30,7 +30,7 @@ Infer the travel mode from clear context; ask only if uncertain:
 
 ## Research and choose
 
-Before recommending any venue, including backups, read [venue-research.md](references/venue-research.md) for local-clientele evidence, current operation, closures, comparison options, prices, and availability.
+Before recommending any venue, including backups, read [venue-research.md](references/venue-research.md) for Google ratings and recent reviews, local-clientele evidence, current operation, closures, comparison options, prices, and availability.
 
 ## Build days that work
 
