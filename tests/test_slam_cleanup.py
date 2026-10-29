@@ -111,6 +111,17 @@ class CleanupTests(unittest.TestCase):
         with self.assertRaisesRegex(self.guard.Refusal, "Checkout"):
             self.check()
 
+    def test_detached_checkout_of_exact_live_base_passes(self):
+        self.land()
+        self.git("switch", "--detach", "main")
+        self.assertEqual(self.check()["git_checks"], "passed")
+
+    def test_detached_feature_commit_is_not_a_base_checkout(self):
+        self.land()
+        self.git("switch", "--detach", self.head)
+        with self.assertRaisesRegex(self.guard.Refusal, "synchronized"):
+            self.check()
+
     def test_new_local_feature_work_refused(self):
         self.land()
         self.git("switch", "feature/sample")

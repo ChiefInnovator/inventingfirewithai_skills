@@ -13,7 +13,7 @@ python3 "$SLAM_SKILL_DIR/scripts/check_cleanup.py" \
   --protected "$SLAM_DEFAULT"
 ```
 
-The read-only guard requires a clean, synchronized base, exact local/live remote feature heads, merged ancestry, and no worktree using the feature. It does not verify GitHub PR identity or policy and never grants deletion authority. Refusal means preserve the branch and investigate; never escalate to force deletion. Squash merges may fail ancestry checks and require retention.
+The read-only guard requires a clean checkout of the synchronized base (or a detached checkout at that exact live base commit), exact local/live remote feature heads, merged ancestry, and no worktree using the feature. It does not verify GitHub PR identity or policy and never grants deletion authority. Refusal means preserve the branch and investigate; never escalate to force deletion. Squash merges may fail ancestry checks and require retention.
 
 For an authorized remote deletion, use the bundled guarded helper with the exact captured origin URL:
 
