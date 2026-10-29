@@ -185,7 +185,7 @@ class Compiler:
         radius = node.get('cornerRadius', 0)
         return f'BorderRadius.circular({number(max(0, radius))})' if isinstance(radius, (int, float)) and radius else None
 
-    def decoration(self, node, stroke_only=False):
+    def decoration(self, node, stroke_only=False, stroke=None):
         props = {}
         paint = self.paints(node) if not stroke_only else None
         if paint:
@@ -195,7 +195,7 @@ class Compiler:
                 props['gradient'] = self.gradient(paint, node)
             elif paint['type'] != 'IMAGE':
                 self.warn(node, f'Unsupported paint: {paint["type"]}')
-        border = self.paints(node, 'strokes') if stroke_only else None
+        border = stroke if stroke_only else None
         if border:
             if node.get('dashPattern'):
                 self.warn(node, 'Dashed stroke requires a measured path painter or exported asset; continuous draft border is approximate', 'dashed-stroke')
@@ -213,6 +213,8 @@ class Compiler:
                 else:
                     props['border'] = call('Border.all', color=color, width=number(node.get('strokeWeight', 1)),
                                            strokeAlign='BorderSide.strokeAlign' + align)
+        if stroke_only and 'border' not in props:
+            return None
         if node['type'] == 'ELLIPSE':
             props['shape'] = 'BoxShape.circle'
             if node['width'] != node['height']:
@@ -377,9 +379,11 @@ class Compiler:
             spans.append(call('TextSpan', text=quote(value), style=self.text_style(resolved, node)))
             struts.add((self.flutter_family(resolved), resolved.get('fontSize', 14), self.line_ratio(resolved, node)))
         align = {'LEFT': 'left', 'RIGHT': 'right', 'CENTER': 'center', 'JUSTIFIED': 'justify'}.get(base.get('textAlignHorizontal'), 'left')
+        characters = ''.join(segment.get('characters', '') for segment in segments)
         if (align == 'center' and base.get('textAutoResize') == 'WIDTH_AND_HEIGHT'
-                and ''.join(segment.get('characters', '') for segment in segments).endswith(' ')):
-            # Flutter centering excludes the trailing space of a source-sized hug run.
+                and characters.endswith(' ') and len(characters.splitlines()) == 1
+                and node.get('minWidth') is None and node.get('maxWidth') is None):
+            # Only an unconstrained single-line hug box is exactly the run's advance.
             align = 'left'
         strut = None
         if len(struts) == 1:
@@ -453,6 +457,7 @@ class Compiler:
 
     def emit(self, node, parent=None, positioned=False):
         kind = node['type']
+        stroke = None
         if node.get('isMask'):
             self.warn(node, 'Mask geometry requires a clip/painter or exported asset')
         if node.get('arcData'):
@@ -465,31 +470,36 @@ class Compiler:
             body = self.asset(node)
         elif kind in ('FRAME', 'GROUP', 'INSTANCE', 'COMPONENT', 'COMPONENT_SET', 'SECTION', 'SLOT', 'RECTANGLE', 'ELLIPSE'):
             children = node['children']
+            stroke = self.paints(node, 'strokes')
             if node.get('itemReverseZIndex'):
                 self.warn(node, 'Reverse z-order requires comparison without reversing flow order')
             if node['layoutMode'] in ('HORIZONTAL', 'VERTICAL'):
-                regular = [c for c in children if c.get('layoutPositioning') != 'ABSOLUTE']
-                overlays = [c for c in children if c.get('layoutPositioning') == 'ABSOLUTE']
+                regular, behind, above = [], [], []
+                interleaved = False
+                for child in children:
+                    if child.get('layoutPositioning') == 'ABSOLUTE':
+                        (above if regular else behind).append(child)
+                    else:
+                        interleaved = interleaved or bool(above)
+                        regular.append(child)
                 body = self.flow(node, regular)
                 pads = [node.get('padding' + side, 0) for side in ('Left', 'Top', 'Right', 'Bottom')]
-                if (node.get('strokesIncludedInLayout') and self.paints(node, 'strokes')
-                        and node.get('strokeAlign', 'INSIDE') != 'OUTSIDE'):
+                if (node.get('strokesIncludedInLayout') and stroke
+                        and node.get('strokeAlign', 'INSIDE') == 'INSIDE'):
                     weights = node.get('individualStrokeWeights')
                     pads = [pad + (weights.get(side, 0) if weights else node.get('strokeWeight', 1))
                             for pad, side in zip(pads, ('left', 'top', 'right', 'bottom'))]
                 if any(pads):
                     body = call('Padding', padding='EdgeInsets.fromLTRB(' + ', '.join(number(p) for p in pads) + ')', child=body)
-                if overlays:
+                if behind or above:
                     # A bounded flow layer must keep the containing box's alignment.
                     if all(node.get('layoutSizing' + axis, 'FIXED') in ('FIXED', 'FILL')
                            for axis in ('Horizontal', 'Vertical')):
                         body = call('Positioned.fill', child=body)
-                    first = children.index(regular[0]) if regular else len(children)
-                    last = children.index(regular[-1]) if regular else first
-                    if any(first < children.index(c) < last for c in overlays):
+                    if interleaved:
                         self.warn(node, 'Absolute layers interleaved with flow children need split flow subtrees to preserve paint order', 'paint-order')
-                    behind = [self.emit(c, node, True) for c in overlays if children.index(c) < first]
-                    above = [self.emit(c, node, True) for c in overlays if children.index(c) >= first]
+                    behind = [self.emit(c, node, True) for c in behind]
+                    above = [self.emit(c, node, True) for c in above]
                     body = call('Stack', clipBehavior='Clip.none', children=sequence(behind + [body] + above))
             elif children:
                 body = call('Stack', clipBehavior='Clip.none', children=sequence([self.emit(c, node, True) for c in children]))
@@ -504,9 +514,10 @@ class Compiler:
                 body = call('DecoratedBox', decoration=decoration, child=body)
             if node.get('clipsContent'):
                 body = call('ClipRRect', borderRadius=self.radius(node), child=body)
-            if self.paints(node, 'strokes'):
+            border_decoration = self.decoration(node, stroke_only=True, stroke=stroke)
+            if border_decoration is not None:
                 body = call('DecoratedBox', position='DecorationPosition.foreground',
-                            decoration=self.decoration(node, stroke_only=True), child=body)
+                            decoration=border_decoration, child=body)
         else:
             self.warn(node, f'Unsupported node type: {kind}; placeholder retained')
             body = 'const Placeholder()'
@@ -546,7 +557,6 @@ class Compiler:
                     # Clipping only the child leaves the backdrop effect square.
                     body = (call('ClipOval', child=body) if kind == 'ELLIPSE' else
                             call('ClipRRect', borderRadius=self.radius(node), child=body))
-        stroke = self.paints(node, 'strokes')
         if stroke and self.supports_gradient_stroke(node, stroke):
             self.uses_gradient_stroke = True
             row = stroke['gradientTransform'][0]

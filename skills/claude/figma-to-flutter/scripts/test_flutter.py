@@ -45,6 +45,14 @@ def main():
          'strokesIncludedInLayout': True, 'strokeAlign': 'INSIDE', 'strokeWeight': 3,
          'strokes': [{'type': 'SOLID', 'color': {'r': 0, 'g': 0, 'b': 1}}],
          'children': [{'id': '4:2', 'type': 'RECTANGLE', 'width': 40, 'height': 10}]},
+        {'id': '5:1', 'type': 'FRAME', 'width': 200, 'height': 80,
+         'layoutMode': 'HORIZONTAL', 'paddingLeft': 8, 'paddingTop': 8,
+         'strokesIncludedInLayout': True, 'strokeAlign': 'CENTER', 'strokeWeight': 3,
+         'strokes': [{'type': 'SOLID', 'color': {'r': 0, 'g': 0, 'b': 1}}],
+         'children': [{'id': '5:2', 'type': 'RECTANGLE', 'width': 40, 'height': 10}]},
+        {'id': '6:1', 'type': 'TEXT', 'width': 200, 'height': 40,
+         'characters': 'Short\nMuch longer line ', 'fontSize': 14,
+         'textAlignHorizontal': 'CENTER', 'textAutoResize': 'WIDTH_AND_HEIGHT'},
     ]
     with tempfile.TemporaryDirectory(prefix='figma-flutter-check-') as directory:
         root = Path(directory)
@@ -86,7 +94,7 @@ import 'package:flutter_test/flutter_test.dart';
         expect(positioned.right, 20);
         expect(positioned.bottom, 20);
       }
-      if (i >= 4) {
+      if (i >= 4 && i <= 7) {
         final child = find.descendant(of: find.byWidget(cases[i]),
           matching: find.byWidgetPredicate((w) => w is SizedBox && w.width == 40 && w.height == 10));
         expect(child, findsOneWidget);
@@ -98,7 +106,7 @@ import 'package:flutter_test/flutter_test.dart';
             of: find.byWidget(cases[i]), matching: find.byType(Stack)));
           expect((stack.children.first as Positioned).left, 0);
         } else {
-          final inset = i == 5 ? 8.0 : 11.0;
+          final inset = i == 6 ? 11.0 : 8.0;
           expect(inner.left - outer.left, inset);
           expect(inner.top - outer.top, inset);
           final border = tester.widgetList<DecoratedBox>(find.descendant(
@@ -106,6 +114,13 @@ import 'package:flutter_test/flutter_test.dart';
             .where((w) => (w.decoration as BoxDecoration).border != null).single;
           expect(border.position, DecorationPosition.foreground);
         }
+      }
+      if (i == 8) {
+        final text = tester.widget<RichText>(find.descendant(
+          of: find.byWidget(cases[i]), matching: find.byType(RichText)));
+        expect(text.text.toPlainText().split(String.fromCharCode(10)),
+          ['Short', 'Much longer line ']);
+        expect(text.textAlign, TextAlign.center);
       }
     });
   }

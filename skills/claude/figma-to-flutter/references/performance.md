@@ -34,7 +34,7 @@ Optional stage measurements help find costs without replacing wall time:
 python3 scripts/run_state.py --state-dir "$FIGMA_STATE_DIR" measure --run "$FIGMA_RUN_ID" --stage capture --seconds 12.5 --cache-hits 2 --retries 1 --throttles 0
 ```
 
-`totals.seconds` is accumulated stage work and may overlap between workers. It is never the throughput denominator. Atomic writes and file locks protect concurrent updates. Include the returned `metricsFile` in the handoff with elapsed time, unique completed screens, rates, remaining outcomes, and supporting parts. Synthetic regression timings are not live Figma speed benchmarks.
+`totals.seconds` is accumulated stage work and may overlap between workers. It is never the throughput denominator. State files retain raw timestamps, items, and stages; `report` and command responses derive elapsed time, counts, and rates without persisting those summary fields. Atomic writes and file locks protect concurrent updates. Include the returned `metricsFile` in the handoff with elapsed time, unique completed screens, rates, remaining outcomes, and supporting parts. Synthetic regression timings are not live Figma speed benchmarks.
 
 ## Source selection and capture scheduling
 

@@ -7,7 +7,6 @@ import subprocess
 import sys
 import tempfile
 import unittest
-from unittest.mock import patch
 
 import run_state
 
@@ -17,12 +16,14 @@ class RunStateTests(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name) / 'metrics'
-        self.clock = datetime(2026, 1, 1, tzinfo=timezone.utc)
-        self.now = patch.object(run_state, 'utc_now', side_effect=lambda: self.clock)
-        self.now.start()
-        self.addCleanup(self.now.stop)
         run_state.start_run(self.root, 'sync', 'example')
         self.path = self.root / 'example.json'
+
+    def set_elapsed_fixture(self, seconds):
+        """Persist a historical start while exercising the real clock and file reader."""
+        value = json.loads(self.path.read_text())
+        value['startedAt'] = (datetime.now(timezone.utc) - timedelta(seconds=seconds)).isoformat()
+        self.path.write_text(json.dumps(value))
 
     def progress(self, slugs, **kwargs):
         return run_state.progress(self.root, 'example', 'website', slugs, **kwargs)
@@ -41,23 +42,25 @@ class RunStateTests(unittest.TestCase):
         self.progress(['pending'])
         self.progress(['failed'], outcome='failed')
         self.progress(['blocked'], outcome='blocked')
-        self.clock += timedelta(seconds=120)
+        self.set_elapsed_fixture(120)
         value = run_state.report_run(self.root, 'example')
         self.assertEqual(value['counts']['screen'],
                          {'completed': 2, 'skipped': 1, 'pending': 1, 'failed': 1, 'blocked': 1})
         self.assertEqual(value['counts']['part']['completed'], 1)
         self.assertEqual(value['counts']['flow-card']['completed'], 1)
-        self.assertEqual(value['screensPerMinute'], 1)
-        self.assertEqual(value['screensPerHour'], 60)
-        self.assertEqual(value['secondsPerScreen'], 60)
+        self.assertGreaterEqual(value['elapsedSeconds'], 120)
+        self.assertEqual(value['screensPerMinute'], 120 / value['elapsedSeconds'])
+        self.assertEqual(value['screensPerHour'], 7200 / value['elapsedSeconds'])
+        self.assertEqual(value['secondsPerScreen'], value['elapsedSeconds'] / 2)
 
     def test_zero_screens_and_zero_elapsed(self):
         value = run_state.report_run(self.root, 'example')
-        self.assertEqual(value['elapsedSeconds'], 0)
+        self.assertGreaterEqual(value['elapsedSeconds'], 0)
         self.assertEqual(value['screensPerMinute'], 0)
         self.assertIsNone(value['secondsPerScreen'])
         self.progress(['screen'], outcome='completed')
-        value = run_state.report_run(self.root, 'example')
+        raw = json.loads(self.path.read_text())
+        value = run_state.run_summary({**raw, 'finishedAt': raw['startedAt']})
         self.assertEqual(value['screensPerHour'], 0)
         self.assertEqual(value['secondsPerScreen'], 0)
 
@@ -73,12 +76,26 @@ class RunStateTests(unittest.TestCase):
     def test_stage_totals_do_not_replace_wall_time(self):
         run_state.measure(self.root, 'example', 'capture', 90, cache_hits=2, retries=1)
         run_state.measure(self.root, 'example', 'render', 80, throttles=3)
-        self.clock += timedelta(seconds=60)
+        self.set_elapsed_fixture(60)
         self.progress(['screen'], outcome='completed')
         value = run_state.finish_run(self.root, 'example', 'completed')
-        self.assertEqual(value['elapsedSeconds'], 60)
+        self.assertGreaterEqual(value['elapsedSeconds'], 60)
         self.assertEqual(value['totals'], {'seconds': 170, 'cacheHits': 2, 'retries': 1, 'throttles': 3})
-        self.assertEqual(value['screensPerMinute'], 1)
+        self.assertEqual(value['screensPerMinute'], 60 / value['elapsedSeconds'])
+
+    def test_finished_file_keeps_raw_state_schema(self):
+        self.progress(['screen'], outcome='completed')
+        run_state.measure(self.root, 'example', 'render', 20)
+        running = json.loads(self.path.read_text())
+        summary = run_state.finish_run(self.root, 'example', 'completed')
+        finished = json.loads(self.path.read_text())
+        derived = {'elapsedSeconds', 'counts', 'screensPerMinute', 'screensPerHour', 'secondsPerScreen'}
+        self.assertTrue(derived.issubset(summary))
+        self.assertFalse(derived.intersection(running))
+        self.assertFalse(derived.intersection(finished))
+        self.assertEqual(set(finished), set(running) | {'finishedAt'})
+        self.assertEqual(finished['items'], running['items'])
+        self.assertEqual(run_state.report_run(self.root, 'example'), summary)
 
     def test_completed_requires_all_registered_work_successful(self):
         for outcome in ('pending', 'failed', 'blocked'):
@@ -93,10 +110,9 @@ class RunStateTests(unittest.TestCase):
     def test_terminal_records_freeze_and_idempotent_finish_does_not_write(self):
         self.progress(['screen'], outcome='completed')
         self.progress(['next'])
-        self.clock += timedelta(seconds=42)
+        self.set_elapsed_fixture(42)
         value = run_state.finish_run(self.root, 'example', 'interrupted')
         original = self.path.read_bytes()
-        self.clock += timedelta(hours=1)
         self.assertEqual(run_state.report_run(self.root, 'example'), value)
         self.assertEqual(run_state.finish_run(self.root, 'example', 'interrupted'), value)
         self.assertEqual(self.path.read_bytes(), original)
@@ -109,8 +125,8 @@ class RunStateTests(unittest.TestCase):
         self.assertEqual(self.path.read_bytes(), original)
 
     def test_clock_rollback_does_not_write_terminal_state(self):
+        self.set_elapsed_fixture(-3600)
         original = self.path.read_bytes()
-        self.clock -= timedelta(seconds=1)
         with self.assertRaisesRegex(ValueError, 'backwards'):
             run_state.finish_run(self.root, 'example', 'blocked')
         self.assertEqual(self.path.read_bytes(), original)

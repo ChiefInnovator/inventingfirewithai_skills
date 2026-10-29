@@ -14,7 +14,7 @@ Before conversion, rendering, or reuse of a rendered result, inspect every selec
 
 Carry resolved line height into any Material `TextStyle.copyWith`; a role name does not establish its metrics. Resolve AUTO from a genuine content-sized source line box where possible. A fixed box can contain alignment slack and is not automatically a line box. Unresolved inherited metrics remain a draft gap.
 
-Keep styled runs, natural paragraph height, width for wrapping, tracking, blank lines, and paragraph spacing distinct. A centered hugging run ending in a space needs review because Flutter centering can exclude that trailing advance. Any tracking half-lead, button-label width rounding, or font-baseline correction must have matching source/font/renderer measurements and a regression; do not apply a project-specific offset or threshold universally.
+Keep styled runs, natural paragraph height, width for wrapping, tracking, blank lines, and paragraph spacing distinct. Flutter centering can exclude a trailing space's advance in an unconstrained single-line hugging run. Keep CENTER alignment for multiline text, including Unicode line separators, and for width-constrained runs; a correction to one line cannot left-align the whole paragraph. Any tracking half-lead, button-label width rounding, or font-baseline correction must have matching source/font/renderer measurements and a regression; do not apply a project-specific offset or threshold universally.
 
 Occluded text is still source content. Account for later opaque or blurred overlays when diagnosing visible glyph bounds; do not remove covered layers merely to improve a geometry score.
 

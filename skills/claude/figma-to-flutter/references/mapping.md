@@ -28,12 +28,14 @@ These rules guide reviewed adoption and repair. The scratch compiler covers only
 | Percentage/center offset | Resolve from the measured containing box. For known width, center at `(parentWidth - childWidth) / 2 + offset`; preserve the source offset. |
 | Negative item spacing | Preserve full child paint with a smaller layout slot or equivalent measured composition. Verify overlap and hit-testing; painted overflow is not automatically interactive. |
 | Zero opacity | Retain layout space while suppressing paint and input. Explicitly hidden nodes may be omitted. These are different source states. |
-| Stroke plus padding | Inspect `strokesIncludedInLayout` and child bounds. Count included visible stroke insets once; OUTSIDE strokes retain the source padding. Paint borders in front of content without shifting children or clipping the border with the content clip. |
+| Stroke plus padding | Inspect `strokesIncludedInLayout` and child bounds. Current Auto Layout counts an included visible INSIDE stroke once; CENTER and OUTSIDE strokes retain source padding. Paint actual solid borders in front without shifting children or clipping the border with the content clip; gradient strokes use their painter without an empty border decoration. |
 | Fixed child larger than parent | Preserve source overflow only when evidenced. Verify global painted and tappable bounds; interactive overflow may require placement in the common containing Stack. |
 | Rotation/group transform | Preserve local size and transform. Rotated axis-aligned bounding boxes alone may not reconstruct the original geometry. |
 | Clip/scroll | Preserve actual clip shapes and scroll direction. Do not hide accidental RenderFlex overflow by adding a scroll view. |
 
 Preserve fractional measurements. Do not round or simplify containers when that changes constraints, decoration, clipping, transforms, or node traceability. Validate bottom groups with and without captured keyboard space; a deterministic reference keyboard is separate from real device keyboard behavior.
+
+[Figma's current stroke-layout rules](https://help.figma.com/hc/en-us/articles/42031586813719-Use-auto-layout-with-CSS-Flexbox-in-mind) exclude CENTER and OUTSIDE strokes from layout, even with `strokesIncludedInLayout`. For a historical capture with different measured child bounds, preserve and diagnose that source geometry; do not guess an extra half-stroke inset from alignment alone.
 
 ## Assets, paints, and effects
 

@@ -23,6 +23,7 @@ Canonical reference catalog for this repository. README stays short; detailed so
 - [Pragmatic Coder Skill](skills/codex/pragmatic-coder/SKILL.md)
 - [Slam Skill](skills/codex/slam/SKILL.md)
 - [Slam GitHub Review Workflow](skills/codex/slam/references/github-review.md)
+- [Slam GitHub Review Workflow for Claude Code](skills/claude/slam/references/github-review.md)
 - [Shared Agent Instructions (Codex, Claude Code, and Copilot)](AGENTS.md)
 
 ### Designs and pilots
@@ -42,6 +43,17 @@ Canonical reference catalog for this repository. README stays short; detailed so
 - [Travel Like a Local: ChatGPT Web Migration](docs/migrations/travel_chatgpt_web.md)
 
 - [Slam Migration and Verification](docs/migrations/slam_migration.md)
+
+### Slam platform documentation
+
+Reviewed October 29, 2026 for the Claude, Codex, and Copilot packages. Automatic review configuration is evidence to inspect; updating a skill does not authorize changing repository settings or requesting reviews.
+
+- [GitHub automatic Copilot review](https://docs.github.com/en/copilot/how-tos/copilot-on-github/set-up-copilot/configure-code-review)
+- [GitHub CLI merge guards and queues](https://cli.github.com/manual/gh_pr_merge)
+- [GitHub CLI check states](https://cli.github.com/manual/gh_pr_checks)
+- [GitHub Copilot Slam package](skills/copilot/slam/SKILL.md)
+- [Claude Code skill metadata](https://code.claude.com/docs/en/skills)
+- [Claude Code hook input and Stop behavior](https://code.claude.com/docs/en/hooks)
 
 ### Research by topic
 
@@ -81,6 +93,10 @@ Community references, reviewed October 10, 2026:
 - [Official repository and documented limitations](https://github.com/bernaferrari/FigmaToCode#deliberate-limitations)
 - [Official privacy model](https://github.com/bernaferrari/FigmaToCode#privacy-model)
 - [Upstream license](https://github.com/bernaferrari/FigmaToCode/blob/main/LICENSE)
+
+Official layout references, checked October 29, 2026:
+- [Figma auto layout and CSS Flexbox: stroke layout behavior](https://help.figma.com/hc/en-us/articles/42031586813719-Use-auto-layout-with-CSS-Flexbox-in-mind)
+- [Figma horizontal and vertical auto-layout flows](https://help.figma.com/hc/en-us/articles/31289464393751-Use-the-horizontal-and-vertical-flows-in-auto-layout)
 
 The local packages adapt an existing conversion workflow into customer-neutral instructions and independently implemented helpers. They do not bundle private captures, decision history, or upstream plugin implementation files. The comparison describes scope and verification additions, not measured superiority. The community plugin is a tool reference, not an agent skill.
 

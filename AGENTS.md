@@ -12,7 +12,7 @@ Reusable coding, shipping, Figma-to-Flutter, and travel skills for Codex, Claude
 - Act on obvious next steps; ask only for real blockers.
 - Reading, editing, or installing Slam does not authorize shipping.
 - Feature branches merge into `develop` by pull request; only `develop` merges into `main`, also by pull request. Never commit or push directly to `develop` or `main`.
-- Wait for GitHub Copilot review on the current PR head; address valid findings and pass required checks before merging. Do not bypass repository rules.
+- Monitor automatic Copilot review and address valid findings. Honor an explicit user instruction not to wait for Copilot; required GitHub checks, approvals, and branch protections still apply.
 - Keep automatic Copilot review enabled for every target branch, including drafts and new pushes, without path exclusions.
 
 ## Layout and use

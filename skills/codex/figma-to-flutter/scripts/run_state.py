@@ -162,7 +162,7 @@ def finish_run(state_dir, run_id, status):
             raise ValueError('Unfinished or unsuccessful items require a blocked, failed or interrupted status')
         value.update(status=status, finishedAt=utc_now().isoformat())
         summary = run_summary(value)
-        atomic_json(path, summary)
+        atomic_json(path, value)
     return summary
 
 

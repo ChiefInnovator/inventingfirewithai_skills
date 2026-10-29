@@ -30,7 +30,7 @@ class ConversionTests(unittest.TestCase):
         self.assertTrue(any(w['reason'] == 'paint-order' for w in result['report']['warnings']))
 
     def test_stroke_paints_foreground_and_counts_layout_padding_once(self):
-        for align, padding in [('OUTSIDE', 8), ('INSIDE', 11), ('CENTER', 11)]:
+        for align, padding in [('OUTSIDE', 8), ('INSIDE', 11), ('CENTER', 8)]:
             source = node('FRAME', layoutMode='HORIZONTAL', paddingLeft=8,
                 strokesIncludedInLayout=True, strokeAlign=align, strokeWeight=3,
                 fills=[{'type': 'SOLID', 'color': {'r': 1, 'g': 0, 'b': 0}}],
@@ -42,6 +42,7 @@ class ConversionTests(unittest.TestCase):
             self.assertIn('strokeAlign: BorderSide.strokeAlign' + align.title(), dart)
             self.assertEqual(dart.count('Border.all('), 1)
             self.assertEqual(dart.count('color: DraftTokens.colorFFFF0000'), 1)
+        source['strokeAlign'] = 'INSIDE'
         source['individualStrokeWeights'] = {'left': 2, 'top': 4, 'right': 6, 'bottom': 8}
         self.assertIn('EdgeInsets.fromLTRB(10, 4, 6, 8)', Compiler('file').compile(source)['dart'])
         source['strokes'][0]['visible'] = False
@@ -63,6 +64,30 @@ class ConversionTests(unittest.TestCase):
         self.assertIn('textAlign: TextAlign.left', Compiler('file').compile(source)['dart'])
         source['textAutoResize'] = 'NONE'
         self.assertIn('textAlign: TextAlign.center', Compiler('file').compile(source)['dart'])
+
+    def test_multiline_and_width_constrained_hug_text_keeps_center_alignment(self):
+        for separator in ('\n', '\r\n', '\r', '\v', '\f', '\x85', '\u2028', '\u2029'):
+            source = node('TEXT', characters=f'Short{separator}Much longer line ',
+                fontFamily='Example', fontSize=14,
+                textAlignHorizontal='CENTER', textAutoResize='WIDTH_AND_HEIGHT')
+            with self.subTest(separator=repr(separator)):
+                self.assertIn('textAlign: TextAlign.center', Compiler('file').compile(source)['dart'])
+        source['characters'] = 'Label '
+        for constraint in ('minWidth', 'maxWidth'):
+            with self.subTest(constraint=constraint):
+                constrained = {**source, constraint: 100}
+                self.assertIn('textAlign: TextAlign.center', Compiler('file').compile(constrained)['dart'])
+
+    def test_large_overlay_groups_preserve_paint_order(self):
+        children = [node(id=f'1:{index}', layoutPositioning='ABSOLUTE')
+                    for index in range(2, 252)]
+        children.append(node(id='1:252'))
+        children.extend(node(id=f'1:{index}', layoutPositioning='ABSOLUTE')
+                        for index in range(253, 503))
+        result = Compiler('file').compile(node('FRAME', layoutMode='HORIZONTAL', children=children))
+        positions = [result['dart'].index(f'/* figma 1:{index} */') for index in range(2, 503)]
+        self.assertEqual(positions, sorted(positions))
+        self.assertEqual(len(result['report']['trace']), 502)
 
     def test_material_role_retains_source_height_or_reports_unknown_metrics(self):
         source = node('TEXT', characters='Label', fontFamily='Example', fontSize=14,
@@ -145,6 +170,7 @@ class ConversionTests(unittest.TestCase):
         self.assertIn('ClipRRect(borderRadius: BorderRadius.circular(12), child: BackdropFilter(', dart)
         self.assertLess(dart.index('Transform('), dart.index('Opacity('))
         self.assertLess(dart.index('Opacity('), dart.index('CustomPaint('))
+        self.assertNotIn('DecorationPosition.foreground', dart)
         self.assertFalse(any('non-solid stroke' in w['message'] for w in result['report']['warnings']))
         for align, value in [('INSIDE', -1), ('CENTER', 0)]:
             source['strokeAlign'] = align
@@ -171,6 +197,7 @@ class ConversionTests(unittest.TestCase):
             result = Compiler('file').compile({**base, **change})
             self.assertNotIn('class DraftGradientStroke', result['dart'])
             self.assertTrue(any('Unsupported non-solid stroke' in w['message'] for w in result['report']['warnings']))
+            self.assertNotIn('DecorationPosition.foreground', result['dart'])
         for field, value in [('gradientTransform', [[0, 0, 0], [0, 1, 0]]),
                              ('gradientStops', [{'position': 'bad'}])]:
             source = copy.deepcopy(base)
