@@ -23,6 +23,7 @@ Canonical reference catalog for this repository. README stays short; detailed so
 - [Pragmatic Coder Skill](skills/codex/pragmatic-coder/SKILL.md)
 - [Slam Skill](skills/codex/slam/SKILL.md)
 - [Slam GitHub Review Workflow](skills/codex/slam/references/github-review.md)
+- [Slam GitHub Review Workflow for Claude Code](skills/claude/slam/references/github-review.md)
 - [Shared Agent Instructions (Codex, Claude Code, and Copilot)](AGENTS.md)
 
 ### Designs and pilots
@@ -42,6 +43,17 @@ Canonical reference catalog for this repository. README stays short; detailed so
 - [Travel Like a Local: ChatGPT Web Migration](docs/migrations/travel_chatgpt_web.md)
 
 - [Slam Migration and Verification](docs/migrations/slam_migration.md)
+
+### Slam platform documentation
+
+Reviewed October 29, 2026 for the Claude, Codex, and Copilot packages. Automatic review configuration is evidence to inspect; updating a skill does not authorize changing repository settings or requesting reviews.
+
+- [GitHub automatic Copilot review](https://docs.github.com/en/copilot/how-tos/copilot-on-github/set-up-copilot/configure-code-review)
+- [GitHub CLI merge guards and queues](https://cli.github.com/manual/gh_pr_merge)
+- [GitHub CLI check states](https://cli.github.com/manual/gh_pr_checks)
+- [GitHub Copilot Slam package](skills/copilot/slam/SKILL.md)
+- [Claude Code skill metadata](https://code.claude.com/docs/en/skills)
+- [Claude Code hook input and Stop behavior](https://code.claude.com/docs/en/hooks)
 
 ### Research by topic
 
@@ -71,6 +83,9 @@ All skill-like references are scored in [`docs/evaluations/referenced_skills_sco
 Local packages and comparison:
 - [Codex skill](skills/codex/figma-to-flutter/SKILL.md)
 - [Claude Code skill](skills/claude/figma-to-flutter/SKILL.md)
+- [GitHub Copilot skill](skills/copilot/figma-to-flutter/SKILL.md)
+- [Incremental work and whole-run measurements](skills/codex/figma-to-flutter/references/performance.md)
+- [Font, glyph, and text checks](skills/codex/figma-to-flutter/references/typography.md)
 - [Why this skill exists and its specific improvements](docs/research/figma_to_flutter_comparison.md)
 
 Community references, reviewed October 10, 2026:
@@ -79,7 +94,13 @@ Community references, reviewed October 10, 2026:
 - [Official privacy model](https://github.com/bernaferrari/FigmaToCode#privacy-model)
 - [Upstream license](https://github.com/bernaferrari/FigmaToCode/blob/main/LICENSE)
 
+Official layout references, checked October 29, 2026:
+- [Figma auto layout and CSS Flexbox: stroke layout behavior](https://help.figma.com/hc/en-us/articles/42031586813719-Use-auto-layout-with-CSS-Flexbox-in-mind)
+- [Figma horizontal and vertical auto-layout flows](https://help.figma.com/hc/en-us/articles/31289464393751-Use-the-horizontal-and-vertical-flows-in-auto-layout)
+
 The local packages adapt an existing conversion workflow into customer-neutral instructions and independently implemented helpers. They do not bundle private captures, decision history, or upstream plugin implementation files. The comparison describes scope and verification additions, not measured superiority. The community plugin is a tool reference, not an agent skill.
+
+The October 29, 2026 update adapts current workflow improvements across all three clients: complete drift coverage, font/glyph gates, verified incremental reuse, isolated hosted checks, scoped batch edits, and persistent whole-run screen throughput. The compiler adds measured layout/paint repairs; project-specific capture, theme, renderer, and portal adapters remain outside the packages. Regression tests do not establish live speed or visual acceptance.
 
 ### `README.md`
 

@@ -9,6 +9,8 @@ Use `/figma-to-flutter` with a frame URL or one of the modes below. Convert the 
 
 ## Start with the project
 
+Start a whole-run timer before prerequisites or planning, including report-only and maintenance invocations. Follow [performance.md](references/performance.md) for the portable metrics helper, worktree state, counting, and every exit path; timing writes stay outside project source and captures.
+
 1. Inspect its instructions, Flutter package, SDK constraints, design system, existing conversions, assets, tests, and explorer. Resolve the requested Figma file/node and destination. Ask only for missing essentials; never assume a customer, file key, repository layout, branch, theme class, or target platform.
 2. Preserve an existing output layout. For a new reference collection, propose a repository-relative design root with `raw/<slug>/<capture>/`, `flutter/<slug>/`, `ledger.json`, and `decisions.json`. Record chosen paths in that project's ledger. Keep shared skill files free of project state and captures.
 3. Establish whether the request concerns reference widgets, production integration, or both. A conversion request alone does not authorize changing routes, backend behavior, shipping a PR, installing scheduled jobs, or publishing captured designs. Follow existing authorization for any requested integration or check-in.
@@ -33,6 +35,7 @@ Read [workflow.md](references/workflow.md) for state, explorer, batch, and maint
 ## Conversion contract
 
 - Read [mapping.md](references/mapping.md) for layout, typography, assets, component reuse, and unsupported cases. Source measurements prevail over generated CSS shortcuts. Inspect repository components before choosing replacements.
+- Read [typography.md](references/typography.md) before conversion, rendering, or cached-result reuse. Missing registered fonts, styles, axes, or glyphs block affected work; preserve unknown source metadata rather than inventing it.
 - Preserve identity by effective file key plus original node ID. Keep existing slugs and public widget interfaces on renames. Update changed subtrees and their dependencies; do not regenerate an entire working screen to repair one node.
 - Keep raw captures immutable. Retain original URLs, dimensions, variable bindings, font metadata, asset bytes, capture time, and call provenance. Truncated or stale context cannot establish complete coverage.
 - Parameterize application text, data, assets, and callbacks during canonical adoption. Put deterministic fixture values in tests or explicitly scoped preview fixtures. Do not add mock services to implementation code or infer successful business actions from visual labels.
@@ -49,4 +52,4 @@ Repair the largest source-supported mismatch, rerender, and compare again. Stop 
 
 Refresh an existing shared explorer when its screens change. Validate the requested platforms separately; a narrow browser viewport is not an Android or iOS run. Preserve unavailable checks as unchecked.
 
-Finish with changed screens/files, source freshness, tests and platform results, pixel findings, open decisions, and remaining acceptance work. Do not claim production integration or visual approval without its evidence.
+Finish with changed screens/files, source freshness, tests and platform results, pixel findings, open decisions, and remaining acceptance work. Include whole-run elapsed time, completed screens, screens/minute and screens/hour, separate skipped/failed/blocked/pending counts and parts, and the metrics path. Do not claim production integration or visual approval without its evidence.

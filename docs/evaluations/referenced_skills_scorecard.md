@@ -7,12 +7,13 @@ These are historical editorial scores from May 2, 2026, based on instruction cov
 | GitHub Copilot versions (five local skills) | N/A | Host-adapted entrypoints and bundled resources, added October 10, 2026; format, discovery, and helper checks do not establish comparative agent performance. | N/A | N/A | N/A |
 | Ponytail implementation skill | N/A | Inspected October 10, 2026: explicit reuse order and affected-path inspection inform applied Pragmatic Coder changes; no local behavioral comparison. | N/A | N/A | N/A |
 | Ponytail review skill | N/A | Inspected October 10, 2026: context and consequence checks inform applied review guidance; no local behavioral comparison. | N/A | N/A | N/A |
-| figma-to-flutter (Codex / Claude) | N/A | Portable conversion, identity, and pixel-check helpers plus capture, repair, and platform-review guidance; added October 10, 2026. Regression validation is not a comparative fidelity benchmark. | N/A | N/A | N/A |
+| figma-to-flutter (Codex / Claude / Copilot) | N/A | Updated October 29, 2026 with generic run metrics, compiler layout/paint repairs, font/glyph checks, complete drift coverage, incremental reuse, and hosted-review guidance. Regression validation is not a live speed or comparative fidelity benchmark. | N/A | N/A | N/A |
 | travel-like-a-local (Codex / Claude) | N/A | Local travel planning, property relaxation, and booking-state accuracy; imported September 25, 2026; comparative behavior unscored. | N/A | N/A | N/A |
 | mcp-pick (Codex / Claude) | N/A | Project integration selection; no comparative behavioral score assigned. | N/A | N/A | N/A |
-| slam (Claude) | N/A | Original native Claude workflow; no comparative behavioral score assigned. | N/A | N/A | N/A |
+| slam (Claude) | N/A | Updated October 29, 2026 with automatic-review-only policy, captured-head merge gates, captured merge identity, and bounded Stop-hook continuation. Real subprocess fixture checks are not an end-to-end shipping benchmark. | N/A | N/A | N/A |
+| slam (Copilot) | N/A | Updated October 29, 2026 for automatic-review-only behavior, explicit review-wait overrides, captured merge identity, and shared cleanup checks. No comparative shipping benchmark. | N/A | N/A | N/A |
 | pragmatic-coder | N/A | Historical September 5 revision before platform-specific invocation guidance; behavioral comparison pending. See evaluation scenarios. | 50 | 3,706 | 705 |
-| slam | N/A | GitHub shipping workflow migrated from the user's Claude skill; entrypoint measured September 5; comparative behavior unscored. | 125 | 15,002 | 3,046 |
+| slam | N/A | Codex workflow updated October 29, 2026 for automatic reviews, routine merge resolution, and current-head evidence. Counts describe the historical September 5 entrypoint; comparative behavior unscored. | 125 | 15,002 | 3,046 |
 | Karpathy Guidelines | 8.0 | Strong assumptions, simplicity, surgical edits, and verification; narrower. | 67 | 2,506 | 580 |
 | Torvalds Doctrine | 7.6 | Strong data/userspace instincts; tone and size reduce reuse. | 141 | 5,574 | 1,288 |
 | Matt Pocock TDD | 8.9 | Excellent TDD/public-interface discipline; focused scope. | 109 | 4,371 | 968 |

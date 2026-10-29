@@ -1,23 +1,15 @@
-## Phase G — Keep the run alive to the merge (before Phase 0)
+## Phase G — Keep the run active through merge verification
 
-`/slam` is a long unattended pipeline with two unavoidable waits — the AI review and CI — and a turn can end at either one with the PR still open. Claude Code gives skills no way to set a `/goal`, so slam carries its own **ship gate**: a `Stop` hook in this skill's frontmatter, registered the moment `/slam` is invoked and kept for the rest of the session.
-
-**Do not print a `/goal` line for the user to paste.** The gate replaces it. If the user already set a `/goal`, leave it alone — never replace or clear it.
-
-**How the gate works.** In Phase 4, once the PR number is known, record it in this session's gate file (path in SKILL.md). From then on, whenever the session would stop, the hook asks GitHub for the PR's state:
+The skill's session-scoped Stop hook reads only this session's ship gate. Use the session ID supplied by SKILL.md, require `[A-Za-z0-9][A-Za-z0-9_-]{0,127}`, and construct `~/.claude/slam-gates/<session-id>`. If the ID is missing or still literal substitution text, skip arming the gate. Arm it in Phase 4 after the repository and PR identities are verified. The gate is JSON with `repo` and a positive `pr` number; optional `root`, `branch`, `base`, and `head` fields preserve resume context. Use a JSON serializer and restrictive file permissions. Never overwrite another run's gate or follow a symlink. Python 3 and authenticated `gh` are required for the hook; missing capabilities do not waive shipping gates.
 
 | PR state | Hook result |
 | --- | --- |
-| `OPEN` | Blocks the stop and tells you to keep going. |
-| `MERGED`, gate file still present | Blocks until Phase 7 cleanup and the final report are done. |
-| `CLOSED`, or no gate file, or `gh` fails | Allows the stop (fails open). |
+| `stop_hook_active: true` | Allow stopping without contacting GitHub or deleting the gate; this breaks recursive continuation. It does not prove completion. |
+| `OPEN` | Continue remaining review, checks, and merge phases. |
+| `MERGED`, gate present | Verify merge evidence, finish cleanup and the final report. |
+| `CLOSED` | Remove this session's gate and allow stopping; closed is not shipped. |
+| Missing/invalid gate, unknown state, or failed GitHub access | Allow stopping and retain any gate; report the unverified state. |
 
-Remove the gate file as the last action of the final report — completed, blocked, or abandoned. Nothing else releases it short of the PR leaving `OPEN`.
+Remove only this session's gate when the final outcome is ready, when no authorized path remains, or when the user asks to stop or pause. Removal is best-effort: a denied or failed deletion never authorizes another continuation or prevents the user from stopping. Preserve the gate as unfinished resume evidence when it remains. User instructions and hard rules always win. Report unfinished phases and what would enable resumption; never claim a merge merely to release the gate. Abandonment requires the user's explicit decision. Preserve any user-created goal; do not replace or clear it.
 
-**A halt is not completion.** Resolve fixable blockers and continue. Stop only when no authorized path remains or the next step is a decision only the user can make; then remove the gate file and report the unfinished run and what would enable resumption. Never claim a merge occurred to get past the gate. Abandonment requires an explicit user decision, with the decision-maker and reason recorded.
-
-**The gate never outranks a hard rule.** If continuing means a rebase, a force-push, an `--admin` merge, or deleting a protected branch, the rule wins: remove the gate file, report, and stop. A Stop hook cannot authorize what a hard rule forbids.
-
-**Waiting under the gate.** The hook cannot see background work, and ending the turn while the PR is open only brings you straight back. Poll the AI review (Phase 5) and CI (Phase 6) with bounded foreground waits (a few minutes per call), re-checking until the state changes.
-
----
+Poll review and checks with individual blocking waits of at most 60 seconds. Inspect changed evidence before continuing. The hook checks GitHub with a 15-second timeout and allows at most one continuation per stop cycle; it is a continuation aid, not a durable background scheduler or a completion signal. Repeated `stop_hook_active` events allow stopping while retaining the gate and do not prove success. Respect the host's continuation limits and interruptions; if execution ends, preserve captured identities and report the actual remaining gates when resuming.

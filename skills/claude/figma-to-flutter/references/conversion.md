@@ -23,6 +23,8 @@ Outputs are `draft.dart`, `normalized.json`, and `report.json`. The report retai
 
 Implemented mechanics include fixed/hug/fill sizing, bounded flex, wrapping, flow plus absolute positioning, transforms, constraints, visibility, clipping, gradients, borders, rich text, and local image/SVG references. Multiple paints, masks, custom vectors/effects, certain text features, and incomplete metadata can remain approximations. Read the warnings; successful emission is not proof of complete or correct rendering.
 
+The compiler preserves background/foreground overlay order and bounded flow alignment, counts included stroke padding once, paints borders in front, converts layer/background blur radius to Gaussian sigma, and reviews centered hugging text with trailing spaces. Interleaved flow overlays, dashed paths, and unresolved Material line heights retain explicit warnings. Project component mappings and richer provider export envelopes require reviewed adapters; none are inferred from a previous application.
+
 Install Pillow from `requirements.txt` in an isolated environment to use visual checks. Compiler and URL tests require only Python's standard library. Run the bundled regression suite from this skill's directory:
 
 ```sh
@@ -31,6 +33,8 @@ python3 scripts/test_flutter.py --flutter flutter
 ```
 
 The optional Flutter smoke test creates an isolated temporary package, resolves its Flutter dependencies, analyzes generated widgets, and runs layout checks. It needs an installed compatible Flutter SDK and package access. It uses synthetic geometry and default fonts, so it does not prove source-font or real-screen fidelity. It leaves the target application untouched.
+
+The standard-library [run metrics helper](performance.md#whole-run-timing) is also bundled. Font acquisition/preflight integration, live capture scheduling, render caching, hosted browser checks, and explorer generation remain target-project workflows, not preinstalled adapters. Run tests with the same dependency-compatible Python environment used for image checks.
 
 ## Public conversion reference
 
