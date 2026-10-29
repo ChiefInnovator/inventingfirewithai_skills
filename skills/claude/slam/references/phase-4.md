@@ -23,4 +23,11 @@ Capture the PR number once, alongside `$BRANCH` and `$BASE`:
 PR=$(gh pr view --json number -q .number)
 ```
 
+Then arm the ship gate (Phase G) with the gate path from SKILL.md:
+
+```bash
+GATE=~/.claude/slam-gates/<session-id-from-SKILL.md>
+mkdir -p "${GATE%/*}" && printf 'repo=%s\npr=%s\n' "$REPO" "$PR" > "$GATE"
+```
+
 ---

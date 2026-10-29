@@ -13,7 +13,7 @@ gh pr view "$PR" --json mergeable,mergeStateStatus,statusCheckRollup \
 | --- | --- |
 | Any required check failing or still running | Wait for running checks. Inspect failures, fix in-scope causes, verify, push, and recheck the new head. Stop only if no authorized remedy remains. Never merge red. |
 | `mergeable: CONFLICTING` | Report the conflict and obtain user approval before resolving it. Diverged branches also require approval. Never rebase; after authorized resolution, verify, push, and recheck. |
-| A human reviewer requested changes | Address actionable in-scope requests, verify, push, and request re-review. Never dismiss the human's block; if reviewer action is all that remains, report the dependency and wait or stop according to host capabilities. |
+| A human reviewer requested changes | Address actionable in-scope requests, verify, push, and wait for reviewer action. Never dismiss the human's block; if reviewer action is all that remains, report the dependency and wait or stop according to host capabilities. |
 | Unresolved review comments you couldn't triage | Stop and ask. |
 
 A repo with no CI configured returns an empty check list. That is "nothing to wait for", not "checks passed" — report it as such.
