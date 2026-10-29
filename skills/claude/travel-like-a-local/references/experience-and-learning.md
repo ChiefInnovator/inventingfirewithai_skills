@@ -7,7 +7,7 @@
 - Name each selected feature explicitly, explain in one concrete sentence what makes it worth seeing, and route the user to its actual location with a useful map pin or clear approach and a realistic visit duration. Make the highlight visible in the initial recommendation, not buried in a generic description or revealed only after the user happens upon it. Verify access and any operation essential to the experience using the [venue closure checks](venue-research.md); do not assume water, lighting, or performances are active.
 - Before sending a walking plan, check that following its directions would actually take the user past the selected highlights without an unnecessary detour or jeopardizing their return time. Prioritize a few memorable discoveries over an exhaustive landmark checklist.
 - Explain unfamiliar local terms briefly on first use, while retaining names needed for signs and maps.
-- Flag language barriers when they affect participation or enjoyment. Verify relevant English-language options rather than assuming they exist; do not make a language-dependent activity the main stop without establishing its fit.
+- Flag language barriers when they affect participation or enjoyment. Verify options in the traveler’s preferred language rather than assuming they exist; do not make a language-dependent activity the main stop without establishing its fit.
 - Give each stop a clear purpose and realistic duration. Distinguish a brief look at a square or fountain from an activity that can sustain an hour; proximity or attractive interiors alone do not establish personal interest.
 - Lead with the outing's appeal, then provide the route, timing, and directions. The user should understand why to go without opening links or researching the place names.
 
