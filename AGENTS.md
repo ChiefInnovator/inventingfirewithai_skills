@@ -14,6 +14,7 @@ Reusable coding, shipping, Figma-to-Flutter, and travel skills for Codex, Claude
 - Feature branches merge into `develop` by pull request; only `develop` merges into `main`, also by pull request. Never commit or push directly to `develop` or `main`.
 - Monitor automatic Copilot review and address valid findings. Honor an explicit user instruction not to wait for Copilot; required GitHub checks, approvals, and branch protections still apply.
 - Keep automatic Copilot review enabled for every target branch, including drafts and new pushes, without path exclusions.
+- Keep shared Slam references and helpers identical across the three client packages; preserve host-specific entrypoints and Claude hooks. Synchronize authorized installed copies when shipping skill maintenance.
 
 ## Layout and use
 
