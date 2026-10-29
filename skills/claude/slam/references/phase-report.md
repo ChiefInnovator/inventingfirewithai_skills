@@ -14,4 +14,6 @@ Summarize concretely:
 
 If you stopped early, report the phase, attempted remedies, remaining obstacle, and what would enable resumption. Distinguish completed, blocked, and explicitly abandoned outcomes; abandonment records who decided and why. A blocked or abandoned run is not shipped.
 
-**Under a Phase G goal the report is also the evidence.** The evaluator judges the condition from the conversation and cannot run `gh` for itself, so put the literal facts in the text — PR number, `state=MERGED`, the merge commit SHA, and the deleted branch name or verified retention reason. For an unfinished run, report the named stop condition and its blocker separately; they are not completion evidence. A report that says "all done" gives the evaluator nothing to confirm and the session keeps grinding. If you halted and the goal is still active, close with the reminder that `/goal clear` releases it.
+**Put the literal facts in the text** — PR number, `state=MERGED`, the merge commit SHA, and the deleted branch name or verified retention reason. For an unfinished run, report the named stop condition and its blocker separately; they are not completion evidence. If the user set their own `/goal`, the same facts are what its evaluator needs.
+
+**Release the ship gate last:** `rm -f` this session's gate file (path in SKILL.md), whether the run completed, halted, or was abandoned.

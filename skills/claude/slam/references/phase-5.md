@@ -12,35 +12,17 @@ This trips up every filter written from memory, so take it as verified fact:
 
 A filter for `copilot-pull-request-reviewer[bot]` against the inline-comments endpoint matches nothing while the findings sit there unread. Prefer listing all comments and reading them, as below.
 
-### Make sure a review is actually coming
+### Observe automatic review
 
-Copilot reviews when a repository ruleset with a `copilot_code_review` rule is `active`, **or** when someone requests `Copilot` as a reviewer. A repo with neither produces no review at all — and silence from Copilot is not an approval.
+Follow the review-request prohibition in the applicable AGENTS.md. Observe the
+reviews triggered automatically by PR creation and real code pushes. Inspect
+active branch-matching rulesets, including their push-review configuration,
+without changing reviewer assignments or review settings.
 
-Check whether a ruleset already covers it, and only request manually if none does:
-
-```bash
-# Any ACTIVE ruleset carrying a copilot_code_review rule? Note that the rule is
-# often bundled into a general branch-protection ruleset (e.g. "Protect Develop")
-# rather than living in one obviously named for Copilot — so match on rule TYPE,
-# never on the ruleset's name.
-auto=$(gh api "/repos/$REPO/rulesets" --paginate -q '.[].id' 2>/dev/null | while read -r id; do
-  gh api "/repos/$REPO/rulesets/$id" \
-    -q 'select(.enforcement=="active") | select(any(.rules[]?; .type=="copilot_code_review")) | .name' 2>/dev/null
-done)
-
-if [ -n "$auto" ]; then
-  echo "Copilot auto-review active via ruleset(s): $auto"
-else
-  gh pr edit "$PR" --add-reviewer Copilot 2>/dev/null \
-    || gh api -X POST "/repos/$REPO/pulls/$PR/requested_reviewers" \
-         -f 'reviewers[]=Copilot' >/dev/null 2>&1 \
-    || echo "NOTE: could not request a Copilot review on $REPO"
-fi
-```
-
-The listing endpoint does **not** expand `.rules`, so you must fetch each ruleset by id to see its rule types. A filter written against the list alone silently finds nothing.
-
-If neither path works, Copilot code review is not available on this repo (no Copilot subscription covering it, or the org disallows it). **Say so explicitly in the final report — "no AI review happened" is not the same as "reviewed clean."**
+The listing endpoint does not expand `.rules`; fetch each applicable ruleset's
+definition. If no review arrives, report whether it is pending, disabled,
+unavailable, or quota-limited. Do not substitute a request or refusal for a
+completed current-head review, and do not treat silence as approval.
 
 ### The 300-file cap
 

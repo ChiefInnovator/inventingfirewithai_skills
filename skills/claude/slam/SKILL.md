@@ -1,8 +1,28 @@
 ---
 name: slam
-description: Ship the current branch end-to-end under a session /goal that keeps the run alive to the merge — preflight checks, commit, push, ensure a PR against the repo's base branch (develop if it exists, else main), request and address GitHub Copilot / AI review comments, merge, then delete the merged branch. Resolves in-scope blockers and stops when no authorized path remains.
+description: Ship the current branch end-to-end under a Stop-hook ship gate that keeps the run alive to the merge — preflight checks, commit, push, ensure a PR against the repo's base branch (develop if it exists, else main), monitor automatic GitHub Copilot reviews and address their comments, merge, then delete the merged branch. Resolves in-scope blockers and stops when no authorized path remains.
 user_invocable: true
 arguments: message-or-scope
+hooks:
+  Stop:
+    - hooks:
+        - type: command
+          timeout: 30
+          # Ship gate: while this session's recorded PR is unfinished, keep
+          # working instead of stopping. Fails open (no gate, no gh, bad data).
+          command: |
+            id=$(sed -n 's/.*"session_id" *: *"\([^"]*\)".*/\1/p' | head -n 1)
+            gate="$HOME/.claude/slam-gates/$id"
+            [ -n "$id" ] && [ -f "$gate" ] || exit 0
+            repo=$(sed -n 's/^repo=//p' "$gate"); pr=$(sed -n 's/^pr=//p' "$gate")
+            case "$pr" in ''|*[!0-9]*) exit 0;; esac
+            state=$(gh pr view "$pr" --repo "$repo" --json state -q .state 2>/dev/null) || exit 0
+            case "$state" in
+              OPEN) why="/slam ship gate: PR #$pr on $repo is still OPEN. Continue the remaining phases - poll review and checks with bounded waits, then merge. If no authorized path remains, remove $gate and report the blocker.";;
+              MERGED) why="/slam ship gate: PR #$pr on $repo is MERGED. Finish Phase 7 cleanup and the final report, then remove $gate.";;
+              *) rm -f "$gate"; exit 0;;
+            esac
+            printf '{"decision":"block","reason":"%s"}\n' "$why"
 ---
 
 # /slam Skill
@@ -28,11 +48,13 @@ Resolve blockers within the authorized scope: inspect evidence, fix valid in-sco
 
 ---
 
+**Ship gate file for this session:** `~/.claude/slam-gates/${CLAUDE_SESSION_ID}` (Phase G explains it). If that path still shows a literal `${CLAUDE_SESSION_ID}`, the host did not substitute it — skip the gate and ship anyway.
+
 ## Required phase instructions
 
 Read only the current phase reference before performing its actions; do not preload every reference. Start with G before touching the tree. Work in order; when resuming, verify the captured repository, branch, base, PR, and head before choosing remaining phases. Preserve completed evidence rather than repeating mutations. Read cleanup guards before any deletion.
 
-- [Phase G — Set the ship goal (before Phase 0)](references/phase-g.md)
+- [Phase G — Keep the run alive to the merge (before Phase 0)](references/phase-g.md)
 - [Phase R — Resolve the repo's shape](references/phase-r.md)
 - [Phase 0 — Get the work onto a feature branch](references/phase-0.md)
 - [Phase 1 — Preflight](references/phase-1.md)
