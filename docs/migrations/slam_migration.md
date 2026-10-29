@@ -24,7 +24,7 @@ Preflight, scoped commit and push, develop/main/default base selection, PR creat
 - Resolve routine divergence/conflicts with merge commits while preserving both branches' intended behavior. Ask only for real product/scope decisions or an explicit project approval requirement.
 - Match the PR head at merge time; wait for actual merged state after queueing. Capture the verified full merge commit as `SLAM_MERGE_SHA` in persistent task state before cleanup, restoring it across tool calls. Use fast-forward-only local base synchronization.
 - Check both local and live remote feature heads, worktrees, clean base state, and ancestry before cleanup. The read-only guard supplements GitHub policy and PR identity checks. The separate remote-deletion helper validates the server-advertised head, preserves existing hooks, and uses an ordinary non-force push so concurrent updates are rejected.
-- Keep squash-merge cleanup conservative and retain branches on uncertainty. Inspect actual policy rather than treating an automatic-review-only rule as a deletion restriction; remove clean merged worktrees only under an explicit cleanup request.
+- Keep squash-merge cleanup conservative and retain branches on uncertainty. Inspect actual policy rather than treating an automatic-review-only rule as a deletion restriction; remove clean merged worktrees only under an explicit cleanup request. Inspect ignored files too: private reports, local settings, and state require a verified private archive before removal; only reproducible caches are disposable.
 
 ## Installation consistency
 
