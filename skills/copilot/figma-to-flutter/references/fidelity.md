@@ -6,6 +6,8 @@ Keep Figma source captures immutable and render the actual Dart independently. R
 
 Use real source fonts and weights, not fallback test fonts. Hash fonts, assets, canonical widgets, relevant shared dependencies, runner configuration, and lockfiles with the evidence. Changes to these inputs invalidate prior visual results. Capture date and render date are different facts.
 
+Run [typography.md](typography.md)'s checks across the selected scope before rendering or cached-result reuse. Follow [performance.md](performance.md) for dependency keys, output-hash verification, and unchanged stopped attempts. Cached pixels never provide fresh source evidence or approval. If the project has not selected a canonical renderer/golden policy, retain committed goldens and keep candidate renders separate until that decision is made.
+
 ## Compare
 
 From the installed skill folder:
@@ -47,6 +49,8 @@ Track these separately:
 - Human visual review.
 - Web, Android, and iOS build/launch/render results for the requested targets.
 - Production integration and behavior/accessibility acceptance, when in scope.
+
+For each requested variable mode, distinguish full-frame source comparison from binding/value checks. A mode without a source screenshot cannot receive a full-frame pixel verdict. Compare the actual hosted explorer as well as standalone output when hosted validation is in scope; [workflow.md](workflow.md) defines its isolation and readiness checks.
 
 A web render does not prove native fidelity. A native build does not prove a screen was opened. A reference widget does not prove production adoption. If a toolchain or reviewer is unavailable, record that layer as unchecked and finish the independent checks that can run.
 

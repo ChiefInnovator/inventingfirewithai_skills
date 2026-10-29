@@ -71,6 +71,9 @@ All skill-like references are scored in [`docs/evaluations/referenced_skills_sco
 Local packages and comparison:
 - [Codex skill](skills/codex/figma-to-flutter/SKILL.md)
 - [Claude Code skill](skills/claude/figma-to-flutter/SKILL.md)
+- [GitHub Copilot skill](skills/copilot/figma-to-flutter/SKILL.md)
+- [Incremental work and whole-run measurements](skills/codex/figma-to-flutter/references/performance.md)
+- [Font, glyph, and text checks](skills/codex/figma-to-flutter/references/typography.md)
 - [Why this skill exists and its specific improvements](docs/research/figma_to_flutter_comparison.md)
 
 Community references, reviewed October 10, 2026:
@@ -80,6 +83,8 @@ Community references, reviewed October 10, 2026:
 - [Upstream license](https://github.com/bernaferrari/FigmaToCode/blob/main/LICENSE)
 
 The local packages adapt an existing conversion workflow into customer-neutral instructions and independently implemented helpers. They do not bundle private captures, decision history, or upstream plugin implementation files. The comparison describes scope and verification additions, not measured superiority. The community plugin is a tool reference, not an agent skill.
+
+The October 29, 2026 update adapts current workflow improvements across all three clients: complete drift coverage, font/glyph gates, verified incremental reuse, isolated hosted checks, scoped batch edits, and persistent whole-run screen throughput. The compiler adds measured layout/paint repairs; project-specific capture, theme, renderer, and portal adapters remain outside the packages. Regression tests do not establish live speed or visual acceptance.
 
 ### `README.md`
 

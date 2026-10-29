@@ -9,6 +9,70 @@ def node(kind='RECTANGLE', **values):
 
 
 class ConversionTests(unittest.TestCase):
+    def test_absolute_background_stays_behind_bounded_flow(self):
+        for sizing in ('FIXED', 'FILL'):
+            source = node('FRAME', layoutMode='HORIZONTAL', layoutSizingHorizontal=sizing,
+                primaryAxisAlignItems='CENTER', children=[
+                    node(id='1:2', layoutPositioning='ABSOLUTE'), node(id='1:3', width=20)])
+            before = copy.deepcopy(source)
+            result = Compiler('file').compile(source)
+            dart = result['dart']
+            self.assertEqual(source, before)
+            self.assertLess(dart.index('/* figma 1:2 */'), dart.index('Positioned.fill('))
+            self.assertIn('Positioned.fill(child: Row(', dart)
+            self.assertIn('MainAxisAlignment.center', dart)
+
+    def test_hug_flow_is_not_stretched_and_interleaving_is_reported(self):
+        source = node('FRAME', layoutMode='HORIZONTAL', layoutSizingVertical='HUG', children=[
+            node(id='1:2'), node(id='1:3', layoutPositioning='ABSOLUTE'), node(id='1:4')])
+        result = Compiler('file').compile(source)
+        self.assertNotIn('Positioned.fill(child: Row(', result['dart'])
+        self.assertTrue(any(w['reason'] == 'paint-order' for w in result['report']['warnings']))
+
+    def test_stroke_paints_foreground_and_counts_layout_padding_once(self):
+        for align, padding in [('OUTSIDE', 8), ('INSIDE', 11), ('CENTER', 11)]:
+            source = node('FRAME', layoutMode='HORIZONTAL', paddingLeft=8,
+                strokesIncludedInLayout=True, strokeAlign=align, strokeWeight=3,
+                fills=[{'type': 'SOLID', 'color': {'r': 1, 'g': 0, 'b': 0}}],
+                strokes=[{'type': 'SOLID', 'color': {'r': 0, 'g': 0, 'b': 1}}],
+                children=[node(id='1:2')])
+            dart = Compiler('file').compile(source)['dart']
+            self.assertIn(f'padding: EdgeInsets.fromLTRB({padding},', dart)
+            self.assertIn('position: DecorationPosition.foreground', dart)
+            self.assertIn('strokeAlign: BorderSide.strokeAlign' + align.title(), dart)
+            self.assertEqual(dart.count('Border.all('), 1)
+            self.assertEqual(dart.count('color: DraftTokens.colorFFFF0000'), 1)
+        source['individualStrokeWeights'] = {'left': 2, 'top': 4, 'right': 6, 'bottom': 8}
+        self.assertIn('EdgeInsets.fromLTRB(10, 4, 6, 8)', Compiler('file').compile(source)['dart'])
+        source['strokes'][0]['visible'] = False
+        self.assertIn('EdgeInsets.fromLTRB(8, 0, 0, 0)', Compiler('file').compile(source)['dart'])
+
+    def test_solid_dashed_strokes_remain_unresolved(self):
+        result = Compiler('file').compile(node(dashPattern=[2, 3],
+            strokes=[{'type': 'SOLID', 'color': {'r': 0, 'g': 0, 'b': 0}}]))
+        self.assertTrue(any(w['reason'] == 'dashed-stroke' for w in result['report']['warnings']))
+
+    def test_layer_and_background_blur_convert_radius_to_sigma(self):
+        for kind in ('LAYER_BLUR', 'BACKGROUND_BLUR'):
+            dart = Compiler('file').compile(node(effects=[{'type': kind, 'radius': 13}]))['dart']
+            self.assertIn('ImageFilter.blur(sigmaX: 6.5, sigmaY: 6.5)', dart)
+
+    def test_hug_centered_trailing_space_keeps_start_of_run(self):
+        source = node('TEXT', characters='Label ', fontFamily='Example', fontSize=14,
+            textAlignHorizontal='CENTER', textAutoResize='WIDTH_AND_HEIGHT')
+        self.assertIn('textAlign: TextAlign.left', Compiler('file').compile(source)['dart'])
+        source['textAutoResize'] = 'NONE'
+        self.assertIn('textAlign: TextAlign.center', Compiler('file').compile(source)['dart'])
+
+    def test_material_role_retains_source_height_or_reports_unknown_metrics(self):
+        source = node('TEXT', characters='Label', fontFamily='Example', fontSize=14,
+            styleName='M3/label/large', lineHeight={'unit': 'PIXELS', 'value': 21})
+        result = Compiler('file').compile(source)
+        self.assertIn('height: 1.5', result['dart'])
+        self.assertFalse(any(w['reason'] == 'line-height' for w in result['report']['warnings']))
+        del source['lineHeight']
+        self.assertTrue(any(w['reason'] == 'line-height' for w in Compiler('file').compile(source)['report']['warnings']))
+
     def test_fixed_text_vertical_alignment_preserves_width_and_source(self):
         for vertical, flutter in [('CENTER', 'centerLeft'), ('BOTTOM', 'bottomLeft')]:
             for horizontal in ('LEFT', 'CENTER', 'RIGHT', 'JUSTIFIED'):

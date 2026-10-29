@@ -185,9 +185,9 @@ class Compiler:
         radius = node.get('cornerRadius', 0)
         return f'BorderRadius.circular({number(max(0, radius))})' if isinstance(radius, (int, float)) and radius else None
 
-    def decoration(self, node):
+    def decoration(self, node, stroke_only=False):
         props = {}
-        paint = self.paints(node)
+        paint = self.paints(node) if not stroke_only else None
         if paint:
             if paint['type'] == 'SOLID':
                 props['color'] = self.color(paint, node)
@@ -195,8 +195,10 @@ class Compiler:
                 props['gradient'] = self.gradient(paint, node)
             elif paint['type'] != 'IMAGE':
                 self.warn(node, f'Unsupported paint: {paint["type"]}')
-        border = self.paints(node, 'strokes')
+        border = self.paints(node, 'strokes') if stroke_only else None
         if border:
+            if node.get('dashPattern'):
+                self.warn(node, 'Dashed stroke requires a measured path painter or exported asset; continuous draft border is approximate', 'dashed-stroke')
             if border.get('type') != 'SOLID':
                 if not self.supports_gradient_stroke(node, border):
                     self.warn(node, 'Unsupported non-solid stroke requires a painter or exported asset')
@@ -218,7 +220,7 @@ class Compiler:
         else:
             props['borderRadius'] = self.radius(node)
         shadows = []
-        for effect in node.get('effects', []):
+        for effect in ([] if stroke_only else node.get('effects', [])):
             if not effect.get('visible', True):
                 continue
             if effect['type'] == 'DROP_SHADOW':
@@ -330,6 +332,8 @@ class Compiler:
         if match:
             base = 'Theme.of(context).textTheme.' + match[1] + match[2].title() + '!'
             # Role identity is useful, but must not replace resolved visual metrics.
+            if ratio is None:
+                self.warn(node, 'Material role has no resolved line height; inherited theme metrics require source comparison', 'line-height')
             return call(base + '.copyWith', **props)
         return call('TextStyle', **props)
 
@@ -373,6 +377,10 @@ class Compiler:
             spans.append(call('TextSpan', text=quote(value), style=self.text_style(resolved, node)))
             struts.add((self.flutter_family(resolved), resolved.get('fontSize', 14), self.line_ratio(resolved, node)))
         align = {'LEFT': 'left', 'RIGHT': 'right', 'CENTER': 'center', 'JUSTIFIED': 'justify'}.get(base.get('textAlignHorizontal'), 'left')
+        if (align == 'center' and base.get('textAutoResize') == 'WIDTH_AND_HEIGHT'
+                and ''.join(segment.get('characters', '') for segment in segments).endswith(' ')):
+            # Flutter centering excludes the trailing space of a source-sized hug run.
+            align = 'left'
         strut = None
         if len(struts) == 1:
             family, size, ratio = next(iter(struts))
@@ -464,11 +472,25 @@ class Compiler:
                 overlays = [c for c in children if c.get('layoutPositioning') == 'ABSOLUTE']
                 body = self.flow(node, regular)
                 pads = [node.get('padding' + side, 0) for side in ('Left', 'Top', 'Right', 'Bottom')]
+                if (node.get('strokesIncludedInLayout') and self.paints(node, 'strokes')
+                        and node.get('strokeAlign', 'INSIDE') != 'OUTSIDE'):
+                    weights = node.get('individualStrokeWeights')
+                    pads = [pad + (weights.get(side, 0) if weights else node.get('strokeWeight', 1))
+                            for pad, side in zip(pads, ('left', 'top', 'right', 'bottom'))]
                 if any(pads):
                     body = call('Padding', padding='EdgeInsets.fromLTRB(' + ', '.join(number(p) for p in pads) + ')', child=body)
                 if overlays:
-                    # Retain Row/Column semantics beneath positioned overlays.
-                    body = call('Stack', clipBehavior='Clip.none', children=sequence([body] + [self.emit(c, node, True) for c in overlays]))
+                    # A bounded flow layer must keep the containing box's alignment.
+                    if all(node.get('layoutSizing' + axis, 'FIXED') in ('FIXED', 'FILL')
+                           for axis in ('Horizontal', 'Vertical')):
+                        body = call('Positioned.fill', child=body)
+                    first = children.index(regular[0]) if regular else len(children)
+                    last = children.index(regular[-1]) if regular else first
+                    if any(first < children.index(c) < last for c in overlays):
+                        self.warn(node, 'Absolute layers interleaved with flow children need split flow subtrees to preserve paint order', 'paint-order')
+                    behind = [self.emit(c, node, True) for c in overlays if children.index(c) < first]
+                    above = [self.emit(c, node, True) for c in overlays if children.index(c) >= first]
+                    body = call('Stack', clipBehavior='Clip.none', children=sequence(behind + [body] + above))
             elif children:
                 body = call('Stack', clipBehavior='Clip.none', children=sequence([self.emit(c, node, True) for c in children]))
             else:
@@ -482,6 +504,9 @@ class Compiler:
                 body = call('DecoratedBox', decoration=decoration, child=body)
             if node.get('clipsContent'):
                 body = call('ClipRRect', borderRadius=self.radius(node), child=body)
+            if self.paints(node, 'strokes'):
+                body = call('DecoratedBox', position='DecorationPosition.foreground',
+                            decoration=self.decoration(node, stroke_only=True), child=body)
         else:
             self.warn(node, f'Unsupported node type: {kind}; placeholder retained')
             body = 'const Placeholder()'
@@ -513,7 +538,8 @@ class Compiler:
         for effect in node.get('effects', []):
             if effect.get('visible', True) and effect['type'] in ('LAYER_BLUR', 'BACKGROUND_BLUR'):
                 self.uses_blur = True
-                radius = number(effect.get('radius', 0))
+                # Figma layer/background blur radius is twice Flutter's Gaussian sigma.
+                radius = number(effect.get('radius', 0) * .5)
                 body = call('ImageFiltered' if effect['type'] == 'LAYER_BLUR' else 'BackdropFilter',
                             **{'imageFilter' if effect['type'] == 'LAYER_BLUR' else 'filter': f'ImageFilter.blur(sigmaX: {radius}, sigmaY: {radius})'}, child=body)
                 if effect['type'] == 'BACKGROUND_BLUR':
