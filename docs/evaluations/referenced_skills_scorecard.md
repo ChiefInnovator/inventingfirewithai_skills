@@ -1,3 +1,8 @@
+---
+title: Referenced skills scorecard
+description: Evidence-bounded editorial assessments and validation status for reusable AI agent skills, with links to package checks and behavioral evaluations.
+---
+
 # Referenced Skills Scorecard
 
 These are historical editorial scores from May 2, 2026, based on instruction coverage and compactness, not behavioral benchmarks. They do not establish correctness, completion rates, or superiority over other skills. Historical counts use `tiktoken` `cl100k_base` for directly fetchable files. `N/A` means unavailable or not applicable. The revised local skill has no comparative performance score; its counts below were measured with the same encoding on September 5, 2026.
@@ -7,12 +12,14 @@ These are historical editorial scores from May 2, 2026, based on instruction cov
 | GitHub Copilot versions (five local skills) | N/A | Host-adapted entrypoints and bundled resources, added October 10, 2026; format, discovery, and helper checks do not establish comparative agent performance. | N/A | N/A | N/A |
 | Ponytail implementation skill | N/A | Inspected October 10, 2026: explicit reuse order and affected-path inspection inform applied Pragmatic Coder changes; no local behavioral comparison. | N/A | N/A | N/A |
 | Ponytail review skill | N/A | Inspected October 10, 2026: context and consequence checks inform applied review guidance; no local behavioral comparison. | N/A | N/A | N/A |
-| figma-to-flutter (Codex / Claude) | N/A | Portable conversion, identity, and pixel-check helpers plus capture, repair, and platform-review guidance; added October 10, 2026. Regression validation is not a comparative fidelity benchmark. | N/A | N/A | N/A |
-| travel-like-a-local (Codex / Claude) | N/A | Local travel planning, property relaxation, and booking-state accuracy; imported September 25, 2026; comparative behavior unscored. | N/A | N/A | N/A |
+| SEO and AI Visibility workflow | N/A | Applied October 31, 2026 to factual crawlable content, canonical/social metadata, structured data, rendered documentation, and discovery regression checks. Source/deployment checks do not establish search rankings or AI citation outcomes. | N/A | N/A | N/A |
+| figma-to-flutter (Codex / Claude / Copilot) | N/A | Updated October 31, 2026 with optional sanitized finished-run history and provenance, retaining generic run metrics, compiler repairs, font/glyph checks, drift coverage, incremental reuse, and hosted-review guidance. Project adapters are excluded; regression validation is not a live speed or comparative fidelity benchmark. | N/A | N/A | N/A |
+| travel-like-a-local (Codex / Claude / Copilot) | N/A | Updated October 31, 2026 with generic preference onboarding, private-profile handling, practical booking/transport guidance, conditional context questions, and concise response guidance. Package regressions and four offline Codex behavioral smoke cases pass; comparative behavior and other-client runtime outcomes remain unscored. See [test evidence](travel_like_a_local_evaluation.md). | N/A | N/A | N/A |
 | mcp-pick (Codex / Claude) | N/A | Project integration selection; no comparative behavioral score assigned. | N/A | N/A | N/A |
-| slam (Claude) | N/A | Original native Claude workflow; no comparative behavioral score assigned. | N/A | N/A | N/A |
+| slam (Claude) | N/A | Updated October 29, 2026 with automatic-review-only policy, captured-head merge gates, captured merge identity, bounded Stop-hook continuation, and guarded non-force cleanup. Real subprocess fixture checks are not an end-to-end shipping benchmark. | N/A | N/A | N/A |
+| slam (Copilot) | N/A | Updated October 29, 2026 for automatic-review-only behavior, explicit review-wait overrides, captured merge identity, client parity checks, and guarded non-force cleanup. No comparative shipping benchmark. | N/A | N/A | N/A |
 | pragmatic-coder | N/A | Historical September 5 revision before platform-specific invocation guidance; behavioral comparison pending. See evaluation scenarios. | 50 | 3,706 | 705 |
-| slam | N/A | GitHub shipping workflow migrated from the user's Claude skill; entrypoint measured September 5; comparative behavior unscored. | 125 | 15,002 | 3,046 |
+| slam | N/A | Codex workflow updated October 29, 2026 for automatic reviews, routine merge resolution, and current-head evidence. Counts describe the historical September 5 entrypoint; comparative behavior unscored. | 125 | 15,002 | 3,046 |
 | Karpathy Guidelines | 8.0 | Strong assumptions, simplicity, surgical edits, and verification; narrower. | 67 | 2,506 | 580 |
 | Torvalds Doctrine | 7.6 | Strong data/userspace instincts; tone and size reduce reuse. | 141 | 5,574 | 1,288 |
 | Matt Pocock TDD | 8.9 | Excellent TDD/public-interface discipline; focused scope. | 109 | 4,371 | 968 |

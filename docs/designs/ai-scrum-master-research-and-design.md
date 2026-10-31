@@ -19,7 +19,7 @@ Resolve these design details before turning the playbook into an operational ski
 - **History and coverage:** current board state and fixed result limits are insufficient for reliable historical scope-change and throughput reporting. Paginate reads, capture sprint baselines, and disclose unavailable history.
 - **Access:** demonstrate reads of the actual iteration, status, hierarchy, and PR fields using the chosen connection. Treat the onboarding portal, sign-in broker, and permission profiles as designs until implemented and tested.
 
-Sources for these implementation checks are cataloged in [references.md](../../references.md). Private customer identifiers in the supplied research have been anonymized. The supplied research follows.
+Sources for these implementation checks are cataloged in [references.md](https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/references.md). Private customer identifiers in the supplied research have been anonymized. The supplied research follows.
 
 ---
 

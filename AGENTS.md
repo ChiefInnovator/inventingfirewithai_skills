@@ -5,6 +5,7 @@ Reusable coding, shipping, Figma-to-Flutter, and travel skills for Codex, Claude
 ## Rules
 
 - Keep `README.md` short; no per-skill READMEs or redundant docs. Put source links in `references.md`, research under `docs/`, and operational rules here.
+- Keep docs and GitHub Pages optimized for SEO, GEO, and AEO: crawlable factual HTML, clear answers, canonical/social metadata, accurate structured data, and working discovery links. Run visibility regression checks and verify the deployed output; respect host-root crawler-policy scope and never promise rankings or AI citations.
 - Keep Pragmatic Coder compact; add capability only when it earns its token cost.
 - Do not reference local files outside this repo.
 - No mocks in implementation code; mocks stay in tests.
@@ -12,8 +13,9 @@ Reusable coding, shipping, Figma-to-Flutter, and travel skills for Codex, Claude
 - Act on obvious next steps; ask only for real blockers.
 - Reading, editing, or installing Slam does not authorize shipping.
 - Feature branches merge into `develop` by pull request; only `develop` merges into `main`, also by pull request. Never commit or push directly to `develop` or `main`.
-- Wait for GitHub Copilot review on the current PR head; address valid findings and pass required checks before merging. Do not bypass repository rules.
+- Monitor automatic Copilot review and address valid findings. Honor an explicit user instruction not to wait for Copilot; required GitHub checks, approvals, and branch protections still apply.
 - Keep automatic Copilot review enabled for every target branch, including drafts and new pushes, without path exclusions.
+- Keep shared Slam references and helpers identical across the three client packages; preserve host-specific entrypoints and Claude hooks. Synchronize authorized installed copies when shipping skill maintenance.
 
 ## Layout and use
 

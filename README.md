@@ -26,6 +26,8 @@ Install an entire skill folder, including its resources: use `skills/codex/` or 
 
 For ChatGPT on the web, see the [travel skill export and setup status](docs/migrations/travel_chatgpt_web.md).
 
+Run repository checks with `uv run --no-project --python 3.14 --with-requirements tests/requirements.txt python -m unittest discover -s tests`. See [Travel package and behavioral test evidence](docs/evaluations/travel_like_a_local_evaluation.md) and [site discovery and validation](docs/evaluations/site_visibility.md) for coverage and limits.
+
 Use `$figma-to-flutter` in Codex or `/figma-to-flutter` in Claude Code. See [what it adds to community code generation](docs/research/figma_to_flutter_comparison.md).
 
 Browse [designs, research, evaluations, and migration notes](references.md#local-documents).

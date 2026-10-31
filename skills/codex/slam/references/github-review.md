@@ -2,19 +2,13 @@
 
 Use the repository, PR, host, and head SHA captured by Slam. These command examples require an authenticated `gh` CLI; equivalent available GitHub tools can be used when they preserve identity, pagination, and error handling. For REST calls use `SLAM_OWNER_REPO` without the host and `--hostname "$SLAM_HOST"` explicitly. Keep request text in structured arguments or properly quoted files, never interpolated shell code.
 
-## Request review
+## Observe automatic review
 
-Read existing review requests and applicable automatic-review settings first. Rulesets must be active and match the branch; the mere presence of a Copilot rule somewhere is insufficient. The ruleset list does not include every rule's details, so inspect applicable ruleset definitions when needed. Do not change rulesets or buy a subscription.
+Read existing review state and applicable automatic-review settings. Rulesets must be active and match the target branch; inspect their definitions, including review-on-push, draft handling, and exclusions. Personal or organization settings may also trigger automatic review, so absence of a repository rule alone does not prove it is disabled. Do not change rulesets, reviewer assignments, or subscriptions.
 
-Check the installed CLI's help before choosing the supported request syntax. Current CLI:
+Never manually request or re-request a review through any tool, API, comment, or delegate. Observe automatic reviews after PR creation and real code pushes; honor an explicit user instruction not to wait for optional AI review, recording its absence without claiming approval. Mandatory GitHub approvals and protections still apply; never create an empty commit or no-op push as a trigger. If required automatic review cannot run, report the actual dependency and retain the merge gate. Use returned evidence for quota, size, permissions, or availability limits rather than a remembered product cap. A pending review remains pending.
 
-```bash
-gh pr edit "$SLAM_PR" --repo "$SLAM_REPO" --add-reviewer '@copilot'
-```
-
-The documented REST reviewer identifier is `copilot-pull-request-reviewer[bot]`. Returned inline-comment identities may differ. Read all feedback rather than filtering by one alias. Distinguish a failed request from an unavailable product, permission denial, or pending review. Use actual error/review evidence for limits; don't assume every large PR hit a fixed cap.
-
-By default, a Copilot review is a comment and does not satisfy required approvals; check the actual repository configuration and review state. A push does not guarantee a re-review. Request one on the new head if automatic review of new pushes is not active.
+Copilot feedback does not by itself satisfy required human approvals; check the actual repository configuration and review state. An earlier review does not cover a newer head. A quota refusal or skipped-review message does not count even if attached to the correct commit.
 
 ## Retrieve all feedback
 
@@ -71,7 +65,6 @@ Refresh all threads and reviews before merging. A query returning GraphQL `error
 
 ## Official references
 
-- [Requesting and handling Copilot review](https://docs.github.com/en/copilot/how-tos/copilot-on-github/use-copilot-agents/copilot-code-review)
-- [GitHub CLI review requests](https://cli.github.com/manual/gh_pr_edit)
+- [Configuring automatic Copilot review](https://docs.github.com/en/copilot/how-tos/copilot-on-github/set-up-copilot/configure-code-review)
 - [GitHub CLI merge and head matching](https://cli.github.com/manual/gh_pr_merge)
 - [GitHub CLI check status](https://cli.github.com/manual/gh_pr_checks)

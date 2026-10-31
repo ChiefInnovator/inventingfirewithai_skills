@@ -45,7 +45,8 @@ def check_cleanup(root, base, branch, head, merge_commit, protected=()):
                 "Use full captured commit SHAs.")
     head, merge_commit = head.lower(), merge_commit.lower()
     require(git(root, "rev-parse", "--is-inside-work-tree") == "true", "Not a worktree.")
-    require(git(root, "branch", "--show-current") == base, "Checkout is not the captured base.")
+    require(git(root, "branch", "--show-current") in (base, ""),
+            "Checkout is not the captured base or a detached base commit.")
     require(not git(root, "status", "--porcelain=v1", "-z"), "Working tree is dirty; retain branches.")
     worktrees = git(root, "worktree", "list", "--porcelain", "-z").split("\0")
     require(f"branch refs/heads/{branch}" not in worktrees,

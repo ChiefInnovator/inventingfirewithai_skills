@@ -1,25 +1,15 @@
-## Phase G — Set the ship goal (before Phase 0)
+## Phase G — Keep the run active through merge verification
 
-`/slam` is a long unattended pipeline with two unavoidable waits — the AI review and CI — and a turn can end at either one with the PR still open. Claude Code's `/goal` exists for exactly that: it registers a Stop hook that blocks the session from stopping until a separate evaluator confirms the condition **from the conversation**, and clears itself once it does. Run `/slam` under a goal and the run survives to the merge instead of trailing off at a natural turn boundary.
+The skill's session-scoped Stop hook reads only this session's ship gate. Use the session ID supplied by SKILL.md, require `[A-Za-z0-9][A-Za-z0-9_-]{0,127}`, and construct `~/.claude/slam-gates/<session-id>`. If the ID is missing or still literal substitution text, skip arming the gate. Arm it in Phase 4 after the repository and PR identities are verified. The gate is JSON with `repo` and a positive `pr` number; optional `root`, `branch`, `base`, and `head` fields preserve resume context. Use a JSON serializer and restrictive file permissions. Never overwrite another run's gate or follow a symlink. Python 3 and authenticated `gh` are required for the hook; missing capabilities do not waive shipping gates.
 
-**Set it first, before Phase 0 touches the tree.**
+| PR state | Hook result |
+| --- | --- |
+| `stop_hook_active: true` | Allow stopping without contacting GitHub or deleting the gate; this breaks recursive continuation. It does not prove completion. |
+| `OPEN` | Continue remaining review, checks, and merge phases. |
+| `MERGED`, gate present | Verify merge evidence, finish cleanup and the final report. |
+| `CLOSED` | Remove this session's gate and allow stopping; closed is not shipped. |
+| Missing/invalid gate, unknown state, or failed GitHub access | Allow stopping and retain any gate; report the unverified state. |
 
-Propose it with the `ProposeGoal` tool — the user approves with one keypress. If that tool is unavailable (non-interactive or agent context, plan mode, or model-proposed goals disabled in settings), print the `/goal` line for the user to paste and **carry on either way**. A missing goal is a missing safety net, never a reason not to ship.
+Remove only this session's gate when the final outcome is ready, when no authorized path remains, or when the user asks to stop or pause. Removal is best-effort: a denied or failed deletion never authorizes another continuation or prevents the user from stopping. Preserve the gate as unfinished resume evidence when it remains. User instructions and hard rules always win. Report unfinished phases and what would enable resumption; never claim a merge merely to release the gate. Abandonment requires the user's explicit decision. Preserve any user-created goal; do not replace or clear it.
 
-**The condition** — name the branch and base and state the completion evidence:
-
-```
-/goal the PR for <branch> reports MERGED into <base> with the merge commit SHA reported, and the feature branch is deleted or its retention explained
-```
-
-Keep it under ~500 characters so the whole thing fits the approval dialog (a typed `/goal` allows 4000).
-
-**A halt is not completion.** Resolve fixable blockers and continue. If no authorized path remains, stop shipping actions and report the unfinished goal and what would enable resumption. Follow the host's supported goal lifecycle; never claim a merge occurred merely to satisfy an evaluator. Abandonment requires an explicit user decision, with the decision-maker and reason recorded.
-
-**The goal never outranks a hard rule.** If continuing means a rebase, a force-push, an `--admin` merge, or deleting a protected branch, the rule wins: report and stop. A Stop hook cannot authorize what a hard rule forbids.
-
-**Use it on the waits.** Poll for the AI review (Phase 5) and CI (Phase 6) as background work — goal evaluation defers while background work runs and a check-in is injected instead, which is the "keep waiting" behavior those phases want.
-
-**Clearing.** The goal auto-clears when the evaluator confirms it met. It does not clear on a halt, and nothing in this skill can clear it — if you stopped early and a goal is still active, say so in the final report and tell the user to run `/goal clear`.
-
----
+Poll review and checks with individual blocking waits of at most 60 seconds. Inspect changed evidence before continuing. The hook checks GitHub with a 15-second timeout and allows at most one continuation per stop cycle; it is a continuation aid, not a durable background scheduler or a completion signal. Repeated `stop_hook_active` events allow stopping while retaining the gate and do not prove success. Respect the host's continuation limits and interruptions; if execution ends, preserve captured identities and report the actual remaining gates when resuming.
