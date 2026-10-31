@@ -112,6 +112,8 @@ def local_file(docs, link, base=SITE, fragments=True):
     require(parsed.scheme == "https", f"Non-HTTPS or machine-specific URL: {link}")
     if parsed.netloc != site.netloc:
         return None
+    if urlsplit(link).scheme and re.fullmatch(r"/[\w.-]+/", parsed.path) and parsed.path != site.path:
+        return None  # absolute link to a sibling project site root on the same Pages host
     require(parsed.path.startswith(site.path), f"URL escapes project site: {link}")
     relative = unquote(parsed.path[len(site.path):]) or "index.html"
     require(".." not in Path(relative).parts and "\\" not in relative, f"Unsafe project URL: {link}")

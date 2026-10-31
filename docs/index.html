@@ -685,6 +685,68 @@
     code .ok { color: #77d6aa; }
     code .bad { color: #ff9a80; }
 
+    .author-block {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 32px;
+      align-items: center;
+      padding: 44px 40px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+
+    .author-block .avatar {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: var(--ink);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 0 0 2px rgba(217, 79, 48, .3), 0 10px 24px rgba(21, 21, 21, .16);
+    }
+
+    .author-block h2 {
+      font-size: 22px;
+      line-height: 1.25;
+      margin: 0 0 6px;
+    }
+
+    .author-block p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .author-block p a {
+      color: var(--ember-text);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(184, 66, 39, .4);
+    }
+
+    .author-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .author-links a {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 2px;
+    }
+
+    .author-links a:hover {
+      color: var(--ember-text);
+      border-bottom-color: var(--ember-text);
+    }
+
     footer {
       padding: 44px 0;
       color: var(--muted);
@@ -709,6 +771,17 @@
 
       .brand-strip .wrap {
         padding: 24px 0;
+      }
+
+      .author-block {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+        padding: 32px 24px;
+      }
+
+      .author-links {
+        justify-content: center;
       }
 
       .brand-mark {
@@ -978,6 +1051,26 @@
         <dt>What license covers the library?</dt>
         <dd>The repository is shared under the <a href="https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/LICENSE" rel="license">MIT license</a>. Follow the target project’s instructions and the client’s permission rules when using a skill.</dd>
       </dl>
+    </div>
+  </section>
+
+  <section id="built-by" aria-label="About the author">
+    <div class="wrap">
+      <div class="author-block">
+        <div class="avatar"><img src="assets/images/inventing-fire-mark.png" alt="Inventing Fire with AI" width="60" height="60" loading="lazy" decoding="async"></div>
+        <div>
+          <h2>Built by Rich Crane — Microsoft MVP, MILL5.</h2>
+          <p>Part of the <i>Inventing Fire with AI</i> initiative. The same workshop behind <a href="https://chiefinnovator.github.io/videodownloader/">Video Downloader</a>, <a href="https://chiefinnovator.github.io/macedgelight/">MacEdgeLight</a>, and <a href="https://inventingfirewith.ai/cutandmove/">Cut &amp; Move</a>.</p>
+          <div class="author-links">
+            <a href="https://mill5.com" rel="noopener">MILL5</a>
+            <a href="https://www.inventingfirewith.ai" rel="noopener">Inventing Fire</a>
+            <a href="https://www.youtube.com/@InventingFirewithAI" rel="noopener">YouTube</a>
+            <a href="https://podcasts.apple.com/us/podcast/inventing-fire-with-ai/id1814411467" rel="noopener">Podcast</a>
+            <a href="https://github.com/ChiefInnovator" rel="noopener">GitHub</a>
+            <a href="https://mvp.microsoft.com/en-US/MVP/profile/10ce0bc0-7536-43f6-b28c-e9601a4a0d0d" rel="noopener">Microsoft MVP</a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
   </main>
