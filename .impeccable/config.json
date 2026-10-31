@@ -4,13 +4,13 @@
     "ignoreFiles": [],
     "ignoreValues": [
       {
-        "rule": "cramped-padding",
-        "value": "*",
+        "rule": "overused-font",
+        "value": "fraunces",
         "files": [
           "docs/index.html"
         ],
-        "createdAt": "2026-10-31T11:57:52.940Z",
-        "reason": "Agent: verified false positive; .brand-strip contains .wrap with a width of calc(100% - 40px), centered horizontal margins, and 30px vertical padding. The scanner ignores the existing wrapper gutters."
+        "createdAt": "2026-10-31T12:42:33.368Z",
+        "reason": "User requested the Video Downloader branding reference. Fraunces matches its author byline only; Chivo remains the primary site family."
       }
     ]
   }
