@@ -591,7 +591,8 @@
     }
 
     .table-wrap {
-      overflow-x: auto;
+      height: min(60vh, 36rem);
+      overflow: auto;
     }
 
     table {
@@ -918,7 +919,7 @@
           </div>
           <a href="evaluations/referenced_skills_scorecard.md">Open markdown</a>
         </div>
-        <div class="table-wrap" id="scorecard-table">
+        <div class="table-wrap" id="scorecard-table" role="region" aria-label="Referenced skills scorecard" tabindex="0">
           <div class="loading">The <a href="evaluations/referenced_skills_scorecard.html">referenced skills scorecard</a> records historical editorial assessments. Read the source for scores and their limits.</div>
         </div>
       </div>
