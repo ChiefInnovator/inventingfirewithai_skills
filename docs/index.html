@@ -8,6 +8,7 @@
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="https://chiefinnovator.github.io/inventingfirewithai_skills/">
   <link rel="sitemap" type="application/xml" href="https://chiefinnovator.github.io/inventingfirewithai_skills/sitemap.xml">
+  <link rel="preload" href="assets/fonts/chivo-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Inventing Fire with AI Skills">
   <meta property="og:title" content="AI Skills for Codex, Claude Code &amp; Copilot | Inventing Fire">
@@ -223,11 +224,29 @@
   }
   </script>
   <style>
+    /* Self-hosted Chivo; license: assets/fonts/OFL-Chivo.txt. */
+    @font-face {
+      font-family: Chivo;
+      font-style: normal;
+      font-weight: 400 800;
+      font-display: swap;
+      src: url("assets/fonts/chivo-latin-wght-normal.woff2") format("woff2");
+    }
+
+    /* Author branding follows Video Downloader; license: assets/fonts/OFL-Fraunces.txt. */
+    @font-face {
+      font-family: Fraunces;
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url("assets/fonts/fraunces-latin-opsz-500-normal.woff2") format("woff2");
+    }
+
     :root {
       --ink: #151515;
       --muted: #5a5f66;
       --line: #d9dde3;
-      --paper: #f7f5ef;
+      --paper: #f3f6f8;
       --panel: #ffffff;
       --ember: #d94f30;
       --ember-text: #b84227;
@@ -235,13 +254,17 @@
       --steel: #236477;
       --green: #1d7a5f;
       --code: #20252b;
+      --brand-surface: #120f0c;
+      --brand-ink: #f2ece3;
+      --brand-muted: #c9bfb0;
+      --brand-accent: #ffb347;
     }
 
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: Chivo, "Segoe UI", sans-serif;
       color: var(--ink);
       background: var(--paper);
       line-height: 1.5;
@@ -249,15 +272,49 @@
 
     a { color: inherit; }
 
+    h1, h2, h3 { line-height: 1.3; }
+
+    ::selection { background: var(--steel); color: #fff; }
+
+    a:focus-visible, [tabindex]:focus-visible {
+      outline: 3px solid var(--steel);
+      outline-offset: 4px;
+    }
+
+    nav a:focus-visible, .hero a:focus-visible, .author-block a:focus-visible {
+      outline-color: var(--gold);
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 12px;
+      left: 20px;
+      z-index: 10;
+      padding: 12px 16px;
+      background: #fff;
+      color: var(--ink);
+      transform: translateY(-200%);
+    }
+
+    .skip-link:focus { transform: translateY(0); }
+
     .hero {
-      min-height: 92vh;
       display: grid;
       align-items: center;
-      background:
-        linear-gradient(90deg, rgba(21, 21, 21, .82), rgba(21, 21, 21, .34)),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 1000'%3E%3Crect width='1600' height='1000' fill='%2320252b'/%3E%3Cg opacity='.72'%3E%3Crect x='130' y='150' width='610' height='510' rx='18' fill='%2317191d' stroke='%23f0b13e' stroke-opacity='.35'/%3E%3Crect x='190' y='220' width='500' height='24' rx='5' fill='%23f7f5ef' fill-opacity='.9'/%3E%3Crect x='190' y='285' width='410' height='18' rx='4' fill='%23d94f30'/%3E%3Crect x='190' y='340' width='455' height='18' rx='4' fill='%231d7a5f'/%3E%3Crect x='190' y='395' width='350' height='18' rx='4' fill='%23236477'/%3E%3Crect x='190' y='450' width='470' height='18' rx='4' fill='%23f0b13e'/%3E%3Crect x='190' y='505' width='290' height='18' rx='4' fill='%23f7f5ef' fill-opacity='.72'/%3E%3C/g%3E%3Cg opacity='.82'%3E%3Cpath d='M890 180h430l120 120v430H890z' fill='%23f7f5ef'/%3E%3Cpath d='M1320 180v120h120' fill='%23d9dde3'/%3E%3Crect x='970' y='300' width='300' height='18' rx='4' fill='%2320252b'/%3E%3Crect x='970' y='355' width='380' height='18' rx='4' fill='%23d94f30'/%3E%3Crect x='970' y='410' width='330' height='18' rx='4' fill='%231d7a5f'/%3E%3Crect x='970' y='465' width='365' height='18' rx='4' fill='%23236477'/%3E%3Crect x='970' y='520' width='250' height='18' rx='4' fill='%23f0b13e'/%3E%3C/g%3E%3Cpath d='M760 760c150-115 325-115 510 0' fill='none' stroke='%23f0b13e' stroke-width='24' stroke-linecap='round' opacity='.8'/%3E%3C/svg%3E");
-      background-size: cover;
-      background-position: center;
+      padding: 56px 0 64px;
+      background: var(--code);
       color: #fff;
     }
 
@@ -267,11 +324,8 @@
     }
 
     nav {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      padding: 22px 0;
+      padding: 18px 0;
+      background: var(--code);
       color: #fff;
     }
 
@@ -283,8 +337,19 @@
     }
 
     .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
       font-weight: 750;
       letter-spacing: 0;
+      text-decoration: none;
+    }
+
+    .brand img {
+      flex: 0 0 36px;
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
     }
 
     .nav-links {
@@ -295,19 +360,23 @@
       font-size: 14px;
     }
 
-    .nav-links a { text-decoration: none; }
+    .nav-links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      text-decoration: none;
+    }
 
     h1 {
       max-width: 820px;
-      font-size: clamp(48px, 8vw, 104px);
-      line-height: .94;
-      margin: 96px 0 26px;
+      font-size: clamp(36px, 5.5vw, 72px);
+      margin: 0 0 22px;
       letter-spacing: 0;
     }
 
     .hero p {
       max-width: 690px;
-      font-size: clamp(18px, 2.5vw, 25px);
+      font-size: clamp(18px, 2vw, 22px);
       color: rgba(255, 255, 255, .86);
       margin: 0 0 34px;
     }
@@ -336,45 +405,6 @@
       color: #fff;
     }
 
-    .brand-strip {
-      background: #fff;
-      border-top: 1px solid rgba(240, 177, 62, .42);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .brand-strip .wrap {
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 34px;
-      align-items: center;
-      padding: 30px 0;
-    }
-
-    .brand-mark {
-      width: min(220px, 100%);
-      height: auto;
-      display: block;
-    }
-
-    .brand-copy {
-      max-width: 720px;
-    }
-
-    .brand-copy strong {
-      display: block;
-      color: var(--ember-text);
-      font-size: 13px;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .brand-copy p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 18px;
-    }
-
     section {
       padding: 86px 0;
       border-top: 1px solid var(--line);
@@ -382,7 +412,6 @@
 
     h2 {
       font-size: clamp(30px, 4vw, 52px);
-      line-height: 1.03;
       margin: 0 0 18px;
       letter-spacing: 0;
     }
@@ -390,6 +419,7 @@
     .lede {
       max-width: 780px;
       font-size: 20px;
+      line-height: 1.5;
       color: var(--muted);
       margin: 0;
     }
@@ -412,6 +442,7 @@
     .card h3 {
       margin: 0 0 10px;
       font-size: 20px;
+      line-height: 1.3;
     }
 
     .card p {
@@ -452,7 +483,6 @@
     .skill-card h3 {
       margin: 0 0 10px;
       font-size: 30px;
-      line-height: 1.05;
     }
 
     .skill-card p {
@@ -525,7 +555,7 @@
     .stat strong {
       display: block;
       font-size: 34px;
-      line-height: 1;
+      line-height: 1.3;
       color: var(--gold);
       margin-bottom: 8px;
     }
@@ -576,7 +606,7 @@
       align-items: center;
       padding: 18px 20px;
       border-bottom: 1px solid var(--line);
-      background: #fbfaf7;
+      background: var(--paper);
     }
 
     .scorecard-head strong {
@@ -640,7 +670,6 @@
       background: var(--code);
       color: #f4f4f4;
       border-radius: 8px;
-      border: 1px solid #303841;
       overflow: hidden;
       box-shadow: 0 18px 50px rgba(0, 0, 0, .16);
     }
@@ -675,6 +704,74 @@
     code .ok { color: #77d6aa; }
     code .bad { color: #ff9a80; }
 
+    .author-block {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 32px;
+      align-items: center;
+      padding: 44px 40px;
+      background: var(--brand-surface);
+      color: var(--brand-ink);
+      border: 1px solid #514335;
+      border-radius: 14px;
+    }
+
+    .author-block .avatar {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: #0b0907;
+      display: grid;
+      place-items: center;
+      border: 2px solid #8f4319;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, .2);
+    }
+
+    .author-block h2 {
+      font-family: Fraunces, "Iowan Old Style", Palatino, serif;
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 1.3;
+      margin: 0 0 6px;
+    }
+
+    .author-block p {
+      margin: 0 0 12px;
+      color: var(--brand-muted);
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .author-block p a {
+      color: var(--brand-accent);
+      text-decoration: none;
+      border-bottom: 1px solid currentColor;
+    }
+
+    .author-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .author-links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--brand-muted);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+    }
+
+    .author-links a:hover {
+      color: var(--brand-accent);
+      border-bottom-color: var(--brand-accent);
+    }
+
     footer {
       padding: 44px 0;
       color: var(--muted);
@@ -692,17 +789,25 @@
       .grid,
       .split,
       .stat-grid,
-      .skill-grid,
-      .brand-strip .wrap {
+      .skill-grid {
         grid-template-columns: 1fr;
       }
 
-      .brand-strip .wrap {
-        padding: 24px 0;
+      .author-block {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+        padding: 32px 24px;
       }
 
-      .brand-mark {
-        width: 180px;
+      .author-links {
+        justify-content: center;
+      }
+
+      nav .wrap {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
       }
 
       nav {
@@ -711,8 +816,7 @@
       }
 
       .hero {
-        min-height: auto;
-        padding: 54px 0 76px;
+        padding: 28px 0 44px;
       }
 
       h1 {
@@ -721,10 +825,11 @@
     }
   </style>
 </head>
-<body>
+<body id="top">
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <nav aria-label="Main navigation">
     <div class="wrap">
-      <div class="brand">Inventing Fire with AI Skills</div>
+      <a class="brand" href="#top" aria-label="Inventing Fire with AI Skills home"><img src="assets/images/inventing-fire-mark.png" alt="" width="36" height="36"><span>Inventing Fire with AI Skills</span></a>
       <div class="nav-links">
         <a href="#why">Why</a>
         <a href="#skills">Skills</a>
@@ -738,10 +843,10 @@
     </div>
   </nav>
 
-  <main id="main-content">
+  <main id="main-content" tabindex="-1">
   <header class="hero">
     <div class="wrap">
-      <h1>Inventing Fire with AI Skills</h1>
+      <h1 id="site-title">Inventing Fire with AI Skills</h1>
       <p>Five reusable AI agent skills for Codex, Claude Code, and GitHub Copilot. Code, ship, convert Figma designs, choose MCP integrations, and plan travel.</p>
       <div class="actions">
         <a class="button" href="https://github.com/ChiefInnovator/inventingfirewithai_skills">View on GitHub</a>
@@ -749,16 +854,6 @@
       </div>
     </div>
   </header>
-
-  <div class="brand-strip" aria-label="Inventing Fire with AI brand">
-    <div class="wrap">
-      <img class="brand-mark" src="assets/images/inventing-fire-brand.png" alt="Inventing Fire with AI" width="967" height="1014" loading="lazy" decoding="async">
-      <div class="brand-copy">
-        <strong>Inventing Fire with AI</strong>
-        <p>A focused skill library for coding agents that favors clarity, verification, restraint, and durable engineering habits.</p>
-      </div>
-    </div>
-  </div>
 
   <section id="why">
     <div class="wrap split">
@@ -790,7 +885,7 @@
             <h3>Pragmatic Coder</h3>
             <p>Complete authorized coding work with minimal changes, proportionate verification, clear evidence, and respect for user choices.</p>
           </div>
-          <div class="client-links" aria-label="Pragmatic Coder packages">
+          <div class="client-links" role="group" aria-label="Pragmatic Coder packages">
             <a href="https://github.com/ChiefInnovator/inventingfirewithai_skills/tree/main/skills/codex/pragmatic-coder">Codex</a>
             <a href="https://github.com/ChiefInnovator/inventingfirewithai_skills/tree/main/skills/claude/pragmatic-coder">Claude Code</a>
             <a href="https://github.com/ChiefInnovator/inventingfirewithai_skills/tree/main/skills/copilot/pragmatic-coder">Copilot</a>
@@ -803,7 +898,7 @@
             <h3>Slam</h3>
             <p>Ship scoped work through commit, pull request, AI review, checks, merge, and verified branch cleanup. Invoke <code>$slam</code> when ready to ship.</p>
           </div>
-          <div class="client-links" aria-label="Slam packages">
+          <div class="client-links" role="group" aria-label="Slam packages">
             <a href="https://github.com/ChiefInnovator/inventingfirewithai_skills/tree/main/skills/codex/slam">Codex</a>
             <a href="https://github.com/ChiefInnovator/inventingfirewithai_skills/tree/main/skills/claude/slam">Claude Code</a>
             <a href="https://github.com/ChiefInnovator/inventingfirewithai_skills/tree/main/skills/copilot/slam">Copilot</a>
@@ -816,7 +911,7 @@
             <h3>MCP Picker</h3>
             <p>Select project-relevant MCP integrations in Codex, Claude Code, or supported GitHub Copilot hosts.</p>
           </div>
-          <div class="client-links" aria-label="MCP Picker packages">
+          <div class="client-links" role="group" aria-label="MCP Picker packages">
             <a href="https://github.com/ChiefInnovator/inventingfirewithai_skills/tree/main/skills/codex/mcp-pick">Codex</a>
             <a href="https://github.com/ChiefInnovator/inventingfirewithai_skills/tree/main/skills/claude/mcp-pick">Claude Code</a>
             <a href="https://github.com/ChiefInnovator/inventingfirewithai_skills/tree/main/skills/copilot/mcp-pick">Copilot</a>
@@ -829,7 +924,7 @@
             <h3>Travel Like a Local</h3>
             <p>Plan neighborhood experiences, relaxing property stays, and practical trip logistics using the traveler's preferences and current trip context.</p>
           </div>
-          <div class="client-links" aria-label="Travel Like a Local packages">
+          <div class="client-links" role="group" aria-label="Travel Like a Local packages">
             <a href="https://github.com/ChiefInnovator/inventingfirewithai_skills/tree/main/skills/codex/travel-like-a-local">Codex</a>
             <a href="https://github.com/ChiefInnovator/inventingfirewithai_skills/tree/main/skills/claude/travel-like-a-local">Claude Code</a>
             <a href="https://github.com/ChiefInnovator/inventingfirewithai_skills/tree/main/skills/copilot/travel-like-a-local">Copilot</a>
@@ -842,7 +937,7 @@
             <h3>Figma to Flutter</h3>
             <p>Capture designs, create or update Flutter widgets, and compare actual renders with source evidence. Adapt to the target project's architecture and design system.</p>
           </div>
-          <div class="client-links" aria-label="Figma to Flutter packages">
+          <div class="client-links" role="group" aria-label="Figma to Flutter packages">
             <a href="https://github.com/ChiefInnovator/inventingfirewithai_skills/tree/main/skills/codex/figma-to-flutter">Codex</a>
             <a href="https://github.com/ChiefInnovator/inventingfirewithai_skills/tree/main/skills/claude/figma-to-flutter">Claude Code</a>
             <a href="https://github.com/ChiefInnovator/inventingfirewithai_skills/tree/main/skills/copilot/figma-to-flutter">Copilot</a>
@@ -897,7 +992,7 @@
           <li><span>3</span><div><strong>Ship one standard.</strong><br>Use a compact skill that guides implementation, review, and refactor work.</div></li>
         </ul>
       </div>
-      <div class="terminal" aria-label="Pragmatic Coder quality gates">
+      <div class="terminal" role="region" aria-label="Pragmatic Coder quality gates">
         <div class="bar"><i class="dot"></i><i class="dot"></i><i class="dot"></i></div>
         <pre><code><span class="key">pragmatic-coder</span>
   <span class="ok">✓</span> read code/docs/tests
@@ -917,9 +1012,10 @@
             <strong>Referenced skills scorecard</strong>
             <span>Historical editorial ratings; revised skill is unscored.</span>
           </div>
-          <a href="evaluations/referenced_skills_scorecard.md">Open markdown</a>
+          <a href="https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/docs/evaluations/referenced_skills_scorecard.md">Open markdown</a>
         </div>
-        <div class="table-wrap" id="scorecard-table" role="region" aria-label="Referenced skills scorecard" tabindex="0">
+        <p id="scorecard-status" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true">Loading skill scorecard.</p>
+        <div class="table-wrap" id="scorecard-table" role="region" aria-label="Referenced skills scorecard" aria-busy="true" tabindex="0">
           <div class="loading">The <a href="evaluations/referenced_skills_scorecard.html">referenced skills scorecard</a> records historical editorial assessments. Read the source for scores and their limits.</div>
         </div>
       </div>
@@ -970,6 +1066,26 @@
       </dl>
     </div>
   </section>
+
+  <section id="built-by" aria-label="About the author">
+    <div class="wrap">
+      <div class="author-block">
+        <div class="avatar"><img src="assets/images/inventing-fire-mark.png" alt="Inventing Fire with AI" width="60" height="60" loading="lazy" decoding="async"></div>
+        <div>
+          <h2>Built by Rich Crane — Microsoft MVP, MILL5.</h2>
+          <p>Part of the <i>Inventing Fire with AI</i> initiative. The same workshop behind <a href="https://chiefinnovator.github.io/videodownloader/">Video Downloader</a>, <a href="https://chiefinnovator.github.io/macedgelight/">MacEdgeLight</a>, and <a href="https://inventingfirewith.ai/cutandmove/">Cut &amp; Move</a>.</p>
+          <div class="author-links">
+            <a href="https://mill5.com" rel="noopener">MILL5</a>
+            <a href="https://www.inventingfirewith.ai" rel="noopener">Inventing Fire</a>
+            <a href="https://www.youtube.com/@InventingFirewithAI" rel="noopener">YouTube</a>
+            <a href="https://podcasts.apple.com/us/podcast/inventing-fire-with-ai/id1814411467" rel="noopener">Podcast</a>
+            <a href="https://github.com/ChiefInnovator" rel="noopener">GitHub</a>
+            <a href="https://mvp.microsoft.com/en-US/MVP/profile/10ce0bc0-7536-43f6-b28c-e9601a4a0d0d" rel="noopener">Microsoft MVP</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
   </main>
 
   <footer id="author">
@@ -981,6 +1097,7 @@
   </footer>
   <script>
     const target = document.getElementById("scorecard-table");
+    const status = document.getElementById("scorecard-status");
 
     function escapeHtml(value) {
       return value
@@ -1011,21 +1128,25 @@
 
       const headers = splitRow(rows[0]);
       const body = rows.slice(1).map(splitRow);
-      const thead = `<thead><tr>${headers.map((h) => `<th>${escapeHtml(h)}</th>`).join("")}</tr></thead>`;
+      const thead = `<thead><tr>${headers.map((h) => `<th scope="col">${escapeHtml(h)}</th>`).join("")}</tr></thead>`;
       const tbody = `<tbody>${body.map((row) => `<tr>${row.map((cell) => `<td>${escapeHtml(cell)}</td>`).join("")}</tr>`).join("")}</tbody>`;
-      return `<table>${thead}${tbody}</table>`;
+      return `<table><caption class="visually-hidden">Referenced skills scorecard</caption>${thead}${tbody}</table>`;
     }
 
-    fetch("evaluations/referenced_skills_scorecard.md")
+    fetch("https://raw.githubusercontent.com/ChiefInnovator/inventingfirewithai_skills/main/docs/evaluations/referenced_skills_scorecard.md")
       .then((response) => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         return response.text();
       })
       .then((markdown) => {
         target.innerHTML = renderMarkdownTable(markdown);
+        target.setAttribute("aria-busy", "false");
+        status.textContent = "Skill scorecard loaded.";
       })
       .catch(() => {
         target.innerHTML = '<div class="loading">Scorecard preview could not load. Open the markdown source from the link above.</div>';
+        target.setAttribute("aria-busy", "false");
+        status.textContent = "Scorecard preview could not load. The markdown source link remains available.";
       });
   </script>
 </body>
