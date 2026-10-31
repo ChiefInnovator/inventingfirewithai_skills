@@ -17,3 +17,5 @@ For dining, match food quality, atmosphere, seating, and occasion. Compare actua
 For lodging, assess sleep, condition, service follow-through, food, room configuration, amenities actually available, total price, and transfer costs. A residential location is an option, not a rule; city access, property relaxation, or event proximity should follow the trip's purpose. Use current loyalty benefits only when relevant.
 
 For special occasions, assess an appropriate table, view, timing, and personal touches. Separate requests from guarantees and disclose added costs. Suggest natural photo opportunities without turning every outing into a shoot.
+
+For step-focused walks, use the traveler's requested target and known completed steps, label distance-to-step estimates, and include appropriate rest, hydration, and restroom opportunities. Route through relevant photographic or cultural highlights and give ordered navigation links using the preferred map service. Include changing time and a realistic return buffer when commitments require them. Do not impose a fixed daily step count, walking ability, or activity quota on every traveler.

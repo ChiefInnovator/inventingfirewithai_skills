@@ -1,6 +1,6 @@
 # Slam Migration to Codex
 
-Adapted on September 5, 2026 from the user's 560-line Claude `slam` skill, source SHA-256 `52832e6d0b627dcac1c2ed9167520ca453c956a37a7c4fdba8823486a5516475`. The maintained packages are [Codex](../../skills/codex/slam/SKILL.md), [Claude](../../skills/claude/slam/SKILL.md), and [Copilot](../../skills/copilot/slam/SKILL.md); the Claude package has since been updated rather than kept as a frozen original. All three now bundle the review reference and Python cleanup guard. Codex retains OpenAI UI metadata; Claude retains its native Stop hook; Copilot uses its host's supported task capabilities.
+Adapted on September 5, 2026 from the user's 560-line Claude `slam` skill, source SHA-256 `52832e6d0b627dcac1c2ed9167520ca453c956a37a7c4fdba8823486a5516475`. The maintained packages are [Codex](https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/skills/codex/slam/SKILL.md), [Claude](https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/skills/claude/slam/SKILL.md), and [Copilot](https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/skills/copilot/slam/SKILL.md); the Claude package has since been updated rather than kept as a frozen original. All three now bundle the review reference and Python cleanup guard. Codex retains OpenAI UI metadata; Claude retains its native Stop hook; Copilot uses its host's supported task capabilities.
 
 ## Preserved Workflow
 

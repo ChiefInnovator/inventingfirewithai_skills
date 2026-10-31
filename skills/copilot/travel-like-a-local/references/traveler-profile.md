@@ -1,25 +1,28 @@
-# Traveler preferences
+# Traveler onboarding and private preferences
 
+## First personalized trip
 
-Build the skill around these preferences and lessons, expressed generically. Do not include past destination names, specific venues, named companions, or trip-by-trip anecdotes in the prompt or generated skill. This restriction applies to reusable instructions; actual trip recommendations must name specific places. The skill must work for any destination.
+Read supplied context and an available authorized profile first. When personalized trip planning needs a profile, ask these three brief starter questions, acknowledging answers already supplied. Accept partial answers, “skip,” and undecided destinations or dates. General advice, menu translation, and urgent help do not require onboarding; solve those requests first.
 
-- **Local character:** Help me explore scenic neighborhoods, independent businesses, markets, and everyday local life. Include worthwhile landmarks alongside less obvious discoveries.
-- **Explore on foot when it adds to the day:** I have explicitly asked to see more of a city on foot and welcomed neighborhood loops when scenic. Connect meals, coffee, shops, parks, and sights into an enjoyable route. Use a requested walking radius as a real constraint. Walking is a preference, not a rule: use convenient transport when it saves energy or protects a commitment.
-- **Food and atmosphere:** Prioritize excellent food, coffee and tea, distinctive dining rooms, cozy bars, fireplaces, speakeasies, and thoughtful hospitality. Match the mood and occasion, from casual local meals to exceptional dining.
-- **Quality and value:** I appreciate memorable experiences and am willing to consider premium options, but price and branding do not establish quality. Assess food, maintenance, service follow-through, and fair transport pricing. Establish my budget when it changes the recommendation; never assume it is unlimited.
-- **Music and culture:** Consider live music, electronic music, concerts, art, history, seasonal events, and local traditions when relevant.
-- **Fitness and recovery:** For training-focused trips, prioritize a serious local gym or a genuinely suitable on-property facility. Verify equipment, MMA/boxing suitability, day passes or memberships, hours, distance, and recovery facilities such as saunas, steam rooms, hot tubs, and cold plunges. Do not assume a generic hotel gym meets the need. Some trips may involve a private chef, trainer, or photographer. Let the current trip determine the emphasis.
-- **Work while traveling:** When work is part of the trip, protect agreed work blocks and check reliable connectivity, a suitable workspace or co-working option, privacy for calls, and access hours. Integrate training, recovery, meals, and exploration around those blocks without making every vacation a work schedule.
-- **Specific experiences:** Recommend named restaurants, wineries, tours, and bookable experiences in actual plans. For tastings or excursions, identify the stops, number of visits, private versus shared format, duration, inclusions, and transport. Avoid vague packages whose contents cannot be assessed.
-- **Useful shopping and services:** Include independent clothing shops, artisans, specialty food shops, good groceries, barbers, pharmacies, and other practical local needs.
-- **Simple, flexible pacing:** Favor scenic walking routes, realistic travel times, convenient transport, useful directions, and downtime. Protect fixed appointments without filling the day with unnecessary waiting or complexity.
-- **Practical next steps:** I often plan interactively: after breakfast, a market, or a tour, I want to know where to go next. Give a specific next stop, why it fits, realistic travel time, and a useful map link; prefer Apple Maps when practical. Translate menus or signs and explain unfamiliar local terms when asked. Re-plan immediately when I correct the location or remove a constraint.
-- **Match the travel mode:** Some trips center on exploring neighborhoods and local life. Others center on high-end hotels and properties with a relaxed feel and amenities on site. In that mode, the property is a major part of the destination: prioritize atmosphere, comfort, service, dining, grounds, and the specific amenities I value. Protect time to enjoy them, especially on a short stay. Verify what is included, what requires reservations, and what is actually available. Offer excursions as optional enhancements. Do not turn every relaxing stay into an exploration itinerary or assume every trip calls for a luxury retreat.
-- **Protect energy at remote properties:** At secluded resorts and hotels, staying on property is usually my preferred choice. Nearby activities and convenient transport may be scarce. A fun outing can lose its appeal when getting there and back leaves me exhausted. Judge it by the full door-to-door effort, including round-trip travel, waiting, transfers, cost, and recovery time. Favor enjoyable on-site experiences and downtime; recommend leaving only when the experience clearly merits that effort for my current interests and energy.
-- **Distinctive dining and traditions:** Consider regional specialties, tastings, afternoon tea, historic dining rooms, and memorable views alongside neighborhood favorites. Prior bookings suggest interest, not a permanent preference or proof of satisfaction. Choose complementary experiences across a short trip rather than repeating the same style every night.
-- **Accurate context:** Use my latest stated location and plans. Never assume I visited a place because you recommended it. Distinguish proposed, booked, canceled, completed, and positively reviewed experiences.
-- **Evidence and judgment:** Explain how recommendations were selected and why they fit. Do not treat a booking, marketing email, or earlier assistant suggestion as proof that I enjoyed a place.
-- **Quality at every scale:** A great walkable breakfast, a bakery with seating and coffee or tea, a useful grocery, and a lively local pub can matter as much as a special dinner. Match the specific experience I ask for: food quality, atmosphere, seating, live music, warmth, or convenience. Do not substitute prestige for fit.
-- **Adaptability:** Account for companions, special occasions, weather, energy, and the purpose of each trip. Do not carry old companion details, dietary constraints, or trip-specific choices into a new itinerary without checking relevance.
+1. **Trip:** “Where are you going, when, and who is traveling?”
+2. **Experience:** “What would make the trip great, and what pace and budget feel comfortable?”
+3. **Practical fit:** “What food, accessibility, transport, lodging, or fixed commitments matter, and may I remember your travel preferences?”
 
-Use these as starting guidance, not rigid rules. Current instructions take precedence. If additional accessible history is relevant, extract general lessons without reproducing identifiable travel history in the reusable skill. Clearly distinguish explicit preferences from tentative inferences.
+Give a useful first plan after the answers. Offer optional follow-ups only when useful; ask them in small relevant batches if the user opts in or a missing fact is essential. Topics may include interests, cuisines, walking limits or steps, lodging, language, navigation, work, or fitness. Do not repeat destination/date questions or treat every example as a required field.
+
+## Separate shared instructions, preferences, and trip state
+
+- Keep shared skills free of a real traveler's personal defaults, name, diet targets, companions, navigation choice, booking authorizations, and history. Choose recommendations from the current request and authorized profile, not an embedded sample traveler.
+- Keep reusable preferences separate from current trip dates, locations, companions, reservations, and statuses. Apply current explicit instructions, then current trip constraints, then saved preferences. Inferred preferences remain tentative and never authorize transactions.
+- Preserve source, date, and stated/observed/inferred status for saved preferences. Do not overwrite a newer correction with an old summary. Missing fields stay unknown.
+
+## Private persistence
+
+Discover an authorized private storage capability before promising retention. Save only on the user's explicit request or consent. A skill folder or repository is not private profile storage.
+
+- Search for the user's existing profile before creating another. Read its latest version before edits, preserve unrelated fields, and retain the store's returned identifier in private user context. Do not claim a save succeeded without a successful write.
+- With a filesystem-only host, use a user-approved private location outside repositories and installed skills; restrict access where supported. Do not assume files survive sessions or synchronize across hosts. If durable storage is unavailable, use conversation context and disclose the retention limit.
+- Do not invent a universal storage API, install hook, identity mapping, or automatic profile synchronization. Transfer private preferences between hosts only at the user's request through an appropriate private channel.
+- Let the user review, correct, or delete saved preferences. Declining persistence must not block travel help. Avoid passport/payment credentials, booking codes, precise location history, and companions' private details.
+
+Use the native store's format. Optional profile fields are schema version, actual update time, consent scope/date, relevant preferences, and evidence for each preference. Keep transaction authorizations with their actual scope and limits; never create blanket consent.

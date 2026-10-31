@@ -44,7 +44,7 @@ Read [workflow.md](references/workflow.md) for state, explorer, batch, and maint
 
 ## Tools and validation
 
-The scripts are relative to this installed skill folder, not the target repository. Run Python 3; install `requirements.txt` into an isolated environment for image checks. The compiler and URL resolver use only the standard library. Read [conversion.md](references/conversion.md) for commands and input/output contracts.
+The scripts are relative to this installed skill folder, not the target repository. Run Python 3; image checks require Python 3.11+ with `requirements.txt` installed in an isolated environment. The compiler and URL resolver use only the standard library. Read [conversion.md](references/conversion.md) for commands and input/output contracts.
 
 Run the target project's relevant analyzer, widget tests, and actual Flutter renders. Read [fidelity.md](references/fidelity.md) before comparison or visual approval. Capture generation, analyzer success, a generated golden, pixel agreement, human approval, and production adoption are separate results.
 
