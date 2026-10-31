@@ -1,10 +1,10 @@
 # Travel Like a Local: ChatGPT web migration
 
-Web setup status recorded September 25, 2026. Export refreshed October 10, 2026 to match the current repository source.
+Web setup status recorded September 25, 2026. Export refreshed October 29, 2026 to match the current repository source.
 
 ## Source and export
 
-The canonical source for this export is [the Codex travel skill](../../skills/codex/travel-like-a-local/SKILL.md). The [downloadable ZIP](../../assets/distributions/travel-like-a-local.zip) preserves its complete folder, including `agents/openai.yaml`, `assets/icon.svg`, `references/traveler-profile.md`, and `references/trip-operations.md`. Keep changes in the source folder and regenerate the archive when those files change.
+The canonical source for this export is [the Codex travel skill](../../skills/codex/travel-like-a-local/SKILL.md). The [downloadable ZIP](../../assets/distributions/travel-like-a-local.zip) preserves its complete folder, including `agents/openai.yaml`, `assets/icon.svg`, `references/traveler-profile.md`, and `references/trip-operations.md`, plus venue research, day planning, and experience references. The traveler-profile reference defines onboarding and storage rules only; no personal profile is bundled. Keep changes in the source folder and regenerate the archive when those files change.
 
 This is a skill source archive, not an installable plugin package. Installing a local Codex skill does not establish that it is available in ChatGPT on the web.
 

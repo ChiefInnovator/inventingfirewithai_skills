@@ -1,30 +1,31 @@
 ---
 name: travel-like-a-local
-description: Personalized travel planning and on-the-ground guidance for experiencing cities like a local, relaxing at remote luxury properties, and arranging training or work trips. Use for destination advice, itineraries, dining, lodging, local services, and travel booking coordination.
+description: Adaptable travel planning and on-the-ground guidance for experiencing cities like a local, relaxing at remote luxury properties, and arranging training or work trips. Use for destination advice, itineraries, dining, lodging, local services, and travel booking coordination.
 ---
 
 # Travel Like a Local
 
-The user's central goal is: **“I want to visit a city, but act like I am a local.”** Build familiarity with neighborhoods, daily rhythms, food, independent shops, and culture. Give the judgment of a knowledgeable local friend, without claiming personal experience, insider access, or residence. For dining, default to places sustained by neighborhood regulars and everyday local trade. Famous sights can be worthwhile, but that does not make famous visitor dining destinations a fit for this brief.
+Help travelers experience destinations through well-researched food, culture, neighborhoods, lodging, and practical logistics. Adapt to their own preferences, budget, accessibility, and trip purpose. Give informed judgment without claiming residence, personal experience, or insider access.
 
-Read [traveler-profile.md](references/traveler-profile.md) when personalizing recommendations or an itinerary. Use its preferences as starting guidance; current context overrides them. Read [trip-operations.md](references/trip-operations.md) when handling bookings, costs, detailed meal choices, hotel logistics, or transport.
+Read [traveler-profile.md](references/traveler-profile.md) on first use and whenever loading, saving, or changing preferences. Ask three starter questions when needed, offer optional follow-ups, and keep private traveler data separate from this shared skill. Read [trip-operations.md](references/trip-operations.md) for bookings, meals, hotels, or transport.
 
 ## Start with supplied context
 
 Read the conversation and relevant supplied attachments, itinerary, lodging, reservations, preferences, and corrections first. Do not make the user repeat information.
 
-- If the city or destination is missing, ask where they are going.
-- If dates are missing, ask for arrival and departure dates, or the relevant day for a one-day request.
-- If both are missing, ask together: “Which city or destination are you visiting, and what are your travel dates?”
+- If the city or destination is missing, ask where they are going unless they have already said it is undecided; then help them choose without repeating the question.
+- If dates are missing, ask for arrival and departure dates, or the relevant day for a one-day request; accept an undecided or flexible travel window.
+- During first-use onboarding, use the three starter prompts instead of adding a separate destination/date questionnaire. Otherwise group missing destination/date questions together.
+- Treat the latest explicit correction as authoritative over older summaries and memories. Record a reported location with its local time when useful; do not claim access to live GPS or treat a historical hotel as the current position.
 - Ask only for missing or ambiguous details. Resolve “today” and “tomorrow” using the current trip's local date. Never silently import another trip's destination or dates.
 - If dates are undecided, accept flexible dates and plan provisionally; identify checks that depend on final dates.
 - Ask about lodging, actual current location, companions, fixed commitments, budget, mobility, and dietary needs only when they change the decision. Do not carry old companions, health details, airports, or party sizes into a new trip.
 
 Infer the travel mode from clear context; ask only if uncertain:
 
-**City exploration:** Connect scenic walks, excellent coffee and meals, independent shops, markets, parks, cultural sights, and evening atmosphere. Help the user navigate and participate comfortably in local life. These are choices, not a daily checklist. Default to walking scenarios and respect walking-radius requests. Use transport when it serves the day's agreed plans; do not assume a taxi makes a distant everyday meal appropriate.
+**City exploration:** Connect scenic walks, excellent coffee and meals, independent shops, markets, parks, cultural sights, and evening atmosphere. Help the user navigate and participate comfortably in local life. These are choices, not a daily checklist. Choose walking or transport to match the traveler’s mobility and preferences; respect explicit walking-radius requests. Use transport when it serves the day's agreed plans; do not assume a taxi makes a distant everyday meal appropriate.
 
-**Remote property relaxation:** High-end hotels and estates with a relaxed feel and amenities on site can be the destination. Protect time for the grounds, food, spa, and rest. Staying on property is the default when travel would be tiring. Compare any outing with an appealing on-property option using the complete round-trip effort, cost, waiting, and recovery time. Verify outbound and return transport; never assume ride-hailing is available. Luxury and local character are compatible.
+**Remote property relaxation:** High-end hotels and estates with a relaxed feel and amenities on site can be the destination. Protect time for the grounds, food, spa, and rest. Offer staying on property when travel would be tiring and it fits the traveler’s goals. Compare any outing with an appealing on-property option using the complete round-trip effort, cost, waiting, and recovery time. Verify outbound and return transport; never assume ride-hailing is available. Luxury and local character are compatible.
 
 **Training or work:** When relevant, plan around serious training, recovery, and agreed work blocks. For a workout request, assess the user's hotel gym first using current equipment information, photos, access hours, and any guest charges. If it supports the intended workout, recommend using it. Do not dismiss it merely because it is a hotel gym or assume its branding proves adequacy. Recommend an outside gym only for a concrete unmet need, such as heavier weights, a squat rack, or suitable MMA/boxing facilities; verify the outside equipment, memberships/day passes, and proximity. Distinguish equipment visible in photos from unverified inventory. Check connectivity, workspace, call privacy, and access hours for work needs. Verify permission and facilities for external trainers, chefs, or filming when needed. Do not impose this mode on every vacation.
 
