@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-31",
+  "skillPackage": "skills/codex/travel-like-a-local",
+  "skillTreeSha256": "ad4dceaf30205e7a7bc6222c4fef815cfb7ac9e7bfc6c06b13ab8e90a79f768b",
+  "skillFiles": {
+    "SKILL.md": "8f495e111774c78eb94e87bb52311ca3c2fe2ebf81bff7cea2211bd4084f8638",
+    "agents/openai.yaml": "c6d53fffb666c579b10c76437ec249d024126894da732f71ce9cc5fe816f9229",
+    "assets/icon.svg": "9be88f8dd4c5e658961515c71389eafd45142ffa68bcae58e8dcff57d178ed91",
+    "references/day-planning.md": "5c81e10f473319942dc415db9ef81ca370bffa1a922decb553db6e0e188447b0",
+    "references/experience-and-learning.md": "52c52318430d38fa1cb1430588997c4fdb3d938a9200c01ab27747a779cb8996",
+    "references/traveler-profile.md": "75d72269ff56d225ba1cea9b4a21f552a6fca3c44b3901295263b1ca8728ebec",
+    "references/trip-operations.md": "c9e935d5cb73cc6d8e596192ae7790012b8f90d06ac786ad841805cf97f45547",
+    "references/venue-research.md": "cb9af3cabaf9c5ef0684a5761142035a5237d84910cd2ca85ca1ec366a7ade87"
+  },
+  "hashMethod": "Sort relative POSIX file paths; SHA-256 over each UTF-8 path plus NUL plus raw 32-byte SHA-256 of its file contents. Exclude Python caches.",
+  "execution": "Four fresh Codex subagents inheriting the session model and reasoning settings; exact model identifiers not separately exported.",
+  "assessmentMethod": "Parent assessed response meaning and verified actual fixture/profile/skill bytes and permitted file sets. No wording-based score.",
+  "results": [
+    {
+      "id": "menu_translation",
+      "fixture": "../../tests/fixtures/travel/menu_translation.json",
+      "fixtureSha256": "db17be1ff56ea1cba690f7b9c275c92ec708004a6a4e5667b426ebe39a634b9a",
+      "result": "pass",
+      "assessment": [
+        "All three translations and brief explanations are accurate.",
+        "No destination, date, or profile questions were added."
+      ],
+      "response": "- **Zuppa di ceci e rosmarino:** Chickpea and rosemary soup.\n- **Pappardelle ai funghi porcini:** Wide, flat ribbon pasta with porcini mushrooms, which have a rich, earthy flavor.\n- **Panna cotta ai frutti di bosco:** A chilled, softly set cream dessert with mixed berries. *Panna cotta* means “cooked cream”; *frutti di bosco* means “woodland fruits,” usually mixed berries."
+    },
+    {
+      "id": "confirmed_pickup",
+      "fixture": "../../tests/fixtures/travel/confirmed_pickup.json",
+      "fixtureSha256": "6fa848cca836e84ef38b1c575f4846ce833f9e3088c8240b9276b5284037d811",
+      "result": "pass",
+      "assessment": [
+        "Latest supplier-amended pickup is 08:15, November 5, 2026, with correct location, terminal, and EUR65 fare.",
+        "Planning suggestion at07:45 is explicitly separate from booking; no confusion with Traveler B."
+      ],
+      "response": "Your confirmed pickup is **November 5, 2026 at 08:15 local time (Europe/Rome)**, from the **Lark Hotel lobby** to **Eastfield Airport Terminal 2**, for **€65**.\n\nThe supplier’s October 29 amendment replaces 09:00. The 07:45 time was only a planning suggestion, not a booking change."
+    },
+    {
+      "id": "closed_venue",
+      "fixture": "../../tests/fixtures/travel/closed_venue.json",
+      "fixtureSha256": "c663e5b85f13b4ac0cfd32f3f66891fbc07fa8332cf142aa5c14d37d2fe621f2",
+      "result": "pass",
+      "assessment": [
+        "Selected bakery is five minutes away and within requested limit.",
+        "Acknowledges closure and absent second qualifying option; no invented seat or live verification.",
+        "Uses supplied rating, review count, verification date, menu, and local-customer evidence."
+      ],
+      "response": "Head to **Market Corner Bakery, Cedar Lane**—a five-minute walk per your notes. Today's branch listing and official notice show breakfast until 13:00: eggs on toast €9 + coffee €3.\n\n**Google:** 4.6★, 238 reviews (supplied verification: 2026-10-31). Neighborhood reporting describes repeat local customers. Seats aren't confirmed; recent review text wasn't supplied.\n\nWillow is closed; these notes contain no second option within your ten-minute limit."
+    },
+    {
+      "id": "private_preferences",
+      "fixture": "../../tests/fixtures/travel/private_preferences.json",
+      "fixtureSha256": "a2c76cfe7029335736e22e223b5d6dafb8f2714b3c6374d8ad91462a62e3fef6",
+      "result": "pass",
+      "assessment": [
+        "First turn leaves original profile bytes unchanged; conversation-only preferences acknowledged.",
+        "Second turn updates only the authorized fictional private profile and preserves existing mapService.",
+        "All input fixtures and the copied skill remain unchanged; only permitted output files exist."
+      ],
+      "turns": [
+        {
+          "response": "I’ll use quiet cafés and walking between nearby stops for this chat only, and won’t save those preferences.",
+          "profileUnchanged": true
+        },
+        {
+          "prompt": "Please now remember these fictional preferences in the authorized test profile at private-store/preferences.json: I prefer quiet cafes and walking between nearby stops. Preserve the profile's other fields.",
+          "response": "Saved your preferences for quiet cafés and walking between nearby stops in private-store/preferences.json, preserving the other fields.",
+          "profile": {
+            "schemaVersion": 1,
+            "preferences": {
+              "mapService": "Apple Maps",
+              "cafeAtmosphere": "quiet",
+              "transportBetweenNearbyStops": "walking"
+            },
+            "preferenceEvidence": {
+              "cafeAtmosphere": {
+                "source": "User explicitly requested saving these fictional preferences",
+                "date": "2026-10-31T12:05:19.260703+00:00",
+                "status": "stated",
+                "consentScope": "Authorized disposable test profile at private-store/preferences.json only"
+              },
+              "transportBetweenNearbyStops": {
+                "source": "User explicitly requested saving these fictional preferences",
+                "date": "2026-10-31T12:05:19.260703+00:00",
+                "status": "stated",
+                "consentScope": "Authorized disposable test profile at private-store/preferences.json only"
+              }
+            }
+          }
+        }
+      ],
+      "initialProfileSha256": "0b79fe52acaaaceafc7a11139200cab0594d24abc1e48c55e530a01abd87a455",
+      "finalProfileSha256": "14b27e1dc24ca01142595532bbda8f7fe96a2e8c61cbad6b2c4881cb8bc8bd71"
+    }
+  ],
+  "limitations": [
+    "Single run per case; preference case uses two turns.",
+    "Fictional offline evidence; no live searches, calls, bookings, or real memory writes.",
+    "Executed the Codex package; cross-client package checks do not prove Claude or Copilot runtime outcomes.",
+    "Agent smoke runs are separate from deterministic unit tests and are not rerun by unittest."
+  ]
+}

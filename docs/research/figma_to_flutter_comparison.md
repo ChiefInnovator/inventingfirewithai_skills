@@ -1,10 +1,15 @@
+---
+title: Figma to Flutter skill and plugin comparison
+description: Scope, portability, conversion helpers, and source-to-render verification in the Figma-to-Flutter agent skill compared with community code generation.
+---
+
 # Why a Figma-to-Flutter skill
 
 The goal is repeatable, reviewable Flutter integration: preserve existing application work, trace each widget to its design, and show what was actually validated. A useful generated starting point is one part of that workflow.
 
 ## Community reference
 
-The community **Figma to Code** plugin generates editable Flutter scaffolds and exports assets. Its documented strengths include local deterministic generation, warnings, and no external design uploads. Its stated limits include no repository connection or ongoing synchronization, no application logic, human accessibility review, and target-dependent vector/effect support. Large selections can also cost memory. These are scope boundaries, not evidence that the plugin is generally defective. The official plugin and repository links are in [references.md](../../references.md#figma-to-flutter).
+The community **Figma to Code** plugin generates editable Flutter scaffolds and exports assets. Its documented strengths include local deterministic generation, warnings, and no external design uploads. Its stated limits include no repository connection or ongoing synchronization, no application logic, human accessibility review, and target-dependent vector/effect support. Large selections can also cost memory. These are scope boundaries, not evidence that the plugin is generally defective. The official plugin and repository links are in [references.md](https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/references.md#figma-to-flutter).
 
 ## What this skill adds
 

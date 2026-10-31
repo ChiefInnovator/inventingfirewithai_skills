@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # /// script
 # requires-python = ">=3.11"
-# dependencies = ["tomlkit==0.15.1"]
+# dependencies = ["tomlkit==0.15.2"]
 # ///
 """Select project-local Codex MCP servers and installed app integrations without exposing secrets."""
 from __future__ import annotations

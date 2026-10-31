@@ -5,6 +5,7 @@ Reusable coding, shipping, Figma-to-Flutter, and travel skills for Codex, Claude
 ## Rules
 
 - Keep `README.md` short; no per-skill READMEs or redundant docs. Put source links in `references.md`, research under `docs/`, and operational rules here.
+- Keep docs and GitHub Pages optimized for SEO, GEO, and AEO: crawlable factual HTML, clear answers, canonical/social metadata, accurate structured data, and working discovery links. Run visibility regression checks and verify the deployed output; respect host-root crawler-policy scope and never promise rankings or AI citations.
 - Keep Pragmatic Coder compact; add capability only when it earns its token cost.
 - Do not reference local files outside this repo.
 - No mocks in implementation code; mocks stay in tests.

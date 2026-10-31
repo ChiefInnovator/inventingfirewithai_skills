@@ -35,6 +35,8 @@ Canonical reference catalog for this repository. README stays short; detailed so
 - [Skill instruction token audit](docs/evaluations/skill_token_budget.md)
 
 - [Pragmatic Coder Behavioral Evaluation](docs/evaluations/pragmatic_coder_evaluation.md)
+- [Travel Like a Local tests and behavioral smoke cases](docs/evaluations/travel_like_a_local_evaluation.md)
+- [Site discovery and SEO/GEO/AEO validation](docs/evaluations/site_visibility.md)
 - [Referenced Skills Audit](docs/evaluations/referenced_skills_audit.md)
 - [Referenced Skills Scorecard](docs/evaluations/referenced_skills_scorecard.md)
 
@@ -75,6 +77,25 @@ Reviewed October 29, 2026 for the Claude, Codex, and Copilot packages. Automatic
 - [Test Driven Development Skill Research](docs/research/tdd_skill_research.md)
 - [TDD Skill References](docs/research/tdd_skills_references.md)
 
+### Site discovery
+
+The SEO and AI Visibility workflow informs crawlability, clear visible answers, factual metadata, and evidence-bounded validation. The implementation uses these primary references:
+
+- [Google Search: AI features and your website](https://developers.google.com/search/docs/appearance/ai-features)
+- [Google robots.txt specification and host-root scope](https://developers.google.com/crawling/docs/robots-txt/robots-txt-spec)
+- [Schema.org SoftwareSourceCode](https://schema.org/SoftwareSourceCode)
+- [GitHub Pages and Jekyll](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/about-github-pages-and-jekyll)
+- [Local site discovery and validation](docs/evaluations/site_visibility.md)
+
+### Dependency versions
+
+Verified October 31, 2026 against the primary package registries. Python image checks require 3.11+ with Pillow 13; the test environment uses Python 3.14.
+
+- [Pillow 13.0.0](https://pypi.org/project/pillow/13.0.0/) and [release notes](https://pillow.readthedocs.io/en/stable/releasenotes/13.0.0.html)
+- [tomlkit 0.15.2](https://pypi.org/project/tomlkit/0.15.2/)
+- [PyYAML 6.0.3](https://pypi.org/project/PyYAML/6.0.3/)
+- [Checkout v7.0.1](https://github.com/actions/checkout/releases/tag/v7.0.1) and [Setup Python v7.1.0](https://github.com/actions/setup-python/releases/tag/v7.1.0), pinned by commit in the checks workflow
+
 ## Scorecard Coverage
 
 All skill-like references are scored in [`docs/evaluations/referenced_skills_scorecard.md`](docs/evaluations/referenced_skills_scorecard.md). Non-skill standards, documentation pages, people, products, and organization links are cataloged here but not scored.
@@ -88,6 +109,7 @@ Local packages and comparison:
 - [Claude Code skill](skills/claude/figma-to-flutter/SKILL.md)
 - [GitHub Copilot skill](skills/copilot/figma-to-flutter/SKILL.md)
 - [Incremental work and whole-run measurements](skills/codex/figma-to-flutter/references/performance.md)
+- [Portable finished-run history exporter](skills/codex/figma-to-flutter/scripts/run_history.py)
 - [Font, glyph, and text checks](skills/codex/figma-to-flutter/references/typography.md)
 - [Why this skill exists and its specific improvements](docs/research/figma_to_flutter_comparison.md)
 
@@ -104,6 +126,8 @@ Official layout references, checked October 29, 2026:
 The local packages adapt an existing conversion workflow into customer-neutral instructions and independently implemented helpers. They do not bundle private captures, decision history, or upstream plugin implementation files. The comparison describes scope and verification additions, not measured superiority. The community plugin is a tool reference, not an agent skill.
 
 The October 29, 2026 update adapts current workflow improvements across all three clients: complete drift coverage, font/glyph gates, verified incremental reuse, isolated hosted checks, scoped batch edits, and persistent whole-run screen throughput. The compiler adds measured layout/paint repairs; project-specific capture, theme, renderer, and portal adapters remain outside the packages. Regression tests do not establish live speed or visual acceptance.
+
+The October 31, 2026 comparison adds optional sanitized, append-only finished-run history and provenance. The reusable packages contain no customer captures, product routes, project ledger schema, theme bindings, measured widget constants, or project-specific comparison exceptions. The [synchronization audit](docs/evaluations/referenced_skills_audit.md#october-31-package-synchronization) records the disk and account search coverage.
 
 ### `README.md`
 

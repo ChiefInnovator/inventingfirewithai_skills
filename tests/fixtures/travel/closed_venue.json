@@ -1,0 +1,34 @@
+{
+  "id": "closed_venue",
+  "prompt": "I'm at Maple Square and hungry. Willow Kitchen is closed; I just tried its door. Find breakfast within a ten-minute walk using these supplied venue notes. Keep it short.",
+  "context": {
+    "as_of": "2026-10-31T09:20:00+00:00",
+    "fictional_location": "Maple Square",
+    "venues": [
+      {
+        "name": "Willow Kitchen, Maple Square branch",
+        "walk_minutes": 2,
+        "google_rating": 4.7,
+        "google_review_count": 412,
+        "verification_date": "2026-10-31",
+        "evidence": "The old regular-hours page says open at 08:00. Today's exact-branch listing says temporarily closed until November 10. The traveler reports the door is closed and no staff are present."
+      },
+      {
+        "name": "Market Corner Bakery, Cedar Lane branch",
+        "walk_minutes": 5,
+        "google_rating": 4.6,
+        "google_review_count": 238,
+        "verification_date": "2026-10-31",
+        "evidence": "Today's exact-branch listing and dated official notice show open 07:00-14:00, breakfast kitchen until 13:00. Menu: eggs on toast EUR 9, pastry EUR 3, coffee EUR 3. Seated tables are shown in current photos; current seat availability has not been confirmed. Neighborhood reporting describes repeat local customers."
+      },
+      {
+        "name": "Riverside Dining, Quay branch",
+        "walk_minutes": 35,
+        "google_rating": 4.8,
+        "google_review_count": 911,
+        "verification_date": "2026-10-31",
+        "evidence": "Breakfast service is operating today, with a current menu and recent local-customer reports."
+      }
+    ]
+  }
+}

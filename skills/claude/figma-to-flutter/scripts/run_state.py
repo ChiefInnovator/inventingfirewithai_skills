@@ -104,16 +104,25 @@ def run_summary(value):
             'secondsPerScreen': seconds / completed if completed else None}
 
 
-def start_run(state_dir, command, run_id=None):
+def start_run(state_dir, command, run_id=None, repo_root=None, skill_root=None):
     if not isinstance(command, str) or not command.strip():
         raise ValueError('Name the skill command being timed')
+    started_at = utc_now().isoformat()
     run_id = run_id if run_id is not None else utc_now().strftime('%Y%m%dT%H%M%S') + '-' + uuid.uuid4().hex[:8]
     path = run_path(state_dir, run_id)
+    provenance = None
+    if repo_root is not None or skill_root is not None:
+        from run_history import capture_provenance
+        provenance = capture_provenance(repo_root, skill_root)
+    if repo_root is not None and Path(repo_root).expanduser().resolve() in path.parents:
+        raise ValueError('Mutable run state must be outside the target repository')
     with file_lock(path.with_suffix('.lock')):
         if path.exists():
             raise ValueError('Run already exists; report or finish it without resetting its timer')
         value = {'run': run_id, 'command': command, 'status': 'running', 'metricsFile': str(path),
-                 'startedAt': utc_now().isoformat(), 'stages': [], 'items': {}}
+                 'startedAt': started_at, 'stages': [], 'items': {}}
+        if provenance is not None:
+            value['provenance'] = provenance
         summary = run_summary(value)
         atomic_json(path, value)
     return summary
@@ -194,6 +203,8 @@ def main(argv=None):
     start = sub.add_parser('start', help='start the whole timer before preflight or planning')
     start.add_argument('--command', required=True)
     start.add_argument('--run')
+    start.add_argument('--repo-root', help='optional explicit Git root for starting revision/dirty provenance')
+    start.add_argument('--skill-root', help='optional explicit skill folder for a starting content hash')
     update = sub.add_parser('progress', help='record unique screen or part outcomes')
     update.add_argument('--run', required=True)
     update.add_argument('--collection', required=True)
@@ -214,7 +225,7 @@ def main(argv=None):
     args = parser.parse_args(argv)
     try:
         if args.action == 'start':
-            result = start_run(args.state_dir, args.command, args.run)
+            result = start_run(args.state_dir, args.command, args.run, args.repo_root, args.skill_root)
         elif args.action == 'progress':
             result = progress(args.state_dir, args.run, args.collection, args.slugs, args.kind, args.outcome)
         elif args.action == 'report':

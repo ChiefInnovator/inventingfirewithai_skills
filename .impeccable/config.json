@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "docs/index.html"
+        ],
+        "createdAt": "2026-10-31T11:57:52.940Z",
+        "reason": "Agent: verified false positive; .brand-strip contains .wrap with a width of calc(100% - 40px), centered horizontal margins, and 30px vertical padding. The scanner ignores the existing wrapper gutters."
+      }
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+# Inventing Fire with AI Skills
+
+> Five reusable AI agent skills for Codex, Claude Code, and GitHub Copilot, created by Richard Crane.
+
+The library contains Pragmatic Coder for focused coding and review, Slam for scoped GitHub delivery, MCP Picker for project integration selection, Figma to Flutter for design conversion and evidence checks, and Travel Like a Local for destination advice and trip logistics. Install a complete client-specific skill folder, including its supporting resources. The repository uses the MIT license.
+
+Travel Like a Local keeps shared instructions separate from private traveler preferences and requires consent before saving preferences. Its ZIP is a Codex source archive, not an installable ChatGPT plugin. Figma capture, rendering, pixel comparison, human approval, and production adoption are separate results. Offline tests do not establish live service acceptance.
+
+## Library and packages
+
+- [Library overview and installation](https://chiefinnovator.github.io/inventingfirewithai_skills/): Five skills, client package links, installation guidance, and common questions.
+- [Source repository](https://github.com/ChiefInnovator/inventingfirewithai_skills): Maintained instructions, scripts, references, and tests.
+- [Codex packages](https://github.com/ChiefInnovator/inventingfirewithai_skills/tree/main/skills/codex): Complete skill folders for Codex.
+- [Claude Code packages](https://github.com/ChiefInnovator/inventingfirewithai_skills/tree/main/skills/claude): Complete skill folders for Claude Code.
+- [GitHub Copilot packages](https://github.com/ChiefInnovator/inventingfirewithai_skills/tree/main/skills/copilot): Complete skill folders for GitHub Copilot.
+- [MIT license](https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/LICENSE): Repository license.
+
+## Test evidence and workflow details
+
+- [Travel tests and behavioral results](https://chiefinnovator.github.io/inventingfirewithai_skills/evaluations/travel_like_a_local_evaluation.html): Deterministic package checks and four offline Codex behavioral scenarios.
+- [Package synchronization audit](https://chiefinnovator.github.io/inventingfirewithai_skills/evaluations/referenced_skills_audit.html): Scope, validation evidence, and acceptance limits.
+- [Figma workflow and validation scope](https://chiefinnovator.github.io/inventingfirewithai_skills/research/figma_to_flutter_comparison.html): Conversion, drift, rendering, and review boundaries.
+- [ChatGPT web setup status](https://chiefinnovator.github.io/inventingfirewithai_skills/migrations/travel_chatgpt_web.html): Source export and separate account-installation acceptance.
+- [Site visibility implementation](https://chiefinnovator.github.io/inventingfirewithai_skills/evaluations/site_visibility.html): Metadata, crawlable content, structured data, and hosting limitations.

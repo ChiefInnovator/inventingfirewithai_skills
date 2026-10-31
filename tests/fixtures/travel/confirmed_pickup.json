@@ -1,0 +1,26 @@
+{
+  "id": "confirmed_pickup",
+  "prompt": "What time is my booked airport pickup on November 5? Use the supplied records.",
+  "context": {
+    "traveler": "Traveler A",
+    "timezone": "Europe/Rome",
+    "records": [
+      {
+        "source": "supplier confirmation, October 27, 2026",
+        "text": "Traveler A: November 5, 2026, 09:00 pickup at Lark Hotel lobby to Eastfield Airport Terminal 2. Fixed fare EUR 65. Confirmed."
+      },
+      {
+        "source": "supplier amendment, October 29, 2026",
+        "text": "We confirm Traveler A's November 5 pickup is changed to 08:15 local time. Lark Hotel lobby, Eastfield Airport Terminal 2, EUR 65 unchanged. This supersedes the 09:00 pickup."
+      },
+      {
+        "source": "planning note, October 30, 2026",
+        "text": "A 07:45 departure would provide a longer airport buffer. This is a suggestion; no change was requested from the supplier."
+      },
+      {
+        "source": "supplier confirmation for another traveler, October 30, 2026",
+        "text": "Traveler B: November 5 pickup at 11:00 from Lark Hotel to Eastfield Airport Terminal 1. Confirmed."
+      }
+    ]
+  }
+}
