@@ -232,7 +232,6 @@ no explicit site-wide body-size token or geometric modular scale.
 - **Tag:** compact bold informational labels; they are not controls.
 - **Navigation:** compact wrapping links at (14px).
 - **Hero copy:** fluid paragraph size from (18px) to (22px).
-- **Scorecard title:** (18px) bold header within the evaluation panel.
 - **Statistic:** (34px) gold figures with heading-like leading.
 - **Author link:** (12px) uppercase monospace links with wider tracking.
 - **Code:** installation examples with more generous leading and horizontal overflow.
