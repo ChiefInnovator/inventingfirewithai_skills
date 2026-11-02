@@ -14,8 +14,9 @@ Reusable coding, shipping, Figma-to-Flutter, and travel skills for Codex, Claude
 - Act on obvious next steps; ask only for real blockers.
 - Reading, editing, or installing Slam does not authorize shipping.
 - Feature branches merge into `develop` by pull request; only `develop` merges into `main`, also by pull request. Never commit or push directly to `develop` or `main`.
+- Feature branches belong to this repository and use `feature/`, `feat/`, `fix/`, `bugfix/`, `hotfix/`, `improve/`, `chore/`, `docs/`, `test/`, `refactor/`, `perf/`, `build/`, `ci/`, or `style/` prefixes.
 - Monitor automatic Copilot review and address valid findings. Honor an explicit user instruction not to wait for Copilot; required GitHub checks, approvals, and branch protections still apply.
-- Keep automatic Copilot review enabled for every target branch, including drafts and new pushes, without path exclusions.
+- Keep cloud Copilot code review active only for `refs/heads/develop`, including drafts and new pushes, without path exclusions. Do not target `main` or use `~DEFAULT_BRANCH`.
 - Keep shared Slam references and helpers identical across the three client packages; preserve host-specific entrypoints and Claude hooks. Synchronize authorized installed copies when shipping skill maintenance.
 
 ## Layout and use
