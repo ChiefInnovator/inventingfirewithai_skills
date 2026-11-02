@@ -186,5 +186,5 @@ exception. Final configured detector returned zero findings. Targeted real brows
 checks and axe scans passed at the recorded widths; the separate file-only finish
 reviewer returned **ship**, with all seven findings resolved and no visible
 regression. No new heuristic score or full accessibility certification is claimed.
-Final unified verification passed487 tests, zero skips/failures. See the separate
+Final unified verification passed 487 tests, zero skips/failures. See the separate
 browser and finish reports for exact evidence and limits.
