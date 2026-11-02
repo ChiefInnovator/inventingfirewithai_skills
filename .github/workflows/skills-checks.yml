@@ -17,9 +17,12 @@ jobs:
   package-and-visibility:
     name: Package and visibility checks
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
         with:
           python-version: '3.14'
@@ -27,5 +30,23 @@ jobs:
           cache-dependency-path: tests/requirements.txt
       - name: Install test dependencies
         run: python -m pip install --disable-pip-version-check -r tests/requirements.txt
+      - name: Install Codex metadata test prerequisite
+        run: npm install --global @openai/codex@0.166.0
       - name: Check packages, docs, and site discovery
-        run: python -m unittest discover -s tests
+        run: python scripts/check_repository.py
+
+  pages-artifact:
+    name: Pages artifact check
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/jekyll-build-pages@44a6e6beabd48582f863aeeb6cb2151cc1716697 # v1.0.13
+        with:
+          source: docs
+          destination: _site
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: '3.14'
+      - name: Check source and built scorecard data
+        run: python scripts/sync_site_data.py --check --built-dir _site

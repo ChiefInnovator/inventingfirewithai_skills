@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "recorded": "2026-11-02",
+  "origin": "Existing repository branding; no raster generated or modified in this work. Rights were not newly assessed.",
+  "assets": [
+    {
+      "path": "docs/assets/images/inventing-fire-brand.png",
+      "sha256": "35b7935e557417e765dc3c4d1d9d0216d7b25818b81883de4c096ef8d422d991",
+      "width": 967,
+      "height": 1014,
+      "source_commit": "89f1a4cc98c25ac226d2d23102458345a6e70965"
+    },
+    {
+      "path": "docs/assets/images/inventing-fire-mark.png",
+      "sha256": "7d0e0daf315f49645186ecdb68f300ec5cbfbd5a55f146b524fbf1b416f22cd8",
+      "width": 176,
+      "height": 176,
+      "source_commit": "f20d14c22d153f0f436e27d1d1d1cd4816c707ab"
+    }
+  ]
+}

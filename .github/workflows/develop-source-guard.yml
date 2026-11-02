@@ -1,0 +1,22 @@
+name: Develop source guard
+
+on:
+  pull_request_target:
+    branches: [develop]
+    types: [opened, edited, reopened, synchronize, ready_for_review]
+
+permissions: {}
+
+jobs:
+  feature-only:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require a feature branch in this repository
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+          HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+        run: |
+          if [[ "$HEAD_REPO" != "$GITHUB_REPOSITORY" || ! "$HEAD_REF" =~ ^(feature|feat|fix|bugfix|hotfix|improve|chore|docs|test|refactor|perf|build|ci|style)/.+$ ]]; then
+            echo "Pull requests into develop must come from a feature branch in $GITHUB_REPOSITORY (got $HEAD_REPO:$HEAD_REF)."
+            exit 1
+          fi

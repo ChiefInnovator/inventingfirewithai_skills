@@ -15,6 +15,9 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 SITE = "https://chiefinnovator.github.io/inventingfirewithai_skills/"
+SCORECARD_ASSET = "assets/data/referenced-skills-scorecard.txt"
+SCORECARD_PREFIX = (b"Generated scorecard snapshot. Source: "
+                   b"docs/evaluations/referenced_skills_scorecard.md\n\n")
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
 
 
@@ -133,6 +136,18 @@ def local_file(docs, link, base=SITE, fragments=True):
     return target
 
 
+def check_scorecard_data(document, docs, source):
+    scripts = "\n".join(node.text(raw=True) for node in document.find("script")
+                        if node.attrs.get("type") != "application/ld+json")
+    fetches = re.findall(r"\bfetch\(\s*['\"]([^'\"]+)['\"]\s*\)", scripts)
+    require(fetches == [SCORECARD_ASSET], "Preview must fetch the deployed relative scorecard asset")
+    asset = local_file(docs, fetches[0])
+    data = asset.read_bytes()
+    require(not data.startswith(b"---"), "Scorecard data must not be processed as Jekyll front matter")
+    require(data == SCORECARD_PREFIX + source.read_bytes(),
+            "Deployed scorecard data differs from its fixed prefix and canonical source bytes")
+
+
 def entities(document):
     result = []
     def visit(value):
@@ -234,6 +249,56 @@ class PagesVisibilityTests(unittest.TestCase):
                 if value:
                     with self.subTest(tag=node.tag, link=value):
                         local_file(DOCS, value)
+
+    def test_scorecard_preview_uses_deployed_data_with_exact_source_bytes(self):
+        check_scorecard_data(self.document, DOCS, DOCS / "evaluations" / "referenced_skills_scorecard.md")
+
+    def test_scorecard_data_contract_rejects_external_missing_or_stale_assets(self):
+        document = Document(f'<script>fetch("{SCORECARD_ASSET}")</script>').root
+        with tempfile.TemporaryDirectory() as directory:
+            docs = Path(directory)
+            source = docs / "source.md"
+            source.write_bytes(b"---\ntitle: Scores\n---\n{{ literal }}\n| Skill | Score |\n| A | 5 |\n")
+            asset = docs / SCORECARD_ASSET
+            asset.parent.mkdir(parents=True)
+            asset.write_bytes(SCORECARD_PREFIX + source.read_bytes())
+            check_scorecard_data(document, docs, source)
+            external = Document('<script>fetch("https://example.invalid/scorecard.md")</script>').root
+            with self.assertRaises(ValueError):
+                check_scorecard_data(external, docs, source)
+            for stale in (b"outdated", source.read_bytes()):
+                asset.write_bytes(stale)
+                with self.subTest(data=stale[:20]), self.assertRaises(ValueError):
+                    check_scorecard_data(document, docs, source)
+            asset.unlink()
+            with self.assertRaises(ValueError):
+                check_scorecard_data(document, docs, source)
+
+    def test_each_skill_links_to_its_complete_matching_client_packages(self):
+        skills = only(self.document.find(id="skills"), "skills section")
+        for article in skills.find("article"):
+            groups = [node for node in article.find() if "client-links" in node.attrs.get("class", "").split()]
+            links = only(groups, "package links").find("a")
+            clients = set()
+            for link in links:
+                parts = urlsplit(link.attrs["href"]).path.split("/")
+                self.assertEqual(parts[-3], "skills")
+                client, family = parts[-2:]
+                self.assertEqual(family, article.attrs["id"])
+                self.assertTrue((ROOT / "skills" / client / family / "SKILL.md").is_file())
+                self.assertNotIn(client, clients, "Duplicate client package")
+                clients.add(client)
+            self.assertEqual(clients, {"codex", "claude", "copilot"})
+
+    def test_library_has_a_local_installation_route_outside_package_groups(self):
+        skills = only(self.document.find(id="skills"), "skills section")
+        help_link = only(skills.find("a", href="#install"), "local installation help link")
+        self.assertTrue(normalized(help_link.text()))
+        self.assertIsNotNone(local_file(DOCS, help_link.attrs["href"]))
+        for article in skills.find("article"):
+            for group in article.find():
+                if "client-links" in group.attrs.get("class", "").split():
+                    self.assertNotIn(help_link, group.find("a"))
 
     def test_structured_skill_inventory_matches_visible_repository_facts(self):
         check_structured_data(self.document, DOCS)

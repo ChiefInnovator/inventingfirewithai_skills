@@ -118,6 +118,8 @@ def check_links(folder):
 def check_metadata(folder, client):
     frontmatter((folder / "SKILL.md").read_text(encoding="utf-8"), client)
     if client != "codex":
+        require(not (folder / "agents" / "openai.yaml").exists(),
+                "OpenAI UI metadata belongs only to Codex")
         return
     try:
         ui = yaml.safe_load((folder / "agents" / "openai.yaml").read_text())
@@ -245,6 +247,23 @@ class TravelPackageTests(unittest.TestCase):
                 metadata["interface"].pop(key, None)
             path.write_text(yaml.safe_dump(metadata))
             check_metadata(folder, "codex")
+
+    def test_native_clients_do_not_require_openai_ui_metadata(self):
+        for client in ("claude", "copilot"):
+            with self.subTest(client=client), tempfile.TemporaryDirectory() as directory:
+                folder = self.copy_package(Path(directory), client)
+                (folder / "agents" / "openai.yaml").unlink(missing_ok=True)
+                check_metadata(folder, client)
+
+    def test_checks_reject_openai_ui_metadata_in_native_clients(self):
+        for client in ("claude", "copilot"):
+            with self.subTest(client=client), tempfile.TemporaryDirectory() as directory:
+                folder = self.copy_package(Path(directory), client)
+                metadata = folder / "agents" / "openai.yaml"
+                metadata.parent.mkdir(exist_ok=True)
+                shutil.copyfile(package(ROOT, "codex") / "agents" / "openai.yaml", metadata)
+                with self.assertRaisesRegex(ValueError, "OpenAI UI metadata belongs only to Codex"):
+                    check_metadata(folder, client)
 
     def test_checks_reject_broken_links_anchors_and_package_escapes(self):
         links = ("missing.md", "references/traveler-profile.md#missing-heading", "../outside.md", "file:///private/menu.md")

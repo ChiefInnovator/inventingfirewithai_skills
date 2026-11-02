@@ -19,6 +19,8 @@ Disposable corrupted packages verify that the checks catch missing or changed re
 
 On October 31, 2026, all 12 Travel tests passed, and the complete root test suite passed 110 tests with the command above. Figma and client-specific MCP helper suites are separate from that root-suite count.
 
+For current whole-repository verification, use `uv run --no-project --python 3.14 --with-requirements tests/requirements.txt python scripts/check_repository.py` with the maintainer prerequisites in the [README](https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/README.md). It includes root, all three Figma unittest suites, and both client-specific MCP suites in separate processes. The dated counts and offline behavioral evidence below remain historical; the unified command does not repeat model-based smoke cases or standalone Flutter SDK acceptance.
+
 ## Behavioral smoke protocol
 
 Use a fresh agent context for each [fictional fixture](https://github.com/ChiefInnovator/inventingfirewithai_skills/tree/main/tests/fixtures/travel/), with an unchanged copy of the skill and only that case's prompt and evidence. Keep the acceptance criteria below with the assessor, not the executing agent. Do not provide the expected answer or earlier results. Disable live browsing, account access, real memory, communications, and bookings. The fixtures supply captured evidence; they do not establish live venue or travel facts.

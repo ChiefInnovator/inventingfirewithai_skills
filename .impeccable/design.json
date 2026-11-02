@@ -1,0 +1,553 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-02T13:51:18.385501+00:00",
+  "title": "Design System: Inventing Fire with AI Skills",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.88)",
+          "oklch(26% 0.0000 89.88)",
+          "oklch(38% 0.0000 89.88)",
+          "oklch(49% 0.0000 89.88)",
+          "oklch(61% 0.0000 89.88)",
+          "oklch(72% 0.0000 89.88)",
+          "oklch(84% 0.0000 89.88)",
+          "oklch(95% 0.0000 89.88)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted",
+        "tonalRamp": [
+          "oklch(15% 0.0032 256.74)",
+          "oklch(26% 0.0068 256.74)",
+          "oklch(38% 0.0106 256.74)",
+          "oklch(49% 0.0129 256.74)",
+          "oklch(61% 0.0129 256.74)",
+          "oklch(72% 0.0106 256.74)",
+          "oklch(84% 0.0068 256.74)",
+          "oklch(95% 0.0032 256.74)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Line",
+        "tonalRamp": [
+          "oklch(15% 0.0023 258.34)",
+          "oklch(26% 0.0049 258.34)",
+          "oklch(38% 0.0077 258.34)",
+          "oklch(49% 0.0093 258.34)",
+          "oklch(61% 0.0093 258.34)",
+          "oklch(72% 0.0077 258.34)",
+          "oklch(84% 0.0049 258.34)",
+          "oklch(95% 0.0023 258.34)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Paper",
+        "tonalRamp": [
+          "oklch(15% 0.0010 236.50)",
+          "oklch(26% 0.0022 236.50)",
+          "oklch(38% 0.0034 236.50)",
+          "oklch(49% 0.0042 236.50)",
+          "oklch(61% 0.0042 236.50)",
+          "oklch(72% 0.0034 236.50)",
+          "oklch(84% 0.0022 236.50)",
+          "oklch(95% 0.0010 236.50)"
+        ]
+      },
+      "panel": {
+        "role": "neutral",
+        "displayName": "Panel",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.88)",
+          "oklch(26% 0.0000 89.88)",
+          "oklch(38% 0.0000 89.88)",
+          "oklch(49% 0.0000 89.88)",
+          "oklch(61% 0.0000 89.88)",
+          "oklch(72% 0.0000 89.88)",
+          "oklch(84% 0.0000 89.88)",
+          "oklch(95% 0.0000 89.88)"
+        ]
+      },
+      "ember": {
+        "role": "primary",
+        "displayName": "Ember",
+        "tonalRamp": [
+          "oklch(15% 0.0448 34.13)",
+          "oklch(26% 0.0941 34.13)",
+          "oklch(38% 0.1478 34.13)",
+          "oklch(49% 0.1792 34.13)",
+          "oklch(61% 0.1792 34.13)",
+          "oklch(72% 0.1478 34.13)",
+          "oklch(84% 0.0941 34.13)",
+          "oklch(95% 0.0448 34.13)"
+        ]
+      },
+      "ember-text": {
+        "role": "primary",
+        "displayName": "Ember Text",
+        "tonalRamp": [
+          "oklch(15% 0.0395 34.28)",
+          "oklch(26% 0.0830 34.28)",
+          "oklch(38% 0.1305 34.28)",
+          "oklch(49% 0.1582 34.28)",
+          "oklch(61% 0.1582 34.28)",
+          "oklch(72% 0.1305 34.28)",
+          "oklch(84% 0.0830 34.28)",
+          "oklch(95% 0.0395 34.28)"
+        ]
+      },
+      "gold": {
+        "role": "primary",
+        "displayName": "Gold",
+        "tonalRamp": [
+          "oklch(15% 0.0363 78.46)",
+          "oklch(26% 0.0762 78.46)",
+          "oklch(38% 0.1198 78.46)",
+          "oklch(49% 0.1452 78.46)",
+          "oklch(61% 0.1452 78.46)",
+          "oklch(72% 0.1198 78.46)",
+          "oklch(84% 0.0762 78.46)",
+          "oklch(95% 0.0363 78.46)"
+        ]
+      },
+      "steel": {
+        "role": "secondary",
+        "displayName": "Steel",
+        "tonalRamp": [
+          "oklch(15% 0.0178 220.82)",
+          "oklch(26% 0.0374 220.82)",
+          "oklch(38% 0.0587 220.82)",
+          "oklch(49% 0.0712 220.82)",
+          "oklch(61% 0.0712 220.82)",
+          "oklch(72% 0.0587 220.82)",
+          "oklch(84% 0.0374 220.82)",
+          "oklch(95% 0.0178 220.82)"
+        ]
+      },
+      "green": {
+        "role": "secondary",
+        "displayName": "Green",
+        "tonalRamp": [
+          "oklch(15% 0.0237 168.72)",
+          "oklch(26% 0.0497 168.72)",
+          "oklch(38% 0.0781 168.72)",
+          "oklch(49% 0.0947 168.72)",
+          "oklch(61% 0.0947 168.72)",
+          "oklch(72% 0.0781 168.72)",
+          "oklch(84% 0.0497 168.72)",
+          "oklch(95% 0.0237 168.72)"
+        ]
+      },
+      "code": {
+        "role": "neutral",
+        "displayName": "Code",
+        "tonalRamp": [
+          "oklch(15% 0.0034 253.06)",
+          "oklch(26% 0.0070 253.06)",
+          "oklch(38% 0.0111 253.06)",
+          "oklch(49% 0.0134 253.06)",
+          "oklch(61% 0.0134 253.06)",
+          "oklch(72% 0.0111 253.06)",
+          "oklch(84% 0.0070 253.06)",
+          "oklch(95% 0.0034 253.06)"
+        ]
+      },
+      "brand-surface": {
+        "role": "neutral",
+        "displayName": "Brand Surface",
+        "tonalRamp": [
+          "oklch(15% 0.0020 67.26)",
+          "oklch(26% 0.0041 67.26)",
+          "oklch(38% 0.0065 67.26)",
+          "oklch(49% 0.0079 67.26)",
+          "oklch(61% 0.0079 67.26)",
+          "oklch(72% 0.0065 67.26)",
+          "oklch(84% 0.0041 67.26)",
+          "oklch(95% 0.0020 67.26)"
+        ]
+      },
+      "brand-ink": {
+        "role": "neutral",
+        "displayName": "Brand Ink",
+        "tonalRamp": [
+          "oklch(15% 0.0034 78.26)",
+          "oklch(26% 0.0072 78.26)",
+          "oklch(38% 0.0113 78.26)",
+          "oklch(49% 0.0136 78.26)",
+          "oklch(61% 0.0136 78.26)",
+          "oklch(72% 0.0113 78.26)",
+          "oklch(84% 0.0072 78.26)",
+          "oklch(95% 0.0034 78.26)"
+        ]
+      },
+      "brand-muted": {
+        "role": "neutral",
+        "displayName": "Brand Muted",
+        "tonalRamp": [
+          "oklch(15% 0.0059 78.19)",
+          "oklch(26% 0.0124 78.19)",
+          "oklch(38% 0.0194 78.19)",
+          "oklch(49% 0.0235 78.19)",
+          "oklch(61% 0.0235 78.19)",
+          "oklch(72% 0.0194 78.19)",
+          "oklch(84% 0.0124 78.19)",
+          "oklch(95% 0.0059 78.19)"
+        ]
+      },
+      "brand-accent": {
+        "role": "neutral",
+        "displayName": "Brand Accent",
+        "tonalRamp": [
+          "oklch(15% 0.0371 72.10)",
+          "oklch(26% 0.0780 72.10)",
+          "oklch(38% 0.1226 72.10)",
+          "oklch(49% 0.1486 72.10)",
+          "oklch(61% 0.1486 72.10)",
+          "oklch(72% 0.1226 72.10)",
+          "oklch(84% 0.0780 72.10)",
+          "oklch(95% 0.0371 72.10)"
+        ]
+      },
+      "tag-surface": {
+        "role": "neutral",
+        "displayName": "Tag Surface",
+        "tonalRamp": [
+          "oklch(15% 0.0014 211.04)",
+          "oklch(26% 0.0029 211.04)",
+          "oklch(38% 0.0045 211.04)",
+          "oklch(49% 0.0055 211.04)",
+          "oklch(61% 0.0055 211.04)",
+          "oklch(72% 0.0045 211.04)",
+          "oklch(84% 0.0029 211.04)",
+          "oklch(95% 0.0014 211.04)"
+        ]
+      },
+      "terminal-bar": {
+        "role": "neutral",
+        "displayName": "Terminal Bar",
+        "tonalRamp": [
+          "oklch(15% 0.0029 254.09)",
+          "oklch(26% 0.0061 254.09)",
+          "oklch(38% 0.0096 254.09)",
+          "oklch(49% 0.0117 254.09)",
+          "oklch(61% 0.0117 254.09)",
+          "oklch(72% 0.0096 254.09)",
+          "oklch(84% 0.0061 254.09)",
+          "oklch(95% 0.0029 254.09)"
+        ]
+      },
+      "terminal-ink": {
+        "role": "neutral",
+        "displayName": "Terminal Ink",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.88)",
+          "oklch(26% 0.0000 89.88)",
+          "oklch(38% 0.0000 89.88)",
+          "oklch(49% 0.0000 89.88)",
+          "oklch(61% 0.0000 89.88)",
+          "oklch(72% 0.0000 89.88)",
+          "oklch(84% 0.0000 89.88)",
+          "oklch(95% 0.0000 89.88)"
+        ]
+      },
+      "code-success": {
+        "role": "secondary",
+        "displayName": "Code Success",
+        "tonalRamp": [
+          "oklch(15% 0.0278 162.42)",
+          "oklch(26% 0.0584 162.42)",
+          "oklch(38% 0.0918 162.42)",
+          "oklch(49% 0.1113 162.42)",
+          "oklch(61% 0.1113 162.42)",
+          "oklch(72% 0.0918 162.42)",
+          "oklch(84% 0.0584 162.42)",
+          "oklch(95% 0.0278 162.42)"
+        ]
+      },
+      "code-error": {
+        "role": "secondary",
+        "displayName": "Code Error",
+        "tonalRamp": [
+          "oklch(15% 0.0318 35.27)",
+          "oklch(26% 0.0668 35.27)",
+          "oklch(38% 0.1050 35.27)",
+          "oklch(49% 0.1272 35.27)",
+          "oklch(61% 0.1272 35.27)",
+          "oklch(72% 0.1050 35.27)",
+          "oklch(84% 0.0668 35.27)",
+          "oklch(95% 0.0318 35.27)"
+        ]
+      },
+      "author-border": {
+        "role": "neutral",
+        "displayName": "Author Border",
+        "tonalRamp": [
+          "oklch(15% 0.0074 66.78)",
+          "oklch(26% 0.0156 66.78)",
+          "oklch(38% 0.0245 66.78)",
+          "oklch(49% 0.0297 66.78)",
+          "oklch(61% 0.0297 66.78)",
+          "oklch(72% 0.0245 66.78)",
+          "oklch(84% 0.0156 66.78)",
+          "oklch(95% 0.0074 66.78)"
+        ]
+      },
+      "mark-border": {
+        "role": "neutral",
+        "displayName": "Mark Border",
+        "tonalRamp": [
+          "oklch(15% 0.0290 46.12)",
+          "oklch(26% 0.0609 46.12)",
+          "oklch(38% 0.0957 46.12)",
+          "oklch(49% 0.1160 46.12)",
+          "oklch(61% 0.1160 46.12)",
+          "oklch(72% 0.0957 46.12)",
+          "oklch(84% 0.0609 46.12)",
+          "oklch(95% 0.0290 46.12)"
+        ]
+      },
+      "mark-surface": {
+        "role": "neutral",
+        "displayName": "Mark Surface",
+        "tonalRamp": [
+          "oklch(15% 0.0015 70.62)",
+          "oklch(26% 0.0032 70.62)",
+          "oklch(38% 0.0050 70.62)",
+          "oklch(49% 0.0060 70.62)",
+          "oklch(61% 0.0060 70.62)",
+          "oklch(72% 0.0050 70.62)",
+          "oklch(84% 0.0032 70.62)",
+          "oklch(95% 0.0015 70.62)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero headline."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section headings."
+      },
+      "skill-title": {
+        "displayName": "Skill Title",
+        "purpose": "Skill names."
+      },
+      "card-title": {
+        "displayName": "Card Title",
+        "purpose": "Principle card headings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Default text with browser-default size."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "Section introductions."
+      },
+      "tag": {
+        "displayName": "Tag",
+        "purpose": "Informational labels."
+      },
+      "author-title": {
+        "displayName": "Author Title",
+        "purpose": "Owner-approved author byline only."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "Installation examples."
+      },
+      "navigation": {
+        "displayName": "Navigation",
+        "purpose": "Wrapping navigation; table body shares the 14px size."
+      },
+      "table-label": {
+        "displayName": "Table Label",
+        "purpose": "Uppercase table headings."
+      },
+      "hero-copy": {
+        "displayName": "Hero Copy",
+        "purpose": "Fluid hero paragraph with 18px lower endpoint."
+      },
+      "scorecard-title": {
+        "displayName": "Scorecard Title",
+        "purpose": "Evaluation panel header."
+      },
+      "statistic": {
+        "displayName": "Statistic",
+        "purpose": "Gold numeric figures."
+      },
+      "author-link": {
+        "displayName": "Author Link",
+        "purpose": "Tracked uppercase monospace attribution links."
+      }
+    },
+    "shadows": [
+      {
+        "name": "scorecard",
+        "value": "0 16px 42px rgba(0, 0, 0, .08)",
+        "purpose": "Scorecard panel."
+      },
+      {
+        "name": "terminal",
+        "value": "0 18px 50px rgba(0, 0, 0, .16)",
+        "purpose": "Installation terminal."
+      },
+      {
+        "name": "author-avatar",
+        "value": "0 12px 30px rgba(0, 0, 0, .2)",
+        "purpose": "Flame frame."
+      },
+      {
+        "name": "featured-card-stroke",
+        "value": "inset 0 0 0 1px rgba(217, 79, 48, .2)",
+        "purpose": "Inset emphasis, not floating elevation."
+      }
+    ],
+    "motion": [],
+    "breakpoints": [
+      {
+        "name": "phone-section-spacing",
+        "value": "600px"
+      },
+      {
+        "name": "stacked",
+        "value": "860px"
+      },
+      {
+        "name": "intermediate-grid-upper-bound",
+        "value": "1100px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Link action on charcoal; source defines no distinct hover or active state.",
+      "html": "<div class=\"ds-dark\"><a class=\"ds-action\" href=\"#skills\">Browse all five skills</a></div>",
+      "css": ".ds-dark{background:var(--code,#20252b);padding:16px}.ds-action{display:inline-flex;align-items:center;min-height:48px;padding:0 18px;border:1px solid rgba(255,255,255,.28);border-radius:6px;text-decoration:none;font:700 16px/1.5 Chivo,\"Segoe UI\",sans-serif;background:var(--panel,#fff);color:var(--ink,#151515)}.ds-action:focus-visible{outline:3px solid var(--gold,#f0b13e);outline-offset:4px}"
+    },
+    {
+      "name": "Secondary action",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Link action on charcoal; source defines no distinct hover or active state.",
+      "html": "<div class=\"ds-dark\"><a class=\"ds-action\" href=\"https://github.com/ChiefInnovator/inventingfirewithai_skills\">View on GitHub</a></div>",
+      "css": ".ds-dark{background:var(--code,#20252b);padding:16px}.ds-action{display:inline-flex;align-items:center;min-height:48px;padding:0 18px;border:1px solid rgba(255,255,255,.28);border-radius:6px;text-decoration:none;font:700 16px/1.5 Chivo,\"Segoe UI\",sans-serif;background:rgba(255,255,255,.08);color:#fff}.ds-action:focus-visible{outline:3px solid var(--gold,#f0b13e);outline-offset:4px}"
+    },
+    {
+      "name": "Informational tag",
+      "kind": "chip",
+      "refersTo": "tag",
+      "description": "Static availability label; no control state.",
+      "html": "<span class=\"ds-tag\">Available</span>",
+      "css": ".ds-tag{display:inline-flex;align-items:center;min-height:28px;padding:0 10px;border-radius:999px;background:var(--tag-surface,#eef3f4);color:var(--steel,#236477);font:700 13px/1.5 Chivo,\"Segoe UI\",sans-serif}"
+    },
+    {
+      "name": "Principle card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "White bordered content panel.",
+      "html": "<article class=\"ds-card\"><h3>Focused skills</h3><p>Keep the purpose and activation surface clear.</p></article>",
+      "css": ".ds-card{background:var(--panel,#fff);color:var(--ink,#151515);border:1px solid var(--line,#d9dde3);border-radius:8px;padding:24px;min-height:190px;font:16px/1.5 Chivo,\"Segoe UI\",sans-serif}.ds-card h3{margin:0 0 10px;font-size:20px;line-height:1.3}.ds-card p{margin:0;color:var(--muted,#5a5f66)}"
+    },
+    {
+      "name": "Navigation links",
+      "kind": "nav",
+      "refersTo": "navigation",
+      "description": "Wrapping dark-surface navigation. The production flame remains the checked-in raster; this preview samples links only.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Main navigation\"><a href=\"#why\">Why</a><a href=\"#skills\">Skills</a><a href=\"#install\">Install</a></nav>",
+      "css": ".ds-nav{display:flex;gap:18px;flex-wrap:wrap;padding:18px 20px;background:var(--code,#20252b);color:rgba(255,255,255,.82);font:14px/1.5 Chivo,\"Segoe UI\",sans-serif}.ds-nav a{display:inline-flex;align-items:center;min-height:44px;color:inherit;text-decoration:none}.ds-nav a:focus-visible{outline:3px solid var(--gold,#f0b13e);outline-offset:4px}"
+    },
+    {
+      "name": "Author attribution",
+      "kind": "custom",
+      "refersTo": "author-panel",
+      "description": "Warm dark attribution with the sanctioned Fraunces byline. Preview omits the production raster avatar.",
+      "html": "<div class=\"ds-author\"><h2>Built by Rich Crane — Microsoft MVP, MILL5.</h2><p>Part of the <i>Inventing Fire with AI</i> initiative.</p><div class=\"ds-author-links\"><a href=\"https://mill5.com\">MILL5</a><a href=\"https://github.com/ChiefInnovator\">GitHub</a></div></div>",
+      "css": ".ds-author{padding:44px 40px;background:var(--brand-surface,#120f0c);color:var(--brand-ink,#f2ece3);border:1px solid #514335;border-radius:14px}.ds-author h2{font:500 22px/1.3 Fraunces,\"Iowan Old Style\",Palatino,serif;margin:0 0 6px}.ds-author p{margin:0 0 12px;color:var(--brand-muted,#c9bfb0);font:15px/1.55 Chivo,\"Segoe UI\",sans-serif}.ds-author-links{display:flex;gap:20px;flex-wrap:wrap}.ds-author-links a{display:inline-flex;align-items:center;min-height:44px;font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--brand-muted,#c9bfb0);text-decoration:none;border-bottom:1px solid transparent}.ds-author-links a:hover{color:var(--brand-accent,#ffb347);border-bottom-color:var(--brand-accent,#ffb347)}.ds-author-links a:focus-visible{outline:3px solid var(--gold,#f0b13e);outline-offset:4px}@media(max-width:860px){.ds-author{text-align:center;padding:32px 24px}.ds-author-links{justify-content:center}}"
+    },
+    {
+      "name": "Client package links",
+      "kind": "custom",
+      "refersTo": "client-link",
+      "description": "Wrapping underlined package links with minimum 44px targets; nearby local installation help.",
+      "html": "<div class=\"ds-client-links\" role=\"group\" aria-label=\"Pragmatic Coder packages\"><a href=\"#codex\">Codex</a><a href=\"#claude\">Claude Code</a><a href=\"#copilot\">Copilot</a></div><p><a class=\"ds-install-help\" href=\"#install\">See installation and discovery steps for your selected skill</a></p>",
+      "css": ".ds-client-links{display:flex;flex-wrap:wrap;gap:12px;font:700 16px/1.5 Chivo,\"Segoe UI\",sans-serif;color:var(--ink,#151515);text-underline-offset:.2em}.ds-client-links a{display:inline-flex;align-items:center;min-width:44px;min-height:44px;max-width:100%;overflow-wrap:anywhere;color:inherit}.ds-client-links a:focus-visible{outline:3px solid var(--steel,#236477);outline-offset:4px}.ds-install-help{display:inline-flex;align-items:center;min-height:44px;font:700 16px/1.5 Chivo,\"Segoe UI\",sans-serif;text-underline-offset:.2em;color:var(--ink,#151515)}.ds-install-help:focus-visible{outline:3px solid var(--steel,#236477);outline-offset:4px}"
+    },
+    {
+      "name": "Installation list",
+      "kind": "custom",
+      "refersTo": "installation-list",
+      "description": "Semantic client terms and descriptions with wrapping inline code.",
+      "html": "<dl class=\"ds-install\"><dt>Codex · personal</dt><dd><p>Copy the entire matching client folder, including scripts and references.</p><p>Confirm the skill is listed in the fresh-session picker without submitting.</p></dd></dl>",
+      "css": ".ds-install{max-width:78ch;margin:28px 0;color:var(--ink,#151515);font:16px/1.5 Chivo,\"Segoe UI\",sans-serif}.ds-install dt{font-weight:700}.ds-install dd{margin:6px 0 24px}.ds-install p{margin:0 0 8px}.ds-install code{overflow-wrap:anywhere}"
+    },
+    {
+      "name": "Scorecard scroll region",
+      "kind": "custom",
+      "refersTo": "scorecard-panel",
+      "description": "Clipped scroll panel with sticky headers, visible directional cue, and inward keyboard focus. No evaluation scores are invented.",
+      "html": "<div class=\"ds-scorecard\"><p id=\"ds-scorecard-help\" class=\"ds-scorecard-help\">Scroll within the table for more rows; scroll sideways on narrow screens for all columns.</p><div class=\"ds-table\" role=\"region\" aria-label=\"Referenced skills scorecard\" aria-describedby=\"ds-scorecard-help\" tabindex=\"0\"><table><thead><tr><th>Skill</th><th>Score</th></tr></thead><tbody></tbody></table></div></div>",
+      "css": ".ds-scorecard{background:var(--panel,#fff);border:1px solid var(--line,#d9dde3);border-radius:8px;overflow:hidden;box-shadow:0 16px 42px rgba(0,0,0,.08)}.ds-table{height:min(60vh,36rem);overflow:auto}.ds-table:focus-visible{outline:3px solid var(--steel,#236477);outline-offset:-3px}.ds-table table{width:100%;border-collapse:collapse;min-width:860px;font:14px/1.5 Chivo,\"Segoe UI\",sans-serif}.ds-table th{padding:13px 16px;border-bottom:1px solid var(--line,#d9dde3);text-align:left;vertical-align:top;background:var(--code,#20252b);color:#fff;font-size:12px;text-transform:uppercase;letter-spacing:.04em}.ds-scorecard-help{margin:0;padding:12px 20px;border-bottom:1px solid var(--line,#d9dde3);color:var(--muted,#5a5f66);font:16px/1.5 Chivo,\"Segoe UI\",sans-serif}.ds-table th{position:sticky;top:0;z-index:1}"
+    },
+    {
+      "name": "Terminal code region",
+      "kind": "custom",
+      "refersTo": "terminal",
+      "description": "Named, keyboard-scrollable code region with gold inward focus on charcoal.",
+      "html": "<div class=\"ds-terminal\"><div class=\"ds-bar\" aria-hidden=\"true\"><span></span><span></span><span></span></div><pre tabindex=\"0\" role=\"region\" aria-label=\"Pragmatic Coder quality gate example\"><code><span class=\"ds-key\">pragmatic-coder</span>\n  <span class=\"ds-ok\">✓</span> read code/docs/tests\n  <span class=\"ds-bad\">✕</span> tolerate unsupported claims</code></pre></div>",
+      "css": ".ds-terminal{background:var(--code,#20252b);color:#f4f4f4;border-radius:8px;overflow:hidden;box-shadow:0 18px 50px rgba(0,0,0,.16)}.ds-bar{height:42px;display:flex;gap:7px;align-items:center;padding:0 14px;background:#15191e}.ds-bar span{width:11px;height:11px;border-radius:50%;background:var(--ember,#d94f30)}.ds-bar span:nth-child(2){background:var(--gold,#f0b13e)}.ds-bar span:nth-child(3){background:var(--green,#1d7a5f)}.ds-terminal pre{margin:0;padding:24px;overflow-x:auto;font:15px/1.65 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.ds-terminal pre:focus-visible{outline:3px solid var(--gold,#f0b13e);outline-offset:-3px}.ds-key{color:var(--gold,#f0b13e)}.ds-ok{color:#77d6aa}.ds-bad{color:#ff9a80}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Fire Workshop",
+    "overview": "The existing fire identity sits inside practical documentation: cool paper,\nwhite content panels, and charcoal navigation, hero, and code surfaces. Compact\nbranding and direct typography keep the library's content and actions legible.\nThis describes the incumbent implementation rather than a replacement concept.\n\nThe checked-in layered flame and the dark author panel connect the library to\nInventing Fire with AI. Chivo carries the interface; the author byline alone\nuses Fraunces, matching the owner-approved Video Downloader branding reference.",
+    "keyCharacteristics": [
+      "Cool paper and white panels separated by fine neutral borders.",
+      "Charcoal anchors with restrained ember, gold, and steel accents.",
+      "Chivo hierarchy, readable body leading, and a limited serif author byline.",
+      "Compact flame branding, wrapping links, and bordered content cards."
+    ],
+    "rules": [
+      {
+        "name": "The Surface Contrast Rule",
+        "body": "Use steel focus outlines on light surfaces and gold outlines on navigation, hero, author, and focused terminal code surfaces, as implemented. ",
+        "section": "colors"
+      },
+      {
+        "name": "The One Byline Rule",
+        "body": "Keep Fraunces confined to the author heading; Chivo remains the site's primary family. ",
+        "section": "typography"
+      },
+      {
+        "name": "The Bordered Panel Rule",
+        "body": "Ordinary content cards retain their neutral border and flat fill; reserve the documented shadows for their existing component roles. ",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do preserve the checked-in flame, its proportions, and compact navigation placement.",
+      "Do use Chivo for the interface and reserve Fraunces for the author byline.",
+      "Do retain neutral borders, readable text leading, and visible contrasting focus.",
+      "Do preserve wrapping actions, native link semantics, and scrollable code or tables.",
+      "Do keep brand attribution and package descriptions grounded in repository content."
+    ],
+    "donts": [
+      "Don't enlarge the full wordmark into a separate branding section that displaces the first viewport.",
+      "Don't spread the author panel's serif or warm palette across ordinary documentation.",
+      "Don't turn informational tags into controls without implementing their semantics and behavior.",
+      "Don't use color or terminal indicators as the only way to communicate status.",
+      "Don't shrink package-link targets below (44px) in either dimension or move the scorecard focus ring outside its clipped panel."
+    ]
+  }
+}
