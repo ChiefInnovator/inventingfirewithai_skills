@@ -1,0 +1,122 @@
+[
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "docs/index.html",
+    "line": 717,
+    "snippet": "background rgb(21, 25, 30) on div is outside DESIGN.md colors",
+    "advisory": true,
+    "ignoreValue": "rgb(21, 25, 30)"
+  },
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "docs/index.html",
+    "line": 738,
+    "snippet": "text color rgb(119, 214, 170) on span \"\u2713\" is outside DESIGN.md colors",
+    "advisory": true,
+    "ignoreValue": "rgb(119, 214, 170)"
+  },
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "docs/index.html",
+    "line": 739,
+    "snippet": "text color rgb(255, 154, 128) on span \"\u2715\" is outside DESIGN.md colors",
+    "advisory": true,
+    "ignoreValue": "rgb(255, 154, 128)"
+  },
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "docs/index.html",
+    "line": 749,
+    "snippet": "border-top rgb(81, 67, 53) on div \"Built by Rich Crane \u2014 Microsoft MVP, MIL\" is outside DESIGN.md colors",
+    "advisory": true,
+    "ignoreValue": "rgb(81, 67, 53)"
+  },
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "docs/index.html",
+    "line": 760,
+    "snippet": "border-top rgb(143, 67, 25) on div is outside DESIGN.md colors",
+    "advisory": true,
+    "ignoreValue": "rgb(143, 67, 25)"
+  },
+  {
+    "antipattern": "design-system-color",
+    "name": "Color outside DESIGN.md",
+    "description": "A literal color is outside the DESIGN.md palette and sidecar tonal ramps. This may be legitimate, but it should be an intentional design-system addition rather than drift.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "docs/index.html",
+    "line": 0,
+    "snippet": "border-bottom rgb(0, 0, 0) on a \"Video Downloader\" is outside DESIGN.md colors",
+    "advisory": true,
+    "ignoreValue": "rgb(0, 0, 0)"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "docs/index.html",
+    "line": 360,
+    "snippet": "font-size: 14px is off the DESIGN.md type ramp",
+    "advisory": true,
+    "ignoreValue": "14px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "docs/index.html",
+    "line": 379,
+    "snippet": "font-size: clamp(18px, 2vw, 22px) has fluid endpoint 18px off the DESIGN.md type ramp",
+    "advisory": true,
+    "ignoreValue": "18px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "docs/index.html",
+    "line": 587,
+    "snippet": "font-size: 34px is off the DESIGN.md type ramp",
+    "advisory": true,
+    "ignoreValue": "34px"
+  },
+  {
+    "antipattern": "design-system-font-size",
+    "name": "Font size outside DESIGN.md",
+    "description": "A literal font-size is off the type ramp documented in DESIGN.md typography. Use a documented size step or update the design system if the new step is intentional.",
+    "severity": "advisory",
+    "category": "quality",
+    "file": "docs/index.html",
+    "line": 680,
+    "snippet": "font-size: 12px is off the DESIGN.md type ramp",
+    "advisory": true,
+    "ignoreValue": "12px"
+  }
+]

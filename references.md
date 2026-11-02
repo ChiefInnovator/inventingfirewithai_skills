@@ -28,10 +28,12 @@ Canonical reference catalog for this repository. README stays short; detailed so
 
 ### Designs and pilots
 
+- [Skills library verification and website design](docs/designs/skills-library-design.md)
 - [AI Scrum Master Service — Research and Design](docs/designs/ai-scrum-master-research-and-design.md)
 
 ### Evaluations and audits
 
+- [Skills library Goldfish and Impeccable review evidence](docs/evaluations/skills_library_review.md)
 - [Skill instruction token audit](docs/evaluations/skill_token_budget.md)
 
 - [Pragmatic Coder Behavioral Evaluation](docs/evaluations/pragmatic_coder_evaluation.md)
@@ -56,6 +58,13 @@ Reviewed October 29, 2026 for the Claude, Codex, and Copilot packages. Automatic
 - [Copilot project and personal skill locations](https://docs.github.com/en/copilot/concepts/customizations/agent-skills)
 - [Git pre-push hook contract](https://git-scm.com/docs/githooks#_pre_push)
 - [Git push protocol and ref updates](https://git-scm.com/docs/gitprotocol-pack#_reference_update_request_and_packfile_transfer)
+
+### Design and review workflows
+
+- [Google Elephant-Goldfish Model](https://github.com/google/elephant-goldfish-model), upstream revision [403d8881](https://github.com/google/elephant-goldfish-model/tree/403d8881d62022490637d740657b33f01e321ea8): specification drafting and fresh-context review. Installed as the EGM Codex plugin; review findings and implementation evidence remain separate.
+- [Impeccable](https://github.com/pbakaus/impeccable): incumbent product/design documentation, independent visual critique, accessibility/responsive checks, and source-based design tokens. Version 4.8.0 was used for this maintenance workflow.
+- [Codex skill discovery](https://learn.chatgpt.com/docs/build-skills), [Claude Code skills](https://code.claude.com/docs/en/skills), and [Copilot CLI skills](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-skills): supported installation and discovery surfaces.
+- [Jekyll front matter](https://jekyllrb.com/docs/front-matter/) and [static files](https://jekyllrb.com/docs/static-files/): the scorecard snapshot needs a non-YAML first line to remain a literal static asset.
 - [GitHub Copilot Slam package](skills/copilot/slam/SKILL.md)
 - [Claude Code skill metadata](https://code.claude.com/docs/en/skills)
 - [Claude Code hook input and Stop behavior](https://code.claude.com/docs/en/hooks)

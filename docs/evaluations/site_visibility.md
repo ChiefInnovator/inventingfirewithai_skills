@@ -26,16 +26,18 @@ Crawler directives are read from `https://chiefinnovator.github.io/robots.txt`. 
 
 ## Regression and deployment checks
 
-Run the repository test suite from its root:
+Run all six maintained test suites from the repository root:
 
 ```sh
-uv run --no-project --python 3.14 --with-requirements tests/requirements.txt python -m unittest discover -s tests
+uv run --no-project --python 3.14 --with-requirements tests/requirements.txt python scripts/check_repository.py
 ```
 
 [Site regression tests](https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/tests/test_pages_visibility.py) check the actual metadata, crawlable content, structured data, links, sitemap, and reading index. [Travel tests and smoke evidence](travel_like_a_local_evaluation.md) distinguish deterministic package verification from agent behavior and live-service acceptance.
 
 [Accessibility regression tests](https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/tests/test_pages_accessibility.py) check landmarks, skip-link focus targets, accessible names, ARIA references and permitted naming, image alternatives, interactive nesting, tab order, and scorecard status/table semantics. These source checks supplement rendered accessibility scans and keyboard checks; they do not establish complete WCAG conformance.
 
-The `Skills and site checks` GitHub Actions workflow runs the root suite for pull requests into `develop` and `main` and for pushes to those branches. Its package and visibility checks report failures before publishing; the separate main-source guard enforces the `develop`-to-`main` route.
+The `Skills and site checks` GitHub Actions workflow runs the unified maintainer command for pull requests into `develop` and `main` and for pushes to those branches. It checks generated scorecard freshness and runs root, three Figma, and two MCP unittest suites in isolated processes. The Codex MCP suite uses a real CLI with disposable configuration, without creating model threads or calling providers. A separate Pages artifact job builds Jekyll and checks the built data asset before deployment. The source guards enforce feature branches into `develop` and `develop` into `main`.
+
+The homepage fetches a same-deployment text snapshot rather than moving raw GitHub content. Regenerate it with `python scripts/sync_site_data.py` after editing the canonical scorecard; `--check` is read-only, and `--check --built-dir _site` verifies the Jekyll-produced asset. Its fixed non-YAML provenance line is followed by the unchanged Markdown bytes, preventing Jekyll from consuming the source's front matter. See [the library review](skills_library_review.html) for findings, verification evidence, and remaining limits.
 
 After deployment, fetch the canonical homepage, sitemap, reading index, representative rendered documentation, source links, and social image. Verify the published text and metadata against the merged source, check HTTP status and the Pages build commit, and inspect desktop and narrow-screen rendering, keyboard focus, and live status updates. Account for CDN cache headers before diagnosing stale content. Record source checks, deployment, and indexing/citation observations separately; a successful Pages build is not evidence that a search or AI service has indexed the update.
