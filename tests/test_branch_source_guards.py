@@ -49,17 +49,20 @@ class BranchSourceGuardTests(unittest.TestCase):
                 self.assertNotEqual(run_guard("develop-source-guard.yml", "feature-only",
                                               branch, repository).returncode, 0)
 
-    def test_develop_guard_uses_trusted_base_without_running_pr_code(self):
-        data = workflow("develop-source-guard.yml")
-        triggers = data.get("on", data.get(True))
-        self.assertEqual(set(triggers), {"pull_request_target"})
-        event = triggers["pull_request_target"]
-        self.assertEqual(event["branches"], ["develop"])
-        self.assertTrue({"opened", "edited", "reopened", "synchronize", "ready_for_review"}.issubset(event["types"]))
-        self.assertNotIn("paths", event)
-        self.assertNotIn("paths-ignore", event)
-        self.assertEqual(data["permissions"], {})
-        self.assertTrue(all("uses" not in step for step in data["jobs"]["feature-only"]["steps"]))
+    def test_source_guards_use_trusted_base_without_running_pr_code(self):
+        for name, branch, job in (("main-source-guard.yml", "main", "develop-only"),
+                                  ("develop-source-guard.yml", "develop", "feature-only")):
+            with self.subTest(workflow=name):
+                data = workflow(name)
+                triggers = data.get("on", data.get(True))
+                self.assertEqual(set(triggers), {"pull_request_target"})
+                event = triggers["pull_request_target"]
+                self.assertEqual(event["branches"], [branch])
+                self.assertTrue({"opened", "edited", "reopened", "synchronize", "ready_for_review"}.issubset(event["types"]))
+                self.assertNotIn("paths", event)
+                self.assertNotIn("paths-ignore", event)
+                self.assertEqual(data["permissions"], {})
+                self.assertTrue(all("uses" not in step for step in data["jobs"][job]["steps"]))
 
 
 if __name__ == "__main__":
