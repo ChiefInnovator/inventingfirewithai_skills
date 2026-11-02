@@ -630,96 +630,6 @@
       font-weight: 800;
     }
 
-    .scorecard-panel {
-      margin-top: 32px;
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 16px 42px rgba(0, 0, 0, .08);
-    }
-
-    .scorecard-head {
-      display: flex;
-      justify-content: space-between;
-      gap: 18px;
-      align-items: center;
-      padding: 18px 20px;
-      border-bottom: 1px solid var(--line);
-      background: var(--paper);
-    }
-
-    .scorecard-head strong {
-      display: block;
-      font-size: 18px;
-    }
-
-    .scorecard-head a {
-      color: var(--steel);
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .scorecard-help {
-      margin: 0;
-      padding: 12px 20px;
-      border-bottom: 1px solid var(--line);
-      color: var(--muted);
-    }
-
-    .table-wrap {
-      height: min(60vh, 36rem);
-      overflow: auto;
-    }
-
-    .table-wrap:focus-visible {
-      outline-offset: -3px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 860px;
-      font-size: 14px;
-    }
-
-    th,
-    td {
-      padding: 13px 16px;
-      border-bottom: 1px solid var(--line);
-      text-align: left;
-      vertical-align: top;
-    }
-
-    th {
-      position: sticky;
-      top: 0;
-      z-index: 1;
-      background: var(--code);
-      color: #fff;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: .04em;
-    }
-
-    td:nth-child(2),
-    td:nth-child(4),
-    td:nth-child(5),
-    td:nth-child(6) {
-      font-variant-numeric: tabular-nums;
-      white-space: nowrap;
-    }
-
-    tr:first-child td:first-child {
-      font-weight: 800;
-      color: var(--ember-text);
-    }
-
-    .loading {
-      padding: 22px;
-      color: var(--muted);
-    }
-
     .terminal {
       background: var(--code);
       color: #f4f4f4;
@@ -905,7 +815,6 @@
         <a href="#why">Why</a>
         <a href="#skills">Skills</a>
         <a href="#standard">Standard</a>
-        <a href="#scorecard">Scorecard</a>
         <a href="#install">Install</a>
         <a href="#tests">Tests</a>
         <a href="#faq">FAQ</a>
@@ -1053,11 +962,10 @@
     </div>
   </section>
 
-  <section id="scorecard">
+  <section id="approach">
     <div class="wrap split">
       <div>
         <h2>Small enough to load. Strong enough to matter.</h2>
-        <p class="lede">The scorecard records editorial assessments of referenced skills. These are not behavioral benchmarks; the revised skill awaits comparative evaluation.</p>
         <ul class="rules">
           <li><span>1</span><div><strong>Audit the references.</strong><br>Score each skill for durable coding-agent value.</div></li>
           <li><span>2</span><div><strong>Keep only signal.</strong><br>Drop framework-specific, tool-specific, or process-heavy bloat.</div></li>
@@ -1075,22 +983,6 @@
   <span class="ok">✓</span> check preconditions
   <span class="ok">✓</span> measure performance work
   <span class="bad">✕</span> tolerate unsupported claims</code></pre>
-      </div>
-    </div>
-    <div class="wrap">
-      <div class="scorecard-panel">
-        <div class="scorecard-head">
-          <div>
-            <strong>Referenced skills scorecard</strong>
-            <span>Historical editorial ratings; revised skill is unscored.</span>
-          </div>
-          <a href="https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/docs/evaluations/referenced_skills_scorecard.md">Open markdown</a>
-        </div>
-        <p id="scorecard-scroll-help" class="scorecard-help">Scroll within the table for more rows; scroll sideways on narrow screens for all columns.</p>
-        <p id="scorecard-status" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true">Loading skill scorecard.</p>
-        <div class="table-wrap" id="scorecard-table" role="region" aria-label="Referenced skills scorecard" aria-describedby="scorecard-scroll-help" aria-busy="true" tabindex="0">
-          <div class="loading">The <a href="evaluations/referenced_skills_scorecard.html">referenced skills scorecard</a> records historical editorial assessments. Read the source for scores and their limits.</div>
-        </div>
       </div>
     </div>
   </section>
@@ -1119,7 +1011,6 @@
       <p>These discovery checks do not run a skill. Do not invoke Slam merely to verify installation. Each package’s <code>SKILL.md</code> describes its workflow and required tools.</p>
       <div class="actions" style="margin-top: 28px">
         <a class="button" href="https://github.com/ChiefInnovator/inventingfirewithai_skills#what-it-does">Installation and package links</a>
-        <a class="button secondary" href="evaluations/referenced_skills_scorecard.html" style="background: var(--code); color: #fff">View scorecard</a>
       </div>
     </div>
   </section>
@@ -1185,59 +1076,5 @@
       <div><a href="sitemap.xml">Sitemap</a> · <a href="llms.txt">Site overview</a></div>
     </div>
   </footer>
-  <script>
-    const target = document.getElementById("scorecard-table");
-    const status = document.getElementById("scorecard-status");
-
-    function escapeHtml(value) {
-      return value
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-    }
-
-    function splitRow(row) {
-      return row
-        .trim()
-        .replace(/^\|/, "")
-        .replace(/\|$/, "")
-        .split("|")
-        .map((cell) => cell.trim());
-    }
-
-    function renderMarkdownTable(markdown) {
-      const rows = markdown
-        .split("\n")
-        .filter((line) => line.startsWith("|") && !line.includes("---"));
-
-      if (rows.length < 2) {
-        throw new Error("No markdown table found");
-      }
-
-      const headers = splitRow(rows[0]);
-      const body = rows.slice(1).map(splitRow);
-      const thead = `<thead><tr>${headers.map((h) => `<th scope="col">${escapeHtml(h)}</th>`).join("")}</tr></thead>`;
-      const tbody = `<tbody>${body.map((row) => `<tr>${row.map((cell) => `<td>${escapeHtml(cell)}</td>`).join("")}</tr>`).join("")}</tbody>`;
-      return `<table><caption class="visually-hidden">Referenced skills scorecard</caption>${thead}${tbody}</table>`;
-    }
-
-    fetch("assets/data/referenced-skills-scorecard.txt")
-      .then((response) => {
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        return response.text();
-      })
-      .then((markdown) => {
-        target.innerHTML = renderMarkdownTable(markdown);
-        target.setAttribute("aria-busy", "false");
-        status.textContent = "Skill scorecard loaded.";
-      })
-      .catch(() => {
-        target.innerHTML = '<div class="loading">Scorecard preview could not load. Open the markdown source from the link above.</div>';
-        target.setAttribute("aria-busy", "false");
-        status.textContent = "Scorecard preview could not load. The markdown source link remains available.";
-      });
-  </script>
 </body>
 </html>

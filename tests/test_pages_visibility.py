@@ -15,9 +15,6 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 SITE = "https://chiefinnovator.github.io/inventingfirewithai_skills/"
-SCORECARD_ASSET = "assets/data/referenced-skills-scorecard.txt"
-SCORECARD_PREFIX = (b"Generated scorecard snapshot. Source: "
-                   b"docs/evaluations/referenced_skills_scorecard.md\n\n")
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"}
 
 
@@ -136,18 +133,6 @@ def local_file(docs, link, base=SITE, fragments=True):
     return target
 
 
-def check_scorecard_data(document, docs, source):
-    scripts = "\n".join(node.text(raw=True) for node in document.find("script")
-                        if node.attrs.get("type") != "application/ld+json")
-    fetches = re.findall(r"\bfetch\(\s*['\"]([^'\"]+)['\"]\s*\)", scripts)
-    require(fetches == [SCORECARD_ASSET], "Preview must fetch the deployed relative scorecard asset")
-    asset = local_file(docs, fetches[0])
-    data = asset.read_bytes()
-    require(not data.startswith(b"---"), "Scorecard data must not be processed as Jekyll front matter")
-    require(data == SCORECARD_PREFIX + source.read_bytes(),
-            "Deployed scorecard data differs from its fixed prefix and canonical source bytes")
-
-
 def entities(document):
     result = []
     def visit(value):
@@ -250,29 +235,25 @@ class PagesVisibilityTests(unittest.TestCase):
                     with self.subTest(tag=node.tag, link=value):
                         local_file(DOCS, value)
 
-    def test_scorecard_preview_uses_deployed_data_with_exact_source_bytes(self):
-        check_scorecard_data(self.document, DOCS, DOCS / "evaluations" / "referenced_skills_scorecard.md")
+    def test_homepage_has_no_scorecard_content_navigation_or_loader(self):
+        self.assertNotRegex(normalized(self.document.text()), r"(?i)scorecard")
+        for node in self.document.find():
+            for attribute in ("id", "class", "href", "src"):
+                with self.subTest(tag=node.tag, attribute=attribute):
+                    self.assertNotRegex(node.attrs.get(attribute, ""), r"(?i)scorecard")
+        scripts = "\n".join(node.text(raw=True) for node in self.document.find("script")
+                            if node.attrs.get("type") != "application/ld+json")
+        self.assertNotRegex(scripts, r"(?i)scorecard|renderMarkdownTable")
 
-    def test_scorecard_data_contract_rejects_external_missing_or_stale_assets(self):
-        document = Document(f'<script>fetch("{SCORECARD_ASSET}")</script>').root
-        with tempfile.TemporaryDirectory() as directory:
-            docs = Path(directory)
-            source = docs / "source.md"
-            source.write_bytes(b"---\ntitle: Scores\n---\n{{ literal }}\n| Skill | Score |\n| A | 5 |\n")
-            asset = docs / SCORECARD_ASSET
-            asset.parent.mkdir(parents=True)
-            asset.write_bytes(SCORECARD_PREFIX + source.read_bytes())
-            check_scorecard_data(document, docs, source)
-            external = Document('<script>fetch("https://example.invalid/scorecard.md")</script>').root
-            with self.assertRaises(ValueError):
-                check_scorecard_data(external, docs, source)
-            for stale in (b"outdated", source.read_bytes()):
-                asset.write_bytes(stale)
-                with self.subTest(data=stale[:20]), self.assertRaises(ValueError):
-                    check_scorecard_data(document, docs, source)
-            asset.unlink()
-            with self.assertRaises(ValueError):
-                check_scorecard_data(document, docs, source)
+    def test_supporting_research_documents_remain_public_and_discoverable(self):
+        sitemap = ET.parse(DOCS / "sitemap.xml")
+        namespace = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9"}
+        urls = {element.text for element in sitemap.findall("s:url/s:loc", namespace)}
+        for name in ("referenced_skills_scorecard", "referenced_skills_audit", "skills_library_review"):
+            url = urljoin(SITE, f"evaluations/{name}.html")
+            with self.subTest(document=name):
+                self.assertIn(url, urls)
+                self.assertTrue(local_file(DOCS, url).read_text().strip())
 
     def test_each_skill_links_to_its_complete_matching_client_packages(self):
         skills = only(self.document.find(id="skills"), "skills section")
