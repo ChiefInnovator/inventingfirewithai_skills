@@ -6,9 +6,18 @@ description: Design for complete local checks, reproducible site data, clear ins
 # Skills library verification and website design
 
 - Author: ChiefInnovator
-- Status: Reviewed design; authorized for implementation with recorded execution gates
+- Status: Implemented baseline; homepage scorecard presentation superseded
 - Date: 2026-11-02
 - Baseline: repository revision `8af960bb310f514f27bf08a63dbeb54dd371af34`
+
+## Current scope update
+
+On November 2, 2026, the owner directed removal of the research scorecard from the
+homepage. Its panel, navigation link, installation CTA, table styles, and loader
+are removed; the research document and supporting artifact checks remain.
+The scorecard presentation and loading steps below record the superseded baseline
+and are no longer homepage requirements. Current implementation details live in
+the repository's `DESIGN.md` and site visibility guidance.
 
 ## Overview
 

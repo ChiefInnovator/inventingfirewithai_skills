@@ -366,19 +366,11 @@
       },
       "navigation": {
         "displayName": "Navigation",
-        "purpose": "Wrapping navigation; table body shares the 14px size."
-      },
-      "table-label": {
-        "displayName": "Table Label",
-        "purpose": "Uppercase table headings."
+        "purpose": "Wrapping navigation links at 14px."
       },
       "hero-copy": {
         "displayName": "Hero Copy",
         "purpose": "Fluid hero paragraph with 18px lower endpoint."
-      },
-      "scorecard-title": {
-        "displayName": "Scorecard Title",
-        "purpose": "Evaluation panel header."
       },
       "statistic": {
         "displayName": "Statistic",
@@ -390,11 +382,6 @@
       }
     },
     "shadows": [
-      {
-        "name": "scorecard",
-        "value": "0 16px 42px rgba(0, 0, 0, .08)",
-        "purpose": "Scorecard panel."
-      },
       {
         "name": "terminal",
         "value": "0 18px 50px rgba(0, 0, 0, .16)",
@@ -493,14 +480,6 @@
       "css": ".ds-install{max-width:78ch;margin:28px 0;color:var(--ink,#151515);font:16px/1.5 Chivo,\"Segoe UI\",sans-serif}.ds-install dt{font-weight:700}.ds-install dd{margin:6px 0 24px}.ds-install p{margin:0 0 8px}.ds-install code{overflow-wrap:anywhere}"
     },
     {
-      "name": "Scorecard scroll region",
-      "kind": "custom",
-      "refersTo": "scorecard-panel",
-      "description": "Clipped scroll panel with sticky headers, visible directional cue, and inward keyboard focus. No evaluation scores are invented.",
-      "html": "<div class=\"ds-scorecard\"><p id=\"ds-scorecard-help\" class=\"ds-scorecard-help\">Scroll within the table for more rows; scroll sideways on narrow screens for all columns.</p><div class=\"ds-table\" role=\"region\" aria-label=\"Referenced skills scorecard\" aria-describedby=\"ds-scorecard-help\" tabindex=\"0\"><table><thead><tr><th>Skill</th><th>Score</th></tr></thead><tbody></tbody></table></div></div>",
-      "css": ".ds-scorecard{background:var(--panel,#fff);border:1px solid var(--line,#d9dde3);border-radius:8px;overflow:hidden;box-shadow:0 16px 42px rgba(0,0,0,.08)}.ds-table{height:min(60vh,36rem);overflow:auto}.ds-table:focus-visible{outline:3px solid var(--steel,#236477);outline-offset:-3px}.ds-table table{width:100%;border-collapse:collapse;min-width:860px;font:14px/1.5 Chivo,\"Segoe UI\",sans-serif}.ds-table th{padding:13px 16px;border-bottom:1px solid var(--line,#d9dde3);text-align:left;vertical-align:top;background:var(--code,#20252b);color:#fff;font-size:12px;text-transform:uppercase;letter-spacing:.04em}.ds-scorecard-help{margin:0;padding:12px 20px;border-bottom:1px solid var(--line,#d9dde3);color:var(--muted,#5a5f66);font:16px/1.5 Chivo,\"Segoe UI\",sans-serif}.ds-table th{position:sticky;top:0;z-index:1}"
-    },
-    {
       "name": "Terminal code region",
       "kind": "custom",
       "refersTo": "terminal",
@@ -539,7 +518,7 @@
       "Do preserve the checked-in flame, its proportions, and compact navigation placement.",
       "Do use Chivo for the interface and reserve Fraunces for the author byline.",
       "Do retain neutral borders, readable text leading, and visible contrasting focus.",
-      "Do preserve wrapping actions, native link semantics, and scrollable code or tables.",
+      "Do preserve wrapping actions, native link semantics, and scrollable code.",
       "Do keep brand attribution and package descriptions grounded in repository content."
     ],
     "donts": [
@@ -547,7 +526,7 @@
       "Don't spread the author panel's serif or warm palette across ordinary documentation.",
       "Don't turn informational tags into controls without implementing their semantics and behavior.",
       "Don't use color or terminal indicators as the only way to communicate status.",
-      "Don't shrink package-link targets below (44px) in either dimension or move the scorecard focus ring outside its clipped panel."
+      "Don't shrink package-link targets below (44px) in either dimension."
     ]
   }
 }

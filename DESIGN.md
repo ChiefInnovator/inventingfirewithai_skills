@@ -71,21 +71,10 @@ typography:
     fontSize: "14px"
     fontWeight: 400
     lineHeight: 1.5
-  table-label:
-    fontFamily: 'Chivo, "Segoe UI", sans-serif'
-    fontSize: "12px"
-    fontWeight: 700
-    lineHeight: 1.5
-    letterSpacing: ".04em"
   hero-copy:
     fontFamily: 'Chivo, "Segoe UI", sans-serif'
     fontSize: "clamp(18px, 2vw, 22px)"
     fontWeight: 400
-    lineHeight: 1.5
-  scorecard-title:
-    fontFamily: 'Chivo, "Segoe UI", sans-serif'
-    fontSize: "18px"
-    fontWeight: 700
     lineHeight: 1.5
   statistic:
     fontFamily: 'Chivo, "Segoe UI", sans-serif'
@@ -152,9 +141,6 @@ components:
     typography: "{typography.body}"
   installation-list:
     typography: "{typography.body}"
-  scorecard-panel:
-    backgroundColor: "{colors.panel}"
-    rounded: "{rounded.panel}"
   author-panel:
     backgroundColor: "{colors.brand-surface}"
     textColor: "{colors.brand-ink}"
@@ -195,11 +181,11 @@ its own warmer dark palette. Frontmatter contains the normative values.
 
 ### Primary
 - **Ember:** terminal indicator and featured-card border emphasis.
-- **Ember text:** the first scorecard row's emphasized name on white.
+- **Ember text:** a declared darker ember token, currently unused on the homepage.
 - **Gold:** statistics, code keys, and focus outlines on dark surfaces.
 
 ### Secondary
-- **Steel:** tags, scorecard links, numbered rules, text selection, and focus on light surfaces.
+- **Steel:** tags, numbered rules, text selection, and focus on light surfaces.
 - **Green:** the terminal's third indicator; it is not a general success-state system.
 - **Code success / code error:** light green and warm red example markers inside
   the charcoal terminal; these differ from the darker toolbar indicator fills.
@@ -244,10 +230,8 @@ no explicit site-wide body-size token or geometric modular scale.
 - **Skill title / card title:** stronger skill names and smaller principle-card headings.
 - **Body / lede:** normal paragraphs and larger introductions; ledes stop at (780px).
 - **Tag:** compact bold informational labels; they are not controls.
-- **Navigation:** compact links; table body text shares its (14px) size.
-- **Table label:** (12px) uppercase headings with tracked letters.
+- **Navigation:** compact wrapping links at (14px).
 - **Hero copy:** fluid paragraph size from (18px) to (22px).
-- **Scorecard title:** (18px) bold header within the evaluation panel.
 - **Statistic:** (34px) gold figures with heading-like leading.
 - **Author link:** (12px) uppercase monospace links with wider tracking.
 - **Code:** installation examples with more generous leading and horizontal overflow.
@@ -273,18 +257,16 @@ author panel centers in one column with padding (32px 24px). Hero padding change
 from (56px 0 64px) to (28px 0 44px). The implementation has explicit media
 boundaries at (600px), (860px), and (1100px).
 
-The scorecard alone retains a minimum table width (860px) inside a scrollable
-region whose height is `min(60vh, 36rem)`. Its table cells use (13px 16px) padding;
-numeric columns use tabular figures. The FAQ is capped at (72ch).
+The FAQ is capped at (72ch). The research scorecard remains in supporting
+documentation and is excluded from the homepage.
 
 ## Elevation & Depth
 
 Most content is flat, separated by background tone and a fine border. Shadows
-are limited to the scorecard, terminal, and author avatar; the featured card's
+are limited to the terminal and author avatar; the featured card's
 inset stroke adds emphasis rather than floating it above the page.
 
 ### Shadow Vocabulary
-- **Scorecard:** `0 16px 42px rgba(0, 0, 0, .08)`.
 - **Terminal:** `0 18px 50px rgba(0, 0, 0, .16)`.
 - **Author avatar:** `0 12px 30px rgba(0, 0, 0, .2)`.
 - **Featured card stroke:** `inset 0 0 0 1px rgba(217, 79, 48, .2)`.
@@ -338,17 +320,6 @@ links. Links have minimum height (44px); navigation becomes stacked below the
 existing breakpoint. The skip link appears at keyboard focus, entering the
 semantic main content. Dark-surface links retain gold focus outlines.
 
-### Scorecard
-
-A white bordered panel contains a paper header and a dark table header. The
-scroll region remains keyboard focusable, with a visible scroll-direction cue
-connected through `aria-describedby`. Table headings stick to the top of the
-scroll region (`top: 0`, `z-index: 1`). The cue has padding (12px 20px) and a
-neutral bottom border. Loading and completion/failure
-messages use the existing live status. Keep fallback source links usable when
-data cannot load. The scroll region retains the global (3px) steel focus outline
-with an inward offset (-3px), keeping the ring inside the clipped panel.
-
 ### Installation List
 
 Client-specific installation instructions use a semantic definition list capped
@@ -378,7 +349,7 @@ Preserve the byline and source links; do not infer new credentials or claims.
 - **Do** preserve the checked-in flame, its proportions, and compact navigation placement.
 - **Do** use Chivo for the interface and reserve Fraunces for the author byline.
 - **Do** retain neutral borders, readable text leading, and visible contrasting focus.
-- **Do** preserve wrapping actions, native link semantics, and scrollable code or tables.
+- **Do** preserve wrapping actions, native link semantics, and scrollable code.
 - **Do** keep brand attribution and package descriptions grounded in repository content.
 
 ### Don't:
@@ -386,4 +357,4 @@ Preserve the byline and source links; do not infer new credentials or claims.
 - **Don't** spread the author panel's serif or warm palette across ordinary documentation.
 - **Don't** turn informational tags into controls without implementing their semantics and behavior.
 - **Don't** use color or terminal indicators as the only way to communicate status.
-- **Don't** shrink package-link targets below (44px) in either dimension or move the scorecard focus ring outside its clipped panel.
+- **Don't** shrink package-link targets below (44px) in either dimension.
