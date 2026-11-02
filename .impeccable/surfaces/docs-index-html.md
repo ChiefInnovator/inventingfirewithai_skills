@@ -24,7 +24,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 
 ## Verification
 
-Use 320/390/768/1024/1440px and 600/601, 860/861, 1100/1101px edge checks. Package links are at least 44x44 CSS px. Keep visible scorecard focus and live loading/success/failure announcements. Site data must match the deployed artifact. Raw review metadata stays outside docs/.
+Use 320/390/768/1024/1440px and 600/601, 860/861, 1100/1101px edge checks. Package links are at least 44x44 CSS px. Preserve native keyboard navigation, visible focus, and the named terminal scroll region. The research scorecard stays in supporting documentation, without a homepage table, navigation link, or data loader. Raw review metadata stays outside docs/.
 
 ## Asset boundary
 

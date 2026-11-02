@@ -137,39 +137,6 @@ def check_controls_and_focus(document):
             require(not any(interactive(ancestor) for ancestor in ancestors), "Nested interactive elements")
 
 
-def check_scorecard(document):
-    target = only(document.find(id="scorecard-table"), "scorecard region")
-    require(target.attrs.get("role") == "region", "Scorecard needs region semantics")
-    require(target.attrs.get("tabindex") == "0", "Scrollable scorecard must be in the keyboard tab order")
-    require(target.attrs.get("aria-busy") == "true", "Scorecard must expose initial loading state")
-    index = ids(document)
-    require(bool(accessible_name(target, index, content=False)), "Scorecard region needs a name")
-    descriptions = (target.attrs.get("aria-describedby") or "").split()
-    require(bool(descriptions) and all(value in index for value in descriptions),
-            "Scorecard must reference its scroll guidance")
-    require(any(index[value] not in target.find() and content_name(index[value])
-                and "visually-hidden" not in index[value].attrs.get("class", "").split()
-                for value in descriptions),
-            "Scroll guidance must remain visible outside replaced table content")
-    require(any(node.attrs.get("href") and accessible_name(node, index)
-                for node in target.find("a")), "Scorecard needs a usable source link before JavaScript loads")
-    statuses = [node for node in document.find() if node.attrs.get("role") == "status"]
-    require(bool(statuses), "Missing persistent scorecard status")
-    outside = [node for node in statuses if node not in target.find()]
-    require(any(node.attrs.get("aria-live") == "polite" and "id" in node.attrs
-                and bool(content_name(node)) for node in outside),
-            "Status must remain outside replaced scorecard content and announce politely")
-    scripts = "\n".join(node.text(raw=True) for node in document.find("script")
-                        if node.attrs.get("type") != "application/ld+json")
-    require(re.search(r"<caption\b[^>]*>\s*[^<]+</caption>", scripts), "Rendered table needs a caption")
-    headers = re.findall(r"<th\b[^>]*>", scripts)
-    require(bool(headers) and all(re.search(r"\bscope\s*=\s*['\"]col['\"]", value) for value in headers),
-            "Rendered column headers need scope=col")
-    require(re.search(r"setAttribute\(\s*['\"]aria-busy['\"]\s*,\s*['\"]false['\"]\s*\)", scripts),
-            "Loader must clear aria-busy")
-    require(re.search(r"\.textContent\s*=", scripts), "Loader must update persistent status text")
-
-
 def check_terminal(document):
     index = ids(document)
     terminals = [node for node in document.find() if "terminal" in node.attrs.get("class", "").split()]
@@ -187,11 +154,7 @@ VALID = """<body><a href="#main">Skip to content</a>
 <main id="main" tabindex="-1"><h1 id="title">Library</h1>
 <div role="group" aria-labelledby="title"><a href="#title"><img alt="">Skills</a></div>
 <section aria-label="Details"><img src="mark.png" alt="Brand mark"></section>
-<p id="scorecard-status" role="status" aria-live="polite">Loading.</p>
-<p id="scroll-help">Scroll sideways for more columns.</p>
-<div id="scorecard-table" role="region" aria-label="Scorecard" aria-describedby="scroll-help" aria-busy="true" tabindex="0"><a href="/scores">View scores</a></div>
-</main><script>function render() { return `<table><caption>Scores</caption><thead><tr><th scope="col">Skill</th></tr></thead></table>`; }
-target.setAttribute("aria-busy", "false"); status.textContent = "Loaded";</script></body>"""
+</main></body>"""
 
 
 class PagesAccessibilityTests(unittest.TestCase):
@@ -208,9 +171,6 @@ class PagesAccessibilityTests(unittest.TestCase):
     def test_page_images_controls_and_keyboard_order_are_accessible(self):
         check_controls_and_focus(self.document)
 
-    def test_scorecard_preserves_live_loading_and_table_semantics(self):
-        check_scorecard(self.document)
-
     def test_terminal_example_has_an_explicit_named_keyboard_scroll_region(self):
         check_terminal(self.document)
 
@@ -225,7 +185,7 @@ class PagesAccessibilityTests(unittest.TestCase):
 
     def test_valid_native_elements_and_explicit_decorative_images_need_no_extra_aria(self):
         document = Document(VALID).root
-        for check in (check_ids_and_labels, check_landmarks_and_skip, check_controls_and_focus, check_scorecard):
+        for check in (check_ids_and_labels, check_landmarks_and_skip, check_controls_and_focus):
             check(document)
         check_ids_and_labels(Document('<header aria-label="Site">Library</header>').root)
         check_ids_and_labels(Document('<main><header role="group" aria-label="Introduction">Library</header></main>').root)
@@ -264,24 +224,6 @@ class PagesAccessibilityTests(unittest.TestCase):
                         '<section><footer aria-label="Footnotes">Notes</footer></section>'):
             with self.subTest(content=content), self.assertRaises(ValueError):
                 check_ids_and_labels(Document(content).root)
-
-    def test_broken_loading_announcements_or_table_markup_are_rejected(self):
-        cases = [('aria-busy="true"', ""), ('aria-live="polite"', 'aria-live="off"'),
-                 ('tabindex="0"', 'tabindex="-1"'), ('<a href="/scores">View scores</a>', ""),
-                 ('aria-describedby="scroll-help"', ''), ('id="scroll-help"', 'id="scroll-help" hidden'),
-                 ('id="scroll-help"', 'id="scroll-help" class="visually-hidden"'),
-                 ('<caption>Scores</caption>', ""), ('scope="col"', ""),
-                 ('setAttribute("aria-busy", "false")', 'setAttribute("data-loaded", "true")'),
-                 ('status.textContent = "Loaded"', 'status.dataset.loaded = "yes"')]
-        for before, after in cases:
-            with self.subTest(before=before), self.assertRaises(ValueError):
-                check_scorecard(Document(VALID.replace(before, after, 1)).root)
-        inside = VALID.replace('<p id="scorecard-status" role="status" aria-live="polite">Loading.</p>', "")
-        inside = inside.replace('<a href="/scores">View scores</a>',
-                                '<a href="/scores">View scores</a><p id="status" role="status" aria-live="polite">Loading.</p>')
-        with self.assertRaises(ValueError):
-            check_scorecard(Document(inside).root)
-
 
 if __name__ == "__main__":
     unittest.main()
