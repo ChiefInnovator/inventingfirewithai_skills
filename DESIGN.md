@@ -230,8 +230,7 @@ no explicit site-wide body-size token or geometric modular scale.
 - **Skill title / card title:** stronger skill names and smaller principle-card headings.
 - **Body / lede:** normal paragraphs and larger introductions; ledes stop at (780px).
 - **Tag:** compact bold informational labels; they are not controls.
-- **Navigation:** compact links; table body text shares its (14px) size.
-- **Table label:** (12px) uppercase headings with tracked letters.
+- **Navigation:** compact wrapping links at (14px).
 - **Hero copy:** fluid paragraph size from (18px) to (22px).
 - **Scorecard title:** (18px) bold header within the evaluation panel.
 - **Statistic:** (34px) gold figures with heading-like leading.
@@ -351,7 +350,7 @@ Preserve the byline and source links; do not infer new credentials or claims.
 - **Do** preserve the checked-in flame, its proportions, and compact navigation placement.
 - **Do** use Chivo for the interface and reserve Fraunces for the author byline.
 - **Do** retain neutral borders, readable text leading, and visible contrasting focus.
-- **Do** preserve wrapping actions, native link semantics, and scrollable code or tables.
+- **Do** preserve wrapping actions, native link semantics, and scrollable code.
 - **Do** keep brand attribution and package descriptions grounded in repository content.
 
 ### Don't:

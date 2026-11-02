@@ -244,6 +244,8 @@ class PagesVisibilityTests(unittest.TestCase):
         scripts = "\n".join(node.text(raw=True) for node in self.document.find("script")
                             if node.attrs.get("type") != "application/ld+json")
         self.assertNotRegex(scripts, r"(?i)scorecard|renderMarkdownTable")
+        styles = "\n".join(node.text(raw=True) for node in self.document.find("style"))
+        self.assertNotRegex(styles, r"(?i)scorecard|\.table-wrap")
 
     def test_supporting_research_documents_remain_public_and_discoverable(self):
         sitemap = ET.parse(DOCS / "sitemap.xml")
