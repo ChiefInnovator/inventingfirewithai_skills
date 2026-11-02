@@ -1,9 +1,9 @@
 name: Main source guard
 
 on:
-  pull_request:
+  pull_request_target:
     branches: [main]
-    types: [opened, edited, reopened, synchronize]
+    types: [opened, edited, reopened, synchronize, ready_for_review]
 
 permissions: {}
 
