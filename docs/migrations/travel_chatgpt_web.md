@@ -5,11 +5,11 @@ description: Complete Travel Like a Local source archive, reproducible ZIP verif
 
 # Travel Like a Local: ChatGPT web migration
 
-Web setup status recorded September 25, 2026. Export refreshed October 31, 2026 to match the current repository source.
+Web setup status recorded September 25, 2026. Export refreshed November 2, 2026 to match the current repository source.
 
 ## Source and export
 
-The canonical source for this export is [the Codex travel skill](https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/skills/codex/travel-like-a-local/SKILL.md). The [downloadable ZIP](https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/assets/distributions/travel-like-a-local.zip) preserves its complete folder, including `agents/openai.yaml`, `assets/icon.svg`, and all five references: traveler profile, venue research, day planning, trip operations, and experience and learning. Keep changes in the source folder and regenerate the archive when those files change.
+The canonical source for this export is [the Codex travel skill](https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/skills/codex/travel-like-a-local/SKILL.md). The [downloadable ZIP](https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/assets/distributions/travel-like-a-local.zip) preserves its complete folder, including `agents/openai.yaml`, `assets/icon.svg`, and all five references: traveler profile, venue research, day planning, trip operations, and experience and learning. The traveler-profile reference defines onboarding and storage rules; no personal profile or trip state is bundled. Keep changes in the source folder and regenerate the archive when those files change.
 
 This is a skill source archive, not an installable plugin package. Installing a local Codex skill does not establish that it is available in ChatGPT on the web.
 
@@ -33,6 +33,8 @@ The creator workflow is documented; importing this particular ZIP and persisting
 - [ ] Create and enable the personal skill in that account.
 - [ ] Confirm it appears in a fresh chat and can read its supporting references.
 - [ ] Test city exploration and remote-property relaxation requests; confirm it asks only for missing trip context and researches current practical details.
+- [ ] With each host's real private store, verify user isolation, field-specific persistence consent, save failure reporting, and correction/deletion. Package checks do not establish these host behaviors.
+- [ ] Verify booking, payment, and cancellation actions stop at the user's authorized scope; a profile-save consent or proposed itinerary does not authorize a transaction.
 
 ## Regenerate the archive
 
