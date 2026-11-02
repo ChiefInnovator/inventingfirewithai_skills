@@ -55,7 +55,7 @@ class BranchSourceGuardTests(unittest.TestCase):
         self.assertEqual(set(triggers), {"pull_request_target"})
         event = triggers["pull_request_target"]
         self.assertEqual(event["branches"], ["develop"])
-        self.assertTrue({"opened", "edited", "reopened", "synchronize"}.issubset(event["types"]))
+        self.assertTrue({"opened", "edited", "reopened", "synchronize", "ready_for_review"}.issubset(event["types"]))
         self.assertNotIn("paths", event)
         self.assertNotIn("paths-ignore", event)
         self.assertEqual(data["permissions"], {})
