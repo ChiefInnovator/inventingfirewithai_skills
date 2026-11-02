@@ -22,3 +22,17 @@ scope. All listed findings retain their reviewers' original severities.
 No finding was contested, escalated, or silently downgraded. All have been
 resolved in the design. Implementation evidence is tracked in the public curated
 review page and the final Impeccable report; this table alone is not a test pass.
+
+## Execution evidence
+
+- Z1 / IZ1: final unified command passed all six suites, 487 tests, zero skips or failures; pinned Node/Codex/Python helpers are active in CI.
+- C1: development records are outside `docs/`; the Pages artifact build passed on PR #17.
+- F1 / R2: independent rendered measurements covered eleven widths and changed breakpoint boundaries; all fifteen package targets were at least 44px high with no page overflow.
+- R1 / B1: README and homepage share concrete client destinations and non-invoking discovery checks; package choice now links locally to installation.
+- R3: staged design, verification, UI, independent critique, and delivery gates were executed in order. Remote release checks remain tied to the actual final PR head.
+- B2: resistant-descendant timeout and SIGINT interruption regressions passed. Intentionally detached processes remain outside this contract.
+- T1 / T2: source-derived design records and independent A/B reports are present; final configured static detector returned zero findings.
+- BR1: the real Jekyll build verified unchanged static data bytes. Deployed-byte parity is a separate release acceptance check.
+
+The evidence above records implementation outcomes, not an additional Goldfish
+re-audit or an assertion of live host, screen-reader, indexing, or provider acceptance.

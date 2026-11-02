@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-02T13:29:40.294883+00:00",
+  "generatedAt": "2026-11-02T13:51:18.385501+00:00",
   "title": "Design System: Inventing Fire with AI Skills",
   "extensions": {
     "colorMeta": {
@@ -227,6 +227,104 @@
           "oklch(84% 0.0029 211.04)",
           "oklch(95% 0.0014 211.04)"
         ]
+      },
+      "terminal-bar": {
+        "role": "neutral",
+        "displayName": "Terminal Bar",
+        "tonalRamp": [
+          "oklch(15% 0.0029 254.09)",
+          "oklch(26% 0.0061 254.09)",
+          "oklch(38% 0.0096 254.09)",
+          "oklch(49% 0.0117 254.09)",
+          "oklch(61% 0.0117 254.09)",
+          "oklch(72% 0.0096 254.09)",
+          "oklch(84% 0.0061 254.09)",
+          "oklch(95% 0.0029 254.09)"
+        ]
+      },
+      "terminal-ink": {
+        "role": "neutral",
+        "displayName": "Terminal Ink",
+        "tonalRamp": [
+          "oklch(15% 0.0000 89.88)",
+          "oklch(26% 0.0000 89.88)",
+          "oklch(38% 0.0000 89.88)",
+          "oklch(49% 0.0000 89.88)",
+          "oklch(61% 0.0000 89.88)",
+          "oklch(72% 0.0000 89.88)",
+          "oklch(84% 0.0000 89.88)",
+          "oklch(95% 0.0000 89.88)"
+        ]
+      },
+      "code-success": {
+        "role": "secondary",
+        "displayName": "Code Success",
+        "tonalRamp": [
+          "oklch(15% 0.0278 162.42)",
+          "oklch(26% 0.0584 162.42)",
+          "oklch(38% 0.0918 162.42)",
+          "oklch(49% 0.1113 162.42)",
+          "oklch(61% 0.1113 162.42)",
+          "oklch(72% 0.0918 162.42)",
+          "oklch(84% 0.0584 162.42)",
+          "oklch(95% 0.0278 162.42)"
+        ]
+      },
+      "code-error": {
+        "role": "secondary",
+        "displayName": "Code Error",
+        "tonalRamp": [
+          "oklch(15% 0.0318 35.27)",
+          "oklch(26% 0.0668 35.27)",
+          "oklch(38% 0.1050 35.27)",
+          "oklch(49% 0.1272 35.27)",
+          "oklch(61% 0.1272 35.27)",
+          "oklch(72% 0.1050 35.27)",
+          "oklch(84% 0.0668 35.27)",
+          "oklch(95% 0.0318 35.27)"
+        ]
+      },
+      "author-border": {
+        "role": "neutral",
+        "displayName": "Author Border",
+        "tonalRamp": [
+          "oklch(15% 0.0074 66.78)",
+          "oklch(26% 0.0156 66.78)",
+          "oklch(38% 0.0245 66.78)",
+          "oklch(49% 0.0297 66.78)",
+          "oklch(61% 0.0297 66.78)",
+          "oklch(72% 0.0245 66.78)",
+          "oklch(84% 0.0156 66.78)",
+          "oklch(95% 0.0074 66.78)"
+        ]
+      },
+      "mark-border": {
+        "role": "neutral",
+        "displayName": "Mark Border",
+        "tonalRamp": [
+          "oklch(15% 0.0290 46.12)",
+          "oklch(26% 0.0609 46.12)",
+          "oklch(38% 0.0957 46.12)",
+          "oklch(49% 0.1160 46.12)",
+          "oklch(61% 0.1160 46.12)",
+          "oklch(72% 0.0957 46.12)",
+          "oklch(84% 0.0609 46.12)",
+          "oklch(95% 0.0290 46.12)"
+        ]
+      },
+      "mark-surface": {
+        "role": "neutral",
+        "displayName": "Mark Surface",
+        "tonalRamp": [
+          "oklch(15% 0.0015 70.62)",
+          "oklch(26% 0.0032 70.62)",
+          "oklch(38% 0.0050 70.62)",
+          "oklch(49% 0.0060 70.62)",
+          "oklch(61% 0.0060 70.62)",
+          "oklch(72% 0.0050 70.62)",
+          "oklch(84% 0.0032 70.62)",
+          "oklch(95% 0.0015 70.62)"
+        ]
       }
     },
     "typographyMeta": {
@@ -265,6 +363,30 @@
       "code": {
         "displayName": "Code",
         "purpose": "Installation examples."
+      },
+      "navigation": {
+        "displayName": "Navigation",
+        "purpose": "Wrapping navigation; table body shares the 14px size."
+      },
+      "table-label": {
+        "displayName": "Table Label",
+        "purpose": "Uppercase table headings."
+      },
+      "hero-copy": {
+        "displayName": "Hero Copy",
+        "purpose": "Fluid hero paragraph with 18px lower endpoint."
+      },
+      "scorecard-title": {
+        "displayName": "Scorecard Title",
+        "purpose": "Evaluation panel header."
+      },
+      "statistic": {
+        "displayName": "Statistic",
+        "purpose": "Gold numeric figures."
+      },
+      "author-link": {
+        "displayName": "Author Link",
+        "purpose": "Tracked uppercase monospace attribution links."
       }
     },
     "shadows": [
@@ -311,7 +433,7 @@
       "kind": "button",
       "refersTo": "button-primary",
       "description": "Link action on charcoal; source defines no distinct hover or active state.",
-      "html": "<div class=\"ds-dark\"><a class=\"ds-action\" href=\"#skills\">View on GitHub</a></div>",
+      "html": "<div class=\"ds-dark\"><a class=\"ds-action\" href=\"#skills\">Browse all five skills</a></div>",
       "css": ".ds-dark{background:var(--code,#20252b);padding:16px}.ds-action{display:inline-flex;align-items:center;min-height:48px;padding:0 18px;border:1px solid rgba(255,255,255,.28);border-radius:6px;text-decoration:none;font:700 16px/1.5 Chivo,\"Segoe UI\",sans-serif;background:var(--panel,#fff);color:var(--ink,#151515)}.ds-action:focus-visible{outline:3px solid var(--gold,#f0b13e);outline-offset:4px}"
     },
     {
@@ -319,7 +441,7 @@
       "kind": "button",
       "refersTo": "button-secondary",
       "description": "Link action on charcoal; source defines no distinct hover or active state.",
-      "html": "<div class=\"ds-dark\"><a class=\"ds-action\" href=\"#skills\">Browse all five skills</a></div>",
+      "html": "<div class=\"ds-dark\"><a class=\"ds-action\" href=\"https://github.com/ChiefInnovator/inventingfirewithai_skills\">View on GitHub</a></div>",
       "css": ".ds-dark{background:var(--code,#20252b);padding:16px}.ds-action{display:inline-flex;align-items:center;min-height:48px;padding:0 18px;border:1px solid rgba(255,255,255,.28);border-radius:6px;text-decoration:none;font:700 16px/1.5 Chivo,\"Segoe UI\",sans-serif;background:rgba(255,255,255,.08);color:#fff}.ds-action:focus-visible{outline:3px solid var(--gold,#f0b13e);outline-offset:4px}"
     },
     {
@@ -358,9 +480,9 @@
       "name": "Client package links",
       "kind": "custom",
       "refersTo": "client-link",
-      "description": "Wrapping underlined package links with minimum 44px targets in both dimensions.",
-      "html": "<div class=\"ds-client-links\" role=\"group\" aria-label=\"Pragmatic Coder packages\"><a href=\"#codex\">Codex</a><a href=\"#claude\">Claude Code</a><a href=\"#copilot\">Copilot</a></div>",
-      "css": ".ds-client-links{display:flex;flex-wrap:wrap;gap:12px;font:700 16px/1.5 Chivo,\"Segoe UI\",sans-serif;color:var(--ink,#151515);text-underline-offset:.2em}.ds-client-links a{display:inline-flex;align-items:center;min-width:44px;min-height:44px;max-width:100%;overflow-wrap:anywhere;color:inherit}.ds-client-links a:focus-visible{outline:3px solid var(--steel,#236477);outline-offset:4px}"
+      "description": "Wrapping underlined package links with minimum 44px targets; nearby local installation help.",
+      "html": "<div class=\"ds-client-links\" role=\"group\" aria-label=\"Pragmatic Coder packages\"><a href=\"#codex\">Codex</a><a href=\"#claude\">Claude Code</a><a href=\"#copilot\">Copilot</a></div><p><a class=\"ds-install-help\" href=\"#install\">See installation and discovery steps for your selected skill</a></p>",
+      "css": ".ds-client-links{display:flex;flex-wrap:wrap;gap:12px;font:700 16px/1.5 Chivo,\"Segoe UI\",sans-serif;color:var(--ink,#151515);text-underline-offset:.2em}.ds-client-links a{display:inline-flex;align-items:center;min-width:44px;min-height:44px;max-width:100%;overflow-wrap:anywhere;color:inherit}.ds-client-links a:focus-visible{outline:3px solid var(--steel,#236477);outline-offset:4px}.ds-install-help{display:inline-flex;align-items:center;min-height:44px;font:700 16px/1.5 Chivo,\"Segoe UI\",sans-serif;text-underline-offset:.2em;color:var(--ink,#151515)}.ds-install-help:focus-visible{outline:3px solid var(--steel,#236477);outline-offset:4px}"
     },
     {
       "name": "Installation list",
@@ -374,9 +496,17 @@
       "name": "Scorecard scroll region",
       "kind": "custom",
       "refersTo": "scorecard-panel",
-      "description": "Clipped panel with keyboard-scrollable table and inward focus. Preview samples source table headings without inventing evaluation scores.",
-      "html": "<div class=\"ds-scorecard\"><div class=\"ds-table\" role=\"region\" aria-label=\"Referenced skills scorecard\" tabindex=\"0\"><table><thead><tr><th>Skill</th><th>Score</th></tr></thead><tbody></tbody></table></div></div>",
-      "css": ".ds-scorecard{background:var(--panel,#fff);border:1px solid var(--line,#d9dde3);border-radius:8px;overflow:hidden;box-shadow:0 16px 42px rgba(0,0,0,.08)}.ds-table{height:min(60vh,36rem);overflow:auto}.ds-table:focus-visible{outline:3px solid var(--steel,#236477);outline-offset:-3px}.ds-table table{width:100%;border-collapse:collapse;min-width:860px;font:14px/1.5 Chivo,\"Segoe UI\",sans-serif}.ds-table th{padding:13px 16px;border-bottom:1px solid var(--line,#d9dde3);text-align:left;vertical-align:top;background:var(--code,#20252b);color:#fff;font-size:12px;text-transform:uppercase;letter-spacing:.04em}"
+      "description": "Clipped scroll panel with sticky headers, visible directional cue, and inward keyboard focus. No evaluation scores are invented.",
+      "html": "<div class=\"ds-scorecard\"><p id=\"ds-scorecard-help\" class=\"ds-scorecard-help\">Scroll within the table for more rows; scroll sideways on narrow screens for all columns.</p><div class=\"ds-table\" role=\"region\" aria-label=\"Referenced skills scorecard\" aria-describedby=\"ds-scorecard-help\" tabindex=\"0\"><table><thead><tr><th>Skill</th><th>Score</th></tr></thead><tbody></tbody></table></div></div>",
+      "css": ".ds-scorecard{background:var(--panel,#fff);border:1px solid var(--line,#d9dde3);border-radius:8px;overflow:hidden;box-shadow:0 16px 42px rgba(0,0,0,.08)}.ds-table{height:min(60vh,36rem);overflow:auto}.ds-table:focus-visible{outline:3px solid var(--steel,#236477);outline-offset:-3px}.ds-table table{width:100%;border-collapse:collapse;min-width:860px;font:14px/1.5 Chivo,\"Segoe UI\",sans-serif}.ds-table th{padding:13px 16px;border-bottom:1px solid var(--line,#d9dde3);text-align:left;vertical-align:top;background:var(--code,#20252b);color:#fff;font-size:12px;text-transform:uppercase;letter-spacing:.04em}.ds-scorecard-help{margin:0;padding:12px 20px;border-bottom:1px solid var(--line,#d9dde3);color:var(--muted,#5a5f66);font:16px/1.5 Chivo,\"Segoe UI\",sans-serif}.ds-table th{position:sticky;top:0;z-index:1}"
+    },
+    {
+      "name": "Terminal code region",
+      "kind": "custom",
+      "refersTo": "terminal",
+      "description": "Named, keyboard-scrollable code region with gold inward focus on charcoal.",
+      "html": "<div class=\"ds-terminal\"><div class=\"ds-bar\" aria-hidden=\"true\"><span></span><span></span><span></span></div><pre tabindex=\"0\" role=\"region\" aria-label=\"Pragmatic Coder quality gate example\"><code><span class=\"ds-key\">pragmatic-coder</span>\n  <span class=\"ds-ok\">✓</span> read code/docs/tests\n  <span class=\"ds-bad\">✕</span> tolerate unsupported claims</code></pre></div>",
+      "css": ".ds-terminal{background:var(--code,#20252b);color:#f4f4f4;border-radius:8px;overflow:hidden;box-shadow:0 18px 50px rgba(0,0,0,.16)}.ds-bar{height:42px;display:flex;gap:7px;align-items:center;padding:0 14px;background:#15191e}.ds-bar span{width:11px;height:11px;border-radius:50%;background:var(--ember,#d94f30)}.ds-bar span:nth-child(2){background:var(--gold,#f0b13e)}.ds-bar span:nth-child(3){background:var(--green,#1d7a5f)}.ds-terminal pre{margin:0;padding:24px;overflow-x:auto;font:15px/1.65 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.ds-terminal pre:focus-visible{outline:3px solid var(--gold,#f0b13e);outline-offset:-3px}.ds-key{color:var(--gold,#f0b13e)}.ds-ok{color:#77d6aa}.ds-bad{color:#ff9a80}"
     }
   ],
   "narrative": {
@@ -391,7 +521,7 @@
     "rules": [
       {
         "name": "The Surface Contrast Rule",
-        "body": "Use steel focus outlines on light surfaces and gold outlines on navigation, hero, and author surfaces, as implemented. ",
+        "body": "Use steel focus outlines on light surfaces and gold outlines on navigation, hero, author, and focused terminal code surfaces, as implemented. ",
         "section": "colors"
       },
       {

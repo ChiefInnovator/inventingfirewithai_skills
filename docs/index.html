@@ -374,6 +374,8 @@
       letter-spacing: 0;
     }
 
+    .hero h1 { text-wrap: balance; }
+
     .hero p {
       max-width: 690px;
       font-size: clamp(18px, 2vw, 22px);
@@ -505,6 +507,14 @@
       min-height: 44px;
       max-width: 100%;
       overflow-wrap: anywhere;
+    }
+
+    .install-help {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      font-weight: 700;
+      text-underline-offset: .2em;
     }
 
     .install-clients {
@@ -650,6 +660,13 @@
       white-space: nowrap;
     }
 
+    .scorecard-help {
+      margin: 0;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+    }
+
     .table-wrap {
       height: min(60vh, 36rem);
       overflow: auto;
@@ -675,6 +692,9 @@
     }
 
     th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
       background: var(--code);
       color: #fff;
       font-size: 12px;
@@ -732,6 +752,11 @@
       padding: 24px;
       overflow-x: auto;
       font: 15px/1.65 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    .terminal pre:focus-visible {
+      outline-color: var(--gold);
+      outline-offset: -3px;
     }
 
     code .key { color: var(--gold); }
@@ -895,8 +920,8 @@
       <h1 id="site-title">Inventing Fire with AI Skills</h1>
       <p>Five reusable AI agent skills for Codex, Claude Code, and GitHub Copilot. Code, ship, convert Figma designs, choose MCP integrations, and plan travel.</p>
       <div class="actions">
-        <a class="button" href="https://github.com/ChiefInnovator/inventingfirewithai_skills">View on GitHub</a>
-        <a class="button secondary" href="#skills">Browse all five skills</a>
+        <a class="button secondary" href="https://github.com/ChiefInnovator/inventingfirewithai_skills">View on GitHub</a>
+        <a class="button" href="#skills">Browse all five skills</a>
       </div>
     </div>
   </header>
@@ -919,6 +944,7 @@
     <div class="wrap">
       <h2>Skills in the library.</h2>
       <p class="lede">Five focused skills for Codex, Claude Code, and GitHub Copilot: Pragmatic Coder, Figma to Flutter, MCP Picker, Slam, and Travel Like a Local.</p>
+      <p><a class="install-help" href="#install">See installation and discovery steps for your selected skill</a></p>
 
       <div class="skill-grid">
         <article class="skill-card featured" id="pragmatic-coder">
@@ -1038,9 +1064,9 @@
           <li><span>3</span><div><strong>Ship one standard.</strong><br>Use a compact skill that guides implementation, review, and refactor work.</div></li>
         </ul>
       </div>
-      <div class="terminal" role="region" aria-label="Pragmatic Coder quality gates">
+      <div class="terminal">
         <div class="bar"><i class="dot"></i><i class="dot"></i><i class="dot"></i></div>
-        <pre><code><span class="key">pragmatic-coder</span>
+        <pre tabindex="0" role="region" aria-label="Pragmatic Coder quality gate example"><code><span class="key">pragmatic-coder</span>
   <span class="ok">✓</span> read code/docs/tests
   <span class="ok">✓</span> prefer little or no code
   <span class="ok">✓</span> fix data shape first
@@ -1060,8 +1086,9 @@
           </div>
           <a href="https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/docs/evaluations/referenced_skills_scorecard.md">Open markdown</a>
         </div>
+        <p id="scorecard-scroll-help" class="scorecard-help">Scroll within the table for more rows; scroll sideways on narrow screens for all columns.</p>
         <p id="scorecard-status" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true">Loading skill scorecard.</p>
-        <div class="table-wrap" id="scorecard-table" role="region" aria-label="Referenced skills scorecard" aria-busy="true" tabindex="0">
+        <div class="table-wrap" id="scorecard-table" role="region" aria-label="Referenced skills scorecard" aria-describedby="scorecard-scroll-help" aria-busy="true" tabindex="0">
           <div class="loading">The <a href="evaluations/referenced_skills_scorecard.html">referenced skills scorecard</a> records historical editorial assessments. Read the source for scores and their limits.</div>
         </div>
       </div>

@@ -26,10 +26,10 @@ Crawler directives are read from `https://chiefinnovator.github.io/robots.txt`. 
 
 ## Regression and deployment checks
 
-Run the repository test suite from its root:
+Run all six maintained test suites from the repository root:
 
 ```sh
-uv run --no-project --python 3.14 --with-requirements tests/requirements.txt python -m unittest discover -s tests
+uv run --no-project --python 3.14 --with-requirements tests/requirements.txt python scripts/check_repository.py
 ```
 
 [Site regression tests](https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/tests/test_pages_visibility.py) check the actual metadata, crawlable content, structured data, links, sitemap, and reading index. [Travel tests and smoke evidence](travel_like_a_local_evaluation.md) distinguish deterministic package verification from agent behavior and live-service acceptance.

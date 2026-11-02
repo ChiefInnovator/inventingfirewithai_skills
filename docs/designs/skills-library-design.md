@@ -170,8 +170,10 @@ The baseline has 138 passing root tests. Existing travel fixtures and package ch
 are separate from real Claude/Copilot host acceptance, connected private stores,
 assistive technology, live bookings, and search indexing. Record exact commands,
 revision, viewport, and browser for new evidence. Do not turn an unrun check into
-a pass. The `feature-only` rule is configured; its first genuine PR execution still
-needs to be observed. Account-wide personal automatic-review preferences are separate
+a pass. At the design baseline, the `feature-only` rule's first genuine PR execution
+was unobserved. It subsequently passed on draft PR #17 at candidate
+`24fe7bacdfa566893fdabd7e276f89fa839ff0d9`; cloud Copilot also completed an automatic
+review of that draft. Account-wide personal automatic-review preferences are separate
 from repository rules and will not be changed by this work.
 
 ## Detailed Implementation Plan

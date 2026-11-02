@@ -11,6 +11,15 @@
         ],
         "createdAt": "2026-10-31T12:42:33.368Z",
         "reason": "User requested the Video Downloader branding reference. Fraunces matches its author byline only; Chivo remains the primary site family."
+      },
+      {
+        "rule": "design-system-color",
+        "value": "rgb(0, 0, 0)",
+        "files": [
+          "docs/index.html"
+        ],
+        "createdAt": "2026-11-02T13:50:54.630Z",
+        "reason": "Assessment B: Video Downloader underline computes to documented amber rgb(255, 179, 71) through currentColor; static black fallback is not rendered"
       }
     ]
   }

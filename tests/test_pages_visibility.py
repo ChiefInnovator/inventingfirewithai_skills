@@ -290,6 +290,16 @@ class PagesVisibilityTests(unittest.TestCase):
                 clients.add(client)
             self.assertEqual(clients, {"codex", "claude", "copilot"})
 
+    def test_library_has_a_local_installation_route_outside_package_groups(self):
+        skills = only(self.document.find(id="skills"), "skills section")
+        help_link = only(skills.find("a", href="#install"), "local installation help link")
+        self.assertTrue(normalized(help_link.text()))
+        self.assertIsNotNone(local_file(DOCS, help_link.attrs["href"]))
+        for article in skills.find("article"):
+            for group in article.find():
+                if "client-links" in group.attrs.get("class", "").split():
+                    self.assertNotIn(help_link, group.find("a"))
+
     def test_structured_skill_inventory_matches_visible_repository_facts(self):
         check_structured_data(self.document, DOCS)
 

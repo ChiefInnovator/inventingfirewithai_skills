@@ -14,3 +14,13 @@ BR1 is not hidden by the readiness/style passes. Its planned resolution must be
 implemented and proved by the real Jekyll-produced asset check before publishing.
 All other behavioral and runtime checks remain execution gates, not consequences
 of document approval.
+
+## Implementation follow-through
+
+The Jekyll Pages artifact job passed for PR #17 candidate
+`24fe7bacdfa566893fdabd7e276f89fa839ff0d9`, proving the actual built asset retains the
+static prefix and canonical Markdown payload. Final local execution passed 487
+tests across all six maintained suites and the separate freshness check, including
+resistant-descendant timeout and interruption cleanup. Impeccable's independent
+reports and targeted rendered finish verification are retained alongside this
+report. Deployment-byte acceptance remains separate from these local/build checks.

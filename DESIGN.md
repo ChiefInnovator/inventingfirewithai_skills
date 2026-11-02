@@ -18,6 +18,13 @@ colors:
   brand-muted: "#c9bfb0"
   brand-accent: "#ffb347"
   tag-surface: "#eef3f4"
+  terminal-bar: "#15191e"
+  terminal-ink: "#f4f4f4"
+  code-success: "#77d6aa"
+  code-error: "#ff9a80"
+  author-border: "#514335"
+  mark-border: "#8f4319"
+  mark-surface: "#0b0907"
 typography:
   display:
     fontFamily: 'Chivo, "Segoe UI", sans-serif'
@@ -59,6 +66,38 @@ typography:
     fontSize: "22px"
     fontWeight: 500
     lineHeight: 1.3
+  navigation:
+    fontFamily: 'Chivo, "Segoe UI", sans-serif'
+    fontSize: "14px"
+    fontWeight: 400
+    lineHeight: 1.5
+  table-label:
+    fontFamily: 'Chivo, "Segoe UI", sans-serif'
+    fontSize: "12px"
+    fontWeight: 700
+    lineHeight: 1.5
+    letterSpacing: ".04em"
+  hero-copy:
+    fontFamily: 'Chivo, "Segoe UI", sans-serif'
+    fontSize: "clamp(18px, 2vw, 22px)"
+    fontWeight: 400
+    lineHeight: 1.5
+  scorecard-title:
+    fontFamily: 'Chivo, "Segoe UI", sans-serif'
+    fontSize: "18px"
+    fontWeight: 700
+    lineHeight: 1.5
+  statistic:
+    fontFamily: 'Chivo, "Segoe UI", sans-serif'
+    fontSize: "34px"
+    fontWeight: 700
+    lineHeight: 1.3
+  author-link:
+    fontFamily: "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
+    fontSize: "12px"
+    fontWeight: 400
+    lineHeight: 1.5
+    letterSpacing: ".1em"
   code:
     fontFamily: "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace"
     fontSize: "15px"
@@ -162,17 +201,32 @@ its own warmer dark palette. Frontmatter contains the normative values.
 ### Secondary
 - **Steel:** tags, scorecard links, numbered rules, text selection, and focus on light surfaces.
 - **Green:** the terminal's third indicator; it is not a general success-state system.
+- **Code success / code error:** light green and warm red example markers inside
+  the charcoal terminal; these differ from the darker toolbar indicator fills.
 
 ### Neutral
 - **Ink / muted:** main text and supporting text on light backgrounds.
 - **Paper / panel / line:** page canvas, white panels, and separators.
 - **Code:** shared charcoal for navigation, hero, statistics, and terminal.
 - **Tag surface:** pale cool fill for informational pills.
+- **Terminal bar / ink:** the darker toolbar and near-white terminal text.
+- **Author border / mark border / mark surface:** the author panel's brown
+  one-pixel perimeter, orange-brown two-pixel avatar perimeter, and dark inset.
+
+These named additions are literal incumbent CSS colors, not newly designed
+shades. White navigation and hero copy also use source alpha values (.82 and
+.86) over charcoal; secondary buttons use an (.08) white fill and (.28) white
+border over their parent surface. Featured cards use (.45) ember borders and
+(.2) ember inset strokes over white. Those rendered mixtures are composited
+colors, not independent opaque palette primitives. Author paragraph link
+underlines inherit amber through `currentColor`; there is no black underline
+color token.
 - **Brand surface / ink / muted / accent:** the author panel's brown-black,
   warm light text, quieter supporting text, and amber links.
 
 **The Surface Contrast Rule.** Use steel focus outlines on light surfaces and
-gold outlines on navigation, hero, and author surfaces, as implemented.
+gold outlines on navigation, hero, author, and focused terminal code surfaces,
+as implemented.
 
 ## Typography
 
@@ -190,6 +244,12 @@ no explicit site-wide body-size token or geometric modular scale.
 - **Skill title / card title:** stronger skill names and smaller principle-card headings.
 - **Body / lede:** normal paragraphs and larger introductions; ledes stop at (780px).
 - **Tag:** compact bold informational labels; they are not controls.
+- **Navigation:** compact links; table body text shares its (14px) size.
+- **Table label:** (12px) uppercase headings with tracked letters.
+- **Hero copy:** fluid paragraph size from (18px) to (22px).
+- **Scorecard title:** (18px) bold header within the evaluation panel.
+- **Statistic:** (34px) gold figures with heading-like leading.
+- **Author link:** (12px) uppercase monospace links with wider tracking.
 - **Code:** installation examples with more generous leading and horizontal overflow.
 - **Author title:** the byline only, preserving the sanctioned serif exception.
 
@@ -253,7 +313,7 @@ image bytes and makes no new rights claim.
 
 Direct link actions use the primary white fill or translucent secondary fill
 on charcoal, a one-pixel translucent white border, bold text, and minimum height
-(48px). Actions wrap with the action gap. Both variants keep visible keyboard
+(48px). The primary hero action browses the skills; GitHub is the secondary action. Actions wrap with the action gap. Both variants keep visible keyboard
 focus; the source defines no distinct button hover, active, or animated state.
 
 ### Tags
@@ -268,6 +328,8 @@ use the skill padding, minimum height (260px), and a vertical flex layout with
 (22px) between content and package links. The featured card uses a translucent
 ember border and the inset stroke recorded above. Package links remain underlined,
 with minimum width and height (44px), wrapping labels, and maximum width (100%).
+The nearby installation-help link is bold, underlined, and at least (44px) tall;
+it leads to the local installation section.
 
 ### Navigation
 
@@ -279,7 +341,10 @@ semantic main content. Dark-surface links retain gold focus outlines.
 ### Scorecard
 
 A white bordered panel contains a paper header and a dark table header. The
-scroll region remains keyboard focusable; loading and completion/failure
+scroll region remains keyboard focusable, with a visible scroll-direction cue
+connected through `aria-describedby`. Table headings stick to the top of the
+scroll region (`top: 0`, `z-index: 1`). The cue has padding (12px 20px) and a
+neutral bottom border. Loading and completion/failure
 messages use the existing live status. Keep fallback source links usable when
 data cannot load. The scroll region retains the global (3px) steel focus outline
 with an inward offset (-3px), keeping the ring inside the clipped panel.
@@ -294,7 +359,9 @@ wrapping anywhere so destination paths remain usable at phone widths.
 ### Terminal
 
 A charcoal panel with a darker toolbar and three small circular indicators
-contains horizontally scrollable installation examples. Gold marks keys;
+contains a keyboard-focusable, named region for horizontally scrollable code.
+The code region uses a gold (3px) focus outline with inward offset (-3px).
+Gold marks keys;
 green and warm red code text retain their existing limited example roles.
 These indicators do not substitute for textual status.
 

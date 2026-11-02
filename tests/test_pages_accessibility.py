@@ -144,6 +144,13 @@ def check_scorecard(document):
     require(target.attrs.get("aria-busy") == "true", "Scorecard must expose initial loading state")
     index = ids(document)
     require(bool(accessible_name(target, index, content=False)), "Scorecard region needs a name")
+    descriptions = (target.attrs.get("aria-describedby") or "").split()
+    require(bool(descriptions) and all(value in index for value in descriptions),
+            "Scorecard must reference its scroll guidance")
+    require(any(index[value] not in target.find() and content_name(index[value])
+                and "visually-hidden" not in index[value].attrs.get("class", "").split()
+                for value in descriptions),
+            "Scroll guidance must remain visible outside replaced table content")
     require(any(node.attrs.get("href") and accessible_name(node, index)
                 for node in target.find("a")), "Scorecard needs a usable source link before JavaScript loads")
     statuses = [node for node in document.find() if node.attrs.get("role") == "status"]
@@ -163,13 +170,26 @@ def check_scorecard(document):
     require(re.search(r"\.textContent\s*=", scripts), "Loader must update persistent status text")
 
 
+def check_terminal(document):
+    index = ids(document)
+    terminals = [node for node in document.find() if "terminal" in node.attrs.get("class", "").split()]
+    require(bool(terminals), "Missing terminal example")
+    for terminal in terminals:
+        scroll = only(terminal.find("pre"), "terminal scroll region")
+        require(scroll.attrs.get("tabindex") == "0", "Terminal scroll region must be in keyboard tab order")
+        require(scroll.attrs.get("role") == "region" and accessible_name(scroll, index, content=False),
+                "Terminal scroll region needs an explicit accessible name")
+        require(terminal.attrs.get("role") != "region", "Avoid duplicate nested terminal regions")
+
+
 VALID = """<body><a href="#main">Skip to content</a>
 <nav aria-label="Primary"><a href="https://example.invalid/">Home</a></nav>
 <main id="main" tabindex="-1"><h1 id="title">Library</h1>
 <div role="group" aria-labelledby="title"><a href="#title"><img alt="">Skills</a></div>
 <section aria-label="Details"><img src="mark.png" alt="Brand mark"></section>
 <p id="scorecard-status" role="status" aria-live="polite">Loading.</p>
-<div id="scorecard-table" role="region" aria-label="Scorecard" aria-busy="true" tabindex="0"><a href="/scores">View scores</a></div>
+<p id="scroll-help">Scroll sideways for more columns.</p>
+<div id="scorecard-table" role="region" aria-label="Scorecard" aria-describedby="scroll-help" aria-busy="true" tabindex="0"><a href="/scores">View scores</a></div>
 </main><script>function render() { return `<table><caption>Scores</caption><thead><tr><th scope="col">Skill</th></tr></thead></table>`; }
 target.setAttribute("aria-busy", "false"); status.textContent = "Loaded";</script></body>"""
 
@@ -190,6 +210,18 @@ class PagesAccessibilityTests(unittest.TestCase):
 
     def test_scorecard_preserves_live_loading_and_table_semantics(self):
         check_scorecard(self.document)
+
+    def test_terminal_example_has_an_explicit_named_keyboard_scroll_region(self):
+        check_terminal(self.document)
+
+    def test_missing_terminal_keyboard_entry_or_region_names_are_rejected(self):
+        valid = '<div class="terminal"><pre tabindex="0" role="region" aria-label="Quality gate example"><code>Read code.</code></pre></div>'
+        check_terminal(Document(valid).root)
+        for before, after in (('tabindex="0"', ''), ('role="region"', ''),
+                              ('aria-label="Quality gate example"', ''),
+                              ('class="terminal"', 'class="terminal" role="region"')):
+            with self.subTest(before=before), self.assertRaises(ValueError):
+                check_terminal(Document(valid.replace(before, after, 1)).root)
 
     def test_valid_native_elements_and_explicit_decorative_images_need_no_extra_aria(self):
         document = Document(VALID).root
@@ -236,6 +268,8 @@ class PagesAccessibilityTests(unittest.TestCase):
     def test_broken_loading_announcements_or_table_markup_are_rejected(self):
         cases = [('aria-busy="true"', ""), ('aria-live="polite"', 'aria-live="off"'),
                  ('tabindex="0"', 'tabindex="-1"'), ('<a href="/scores">View scores</a>', ""),
+                 ('aria-describedby="scroll-help"', ''), ('id="scroll-help"', 'id="scroll-help" hidden'),
+                 ('id="scroll-help"', 'id="scroll-help" class="visually-hidden"'),
                  ('<caption>Scores</caption>', ""), ('scope="col"', ""),
                  ('setAttribute("aria-busy", "false")', 'setAttribute("data-loaded", "true")'),
                  ('status.textContent = "Loaded"', 'status.dataset.loaded = "yes"')]
