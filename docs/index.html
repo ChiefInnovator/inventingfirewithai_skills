@@ -498,6 +498,36 @@
       text-underline-offset: .2em;
     }
 
+    .client-links a {
+      display: inline-flex;
+      align-items: center;
+      min-width: 44px;
+      min-height: 44px;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+    }
+
+    .install-clients {
+      max-width: 78ch;
+      margin: 28px 0;
+    }
+
+    .install-clients dt {
+      font-weight: 700;
+    }
+
+    .install-clients dd {
+      margin: 6px 0 24px;
+    }
+
+    .install-clients p {
+      margin: 0 0 8px;
+    }
+
+    .install-clients code {
+      overflow-wrap: anywhere;
+    }
+
     .faq-list {
       max-width: 72ch;
       margin: 32px 0 0;
@@ -623,6 +653,10 @@
     .table-wrap {
       height: min(60vh, 36rem);
       overflow: auto;
+    }
+
+    .table-wrap:focus-visible {
+      outline-offset: -3px;
     }
 
     table {
@@ -785,6 +819,12 @@
       flex-wrap: wrap;
     }
 
+    @media (min-width: 861px) and (max-width: 1100px) {
+      .skill-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
     @media (max-width: 860px) {
       .grid,
       .split,
@@ -821,6 +861,12 @@
 
       h1 {
         margin-top: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      section {
+        padding: 48px 0;
       }
     }
   </style>
@@ -1025,8 +1071,25 @@
   <section id="install">
     <div class="wrap">
       <h2>Install a complete skill folder.</h2>
-      <p class="lede">Copy a complete skill folder from <code>skills/codex/</code> or <code>skills/claude/</code> into the matching client’s skills directory, including bundled scripts and references. For GitHub Copilot, copy a folder from <code>skills/copilot/</code> into your repository’s <code>.github/skills/</code>.</p>
-      <p>Invoke <code>$skill-name</code> in Codex or <code>/skill-name</code> in Claude Code and GitHub Copilot. In Copilot CLI, run <code>/skills reload</code> after installation. Each package’s <code>SKILL.md</code> explains its supported workflow and required tools.</p>
+      <p class="lede">Copy the entire matching client folder, including scripts and references. Replace <code>&lt;skill-name&gt;</code> with the folder name. Preserve intentional project adapters.</p>
+      <dl class="install-clients">
+        <dt>Codex · personal</dt>
+        <dd>
+          <p>Copy <code>skills/codex/&lt;skill-name&gt;/</code> to <code>~/.agents/skills/&lt;skill-name&gt;/</code>. Invoke with <code>$&lt;skill-name&gt;</code>.</p>
+          <p>In a fresh Codex session, open the <code>$</code> skill picker, confirm the name is listed, then exit without submitting. Avoid a second personal copy in a legacy skills root.</p>
+        </dd>
+        <dt>Claude Code · personal</dt>
+        <dd>
+          <p>Copy <code>skills/claude/&lt;skill-name&gt;/</code> to <code>~/.claude/skills/&lt;skill-name&gt;/</code>. Invoke with <code>/&lt;skill-name&gt;</code>.</p>
+          <p>In a fresh Claude Code session, open the <code>/</code> command picker, confirm the name is listed, then exit without invoking it.</p>
+        </dd>
+        <dt>Copilot CLI · repository</dt>
+        <dd>
+          <p>Copy <code>skills/copilot/&lt;skill-name&gt;/</code> to <code>.github/skills/&lt;skill-name&gt;/</code> in the target repository. Invoke with <code>/&lt;skill-name&gt;</code>.</p>
+          <p>From that repository, run <code>/skills reload</code>, then <code>/skills info &lt;skill-name&gt;</code>. Confirm the skill points to the copied folder and is enabled. Other Copilot hosts may use different discovery controls.</p>
+        </dd>
+      </dl>
+      <p>These discovery checks do not run a skill. Do not invoke Slam merely to verify installation. Each package’s <code>SKILL.md</code> describes its workflow and required tools.</p>
       <div class="actions" style="margin-top: 28px">
         <a class="button" href="https://github.com/ChiefInnovator/inventingfirewithai_skills#what-it-does">Installation and package links</a>
         <a class="button secondary" href="evaluations/referenced_skills_scorecard.html" style="background: var(--code); color: #fff">View scorecard</a>
@@ -1133,7 +1196,7 @@
       return `<table><caption class="visually-hidden">Referenced skills scorecard</caption>${thead}${tbody}</table>`;
     }
 
-    fetch("https://raw.githubusercontent.com/ChiefInnovator/inventingfirewithai_skills/main/docs/evaluations/referenced_skills_scorecard.md")
+    fetch("assets/data/referenced-skills-scorecard.txt")
       .then((response) => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         return response.text();

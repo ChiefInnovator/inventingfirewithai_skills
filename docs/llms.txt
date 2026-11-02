@@ -17,6 +17,8 @@ Travel Like a Local keeps shared instructions separate from private traveler pre
 
 ## Test evidence and workflow details
 
+- [Library design](https://chiefinnovator.github.io/inventingfirewithai_skills/designs/skills-library-design.html): Reviewed plan for complete verification, installation guidance, and incumbent website improvements.
+- [Goldfish and Impeccable review evidence](https://chiefinnovator.github.io/inventingfirewithai_skills/evaluations/skills_library_review.html): Findings, resolutions, commands, and limits; independent reviews do not replace runtime acceptance.
 - [Travel tests and behavioral results](https://chiefinnovator.github.io/inventingfirewithai_skills/evaluations/travel_like_a_local_evaluation.html): Deterministic package checks and four offline Codex behavioral scenarios.
 - [Package synchronization audit](https://chiefinnovator.github.io/inventingfirewithai_skills/evaluations/referenced_skills_audit.html): Scope, validation evidence, and acceptance limits.
 - [Figma workflow and validation scope](https://chiefinnovator.github.io/inventingfirewithai_skills/research/figma_to_flutter_comparison.html): Conversion, drift, rendering, and review boundaries.

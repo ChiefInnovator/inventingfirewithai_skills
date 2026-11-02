@@ -140,9 +140,12 @@ def check_controls_and_focus(document):
 def check_scorecard(document):
     target = only(document.find(id="scorecard-table"), "scorecard region")
     require(target.attrs.get("role") == "region", "Scorecard needs region semantics")
+    require(target.attrs.get("tabindex") == "0", "Scrollable scorecard must be in the keyboard tab order")
     require(target.attrs.get("aria-busy") == "true", "Scorecard must expose initial loading state")
     index = ids(document)
     require(bool(accessible_name(target, index, content=False)), "Scorecard region needs a name")
+    require(any(node.attrs.get("href") and accessible_name(node, index)
+                for node in target.find("a")), "Scorecard needs a usable source link before JavaScript loads")
     statuses = [node for node in document.find() if node.attrs.get("role") == "status"]
     require(bool(statuses), "Missing persistent scorecard status")
     outside = [node for node in statuses if node not in target.find()]
@@ -166,7 +169,7 @@ VALID = """<body><a href="#main">Skip to content</a>
 <div role="group" aria-labelledby="title"><a href="#title"><img alt="">Skills</a></div>
 <section aria-label="Details"><img src="mark.png" alt="Brand mark"></section>
 <p id="scorecard-status" role="status" aria-live="polite">Loading.</p>
-<div id="scorecard-table" role="region" aria-label="Scorecard" aria-busy="true"></div>
+<div id="scorecard-table" role="region" aria-label="Scorecard" aria-busy="true" tabindex="0"><a href="/scores">View scores</a></div>
 </main><script>function render() { return `<table><caption>Scores</caption><thead><tr><th scope="col">Skill</th></tr></thead></table>`; }
 target.setAttribute("aria-busy", "false"); status.textContent = "Loaded";</script></body>"""
 
@@ -232,6 +235,7 @@ class PagesAccessibilityTests(unittest.TestCase):
 
     def test_broken_loading_announcements_or_table_markup_are_rejected(self):
         cases = [('aria-busy="true"', ""), ('aria-live="polite"', 'aria-live="off"'),
+                 ('tabindex="0"', 'tabindex="-1"'), ('<a href="/scores">View scores</a>', ""),
                  ('<caption>Scores</caption>', ""), ('scope="col"', ""),
                  ('setAttribute("aria-busy", "false")', 'setAttribute("data-loaded", "true")'),
                  ('status.textContent = "Loaded"', 'status.dataset.loaded = "yes"')]
@@ -239,7 +243,8 @@ class PagesAccessibilityTests(unittest.TestCase):
             with self.subTest(before=before), self.assertRaises(ValueError):
                 check_scorecard(Document(VALID.replace(before, after, 1)).root)
         inside = VALID.replace('<p id="scorecard-status" role="status" aria-live="polite">Loading.</p>', "")
-        inside = inside.replace('aria-busy="true"></div>', 'aria-busy="true"><p id="status" role="status" aria-live="polite">Loading.</p></div>')
+        inside = inside.replace('<a href="/scores">View scores</a>',
+                                '<a href="/scores">View scores</a><p id="status" role="status" aria-live="polite">Loading.</p>')
         with self.assertRaises(ValueError):
             check_scorecard(Document(inside).root)
 

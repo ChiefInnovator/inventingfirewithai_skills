@@ -9,6 +9,8 @@ These are historical editorial scores from May 2, 2026, based on instruction cov
 
 | Skill | Score | Why | Lines | Characters | Tokens |
 |---|---:|---|---:|---:|---:|
+| Google Elephant-Goldfish Model | N/A | Specification drafting and fresh-context design review used November 2, 2026. Findings and resolutions are recorded in the library review; document review does not establish runtime or deployment acceptance. | N/A | N/A | N/A |
+| Impeccable | N/A | Incumbent product/design records, independent visual critique, detector checks, and responsive/accessibility review. Maintainer workflow, not a new downloadable skill family or comparative benchmark. | N/A | N/A | N/A |
 | GitHub Copilot versions (five local skills) | N/A | Host-adapted entrypoints and bundled resources, added October 10, 2026; format, discovery, and helper checks do not establish comparative agent performance. | N/A | N/A | N/A |
 | Ponytail implementation skill | N/A | Inspected October 10, 2026: explicit reuse order and affected-path inspection inform applied Pragmatic Coder changes; no local behavioral comparison. | N/A | N/A | N/A |
 | Ponytail review skill | N/A | Inspected October 10, 2026: context and consequence checks inform applied review guidance; no local behavioral comparison. | N/A | N/A | N/A |
