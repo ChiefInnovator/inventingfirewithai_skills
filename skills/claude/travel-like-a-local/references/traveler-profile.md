@@ -1,40 +1,28 @@
 # Traveler onboarding and private preferences
 
-## First use: three starter questions
+## First personalized trip
 
-A skill is reusable instructions and bundled resources, not an automatic database or install-time hook. Run onboarding on the first invocation when no usable traveler profile exists. Do not claim installation itself ran onboarding. Read supplied context first; do not repeat answered questions. Ask the three prompts below together, replacing already answered prompts with a short acknowledgment. Accept partial answers, “skip,” and “not sure.” If the user needs immediate help, solve the urgent request first and defer nonessential onboarding.
+A skill supplies reusable instructions, not a database or an install-time onboarding hook. Read supplied context and an available authorized profile first. When personalized trip planning needs a profile, ask these three brief starter questions, acknowledging answers already supplied. Accept partial answers, “skip,” and undecided destinations or dates. General advice, menu translation, and urgent help do not require onboarding; solve those requests first.
 
 1. **Trip:** “Where are you going, when, and who is traveling?”
-2. **Experience:** “What would make the trip great for you—food, culture, relaxation, adventure, nightlife, or something else—and what pace and budget feel comfortable?”
-3. **Practical fit:** “What should I account for, such as food restrictions, accessibility, transport, lodging needs, or fixed commitments, and may I remember your preferences for future trips?”
+2. **Experience:** “What would make the trip great, and what pace and budget feel comfortable?”
+3. **Practical fit:** “What food, accessibility, transport, lodging, or fixed commitments matter, and may I remember your travel preferences?”
 
-Keep the three prompts brief; examples are optional, not a demand to answer every field. After the answers, give a useful first recommendation or plan. Offer: “I can tailor this further with a few optional questions, or we can start here.” Ask additional questions only if the user opts in or a missing fact is essential to the requested action. Optional topics include coffee/tea, cuisines, local-versus-famous venues, walking distance or steps, hotel brands and loyalty, nightlife, photography, language, budget details, and work or fitness needs. Ask in small relevant batches, not an exhaustive questionnaire.
+Give a useful first plan after the answers. Offer optional follow-ups only when useful; ask them in small relevant batches if the user opts in or a missing fact is essential. Topics may include interests, cuisines, walking limits or steps, lodging, language, navigation, work, or fitness. Do not repeat destination/date questions or treat every example as a required field.
 
-## Separate instructions, preferences, and trip state
+## Separate shared instructions, preferences, and trip state
 
-- Keep shared skill files destination-independent and free of personal defaults. Do not embed a real traveler's name, diet targets, companions, map preference, booking authorizations, or history in the distributed package.
-- Store reusable preferences in the current user's private profile, only with their permission. Keep current trip dates, locations, companions, reservations, and statuses in a separate trip record; do not turn them into permanent preferences.
-- Load the profile when available. Apply current explicit instructions first, then current trip constraints, then saved preferences. Treat inferred preferences as tentative and never as consent to book or spend.
-- Preserve provenance and last-updated date; distinguish stated, observed, and inferred information. Do not overwrite a newer correction with an old summary. Unknown means unknown, not an inherited sample value.
+- Keep shared skills free of a real traveler's personal defaults, name, diet targets, companions, navigation choice, booking authorizations, and history. Choose recommendations from the current request and authorized profile, not an embedded sample traveler.
+- Keep reusable preferences separate from current trip dates, locations, companions, reservations, and statuses. Apply current explicit instructions, then current trip constraints, then saved preferences. Inferred preferences remain tentative and never authorize transactions.
+- Preserve source, date, and stated/observed/inferred status for saved preferences. Do not overwrite a newer correction with an old summary. Missing fields stay unknown.
 
-## Persistence across hosts
+## Private persistence
 
-Discover an authorized private storage capability before promising retention. Prefer the host's user-scoped memory or private document storage. A profile file in a skill directory or public repository is not private storage and may be redistributed or overwritten by updates.
+Discover an authorized private storage capability before promising retention. Save only on the user's explicit request or consent for the named store and approved fields; a general answer to an onboarding question is not permission to persist it. A skill folder or repository is not private profile storage.
 
-- With consent and a supported private store, create or update one profile and retain the store's returned identifier in that user's private context. Search the user's existing profile before creating another; use a stable descriptive title such as “Travel preferences.” Read the latest version before edits and preserve unrelated fields.
-- For a filesystem-only host, use a user-approved private location outside repositories and installed skill folders. Do not assume that local files survive sessions or synchronize across agents. Avoid secrets and unnecessary identity data; restrict file access where supported.
-- Without durable storage, use conversation context and state plainly that cross-session retention is unavailable. Offer a portable profile only when wanted. Do not claim a save succeeded without a successful write.
-- Do not invent a universal storage API, install hook, automatic cross-harness profile sync, or identity mapping. Each installation resolves its own authorized user's profile. Share generic instructions across harnesses; transfer private preferences only at the user's request through an appropriate private channel.
-- Allow the user to review, correct, or delete saved preferences. Declining persistence must not block travel help. Store only approved fields; do not save passport/payment credentials, booking access codes, precise location history, or companions' private details in the preference profile.
+- Search for the user's existing profile before creating another. Read its latest version before edits, preserve unrelated fields, and retain the store's returned identifier in private user context. Do not claim a save succeeded without a successful write.
+- With a filesystem-only host, use a user-approved private location outside repositories and installed skills; restrict access where supported. Do not assume files survive sessions or synchronize across hosts. If durable storage is unavailable, use conversation context and disclose the retention limit.
+- Resolve each installation's current authorized user before loading a profile; a matching title or another user's saved identifier does not establish ownership. Do not invent a universal storage API, install hook, identity mapping, or automatic profile synchronization. Transfer private preferences between hosts only at the user's request through an appropriate private channel.
+- Let the user review, correct, or delete saved preferences. Declining persistence must not block travel help. Avoid passport/payment credentials, booking codes, precise location history, and companions' private details.
 
-## Minimal profile structure
-
-Use the native store's format; these are optional fields, not mandatory questions:
-
-- schema_version: 1
-- updated_at: actual timestamp
-- persistence_consent: scope and date of the user's approval
-- preferences: interests, pace, budget/currency, food needs, mobility/transport, lodging, language, navigation, fitness/work, communication
-- evidence: for each populated preference, source/date and stated/observed/inferred status
-
-Keep missing fields absent or null. Keep transaction authorizations scoped to the relevant request or explicitly stated standing instruction, with their limits; never create blanket consent for other users.
+Use the native store's format. Optional profile fields are schema version, actual update time, consent scope/date, relevant preferences, and evidence for each preference. Keep transaction authorizations with their actual scope and limits; never create blanket consent.

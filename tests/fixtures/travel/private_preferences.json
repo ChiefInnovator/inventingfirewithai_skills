@@ -1,0 +1,10 @@
+{
+  "id": "private_preferences",
+  "prompt": "For this chat, I prefer quiet cafes and walking between nearby stops. Use those preferences here, but do not save anything.",
+  "profile_seed": {
+    "schemaVersion": 1,
+    "preferences": {
+      "mapService": "Apple Maps"
+    }
+  }
+}

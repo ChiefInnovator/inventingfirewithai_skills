@@ -1,0 +1,11 @@
+{
+  "id": "menu_translation",
+  "prompt": "Translate this menu into English and briefly explain any unfamiliar food terms: Zuppa di ceci e rosmarino; Pappardelle ai funghi porcini; Panna cotta ai frutti di bosco.",
+  "context": {
+    "menu": [
+      "Zuppa di ceci e rosmarino",
+      "Pappardelle ai funghi porcini",
+      "Panna cotta ai frutti di bosco"
+    ]
+  }
+}

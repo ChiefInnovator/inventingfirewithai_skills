@@ -1,63 +1,31 @@
-## Phase 7 — Clean up the branch
+## 7 — Verify cleanup before deletion
 
-Delete the feature branch once the work is genuinely landed. **Every one of these must hold — if any fails, stop and leave the branch alone:**
+Skip cleanup if the user requested retention. Otherwise re-query the PR and require its merged state, timestamp, merge SHA, base, head repository/branch, and `headRefOid` to match the captured run. Refuse cross-repository deletion. Confirm every `origin` fetch/push URL still identifies the captured repository.
 
-```bash
-# $BRANCH is the value captured in Phase 1. Do NOT reassign it here and do NOT
-# re-derive it — Phase 6 has already checked out $BASE, so any fresh
-# `git branch --show-current` now yields the base branch, not the branch to delete.
+Refresh applicable rulesets and legacy branch protection. Protect the base, remote default, `main`, `master`, `develop`, and branches restricted by protection policy. Inspect the actual rules: an automatic-review-only rule does not prohibit deletion, even when the branch API reports `protected: true`. Deletion/update restrictions, required-PR policy, or unknown policy mean retain. Never change protections to permit cleanup.
 
-# 0. NEVER a protected branch, and never an empty name. Check this FIRST —
-#    an unset $BRANCH would otherwise expand to nothing and corrupt the
-#    delete commands below.
-is_protected "$BRANCH" && { echo "REFUSE: '$BRANCH' is protected or invalid"; exit 1; }
-
-# 1. GitHub reports the PR merged — state MERGED *and* a real timestamp
-read -r state merged_at <<<"$(gh pr view "$PR" --json state,mergedAt -q '"\(.state) \(.mergedAt)"')"
-[ "$state" = "MERGED" ] && [ -n "$merged_at" ] && [ "$merged_at" != "null" ] \
-  || { echo "REFUSE: PR $PR is not merged (state=$state mergedAt=$merged_at)"; exit 1; }
-
-# 2. You are NOT standing on the branch you're deleting
-[ "$(git branch --show-current)" = "$BASE" ] \
-  || { echo "REFUSE: not on $BASE — Phase 6 should have checked it out"; exit 1; }
-
-# 3. The branch is an ancestor of the base — its commits really are in.
-#    Re-fetch IMMEDIATELY BEFORE the check. Phase R's fetch is minutes old by
-#    now and Phase 6's pull refreshed only $BASE. If anyone pushed to the
-#    feature branch during this run, a stale origin/$BRANCH points at an older
-#    commit that IS contained in the base — the gate would pass and the delete
-#    would take the newer commits with it.
-git fetch origin --prune --quiet \
-  || { echo "REFUSE: git fetch failed — cannot judge containment on stale refs"; exit 1; }
-remote_ref=$(git ls-remote --heads origin "refs/heads/$BRANCH") \
-  || { echo "REFUSE: remote lookup failed"; exit 1; }
-if [ -n "$remote_ref" ]; then
-  remote_head=$(printf '%s' "$remote_ref" | cut -f1)
-  git merge-base --is-ancestor "$remote_head" "origin/$BASE" \
-    || { echo "REFUSE: remote feature is NOT contained in origin/$BASE"; exit 1; }
-fi
-# A missing remote feature is already clean, not a merge failure.
-if git show-ref --verify --quiet "refs/heads/$BRANCH"; then
-  git merge-base --is-ancestor "refs/heads/$BRANCH" "origin/$BASE" \
-    || { echo "REFUSE: local feature is NOT contained in origin/$BASE"; exit 1; }
-fi
-```
-
-Every check above **exits non-zero on failure** rather than printing a verdict for you to read past. That is deliberate: a gate that only narrates is not a gate. In particular, note that `--is-ancestor ... && echo ok || echo "NOT CONTAINED"` would *swallow* the non-zero exit and let the deletion proceed — never write the containment check that way.
-
-Only with all four satisfied, perform local cleanup. Retain the remote feature by default: a live-ref check followed by an ordinary delete is not atomic. Remote deletion requires repository-supported exclusive control preventing updates between the check and deletion. Never infer exclusivity from a quiet branch or use force/force-with-lease to bypass the no-force rule; report retention when exclusive control is unavailable.
+Fetch with pruning immediately before the guard. Resolve `SLAM_SKILL_DIR` to the installed skill directory. Restore the captured `SLAM_HEAD` and `SLAM_MERGE_SHA`; do not infer them from the current checkout. Pass every additional protected name with repeated `--protected` options:
 
 ```bash
-# Retain the remote feature unless exclusive control has been established.
-if git show-ref --verify --quiet "refs/heads/$BRANCH"; then
-  git branch -d "$BRANCH"           # local — -d, never -D
-fi
+python3 "$SLAM_SKILL_DIR/scripts/check_cleanup.py" \
+  --repo-dir "$SLAM_ROOT" --base "$SLAM_BASE" --branch "$SLAM_BRANCH" \
+  --head "$SLAM_HEAD" --merge-commit "$SLAM_MERGE_SHA" \
+  --protected "$SLAM_DEFAULT"
 ```
 
-Use `git branch -d`, never `-D`. `-d` refuses to delete a branch whose commits aren't reachable from the current HEAD, which is a free second opinion on check 3. **If `-d` refuses, that is a real signal** — the commits are not in the base. Stop and investigate rather than reaching for `-D`.
+The read-only guard requires a clean checkout of the synchronized base (or a detached checkout at that exact live base commit), exact local/live remote feature heads, merged ancestry, and no worktree using the feature. It does not verify GitHub PR identity or policy and never grants deletion authority. Refusal means preserve the branch and investigate; never escalate to force deletion. Squash merges may fail ancestry checks and require retention.
 
-Note this ordering matters if the merge was ever done as a squash: squashed commits are not literally ancestors of the base, so checks 3 and `-d` will both correctly refuse. That is the desired behavior — report it rather than forcing.
+For an authorized remote deletion, use the bundled guarded helper with the exact captured origin URL:
 
-**Skip deletion entirely** (and say so) if the merge did not happen, if the user asked to keep the branch, or if the branch has commits that never made it into the PR.
+```bash
+python3 "$SLAM_SKILL_DIR/scripts/delete_remote_branch.py" \
+  --repo-dir "$SLAM_ROOT" --base "$SLAM_BASE" --branch "$SLAM_BRANCH" \
+  --head "$SLAM_HEAD" --merge-commit "$SLAM_MERGE_SHA" \
+  --expected-origin "$SLAM_ORIGIN" --protected "$SLAM_DEFAULT"
+```
 
----
+It repeats the containment check and runs an ordinary non-force push with a temporary pre-push guard. The guard verifies the server-advertised deletion head, preserves existing hooks, and lets Git reject a racing ref update. It changes no persistent Git configuration. Do not replace it with a bare delete, force/lease flag, or skipped hook. A missing remote is already removed. A failure or a newly present ref is a retention result, not permission to retry blindly.
+
+After verification, delete the matching local feature with `git branch -d -- <feature>` if it exists, then verify both refs are absent. Never delete another run's branch merely because the current checkout changed. A separate explicit cleanup request may cover additional branches, each with its own captured merge/ancestry and policy evidence.
+
+Remove worktrees only when the user requests that cleanup. Require merged/pushed work, a clean tree, and no lock or active use; preserve base and dedicated protected worktrees. Use normal `git worktree remove`, never `--force`. Inspect ignored files explicitly; a clean `git status` does not establish that a tree is disposable. Unique uncommitted, untracked, or ignored work blocks removal. Under an explicit cleanup request, preserve unique ignored evidence, local settings, and state in a private archive outside Git, recording original paths and checksums and verifying the archived bytes before removal; discard only clearly regenerable caches. Never upload the archive or print credential contents. A duplicated skill edit may be reconciled only after its exact bytes are recorded in the merged canonical source and no other work exists in that tree. Preserve every exception and report retained paths/reasons. Prune only stale worktree metadata after successful removal.

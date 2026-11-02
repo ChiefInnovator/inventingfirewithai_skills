@@ -32,3 +32,11 @@ Record supplied URL, effective file/node, original names, capture time, dimensio
 For Codex, save the actual current tool-result blocks and downloaded resources. For Claude Code, use the current client's documented result mechanism. Do not search another client's transcripts or assume a transcript format. If outputs truncate, use supported result retrieval or smaller node scopes; report incomplete capture if it cannot be recovered.
 
 Respect provider rate limits and retry guidance. Serial calls are a safe default. Do not launch multiple capture agents merely to bypass a shared account limit.
+
+For incremental selection, require complete inventory and dependency coverage under [performance.md](performance.md). A missing read is unknown. Preserve geometry-rich export fields and original envelopes during normalization; this compiler expects enriched node JSON, not an arbitrary provider envelope. Unsupported export versions need an explicit adapter, never a guessed legacy interpretation.
+
+After saving a new source capture, run [typography.md](typography.md)'s checks before conversion. Missing fonts do not justify discarding a complete immutable capture.
+
+## Variable modes
+
+A captured mode is source evidence only for that mode. If no full-frame screenshot exists for an alternate mode, validate its bindings and rendered values separately and label full-frame pixel fidelity unchecked. Do not switch Figma variable modes during a read-only workflow or assume a screenshot tool supports a mode parameter. A component crop cannot approve an entire screen.

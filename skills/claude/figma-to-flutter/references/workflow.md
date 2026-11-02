@@ -13,6 +13,10 @@ Use `pending` for work not completed, `draft` for generated or unresolved output
 
 `status` reports existing state without changing it. `drift` compares the requested live scope with captures but does not save results or trigger conversions. `sync` preserves unrelated file/page entries and updates only changed source plus dependent subtrees. Unchanged passing output should not be regenerated. `continue` resumes pending/failing/stale items without discarding partial user work.
 
+Keep the whole-run measurements in external state under [performance.md](performance.md), including report-only invocations. Before calling drift unchanged, reconcile expected file/node identities with successful reads; blocked or cut-off calls remain unknown.
+
+For a proven color-only change, refresh the changed bindings/values and patch only matching widgets or semantic token references. Verify that geometry, text, fonts, assets, and other dependencies are unchanged. Avoid global literal replacement, which can alter unrelated unbound paints. Rerender affected screens and requested modes under the normal gates.
+
 ## Decisions
 
 Store only current-project questions, requirements, answers, and evidence. Do not import historical decision IDs, people, or approvals from the source skill. A useful entry has an ID, type, affected nodes/screens, owner role, question or requirement, status, adopted rule, and answer provenance.
@@ -27,6 +31,8 @@ Keep fixtures and bundled assets deterministic and local. Generated mirrors are 
 
 Run the project's preparation, analysis, and widget tests. Build and launch each requested platform on an explicit target and inspect the actual screen. A browser at phone width does not establish mobile acceptance. If no explorer exists, establish its location and requested targets before creating one; do not assume unrelated production-app edits are authorized.
 
+When the explorer is embedded in an authorized application or review portal, validate that hosted surface too. Begin each screen from a fresh page or navigate to a blank page before loading it; previous canvases and app state must not satisfy readiness. Wait for the selected screen and mode, verify loaded content/assets, and inspect the actual render. Use existing supported authentication without copying project-specific session stubs. Remote URLs require fresh validation; local report reuse needs matching source/build/mode/browser/checker inputs and output hashes. Keep standalone and hosted results separate.
+
 This package provides the workflow, not a prebuilt application-specific explorer or Docker runner. Discover or implement the target project's adapter within scope. Do not reference absent helper commands as if they were bundled.
 
 ## Batches and interruption
@@ -34,6 +40,8 @@ This package provides the workflow, not a prebuilt application-specific explorer
 Use parallel agents only when available and authorized, and when independent screen work benefits. Give each worker disjoint canonical files and a clear source/capture contract. Keep shared ledgers, decisions, catalog updates, and final evidence reconciliation with one coordinator. Serialize operations sharing rate limits, render state, or caches.
 
 Do not hard-code worker counts, model choices, transcript locations, shared Docker volumes, or machine-wide locks. Preserve partial work after interruption, mark unfinished checks accurately, and resume from artifacts rather than a worker's self-reported completion count.
+
+After each batch, compare the diff with each worker's assigned files and source nodes, preserving public widget APIs and trace comments. Shared ledger/explorer updates belong to the coordinator. Permit only new captures for assigned sources; an existing capture is immutable. Isolate or repair a stray edit without discarding pre-existing user work. A worker's reported count cannot replace verified capture/render artifacts or complete drift coverage.
 
 ## Repairs and upstream knowledge
 

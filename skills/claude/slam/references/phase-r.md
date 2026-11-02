@@ -1,43 +1,9 @@
-## Phase R — Resolve the repo's shape
+## R — Resolve repository and base
 
-Everything downstream depends on three facts. Establish them once, here, and carry them through the whole run: **`$BASE`, `$BRANCH`, `$REPO`.** Re-deriving any of them mid-run is how a later phase acts on the wrong branch.
+Before changing the tree, verify Git and authenticated GitHub access. Inspect the working tree, current branch, all `origin` fetch/push URLs, and worktrees. Stop on detached HEAD. Resolve the GitHub host and owner/repository from `origin`, explicitly using that repository for all GitHub calls; don't rely on a CLI default that could point to a fork or another repository. Require every push destination to match the intended repository; stop on a mismatched or ambiguous push URL before publishing or deleting a ref.
 
-### The base branch: `develop` if it exists, else `main`
+If `origin` is missing, inspect the work and proposed outgoing history for secrets first, reporting paths and types without exposing credential values. Ask for any missing owner/name and authority before creating a private repository; public visibility requires an explicit request. Do not create or push a repository merely to complete migration/inspection of this skill. After authorized creation, restart repository resolution. Never interpret a failed fetch or denied API request as an empty repository or absent policy.
 
-```bash
-git rev-parse --is-inside-work-tree >/dev/null 2>&1 \
-  || { echo "REFUSE: not a git repository"; exit 1; }
+Fetch `origin` successfully with pruning. Resolve the base from explicit user/project instructions; otherwise use remote `develop` if present, then `main`, then the actual remote default. This is a selection policy, not proof of the repository's branching model. Confirm the selected remote ref exists.
 
-git fetch origin --quiet \
-  || { echo "REFUSE: git fetch failed — every check below would run on stale refs"; exit 1; }
-
-if   git show-ref --verify --quiet refs/remotes/origin/develop; then BASE=develop
-elif git show-ref --verify --quiet refs/remotes/origin/main;    then BASE=main
-else BASE=$(gh repo view --json defaultBranchRef -q .defaultBranchRef.name 2>/dev/null)
-fi
-[ -n "$BASE" ] || { echo "REFUSE: cannot determine a base branch"; exit 1; }
-git show-ref --verify --quiet "refs/remotes/origin/$BASE" \
-  || { echo "REFUSE: origin/$BASE does not exist"; exit 1; }
-echo "base: $BASE"
-```
-
-`develop` wins whenever it exists — a repo with both is running a develop→main promotion flow, and feature work targets `develop`. The `gh` fallback catches repos on `master` or another custom default.
-
-**Never hardcode `develop` or `main` anywhere below.** Use `$BASE`.
-
-### The protected set
-
-`$BASE` is protected, and so are `main`, `master`, and `develop` **even when they are not the base** — a repo with a develop flow still must not have `main` deleted or reset by this skill. Use this test everywhere a branch name is about to be deleted, reset, or committed to:
-
-```bash
-is_protected() {
-  case "$1" in
-    ""|main|master|develop|"$BASE"|origin/*) return 0;;
-    *) return 1;;
-  esac
-}
-```
-
-The empty string is in that list deliberately: an unset variable expands to nothing, and `git push origin --delete ""` must never be one typo away from running.
-
----
+Capture values in task state: `SLAM_ROOT`, `SLAM_HOST`, `SLAM_OWNER_REPO` (owner/repo), `SLAM_REPO` (host/owner/repo), `SLAM_ORIGIN`, `SLAM_BASE`, `SLAM_DEFAULT`, and protected branch names/rules. Inspect applicable GitHub protection/rulesets, including their target conditions. Recheck protections before merge and cleanup. Use `SLAM_BRANCH` only after Phase 0; never replace it with the current branch during cleanup. Shell variables do not persist between independent tool calls: restore captured values explicitly and verify repository identity before mutations.

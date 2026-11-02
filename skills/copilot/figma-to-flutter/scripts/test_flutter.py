@@ -29,6 +29,30 @@ def main():
         {'id': '1:6', 'type': 'FRAME', 'width': 200, 'height': 160,
          'children': [{'id': '1:7', 'type': 'RECTANGLE', 'width': 50, 'height': 20,
                        'x': 130, 'y': 120, 'constraints': {'horizontal': 'MAX', 'vertical': 'MAX'}}]},
+        {'id': '2:1', 'type': 'FRAME', 'width': 200, 'height': 80,
+         'layoutMode': 'HORIZONTAL', 'primaryAxisAlignItems': 'CENTER',
+         'counterAxisAlignItems': 'CENTER', 'children': [
+             {'id': '2:2', 'type': 'RECTANGLE', 'layoutPositioning': 'ABSOLUTE',
+              'width': 200, 'height': 80, 'fills': [{'type': 'SOLID', 'color': {'r': 1, 'g': 0, 'b': 0}}]},
+             {'id': '2:3', 'type': 'RECTANGLE', 'width': 40, 'height': 10}]},
+        {'id': '3:1', 'type': 'FRAME', 'width': 200, 'height': 80,
+         'layoutMode': 'HORIZONTAL', 'paddingLeft': 8, 'paddingTop': 8,
+         'strokesIncludedInLayout': True, 'strokeAlign': 'OUTSIDE', 'strokeWeight': 3,
+         'strokes': [{'type': 'SOLID', 'color': {'r': 0, 'g': 0, 'b': 1}}],
+         'children': [{'id': '3:2', 'type': 'RECTANGLE', 'width': 40, 'height': 10}]},
+        {'id': '4:1', 'type': 'FRAME', 'width': 200, 'height': 80,
+         'layoutMode': 'HORIZONTAL', 'paddingLeft': 8, 'paddingTop': 8,
+         'strokesIncludedInLayout': True, 'strokeAlign': 'INSIDE', 'strokeWeight': 3,
+         'strokes': [{'type': 'SOLID', 'color': {'r': 0, 'g': 0, 'b': 1}}],
+         'children': [{'id': '4:2', 'type': 'RECTANGLE', 'width': 40, 'height': 10}]},
+        {'id': '5:1', 'type': 'FRAME', 'width': 200, 'height': 80,
+         'layoutMode': 'HORIZONTAL', 'paddingLeft': 8, 'paddingTop': 8,
+         'strokesIncludedInLayout': True, 'strokeAlign': 'CENTER', 'strokeWeight': 3,
+         'strokes': [{'type': 'SOLID', 'color': {'r': 0, 'g': 0, 'b': 1}}],
+         'children': [{'id': '5:2', 'type': 'RECTANGLE', 'width': 40, 'height': 10}]},
+        {'id': '6:1', 'type': 'TEXT', 'width': 200, 'height': 40,
+         'characters': 'Short\nMuch longer line ', 'fontSize': 14,
+         'textAlignHorizontal': 'CENTER', 'textAutoResize': 'WIDTH_AND_HEIGHT'},
     ]
     with tempfile.TemporaryDirectory(prefix='figma-flutter-check-') as directory:
         root = Path(directory)
@@ -69,6 +93,34 @@ import 'package:flutter_test/flutter_test.dart';
           of: find.byWidget(cases[i]), matching: find.byType(Positioned)));
         expect(positioned.right, 20);
         expect(positioned.bottom, 20);
+      }
+      if (i >= 4 && i <= 7) {
+        final child = find.descendant(of: find.byWidget(cases[i]),
+          matching: find.byWidgetPredicate((w) => w is SizedBox && w.width == 40 && w.height == 10));
+        expect(child, findsOneWidget);
+        final outer = tester.getRect(find.byWidget(cases[i]));
+        final inner = tester.getRect(child);
+        if (i == 4) {
+          expect(inner.center, outer.center);
+          final stack = tester.widget<Stack>(find.descendant(
+            of: find.byWidget(cases[i]), matching: find.byType(Stack)));
+          expect((stack.children.first as Positioned).left, 0);
+        } else {
+          final inset = i == 6 ? 11.0 : 8.0;
+          expect(inner.left - outer.left, inset);
+          expect(inner.top - outer.top, inset);
+          final border = tester.widgetList<DecoratedBox>(find.descendant(
+            of: find.byWidget(cases[i]), matching: find.byType(DecoratedBox)))
+            .where((w) => (w.decoration as BoxDecoration).border != null).single;
+          expect(border.position, DecorationPosition.foreground);
+        }
+      }
+      if (i == 8) {
+        final text = tester.widget<RichText>(find.descendant(
+          of: find.byWidget(cases[i]), matching: find.byType(RichText)));
+        expect(text.text.toPlainText().split(String.fromCharCode(10)),
+          ['Short', 'Much longer line ']);
+        expect(text.textAlign, TextAlign.center);
       }
     });
   }
