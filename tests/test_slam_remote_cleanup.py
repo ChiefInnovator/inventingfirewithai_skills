@@ -9,7 +9,7 @@ import sys
 import tempfile
 import unittest
 
-SCRIPT = Path(__file__).resolve().parents[1] / "skills/codex/slam/scripts/delete_remote_branch.py"
+SCRIPT = Path(__file__).resolve().parents[1] / "skills/universal/slam/scripts/delete_remote_branch.py"
 
 
 class RemoteCleanupTests(unittest.TestCase):

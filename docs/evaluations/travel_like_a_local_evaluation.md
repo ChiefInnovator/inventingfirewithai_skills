@@ -44,4 +44,15 @@ Four fresh Codex subagents executed the four cases; the preference case had two 
 
 The tested Codex skill's eight-file content hash was `ad4dceaf30205e7a7bc6222c4fef815cfb7ac9e7bfc6c06b13ab8e90a79f768b`. The results file defines the hash method. The same model and reasoning settings were inherited from this session; their exact identifiers were not separately exported by the harness.
 
+## November 14, 2026 Run
+
+The four cases were repeated against the shared `skills/universal/travel-like-a-local` package after its venue-research and coordination rules were consolidated. Four fresh Claude Code subagents ran them offline with a scratch copy of the skill; the preference case had two user turns.
+
+- **Menu translation:** passed.
+- **Confirmed pickup:** gave 08:15 local, Lark Hotel lobby, Terminal 2, EUR 65, and separated the superseded 09:00 booking and the 07:45 suggestion. It used only Traveler A's records but did not mention Traveler B's separate transfer.
+- **Closed venue:** passed; it chose the five-minute bakery, kept seating unconfirmed, named no second qualifying option, and stated the supplied-notes limit.
+- **Private preferences:** passed; the profile's SHA-256 was unchanged after the first turn, and after consent only `private-store/preferences.json` changed, keeping the existing map preference.
+
+The skill copy and fixtures were byte-identical afterwards. Responses were assessed in the session and not exported; the October results file remains the last recorded transcript set.
+
 These are single-run, offline behavioral smoke checks, not comparative benchmarks, live booking acceptance, or proof of Claude/Copilot runtime behavior. Shared-resource tests establish package consistency across those clients. Rerun the behavioral cases when relevant instructions change; ordinary unit-test execution does not launch agents or repeat these smoke runs.

@@ -20,7 +20,7 @@ def load_guard(script):
 
 
 class CleanupTests(unittest.TestCase):
-    script = ROOT / "skills/codex/slam/scripts/check_cleanup.py"
+    script = ROOT / "skills/universal/slam/scripts/check_cleanup.py"
     guard = load_guard(script)
 
     def setUp(self):
@@ -200,16 +200,6 @@ class CleanupTests(unittest.TestCase):
                               "--head", self.head, "--merge-commit", self.merge)
         self.assertEqual(json.loads(output)["git_checks"], "passed")
         self.assertEqual(self.head, self.git("rev-parse", "feature/sample"))
-
-
-class ClaudeCleanupTests(CleanupTests):
-    script = ROOT / "skills/claude/slam/scripts/check_cleanup.py"
-    guard = load_guard(script)
-
-
-class CopilotCleanupTests(CleanupTests):
-    script = ROOT / "skills/copilot/slam/scripts/check_cleanup.py"
-    guard = load_guard(script)
 
 
 if __name__ == "__main__":

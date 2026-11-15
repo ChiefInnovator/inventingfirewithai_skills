@@ -1,5 +1,0 @@
-## 1 — Preflight and synchronize
-
-Confirm repository identity, remote, branch, base, authorization, and scope. Inspect the entire outgoing diff and local-only history, not only uncommitted files. Check for secrets, generated/large files, deleted-path references, debug leftovers, and relevant project requirements. Redact secret values from outputs. A scan result is evidence, not a guarantee that no secrets exist.
-
-Require common history with the base before any merge. Preserve dirty work by reviewing and committing the scoped changes in Phase 2 before synchronizing when necessary; never auto-stash unrelated work. Merge `origin/<base>` into the feature branch when needed, using a merge commit for divergent history. Resolve routine conflicts by inspecting both sides and their callers/tests, preserving their intended behavior. Do not blanket-select ours/theirs. Ask only for a genuine product/scope decision or an explicit project approval requirement. Run affected checks after the merge; stop on unrelated histories or a merge that cannot preserve the user's work.

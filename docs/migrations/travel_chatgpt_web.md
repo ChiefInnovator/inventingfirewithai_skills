@@ -9,7 +9,7 @@ Web setup status recorded September 25, 2026. Export refreshed November 2, 2026 
 
 ## Source and export
 
-The canonical source for this export is [the Codex travel skill](https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/skills/codex/travel-like-a-local/SKILL.md). The [downloadable ZIP](https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/assets/distributions/travel-like-a-local.zip) preserves its complete folder, including `agents/openai.yaml`, `assets/icon.svg`, and all five references: traveler profile, venue research, day planning, trip operations, and experience and learning. The traveler-profile reference defines onboarding and storage rules; no personal profile or trip state is bundled. Keep changes in the source folder and regenerate the archive when those files change.
+The canonical source for this export is [the travel skill](https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/skills/universal/travel-like-a-local/SKILL.md). The [downloadable ZIP](https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/assets/distributions/travel-like-a-local.zip) preserves its complete folder, including `agents/openai.yaml`, `assets/icon.svg`, and all five references: traveler profile, venue research, day planning, trip operations, and experience and learning. The traveler-profile reference defines onboarding and storage rules; no personal profile or trip state is bundled. Keep changes in the source folder and regenerate the archive when those files change.
 
 This is a skill source archive, not an installable plugin package. Installing a local Codex skill does not establish that it is available in ChatGPT on the web.
 
@@ -44,7 +44,7 @@ Run from the repository root with Python 3:
 from pathlib import Path
 from zipfile import ZIP_DEFLATED, ZipFile
 
-source = Path("skills/codex/travel-like-a-local")
+source = Path("skills/universal/travel-like-a-local")
 output = Path("assets/distributions/travel-like-a-local.zip")
 output.parent.mkdir(parents=True, exist_ok=True)
 with ZipFile(output, "w", ZIP_DEFLATED) as archive:
