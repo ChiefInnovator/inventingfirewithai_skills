@@ -17,11 +17,12 @@ Reusable coding, shipping, Figma-to-Flutter, and travel skills for Codex, Claude
 - Feature branches belong to this repository and use `feature/`, `feat/`, `fix/`, `bugfix/`, `hotfix/`, `improve/`, `chore/`, `docs/`, `test/`, `refactor/`, `perf/`, `build/`, `ci/`, or `style/` prefixes.
 - Monitor automatic Copilot review and address valid findings. Honor an explicit user instruction not to wait for Copilot; required GitHub checks, approvals, and branch protections still apply.
 - Keep cloud Copilot code review active only for `refs/heads/develop`, including drafts and new pushes, without path exclusions. Do not target `main` or use `~DEFAULT_BRANCH`.
-- Keep shared Slam references and helpers identical across the three client packages; preserve host-specific entrypoints and Claude hooks. Synchronize authorized installed copies when shipping skill maintenance.
+- Each skill has one package that must work unchanged in Codex, Claude Code, and GitHub Copilot. Keep host-specific steps in a clearly labeled section or a per-host reference, never in a per-client copy. Preserve Slam's Claude Stop hook. Synchronize authorized installed copies when shipping skill maintenance.
+- Keep entrypoints within the token budgets in `tests/test_skill_budgets.py`; raise a budget only with a stated reason.
 
 ## Layout and use
 
-- `skills/{codex,claude,copilot}/<name>/`: downloadable client packages, not skills installed for this repository.
+- `skills/universal/<name>/`: downloadable packages shared by all three clients, not skills installed for this repository.
 - Names: `pragmatic-coder`, `slam`, `mcp-pick`, `travel-like-a-local`, `figma-to-flutter`.
 - Install entire folders, including resources. Invoke `$<name>` in Codex or `/<name>` in Claude Code and Copilot.
 - `tests/`: helper checks; `docs/{designs,research,evaluations,migrations}/`: supporting documents.

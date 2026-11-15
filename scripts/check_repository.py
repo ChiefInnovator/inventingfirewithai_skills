@@ -2,6 +2,7 @@
 """Check site data and run all maintained Python suites in isolated processes."""
 
 from dataclasses import dataclass
+import importlib.util
 from pathlib import Path
 import os
 import re
@@ -26,11 +27,8 @@ class Suite:
 
 SUITES = (
     Suite("Repository tests", "tests"),
-    Suite("Codex Figma-to-Flutter", "skills/codex/figma-to-flutter/scripts"),
-    Suite("Claude Figma-to-Flutter", "skills/claude/figma-to-flutter/scripts"),
-    Suite("Copilot Figma-to-Flutter", "skills/copilot/figma-to-flutter/scripts"),
-    Suite("Codex MCP Picker", "skills/codex/mcp-pick/tests", requires_codex=True),
-    Suite("Copilot MCP Picker", "skills/copilot/mcp-pick/tests"),
+    Suite("Figma-to-Flutter", "skills/universal/figma-to-flutter/scripts"),
+    Suite("MCP Picker", "skills/universal/mcp-pick/tests", requires_codex=True),
 )
 
 
@@ -154,6 +152,11 @@ def run_checks(root=ROOT, suites=SUITES, timeout=SUITE_TIMEOUT,
 
 
 def main():
+    missing = [name for name in ("yaml", "PIL", "tomlkit") if importlib.util.find_spec(name) is None]
+    if missing:
+        print(f"Missing test dependencies: {', '.join(missing)}. Run:\n  uv run --no-project --python 3.14 "
+              "--with-requirements tests/requirements.txt python scripts/check_repository.py", file=sys.stderr)
+        return 2
     return int(any(not result.passed for result in run_checks()))
 
 

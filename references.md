@@ -6,24 +6,12 @@ Canonical reference catalog for this repository. README stays short; detailed so
 
 ### Skills and operating instructions
 
-- [Figma to Flutter for GitHub Copilot](skills/copilot/figma-to-flutter/SKILL.md)
-- [Pragmatic Coder for GitHub Copilot](skills/copilot/pragmatic-coder/SKILL.md)
-- [Slam for GitHub Copilot](skills/copilot/slam/SKILL.md)
-- [MCP Picker for GitHub Copilot](skills/copilot/mcp-pick/SKILL.md)
-- [Travel Like a Local for GitHub Copilot](skills/copilot/travel-like-a-local/SKILL.md)
-
-- [Figma to Flutter for Codex](skills/codex/figma-to-flutter/SKILL.md)
-- [Figma to Flutter for Claude Code](skills/claude/figma-to-flutter/SKILL.md)
-- [Travel Like a Local for Codex](skills/codex/travel-like-a-local/SKILL.md)
-- [Travel Like a Local for Claude Code](skills/claude/travel-like-a-local/SKILL.md)
-- [Pragmatic Coder for Claude Code](skills/claude/pragmatic-coder/SKILL.md)
-- [MCP Picker for Codex](skills/codex/mcp-pick/SKILL.md)
-- [MCP Picker for Claude Code](skills/claude/mcp-pick/SKILL.md)
-- [Slam for Claude Code](skills/claude/slam/SKILL.md)
-- [Pragmatic Coder Skill](skills/codex/pragmatic-coder/SKILL.md)
-- [Slam Skill](skills/codex/slam/SKILL.md)
-- [Slam GitHub Review Workflow](skills/codex/slam/references/github-review.md)
-- [Slam GitHub Review Workflow for Claude Code](skills/claude/slam/references/github-review.md)
+- [Figma to Flutter](skills/universal/figma-to-flutter/SKILL.md)
+- [Pragmatic Coder](skills/universal/pragmatic-coder/SKILL.md)
+- [Slam](skills/universal/slam/SKILL.md)
+- [Slam pull request and review mechanics](skills/universal/slam/references/review.md)
+- [MCP Picker](skills/universal/mcp-pick/SKILL.md)
+- [Travel Like a Local](skills/universal/travel-like-a-local/SKILL.md)
 - [Shared Agent Instructions (Codex, Claude Code, and Copilot)](AGENTS.md)
 
 ### Designs and pilots
@@ -65,7 +53,6 @@ Reviewed October 29, 2026 for the Claude, Codex, and Copilot packages. Automatic
 - [Impeccable](https://github.com/pbakaus/impeccable): incumbent product/design documentation, independent visual critique, accessibility/responsive checks, and source-based design tokens. Version 4.8.0 was used for this maintenance workflow.
 - [Codex skill discovery](https://learn.chatgpt.com/docs/build-skills), [Claude Code skills](https://code.claude.com/docs/en/skills), and [Copilot CLI skills](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-skills): supported installation and discovery surfaces.
 - [Jekyll front matter](https://jekyllrb.com/docs/front-matter/) and [static files](https://jekyllrb.com/docs/static-files/): the scorecard snapshot needs a non-YAML first line to remain a literal static asset.
-- [GitHub Copilot Slam package](skills/copilot/slam/SKILL.md)
 - [Claude Code skill metadata](https://code.claude.com/docs/en/skills)
 - [Claude Code hook input and Stop behavior](https://code.claude.com/docs/en/hooks)
 
@@ -114,12 +101,10 @@ All skill-like references are scored in [`docs/evaluations/referenced_skills_sco
 ### Figma to Flutter
 
 Local packages and comparison:
-- [Codex skill](skills/codex/figma-to-flutter/SKILL.md)
-- [Claude Code skill](skills/claude/figma-to-flutter/SKILL.md)
-- [GitHub Copilot skill](skills/copilot/figma-to-flutter/SKILL.md)
-- [Incremental work and whole-run measurements](skills/codex/figma-to-flutter/references/performance.md)
-- [Portable finished-run history exporter](skills/codex/figma-to-flutter/scripts/run_history.py)
-- [Font, glyph, and text checks](skills/codex/figma-to-flutter/references/typography.md)
+- [Skill](skills/universal/figma-to-flutter/SKILL.md)
+- [Incremental work and whole-run measurements](skills/universal/figma-to-flutter/references/performance.md)
+- [Portable finished-run history exporter](skills/universal/figma-to-flutter/scripts/run_history.py)
+- [Font, glyph, and text checks](skills/universal/figma-to-flutter/references/typography.md)
 - [Why this skill exists and its specific improvements](docs/research/figma_to_flutter_comparison.md)
 
 Community references, reviewed October 10, 2026:
@@ -158,7 +143,7 @@ Local references:
 - `README.md`
 - `docs/evaluations/referenced_skills_scorecard.md`
 - `references.md`
-- `skills/codex/pragmatic-coder/SKILL.md`
+- `skills/universal/pragmatic-coder/SKILL.md`
 
 ### `docs/research/autonomous_execution_skills_research.md`
 
@@ -313,7 +298,7 @@ External references:
 ### `docs/evaluations/referenced_skills_audit.md`
 
 Local references:
-- `skills/codex/pragmatic-coder/SKILL.md`
+- `skills/universal/pragmatic-coder/SKILL.md`
 
 ### `docs/evaluations/referenced_skills_scorecard.md`
 
@@ -494,7 +479,7 @@ External references:
 - [VS Code agent skills](https://code.visualstudio.com/docs/agent-customization/agent-skills)
 - [VS Code MCP server management and enablement scope](https://code.visualstudio.com/docs/agent-customization/mcp-servers)
 
-The five downloadable Copilot packages live in `skills/copilot/`; users install them into `.github/skills/` in their own repositories. Instructions use Copilot invocation and host capabilities; bundled Figma conversion and Slam cleanup helpers retain their existing behavior. MCP Picker uses supported host controls rather than another client's private configuration. CLI syntax was checked against installed Copilot 1.0.95 help on October 10, 2026; check the installed version before use.
+The five packages live in `skills/universal/` and are shared by all clients; Copilot users install them into `.github/skills/` in their own repositories. Instructions use Copilot invocation and host capabilities; bundled Figma conversion and Slam cleanup helpers retain their existing behavior. MCP Picker uses supported host controls rather than another client's private configuration. CLI syntax was checked against installed Copilot 1.0.95 help on October 10, 2026; check the installed version before use.
 
 ### Ponytail
 

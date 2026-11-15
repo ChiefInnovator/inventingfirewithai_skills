@@ -188,7 +188,7 @@ def check_structured_data(document, docs):
     require(bool(authors) and all(node.get("name") in visible for node in authors), "Structured author is absent from visible content")
     items = only([node for node in data if kind(node, "ItemList")], "skill ItemList").get("itemListElement", [])
     articles = {node.attrs["id"]: node for node in document.find("article") if "skill-card" in node.attrs.get("class", "").split()}
-    families = {path.name for path in (ROOT / "skills" / "codex").iterdir() if (path / "SKILL.md").is_file()}
+    families = {path.name for path in (ROOT / "skills" / "universal").iterdir() if (path / "SKILL.md").is_file()}
     require(set(articles) == families, "Visible skill articles differ from repository skill families")
     require(len(items) == len(families), "Structured skill inventory differs from visible inventory")
     seen = set()
@@ -257,21 +257,14 @@ class PagesVisibilityTests(unittest.TestCase):
                 self.assertIn(url, urls)
                 self.assertTrue(local_file(DOCS, url).read_text().strip())
 
-    def test_each_skill_links_to_its_complete_matching_client_packages(self):
+    def test_each_skill_links_to_its_one_shared_package(self):
         skills = only(self.document.find(id="skills"), "skills section")
         for article in skills.find("article"):
             groups = [node for node in article.find() if "client-links" in node.attrs.get("class", "").split()]
-            links = only(groups, "package links").find("a")
-            clients = set()
-            for link in links:
-                parts = urlsplit(link.attrs["href"]).path.split("/")
-                self.assertEqual(parts[-3], "skills")
-                client, family = parts[-2:]
-                self.assertEqual(family, article.attrs["id"])
-                self.assertTrue((ROOT / "skills" / client / family / "SKILL.md").is_file())
-                self.assertNotIn(client, clients, "Duplicate client package")
-                clients.add(client)
-            self.assertEqual(clients, {"codex", "claude", "copilot"})
+            link = only(only(groups, "package links").find("a"), "package link")
+            parts = urlsplit(link.attrs["href"]).path.split("/")
+            self.assertEqual(parts[-3:], ["skills", "universal", article.attrs["id"]])
+            self.assertTrue((ROOT / "skills" / "universal" / article.attrs["id"] / "SKILL.md").is_file())
 
     def test_library_has_a_local_installation_route_outside_package_groups(self):
         skills = only(self.document.find(id="skills"), "skills section")
