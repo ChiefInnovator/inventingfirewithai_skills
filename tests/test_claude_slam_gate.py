@@ -8,7 +8,7 @@ import textwrap
 import time
 import unittest
 
-SKILL = Path(__file__).resolve().parents[1] / "skills/claude/slam/SKILL.md"
+SKILL = Path(__file__).resolve().parents[1] / "skills/universal/slam/SKILL.md"
 
 
 def hook_command():

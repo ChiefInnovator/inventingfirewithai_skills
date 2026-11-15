@@ -12,23 +12,25 @@ Part of **[Inventing Fire with AI](https://inventingfirewith.ai)** by **[Richard
 
 ## What it does
 
-| Skill | Codex | Claude Code | GitHub Copilot | Purpose |
-|---|---|---|---|---|
-| figma-to-flutter | [Skill](skills/codex/figma-to-flutter/SKILL.md) | [Skill](skills/claude/figma-to-flutter/SKILL.md) | [Skill](skills/copilot/figma-to-flutter/SKILL.md) | Capture, convert, and check Flutter against Figma. |
-| pragmatic-coder | [Skill](skills/codex/pragmatic-coder/SKILL.md) | [Skill](skills/claude/pragmatic-coder/SKILL.md) | [Skill](skills/copilot/pragmatic-coder/SKILL.md) | Make focused changes with proportionate verification. |
-| slam | [Skill](skills/codex/slam/SKILL.md) | [Skill](skills/claude/slam/SKILL.md) | [Skill](skills/copilot/slam/SKILL.md) | Ship through review, CI, merge, and verified cleanup. |
-| mcp-pick | [Skill](skills/codex/mcp-pick/SKILL.md) | [Skill](skills/claude/mcp-pick/SKILL.md) | [Skill](skills/copilot/mcp-pick/SKILL.md) | Select project-relevant MCP servers. |
-| travel-like-a-local | [Skill](skills/codex/travel-like-a-local/SKILL.md) | [Skill](skills/claude/travel-like-a-local/SKILL.md) | [Skill](skills/copilot/travel-like-a-local/SKILL.md) | Plan local experiences, property stays, and trip logistics. |
+| Skill | Purpose |
+|---|---|
+| [figma-to-flutter](skills/universal/figma-to-flutter/SKILL.md) | Capture, convert, and check Flutter against Figma. |
+| [pragmatic-coder](skills/universal/pragmatic-coder/SKILL.md) | Make focused changes with proportionate verification. |
+| [slam](skills/universal/slam/SKILL.md) | Ship through review, CI, merge, and verified cleanup. |
+| [mcp-pick](skills/universal/mcp-pick/SKILL.md) | Select project-relevant MCP servers. |
+| [travel-like-a-local](skills/universal/travel-like-a-local/SKILL.md) | Plan local experiences, property stays, and trip logistics. |
+
+Each skill is one folder under `skills/universal/` that works unchanged in Codex, Claude Code, and GitHub Copilot.
 
 `pragmatic-coder` guides coding agents to finish authorized work with minimal changes, proportionate verification, clear evidence, and respect for user choices. It favors simple data, maintainable solutions, relevant security checks, and measured performance work.
 
 Clone or download this repository, then copy the **complete skill folder**, including its resources:
 
-| Client | Copy from | Copy to | Check discovery |
-|---|---|---|---|
-| Codex, personal | `skills/codex/<name>/` | `~/.agents/skills/<name>/` | Fresh session: open the `$` skill picker. |
-| Claude Code, personal | `skills/claude/<name>/` | `~/.claude/skills/<name>/` | Fresh session: open the `/` command picker. |
-| Copilot CLI, repository | `skills/copilot/<name>/` | Target repo's `.github/skills/<name>/` | `/skills reload`, then `/skills info <name>`. |
+| Client | Copy `skills/universal/<name>/` to | Check discovery |
+|---|---|---|
+| Codex, personal | `~/.agents/skills/<name>/` | Fresh session: open the `$` skill picker. |
+| Claude Code, personal | `~/.claude/skills/<name>/` | Fresh session: open the `/` command picker. |
+| Copilot CLI, repository | Target repo's `.github/skills/<name>/` | `/skills reload`, then `/skills info <name>`. |
 
 Confirm the skill appears without invoking it. Use `$<name>` in Codex or `/<name>` in Claude Code/Copilot when ready. Preserve project adapters and avoid a second Codex personal copy in a legacy skills root. MCP Picker reports prepared commands separately from applied settings; its scope depends on the host.
 
@@ -36,7 +38,7 @@ For ChatGPT on the web, see the [travel skill export and setup status](docs/migr
 
 Maintainer checks support macOS/Linux and require Git/Bash, Python 3.14, Node.js 24, Codex CLI 0.153.4 or newer, and `uv`. CI uses `@openai/codex@0.166.0` (`npm install -g @openai/codex@0.166.0` to reproduce it).
 
-Run all six unittest suites with `uv run --no-project --python 3.14 --with-requirements tests/requirements.txt python scripts/check_repository.py`. See [review evidence](docs/evaluations/skills_library_review.md), [Travel tests](docs/evaluations/travel_like_a_local_evaluation.md), and [site validation](docs/evaluations/site_visibility.md) for coverage and limits.
+Run all three unittest suites with `uv run --no-project --python 3.14 --with-requirements tests/requirements.txt python scripts/check_repository.py`. See [review evidence](docs/evaluations/skills_library_review.md), [Travel tests](docs/evaluations/travel_like_a_local_evaluation.md), and [site validation](docs/evaluations/site_visibility.md) for coverage and limits.
 
 Use `$figma-to-flutter` in Codex or `/figma-to-flutter` in Claude Code. See [what it adds to community code generation](docs/research/figma_to_flutter_comparison.md).
 

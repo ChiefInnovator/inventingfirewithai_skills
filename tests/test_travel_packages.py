@@ -19,7 +19,6 @@ import yaml
 
 
 ROOT = Path(__file__).resolve().parents[1]
-CLIENTS = ("codex", "claude", "copilot")
 FAMILY = "travel-like-a-local"
 ARCHIVE = ROOT / "assets" / "distributions" / (FAMILY + ".zip")
 MACHINE_PATH = re.compile(
@@ -35,8 +34,8 @@ def require(condition, message):
         raise ValueError(message)
 
 
-def package(root, client):
-    return root / "skills" / client / FAMILY
+def package(root):
+    return root / "skills" / "universal" / FAMILY
 
 
 def package_files(folder):
@@ -115,12 +114,8 @@ def check_links(folder):
                 local_target(folder, document, match.group(1) or match.group(2))
 
 
-def check_metadata(folder, client):
-    frontmatter((folder / "SKILL.md").read_text(encoding="utf-8"), client)
-    if client != "codex":
-        require(not (folder / "agents" / "openai.yaml").exists(),
-                "OpenAI UI metadata belongs only to Codex")
-        return
+def check_metadata(folder):
+    frontmatter((folder / "SKILL.md").read_text(encoding="utf-8"), folder.name)
     try:
         ui = yaml.safe_load((folder / "agents" / "openai.yaml").read_text())
     except yaml.YAMLError as error:
@@ -144,19 +139,6 @@ def check_metadata(folder, client):
             require(type(ui["policy"]["allow_implicit_invocation"]) is bool, "Invalid Codex invocation flag")
 
 
-def check_parity(root):
-    reference_sets = {}
-    for client in CLIENTS:
-        files = package_files(package(root, client))
-        reference_sets[client] = {name: data for name, data in files.items() if name.startswith("references/")}
-        require(bool(reference_sets[client]), f"No shared references: {client}")
-    expected = reference_sets["codex"]
-    for client in CLIENTS[1:]:
-        actual = reference_sets[client]
-        differences = sorted(name for name in expected.keys() | actual.keys() if expected.get(name) != actual.get(name))
-        require(not differences, f"Shared reference mismatch for {client}: {differences}")
-
-
 def check_archive(folder, archive_path):
     expected = {FAMILY + "/" + name: data for name, data in package_files(folder).items()}
     with ZipFile(archive_path) as archive:
@@ -175,47 +157,20 @@ def check_archive(folder, archive_path):
 
 
 class TravelPackageTests(unittest.TestCase):
-    def test_shared_references_match_without_erasing_host_entrypoints(self):
-        check_parity(ROOT)
+    def test_archive_matches_complete_package(self):
+        check_archive(package(ROOT), ARCHIVE)
 
-    def test_archive_matches_complete_codex_package(self):
-        check_archive(package(ROOT, "codex"), ARCHIVE)
-
-    def test_all_clients_have_valid_metadata_and_bundled_ui_assets(self):
-        for client in CLIENTS:
-            with self.subTest(client=client):
-                folder = package(ROOT, client)
-                package_files(folder)
-                check_metadata(folder, client)
+    def test_package_has_valid_metadata_and_bundled_ui_assets(self):
+        package_files(package(ROOT))
+        check_metadata(package(ROOT))
 
     def test_all_local_links_and_anchors_resolve_within_the_package(self):
-        for client in CLIENTS:
-            with self.subTest(client=client):
-                check_links(package(ROOT, client))
+        check_links(package(ROOT))
 
-    def test_all_clients_exclude_known_machine_paths_and_state_files(self):
-        for client in CLIENTS:
-            with self.subTest(client=client):
-                package_files(package(ROOT, client))
-
-    def copy_package(self, destination, client="codex"):
-        folder = destination / "skills" / client / FAMILY
-        shutil.copytree(package(ROOT, client), folder)
+    def copy_package(self, destination):
+        folder = package(destination)
+        shutil.copytree(package(ROOT), folder)
         return folder
-
-    def test_checks_reject_missing_or_changed_shared_references(self):
-        for mutation in ("missing", "changed"):
-            with self.subTest(mutation=mutation), tempfile.TemporaryDirectory() as directory:
-                root = Path(directory)
-                for client in CLIENTS:
-                    self.copy_package(root, client)
-                reference = next((package(root, "claude") / "references").glob("*.md"))
-                if mutation == "missing":
-                    reference.unlink()
-                else:
-                    reference.write_text(reference.read_text() + "\nChanged fixture.\n")
-                with self.assertRaisesRegex(ValueError, "reference mismatch"):
-                    check_parity(root)
 
     def test_checks_reject_invalid_metadata_and_missing_ui_assets(self):
         def point_icon_at_document(folder):
@@ -236,7 +191,7 @@ class TravelPackageTests(unittest.TestCase):
                 folder = self.copy_package(Path(directory))
                 mutate(folder)
                 with self.assertRaises(ValueError):
-                    check_metadata(folder, "codex")
+                    check_metadata(folder)
 
     def test_optional_icon_metadata_can_be_omitted(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -246,24 +201,7 @@ class TravelPackageTests(unittest.TestCase):
             for key in ("icon_small", "icon_large"):
                 metadata["interface"].pop(key, None)
             path.write_text(yaml.safe_dump(metadata))
-            check_metadata(folder, "codex")
-
-    def test_native_clients_do_not_require_openai_ui_metadata(self):
-        for client in ("claude", "copilot"):
-            with self.subTest(client=client), tempfile.TemporaryDirectory() as directory:
-                folder = self.copy_package(Path(directory), client)
-                (folder / "agents" / "openai.yaml").unlink(missing_ok=True)
-                check_metadata(folder, client)
-
-    def test_checks_reject_openai_ui_metadata_in_native_clients(self):
-        for client in ("claude", "copilot"):
-            with self.subTest(client=client), tempfile.TemporaryDirectory() as directory:
-                folder = self.copy_package(Path(directory), client)
-                metadata = folder / "agents" / "openai.yaml"
-                metadata.parent.mkdir(exist_ok=True)
-                shutil.copyfile(package(ROOT, "codex") / "agents" / "openai.yaml", metadata)
-                with self.assertRaisesRegex(ValueError, "OpenAI UI metadata belongs only to Codex"):
-                    check_metadata(folder, client)
+            check_metadata(folder)
 
     def test_checks_reject_broken_links_anchors_and_package_escapes(self):
         links = ("missing.md", "references/traveler-profile.md#missing-heading", "../outside.md", "file:///private/menu.md")

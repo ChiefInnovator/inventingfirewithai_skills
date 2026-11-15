@@ -7,7 +7,7 @@ import sys
 import tempfile
 import unittest
 
-SCRIPT = Path(__file__).resolve().parents[1] / 'skills/claude/mcp-pick/scripts/mcp-pick.sh'
+SCRIPT = Path(__file__).resolve().parents[1] / 'skills/universal/mcp-pick/scripts/claude_mcp_pick.sh'
 
 
 class ClaudePickerTests(unittest.TestCase):
@@ -17,12 +17,13 @@ class ClaudePickerTests(unittest.TestCase):
         self.root = Path(self.temp.name).resolve()
         self.config = self.root / 'config.json'
         self.original = {'unrelated': True, 'projects': {str(self.root): {
-            'disabledMcpServers': ['unseen', 'http-server'], 'other': 'preserve'}}}
+            'disabledMcpServers': ['unseen'], 'other': 'preserve'}}}
         self.config.write_text(json.dumps(self.original))
         self.inventory = self.root / 'servers'
         self.inventory.write_text('http-server\n')
         self.env = {**os.environ, 'MCP_CFG': str(self.config),
-                    'MCP_SERVER_LIST': str(self.inventory)}
+                    'MCP_SERVER_LIST': str(self.inventory),
+                    'MCP_CACHE_DIR': str(self.root / 'cache')}
 
     def run_picker(self, *args):
         return subprocess.run(['bash', str(SCRIPT), *args], cwd=self.root,
@@ -57,6 +58,37 @@ class ClaudePickerTests(unittest.TestCase):
         backups = list(self.root.glob('config.json.bak.*'))
         self.assertEqual(len(backups), 2)
         self.assertTrue(all(json.loads(p.read_text()) for p in backups))
+
+    def test_only_three_newest_backups_are_kept(self):
+        for index, mode in enumerate(['none', 'all', 'none', 'all', 'none']):
+            self.run_picker(mode)
+            for backup in self.root.glob('config.json.bak.*'):
+                if not backup.name.endswith('.aged'):
+                    aged = backup.with_name(backup.name + '.aged')
+                    backup.rename(aged)
+                    os.utime(aged, (index, index))
+        self.assertEqual(len(list(self.root.glob('config.json.bak.*'))), 3)
+
+    def test_unchanged_selection_writes_no_config_or_backup(self):
+        self.run_picker('none')
+        before = self.config.read_bytes()
+        result = self.run_picker('none')
+        self.assertIn('unchanged', result.stdout)
+        self.assertEqual(self.config.read_bytes(), before)
+        self.assertEqual(len(list(self.root.glob('config.json.bak.*'))), 1)
+
+    def test_write_reuses_names_saved_by_list(self):
+        binary = self.root / 'claude'
+        calls = self.root / 'calls'
+        binary.write_text("#!/bin/sh\necho x >> '%s'\necho 'http-server: https://example.invalid/mcp (HTTP) - Connected'\n" % calls)
+        binary.chmod(0o700)
+        self.env.pop('MCP_SERVER_LIST')
+        self.env['PATH'] = str(self.root) + os.pathsep + self.env['PATH']
+        self.run_picker('list')
+        self.run_picker('all')
+        self.assertEqual(calls.read_text().count('x'), 1)
+        self.run_picker('list')
+        self.assertEqual(calls.read_text().count('x'), 2)
 
     def test_failed_replace_preserves_live_config(self):
         before = self.config.read_bytes()

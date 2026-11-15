@@ -196,11 +196,11 @@ does not invoke the skill or authorize Slam to ship anything.
 
 | Client | Source | Destination | Invocation | Discovery and observable success |
 |---|---|---|---|---|
-| Codex, personal | `skills/codex/<skill-name>/` | `~/.agents/skills/<skill-name>/` | `$<skill-name>` | Start a fresh Codex session; open the `$` skill picker and confirm the skill name is listed. Exit the picker without submitting. |
-| Claude Code, personal | `skills/claude/<skill-name>/` | `~/.claude/skills/<skill-name>/` | `/<skill-name>` | Start a fresh Claude Code session; open the `/` command picker and confirm the skill name is listed. Exit without invoking it. |
-| Copilot CLI, repository | `skills/copilot/<skill-name>/` | `.github/skills/<skill-name>/` in the target repository | `/<skill-name>` | From that repository run `/skills reload`, then `/skills info <skill-name>`; verify the reported skill points to the copied folder and is enabled. |
+| Codex, personal | `skills/universal/<skill-name>/` | `~/.agents/skills/<skill-name>/` | `$<skill-name>` | Start a fresh Codex session; open the `$` skill picker and confirm the skill name is listed. Exit the picker without submitting. |
+| Claude Code, personal | `skills/universal/<skill-name>/` | `~/.claude/skills/<skill-name>/` | `/<skill-name>` | Start a fresh Claude Code session; open the `/` command picker and confirm the skill name is listed. Exit without invoking it. |
+| Copilot CLI, repository | `skills/universal/<skill-name>/` | `.github/skills/<skill-name>/` in the target repository | `/<skill-name>` | From that repository run `/skills reload`, then `/skills info <skill-name>`; verify the reported skill points to the copied folder and is enabled. |
 
-For example, the complete `skills/codex/pragmatic-coder/` folder becomes
+For example, the complete `skills/universal/pragmatic-coder/` folder becomes
 `~/.agents/skills/pragmatic-coder/`, including SKILL.md and supporting resources.
 Do not create a second Codex personal copy in a legacy skills root. Do not replace
 intentional project adapters. Other Copilot hosts may expose different discovery
@@ -219,9 +219,9 @@ controls; the procedure above makes a specific claim for Copilot CLI.
    transitions, full component snippets, and narrative in the sidecar.
    Treat these as development documents rather than page content.
 3. **Test runner (new `scripts/check_repository.py`):** run root discovery and
-   discoveries in `skills/{codex,claude,copilot}/figma-to-flutter/scripts`,
-   `skills/codex/mcp-pick/tests`, and `skills/copilot/mcp-pick/tests`. Resolve paths
-   from the runner location; refuse missing suites, run all six, collect exit
+   discoveries in `skills/universal/figma-to-flutter/scripts` and
+   `skills/universal/mcp-pick/tests`. Resolve paths
+   from the runner location; refuse missing suites, run all three, collect exit
    codes, and exit nonzero on any failure. Check the Codex version before its MCP
    suite and report a missing/incompatible CLI as that suite's failure while
    continuing the others. The maintainer runner supports macOS/Linux; refuse other
