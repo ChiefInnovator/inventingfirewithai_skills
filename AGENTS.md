@@ -23,6 +23,6 @@ Reusable coding, shipping, Figma-to-Flutter, and travel skills for Codex, Claude
 ## Layout and use
 
 - `skills/universal/<name>/`: downloadable packages shared by all three clients, not skills installed for this repository.
-- Names: `pragmatic-coder`, `slam`, `mcp-pick`, `travel-like-a-local`, `figma-to-flutter`.
+- Names: `pragmatic-coder`, `slam`, `mcp-pick`, `travel-like-a-local`, `figma-to-flutter`, `promptman`, `reposlide`.
 - Install entire folders, including resources. Invoke `$<name>` in Codex or `/<name>` in Claude Code and Copilot.
 - `tests/`: helper checks; `docs/{designs,research,evaluations,migrations}/`: supporting documents.

@@ -19,6 +19,8 @@ Part of **[Inventing Fire with AI](https://inventingfirewith.ai)** by **[Richard
 | [slam](skills/universal/slam/SKILL.md) | Ship through review, CI, merge, and verified cleanup. |
 | [mcp-pick](skills/universal/mcp-pick/SKILL.md) | Select project-relevant MCP servers. |
 | [travel-like-a-local](skills/universal/travel-like-a-local/SKILL.md) | Plan local experiences, property stays, and trip logistics. |
+| [promptman](skills/universal/promptman/SKILL.md) | Turn a product idea into one reviewed build prompt. |
+| [reposlide](skills/universal/reposlide/SKILL.md) | Turn a repo into a one-slide PowerPoint prompt. |
 
 Each skill is one folder under `skills/universal/` that works unchanged in Codex, Claude Code, and GitHub Copilot.
 

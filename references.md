@@ -12,6 +12,8 @@ Canonical reference catalog for this repository. README stays short; detailed so
 - [Slam pull request and review mechanics](skills/universal/slam/references/review.md)
 - [MCP Picker](skills/universal/mcp-pick/SKILL.md)
 - [Travel Like a Local](skills/universal/travel-like-a-local/SKILL.md)
+- [PromptMan](skills/universal/promptman/SKILL.md)
+- [RepoSlide](skills/universal/reposlide/SKILL.md)
 - [Shared Agent Instructions (Codex, Claude Code, and Copilot)](AGENTS.md)
 
 ### Designs and pilots

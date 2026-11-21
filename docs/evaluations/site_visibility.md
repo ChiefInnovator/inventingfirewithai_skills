@@ -5,7 +5,7 @@ description: SEO, GEO, and AEO maintenance for the Inventing Fire with AI Skills
 
 # Site discovery and validation
 
-The public site presents five reusable skills for Codex, Claude Code, and GitHub Copilot. SEO, generative engine optimization (GEO), and answer engine optimization (AEO) maintenance keeps that information accessible, factual, and consistent. It does not establish search rankings, indexing, recommendations, or AI citations.
+The public site presents seven reusable skills for Codex, Claude Code, and GitHub Copilot. SEO, generative engine optimization (GEO), and answer engine optimization (AEO) maintenance keeps that information accessible, factual, and consistent. It does not establish search rankings, indexing, recommendations, or AI citations.
 
 ## What is maintained
 
