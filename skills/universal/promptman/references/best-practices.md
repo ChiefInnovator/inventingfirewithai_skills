@@ -1,6 +1,6 @@
 # Prompt checklist
 
-Work through this when drafting the prompt (step 4) and again after the review fixes (step 6). Every box must be true of `prompt.md`. It condenses `~/.openclaw/projects/promptman/docs/anthropic-prompting-best-practices.md` and `openai-prompting-best-practices.md`; read those only when an item needs more detail.
+Work through this when drafting the prompt (step 4) and again after the review fixes (step 6). Every box must be true of `prompt.md`. It condenses Anthropic's and OpenAI's prompting best-practice guides and stands on its own.
 
 ## A. Format
 

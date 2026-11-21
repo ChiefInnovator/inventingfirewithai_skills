@@ -261,7 +261,7 @@ Each CLI reviewer is its own command call (one command per call, with the `cd` a
 - in Claude Code, a failed CLI reviewer reruns on the matching Claude subagent (`egm:egm-design`, `egm:egm-structural`, or `egm:egm-implementation-readiness`); in any other host it reruns on the `claude` CLI command above, with its output pointed at that reviewer's file;
 - a failed Claude reviewer (subagent or CLI) reruns on `codex` with the command above, with the persona line added and `-o` pointed at that reviewer's file.
 
-If the rerun also fails, write "not run" and the reason into that reviewer's file and record it as "not run", so it is never read as "no findings". A run with a reviewer marked "not run" is still done.
+If the rerun also fails, write "not run" and the reason into that reviewer's file and record it as "not run", so it is never read as "no findings". A run is still done if at least one reviewer completed; if none did, report the prompt as unreviewed, not done.
 
 **Apply the findings once.** Merge the findings across reviewers and remove duplicates. Fix every Blocker and Major that is correct. Fix a Nit when it is correct and cheap. Reject, with a recorded reason:
 

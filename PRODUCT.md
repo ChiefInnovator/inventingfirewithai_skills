@@ -80,3 +80,5 @@ static regressions with rendered checks and report untested assistive technology
 
 The owner confirmed the five-skill library/Pages scope, existing branding and
 static architecture, and uninterrupted review/implementation on November 2, 2026.
+PromptMan and RepoSlide were added at the owner's request on November 21, 2026,
+making seven.
