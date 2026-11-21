@@ -16,6 +16,8 @@ BUDGETS = {
     "figma-to-flutter": 9000,
     "mcp-pick": 2000,
     "pragmatic-coder": 4000,
+    "promptman": 29000,  # one procedure read in full on every run: prompt outline, review step, report
+    "reposlide": 4500,
     "slam": 9000,  # includes the 3 KB Claude Stop hook in frontmatter
     "travel-like-a-local": 6500,
 }

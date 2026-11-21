@@ -1,0 +1,3 @@
+interface:
+  display_name: "RepoSlide"
+  short_description: "Turn a repo into a one-slide PowerPoint prompt"

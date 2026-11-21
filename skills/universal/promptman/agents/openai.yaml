@@ -1,0 +1,3 @@
+interface:
+  display_name: "PromptMan"
+  short_description: "Turn a product idea into a reviewed build prompt"

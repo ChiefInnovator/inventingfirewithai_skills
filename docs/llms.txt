@@ -1,14 +1,14 @@
 # Inventing Fire with AI Skills
 
-> Five reusable AI agent skills for Codex, Claude Code, and GitHub Copilot, created by Richard Crane.
+> Seven reusable AI agent skills for Codex, Claude Code, and GitHub Copilot, created by Richard Crane.
 
-The library contains Pragmatic Coder for focused coding and review, Slam for scoped GitHub delivery, MCP Picker for project integration selection, Figma to Flutter for design conversion and evidence checks, and Travel Like a Local for destination advice and trip logistics. Install a complete client-specific skill folder, including its supporting resources. The repository uses the MIT license.
+The library contains Pragmatic Coder for focused coding and review, Slam for scoped GitHub delivery, MCP Picker for project integration selection, Figma to Flutter for design conversion and evidence checks, Travel Like a Local for destination advice and trip logistics, PromptMan for turning a product idea into a reviewed build prompt, and RepoSlide for turning a repository into a one-slide PowerPoint prompt. Install a complete client-specific skill folder, including its supporting resources. The repository uses the MIT license.
 
 Travel Like a Local keeps shared instructions separate from private traveler preferences and requires consent before saving preferences. Its ZIP is a Codex source archive, not an installable ChatGPT plugin. Figma capture, rendering, pixel comparison, human approval, and production adoption are separate results. Offline tests do not establish live service acceptance.
 
 ## Library and packages
 
-- [Library overview and installation](https://chiefinnovator.github.io/inventingfirewithai_skills/): Five skills, client package links, installation guidance, and common questions.
+- [Library overview and installation](https://chiefinnovator.github.io/inventingfirewithai_skills/): Seven skills, client package links, installation guidance, and common questions.
 - [Source repository](https://github.com/ChiefInnovator/inventingfirewithai_skills): Maintained instructions, scripts, references, and tests.
 - [Skill packages](https://github.com/ChiefInnovator/inventingfirewithai_skills/tree/main/skills/universal): One complete folder per skill, usable in Codex, Claude Code, and GitHub Copilot.
 - [MIT license](https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/LICENSE): Repository license.

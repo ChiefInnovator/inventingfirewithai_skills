@@ -14,8 +14,8 @@ library without losing host-specific behavior or private user data boundaries.
 
 ## Product Purpose
 
-Help visitors select, install, and understand five reusable skills: Pragmatic
-Coder, Slam, MCP Picker, Travel Like a Local, and Figma-to-Flutter. Success means
+Help visitors select, install, and understand seven reusable skills: Pragmatic
+Coder, Slam, MCP Picker, Travel Like a Local, Figma-to-Flutter, PromptMan, and RepoSlide. Success means
 finding the matching complete client package, knowing when to invoke it, and
 understanding what its checks actually establish.
 
@@ -34,7 +34,7 @@ site with Jekyll. Local and CI checks support evidence-bounded maintenance.
 
 ## Capabilities and Constraints
 
-- Keep the existing five families, static HTML/CSS/JavaScript, Jekyll documentation,
+- Keep the existing seven families, static HTML/CSS/JavaScript, Jekyll documentation,
   bundled resources, and complete-folder distribution.
 - Record source delivery, CI, deployment, and live host acceptance separately.
 - Preserve generic packages: personal profiles, trip state, secrets, customer
@@ -42,7 +42,7 @@ site with Jekyll. Local and CI checks support evidence-bounded maintenance.
 - Cloud Copilot repository rules target develop, including drafts and new pushes.
   Account-level preferences are separate and are not changed by site work.
 - Design workflows use Google's EGM and Impeccable. They are maintainer tools,
-  not additions to the five downloadable skill families.
+  not additions to the seven downloadable skill families.
 - No new service, authentication, telemetry, framework, theme switch, or automatic
   private-storage/booking implementation is part of this work.
 
@@ -80,3 +80,5 @@ static regressions with rendered checks and report untested assistive technology
 
 The owner confirmed the five-skill library/Pages scope, existing branding and
 static architecture, and uninterrupted review/implementation on November 2, 2026.
+PromptMan and RepoSlide were added at the owner's request on November 21, 2026,
+making seven.
