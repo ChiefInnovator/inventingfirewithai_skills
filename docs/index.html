@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Five reusable AI agent skills for Codex, Claude Code, and GitHub Copilot: coding, shipping, Figma-to-Flutter, MCP setup, and local travel planning.">
+  <meta name="description" content="Seven reusable AI agent skills for Codex, Claude Code, and GitHub Copilot: coding, shipping, build prompts, slide prompts, Figma-to-Flutter, MCP setup, and local travel planning.">
   <meta name="author" content="Richard Crane">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="https://chiefinnovator.github.io/inventingfirewithai_skills/">
@@ -12,7 +12,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Inventing Fire with AI Skills">
   <meta property="og:title" content="AI Skills for Codex, Claude Code &amp; Copilot | Inventing Fire">
-  <meta property="og:description" content="Five reusable AI agent skills for Codex, Claude Code, and GitHub Copilot: coding, shipping, Figma-to-Flutter, MCP setup, and local travel planning.">
+  <meta property="og:description" content="Seven reusable AI agent skills for Codex, Claude Code, and GitHub Copilot: coding, shipping, build prompts, slide prompts, Figma-to-Flutter, MCP setup, and local travel planning.">
   <meta property="og:url" content="https://chiefinnovator.github.io/inventingfirewithai_skills/">
   <meta property="og:image" content="https://chiefinnovator.github.io/inventingfirewithai_skills/assets/images/inventing-fire-brand.png">
   <meta property="og:image:type" content="image/png">
@@ -21,7 +21,7 @@
   <meta property="og:image:alt" content="Inventing Fire with AI brand">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="AI Skills for Codex, Claude Code &amp; Copilot | Inventing Fire">
-  <meta name="twitter:description" content="Five reusable AI agent skills for Codex, Claude Code, and GitHub Copilot: coding, shipping, Figma-to-Flutter, MCP setup, and local travel planning.">
+  <meta name="twitter:description" content="Seven reusable AI agent skills for Codex, Claude Code, and GitHub Copilot: coding, shipping, build prompts, slide prompts, Figma-to-Flutter, MCP setup, and local travel planning.">
   <meta name="twitter:image" content="https://chiefinnovator.github.io/inventingfirewithai_skills/assets/images/inventing-fire-brand.png">
   <meta name="twitter:image:alt" content="Inventing Fire with AI brand">
   <title>AI Skills for Codex, Claude Code &amp; Copilot | Inventing Fire</title>
@@ -50,7 +50,7 @@
         "@id": "https://chiefinnovator.github.io/inventingfirewithai_skills/#webpage",
         "url": "https://chiefinnovator.github.io/inventingfirewithai_skills/",
         "name": "Inventing Fire with AI Skills",
-        "description": "Five reusable AI agent skills for Codex, Claude Code, and GitHub Copilot: coding, shipping, Figma-to-Flutter, MCP setup, and local travel planning.",
+        "description": "Seven reusable AI agent skills for Codex, Claude Code, and GitHub Copilot: coding, shipping, build prompts, slide prompts, Figma-to-Flutter, MCP setup, and local travel planning.",
         "isPartOf": {
           "@id": "https://chiefinnovator.github.io/inventingfirewithai_skills/#website"
         },
@@ -66,7 +66,7 @@
         "@type": "ItemList",
         "@id": "https://chiefinnovator.github.io/inventingfirewithai_skills/#skills",
         "name": "AI agent skills",
-        "numberOfItems": 5,
+        "numberOfItems": 7,
         "itemListElement": [
           {
             "@type": "ListItem",
@@ -198,6 +198,66 @@
               "description": "Capture designs, create or update Flutter widgets, and compare actual renders with source evidence. Adapt to the target project's architecture and design system.",
               "url": "https://chiefinnovator.github.io/inventingfirewithai_skills/#figma-to-flutter",
               "codeRepository": "https://github.com/ChiefInnovator/inventingfirewithai_skills/tree/main/skills/universal/figma-to-flutter",
+              "license": "https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/LICENSE",
+              "author": {
+                "@id": "https://chiefinnovator.github.io/inventingfirewithai_skills/#author"
+              },
+              "targetProduct": [
+                {
+                  "@type": "SoftwareApplication",
+                  "name": "Codex"
+                },
+                {
+                  "@type": "SoftwareApplication",
+                  "name": "Claude Code"
+                },
+                {
+                  "@type": "SoftwareApplication",
+                  "name": "GitHub Copilot"
+                }
+              ]
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 6,
+            "item": {
+              "@type": "SoftwareSourceCode",
+              "@id": "https://chiefinnovator.github.io/inventingfirewithai_skills/#promptman",
+              "name": "PromptMan",
+              "description": "Turn a product idea into one reviewed prompt that a coding agent can follow to build the whole product without asking questions.",
+              "url": "https://chiefinnovator.github.io/inventingfirewithai_skills/#promptman",
+              "codeRepository": "https://github.com/ChiefInnovator/inventingfirewithai_skills/tree/main/skills/universal/promptman",
+              "license": "https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/LICENSE",
+              "author": {
+                "@id": "https://chiefinnovator.github.io/inventingfirewithai_skills/#author"
+              },
+              "targetProduct": [
+                {
+                  "@type": "SoftwareApplication",
+                  "name": "Codex"
+                },
+                {
+                  "@type": "SoftwareApplication",
+                  "name": "Claude Code"
+                },
+                {
+                  "@type": "SoftwareApplication",
+                  "name": "GitHub Copilot"
+                }
+              ]
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 7,
+            "item": {
+              "@type": "SoftwareSourceCode",
+              "@id": "https://chiefinnovator.github.io/inventingfirewithai_skills/#reposlide",
+              "name": "RepoSlide",
+              "description": "Research a repository and its public site, then write one prompt for Claude in PowerPoint that builds a single slide about the project.",
+              "url": "https://chiefinnovator.github.io/inventingfirewithai_skills/#reposlide",
+              "codeRepository": "https://github.com/ChiefInnovator/inventingfirewithai_skills/tree/main/skills/universal/reposlide",
               "license": "https://github.com/ChiefInnovator/inventingfirewithai_skills/blob/main/LICENSE",
               "author": {
                 "@id": "https://chiefinnovator.github.io/inventingfirewithai_skills/#author"
@@ -827,10 +887,10 @@
   <header class="hero">
     <div class="wrap">
       <h1 id="site-title">Inventing Fire with AI Skills</h1>
-      <p>Five reusable AI agent skills for Codex, Claude Code, and GitHub Copilot. Code, ship, convert Figma designs, choose MCP integrations, and plan travel.</p>
+      <p>Seven reusable AI agent skills for Codex, Claude Code, and GitHub Copilot. Code, ship, write build and slide prompts, convert Figma designs, choose MCP integrations, and plan travel.</p>
       <div class="actions">
         <a class="button secondary" href="https://github.com/ChiefInnovator/inventingfirewithai_skills">View on GitHub</a>
-        <a class="button" href="#skills">Browse all five skills</a>
+        <a class="button" href="#skills">Browse all seven skills</a>
       </div>
     </div>
   </header>
@@ -852,7 +912,7 @@
   <section id="skills">
     <div class="wrap">
       <h2>Skills in the library.</h2>
-      <p class="lede">Five focused skills for Codex, Claude Code, and GitHub Copilot: Pragmatic Coder, Figma to Flutter, MCP Picker, Slam, and Travel Like a Local.</p>
+      <p class="lede">Seven focused skills for Codex, Claude Code, and GitHub Copilot: Pragmatic Coder, Figma to Flutter, MCP Picker, Slam, Travel Like a Local, PromptMan, and RepoSlide.</p>
       <p><a class="install-help" href="#install">See installation and discovery steps for your selected skill</a></p>
 
       <div class="skill-grid">
@@ -912,6 +972,28 @@
           </div>
           <div class="client-links" role="group" aria-label="Figma to Flutter packages">
             <a href="https://github.com/ChiefInnovator/inventingfirewithai_skills/tree/main/skills/universal/figma-to-flutter">Figma to Flutter skill folder</a>
+          </div>
+        </article>
+
+        <article class="skill-card" id="promptman">
+          <div>
+            <span class="tag">Available</span>
+            <h3>PromptMan</h3>
+            <p>Turn a product idea into one reviewed prompt that a coding agent can follow to build the whole product without asking questions.</p>
+          </div>
+          <div class="client-links" role="group" aria-label="PromptMan packages">
+            <a href="https://github.com/ChiefInnovator/inventingfirewithai_skills/tree/main/skills/universal/promptman">PromptMan skill folder</a>
+          </div>
+        </article>
+
+        <article class="skill-card" id="reposlide">
+          <div>
+            <span class="tag">Available</span>
+            <h3>RepoSlide</h3>
+            <p>Research a repository and its public site, then write one prompt for Claude in PowerPoint that builds a single slide about the project.</p>
+          </div>
+          <div class="client-links" role="group" aria-label="RepoSlide packages">
+            <a href="https://github.com/ChiefInnovator/inventingfirewithai_skills/tree/main/skills/universal/reposlide">RepoSlide skill folder</a>
           </div>
         </article>
       </div>
@@ -1025,7 +1107,7 @@
         <dt>What is an AI agent skill?</dt>
         <dd>A skill is a reusable folder of task instructions in <code>SKILL.md</code>, plus any references, scripts, or assets its workflow needs. These packages guide an agent inside your chosen client and project.</dd>
         <dt>Which clients does this library support?</dt>
-        <dd>Each of the five skills is a single folder that works in Codex, Claude Code, and GitHub Copilot. Install the entire folder so its supporting resources remain available.</dd>
+        <dd>Each of the seven skills is a single folder that works in Codex, Claude Code, and GitHub Copilot. Install the entire folder so its supporting resources remain available.</dd>
         <dt>What changed in Travel Like a Local?</dt>
         <dd>It asks for destination and dates only when they affect the decision, uses brief onboarding for personalized planning, and keeps private traveler preferences separate from the shared skill. Saving preferences requires consent. Its <a href="evaluations/travel_like_a_local_evaluation.html">test evidence</a> includes four offline Codex behavioral scenarios.</dd>
         <dt>Can I install the travel ZIP directly in ChatGPT?</dt>
