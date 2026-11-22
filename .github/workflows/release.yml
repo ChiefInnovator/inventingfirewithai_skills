@@ -27,4 +27,8 @@ jobs:
             echo "v$version is already released; bump VERSION on a feature PR into develop to release again."
             exit 0
           fi
-          gh release create "v$version" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "v$version" --generate-notes
+          if ! gh release create "v$version" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "v$version" --generate-notes; then
+            # A concurrent run for the same version may have created it first.
+            gh release view "v$version" --repo "$GITHUB_REPOSITORY" >/dev/null
+            echo "v$version was released by another run."
+          fi
